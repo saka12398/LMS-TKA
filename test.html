@@ -7,13 +7,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', system-ui, sans-serif;
             background: linear-gradient(145deg, #eef2ff 0%, #c7d2fe 100%);
+            background-size: 200% 200%;
+            animation: bgShift 18s ease-in-out infinite;
             color: #0f172a;
             line-height: 1.45;
             padding: 16px;
             min-height: 100vh;
+        }
+        @keyframes bgShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         .container {
             max-width: 850px;
@@ -22,6 +29,11 @@
             border-radius: 40px;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
             overflow: hidden;
+            animation: containerIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes containerIn {
+            from { opacity: 0; transform: translateY(24px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         #splash-screen {
             position: fixed;
@@ -36,7 +48,7 @@
         }
         .stars { position: absolute; width: 100%; height: 100%; pointer-events: none; }
         .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
-        @keyframes twinkle { 0%,100%{opacity:0;} 50%{opacity:1;} }
+        @keyframes twinkle { 0%,100%{opacity:0; transform:scale(0.6);} 50%{opacity:1; transform:scale(1);} }
         .splash-content { text-align: center; z-index: 2; width: 90%; max-width: 400px; margin: 0 auto; }
         .math-logo {
             width: clamp(80px, 25vw, 120px); height: clamp(80px, 25vw, 120px);
@@ -44,38 +56,118 @@
             border-radius: 35px; display: flex; align-items: center; justify-content: center;
             font-size: clamp(2.5rem, 8vw, 3.5rem); color: #0f172a;
             box-shadow: 0 20px 35px -8px rgba(250,204,21,0.5);
-            animation: pulseLogo 1.8s ease-in-out infinite;
+            animation: pulseLogo 1.8s ease-in-out infinite, logoSpinIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
-        @keyframes pulseLogo { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
-        .splash-title { font-size: clamp(1.5rem,6vw,2.2rem); font-weight:800; background:linear-gradient(135deg,#facc15,#f97316); -webkit-background-clip:text; background-clip:text; color:transparent; }
-        .loader-track { height: 6px; background: rgba(255,255,255,0.15); border-radius: 10px; overflow: hidden; margin: 20px 0 10px; }
-        .loader-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #facc15, #f97316); animation: loadingFill 2.5s ease-out forwards; }
+        @keyframes pulseLogo { 0%,100%{transform:scale(1) rotate(0deg);} 50%{transform:scale(1.07) rotate(3deg);} }
+        @keyframes logoSpinIn {
+            from { opacity: 0; transform: scale(0.3) rotate(-30deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+        .splash-title {
+            font-size: clamp(1.5rem,6vw,2.2rem); font-weight:800;
+            background:linear-gradient(135deg,#facc15,#f97316); -webkit-background-clip:text; background-clip:text; color:transparent;
+            animation: titleFadeUp 0.7s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both, shimmerText 3s 1.2s linear infinite;
+            background-size: 200% auto;
+        }
+        @keyframes titleFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shimmerText {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        .splash-content p { animation: titleFadeUp 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .loader-track { height: 6px; background: rgba(255,255,255,0.15); border-radius: 10px; overflow: hidden; margin: 20px 0 10px; animation: titleFadeUp 0.7s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .loader-fill {
+            width: 0%; height: 100%;
+            background: linear-gradient(90deg, #facc15, #f97316, #facc15);
+            background-size: 200% 100%;
+            animation: loadingFill 2.5s ease-out forwards, loaderGlow 1.2s linear infinite;
+            box-shadow: 0 0 10px rgba(250,204,21,0.7);
+        }
         @keyframes loadingFill { 0% { width: 0%; } 100% { width: 100%; } }
-        .fade-out { opacity: 0; visibility: hidden; }
+        @keyframes loaderGlow { 0% { background-position: 0% 0; } 100% { background-position: -200% 0; } }
+        .loader-percent { animation: titleFadeUp 0.7s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; font-variant-numeric: tabular-nums; }
+        .fade-out { opacity: 0; visibility: hidden; transform: scale(1.03); }
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            background-size: 200% 200%;
+            animation: heroShift 10s ease-in-out infinite;
             padding: 1.6rem 1rem; color: white; text-align: center;
             border-bottom: 4px solid #facc15;
+            position: relative;
+            overflow: hidden;
         }
-        .hero h1 { font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .badge-50 { background: #facc15; color: #0f172a; padding: 4px 14px; border-radius: 60px; font-size: 0.8rem; font-weight: 800; }
-        .subhead { font-size: 0.7rem; opacity: 0.9; margin-top: 4px; }
+        @keyframes heroShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+        .hero h1 { font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; animation: heroFadeDown 0.6s 0.1s cubic-bezier(0.22,1,0.36,1) both; }
+        .subhead { font-size: 0.7rem; opacity: 0.9; margin-top: 4px; animation: heroFadeDown 0.6s 0.25s cubic-bezier(0.22,1,0.36,1) both; }
+        .hero > div:last-child { animation: heroFadeDown 0.6s 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes heroFadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .badge-50 {
+            background: #facc15; color: #0f172a; padding: 4px 14px; border-radius: 60px; font-size: 0.8rem; font-weight: 800;
+            animation: badgePop 0.5s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both, badgeGlow 2.4s 1.3s ease-in-out infinite;
+        }
+        @keyframes badgePop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+        @keyframes badgeGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(250,204,21,0.5); } 50% { box-shadow: 0 0 0 6px rgba(250,204,21,0); } }
         .info-bar {
             background: #ffffffdd; backdrop-filter: blur(8px); padding: 10px 20px;
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
             gap: 10px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 20;
+            transition: box-shadow 0.3s ease;
         }
-        .score-card { background: #0f172a; padding: 6px 18px; border-radius: 50px; font-weight: bold; color: #facc15; }
+        .info-bar.scrolled { box-shadow: 0 6px 16px -6px rgba(0,0,0,0.15); }
+        .score-card {
+            background: #0f172a; padding: 6px 18px; border-radius: 50px; font-weight: bold; color: #facc15;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .score-card.bump { animation: scoreBump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes scoreBump { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+        .progress-track {
+            height: 4px; width: 100%; background: #e2e8f0; border-radius: 4px; overflow: hidden;
+            flex-basis: 100%; order: 3; margin-top: 2px;
+        }
+        .progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #3b82f6, #facc15);
+            border-radius: 4px;
+            transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
         .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn { border: none; padding: 6px 18px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
+        .btn { border: none; padding: 6px 18px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; font-size: 0.8rem; position: relative; overflow: hidden; }
         .btn-primary { background: #3b82f6; color: white; }
         .btn-warning { background: #f59e0b; color: white; }
         .btn-home { background: #64748b; color: white; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
-        .btn:active { transform: scale(0.96); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -6px rgba(0,0,0,0.3); filter: brightness(1.06); }
+        .btn:active { transform: scale(0.94); }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.55); transform: scale(0); animation: rippleAnim 0.55s ease-out; pointer-events: none; }
+        @keyframes rippleAnim { to { transform: scale(2.6); opacity: 0; } }
         .quiz-grid { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-        .question-card { background: white; border-radius: 28px; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); border: 1px solid #eef2ff; }
+        .question-card {
+            background: white; border-radius: 28px; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); border: 1px solid #eef2ff;
+            opacity: 0; transform: translateY(28px);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+        }
+        .question-card.revealed { animation: cardReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes cardReveal { to { opacity: 1; transform: translateY(0); } }
+        .question-card:hover { box-shadow: 0 16px 30px -8px rgba(0,0,0,0.14); transform: translateY(-3px); }
+        .question-card.answered-correct { animation: correctPulse 0.6s ease; }
+        .question-card.answered-wrong { animation: wrongShake 0.5s ease; }
+        @keyframes correctPulse {
+            0% { box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); }
+            30% { box-shadow: 0 0 0 6px rgba(16,185,129,0.35); }
+            100% { box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); }
+        }
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(5px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(3px); }
+        }
         .card-header { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: #fefce8; border-radius: 28px 28px 20px 20px; flex-wrap: wrap; }
-        .num-badge { width: 34px; height: 34px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; flex-shrink: 0; }
+        .num-badge { width: 34px; height: 34px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; flex-shrink: 0; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease; }
+        .question-card.answered-correct .num-badge { background: #10b981; transform: rotate(360deg); }
+        .question-card.answered-wrong .num-badge { background: #ef4444; }
         .difficulty-tag, .category-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.65rem; font-weight: 700; }
         .diff-easy { background: #d1fae5; color: #065f46; }
         .diff-medium { background: #fef3c7; color: #b45309; }
@@ -91,9 +183,10 @@
             padding: 8px 14px; margin: 4px 0;
             background: #fafcff; border-radius: 14px;
             border: 1px solid #e2e8f0; cursor: pointer;
-            transition: 0.2s;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
         }
-        .option-item:hover { background: #fefce8; border-color: #facc15; }
+        .option-item:hover { background: #fefce8; border-color: #facc15; transform: translateX(3px); }
+        .option-item:has(input:checked) { background: #eff6ff; border-color: #3b82f6; transform: translateX(3px); }
         .option-item input[type="radio"] {
             width: 18px; height: 18px; accent-color: #facc15; flex-shrink: 0;
             cursor: pointer;
@@ -101,32 +194,52 @@
         .option-item label { flex: 1; cursor: pointer; font-size: 0.85rem; color: #334155; }
         .option-item .math { font-family: 'Times New Roman', serif; }
         .input-wrapper { padding: 0.2rem 1.2rem; }
-        .answer-input { width: 100%; padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 60px; font-family: monospace; background: #fafcff; font-size: 0.9rem; }
-        .answer-input:focus { border-color: #facc15; outline: none; }
+        .answer-input { width: 100%; padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 60px; font-family: monospace; background: #fafcff; font-size: 0.9rem; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+        .answer-input:focus { border-color: #facc15; outline: none; box-shadow: 0 0 0 4px rgba(250,204,21,0.18); }
         .button-group-dual { display: flex; gap: 10px; margin: 12px 1.2rem 8px; width: calc(100% - 2.4rem); flex-wrap: wrap; }
-        .check-btn, .pembahasan-btn { flex: 1; padding: 9px; border-radius: 60px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; min-width: 120px; }
+        .check-btn, .pembahasan-btn { flex: 1; padding: 9px; border-radius: 60px; font-weight: 700; border: none; cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; min-width: 120px; position: relative; overflow: hidden; }
         .check-btn { background: linear-gradient(95deg, #3b82f6, #2563eb); color: white; }
         .pembahasan-btn { background: linear-gradient(95deg, #f59e0b, #d97706); color: white; }
+        .check-btn:hover, .pembahasan-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 18px -6px rgba(0,0,0,0.35); filter: brightness(1.05); }
+        .check-btn:active, .pembahasan-btn:active { transform: scale(0.96); }
         .feedback-area { padding: 0.6rem 1.2rem 1.2rem; }
+        .result-correct, .result-wrong, .warning-message, .explanation-box {
+            animation: feedbackIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes feedbackIn {
+            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
         .result-correct { background: #d1fae5; color: #065f46; border-left: 6px solid #10b981; padding: 10px; border-radius: 20px; margin-bottom: 8px; font-weight: bold; }
         .result-wrong { background: #fee2e2; color: #991b1b; border-left: 6px solid #ef4444; padding: 10px; border-radius: 20px; margin-bottom: 8px; font-weight: bold; }
         .warning-message { background: #fef3c7; color: #92400e; border-left: 6px solid #f59e0b; padding: 10px; border-radius: 20px; }
-        .explanation-box { background: #f8fafc; padding: 14px; border-radius: 20px; font-size: 0.85rem; line-height: 1.7; border: 1px solid #e2e8f0; }
+        .explanation-box { background: #f8fafc; padding: 14px; border-radius: 20px; font-size: 0.85rem; line-height: 1.7; border: 1px solid #e2e8f0; animation-delay: 0.08s; }
         .explanation-box .math { font-family: 'Times New Roman', serif; font-size: 0.95rem; }
-        .scroll-top { position: fixed; bottom: 20px; right: 20px; background: #1e293b; width: 44px; height: 44px; border-radius: 30px; display: flex; align-items: center; justify-content: center; color: #facc15; cursor: pointer; z-index: 99; border: none; font-size: 1.2rem; }
+        .scroll-top {
+            position: fixed; bottom: 20px; right: 20px; background: #1e293b; width: 44px; height: 44px; border-radius: 30px;
+            display: flex; align-items: center; justify-content: center; color: #facc15; cursor: pointer; z-index: 99; border: none; font-size: 1.2rem;
+            opacity: 0; transform: translateY(16px) scale(0.8); pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .scroll-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .scroll-top:hover { transform: translateY(-3px) scale(1.06); }
         #confetti-canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1000; }
         .toast-once {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(10px);
             background: #0f172a; color: #facc15; padding: 10px 24px; border-radius: 50px;
             font-size: 0.85rem; font-weight: 600; z-index: 1001; opacity: 0;
-            transition: opacity 0.4s ease; pointer-events: none; white-space: nowrap;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); pointer-events: none; white-space: nowrap;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: monospace;
         }
+        .toast-once.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         @media (max-width: 550px) {
             body { padding: 8px; }
             .button-group-dual { flex-direction: column; }
             .toast-once { font-size: 0.7rem; white-space: nowrap; bottom: 20px; padding: 8px 16px; }
             .option-item label { font-size: 0.78rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
         .true-false-wrapper { padding: 0.3rem 1.2rem; display: flex; gap: 16px; flex-wrap: wrap; }
         .tf-option { display: flex; align-items: center; gap: 8px; }
@@ -139,9 +252,10 @@
             padding: 8px 14px; margin: 4px 0;
             background: #fafcff; border-radius: 14px;
             border: 1px solid #e2e8f0; cursor: pointer;
-            transition: 0.2s;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
         }
-        .multiple-option:hover { background: #fefce8; border-color: #facc15; }
+        .multiple-option:hover { background: #fefce8; border-color: #facc15; transform: translateX(3px); }
+        .multiple-option:has(input:checked) { background: #eff6ff; border-color: #3b82f6; }
         .multiple-option input[type="checkbox"] { width: 18px; height: 18px; accent-color: #facc15; flex-shrink: 0; cursor: pointer; }
         .multiple-option label { flex: 1; cursor: pointer; font-size: 0.85rem; color: #334155; }
         .footer-note { background: #f1f5f9; text-align: center; padding: 12px; font-size: 0.7rem; color: #475569; }
@@ -157,13 +271,14 @@
         <div class="subhead">Bilangan | Aljabar | Geometri | Statistika | Peluang | Trigonometri | Aritmatika Sosial</div>
         <div style="margin-top:5px;">🎯 Latihan Soal TKA dengan Auto-Save</div>
     </div>
-    <div class="info-bar">
+    <div class="info-bar" id="infoBar">
         <div class="score-card" id="liveScoreDisplay">🏆 SKOR: 0 / 50</div>
         <div class="btn-group">
             <a href="index.html" class="btn btn-home" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">🏠 HOME</a>
             <button class="btn btn-primary" id="checkAllBtn">✅ CEK SEMUA</button>
             <button class="btn btn-warning" id="resetBtn">🔄 RESET</button>
         </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
     <div class="quiz-grid" id="quizGrid"></div>
     <div class="footer-note">
@@ -210,6 +325,14 @@ const pInterval = setInterval(()=>{
 
 let toastOnceShown = false;
 
+// Reveal question cards with stagger once splash is gone
+function revealCards(){
+    const cards = document.querySelectorAll('.question-card');
+    cards.forEach((card, i) => {
+        setTimeout(()=>{ card.classList.add('revealed'); }, i * 45);
+    });
+}
+
 window.addEventListener('load',()=>{
     setTimeout(()=>{
         clearInterval(pInterval);
@@ -219,10 +342,11 @@ window.addEventListener('load',()=>{
             toastOnceShown = true;
             const toast = document.getElementById('toast-once');
             if(toast){
-                toast.style.opacity = '1';
-                setTimeout(() => { if(toast) toast.style.opacity = '0'; }, 2500);
+                toast.classList.add('show');
+                setTimeout(() => { if(toast) toast.classList.remove('show'); }, 2500);
             }
         }
+        revealCards();
     },2500);
 });
 
@@ -261,6 +385,21 @@ function startConfetti(){
     }
     animate();
     setTimeout(()=>{ if(animId){ cancelAnimationFrame(animId); animId=null; ctx.clearRect(0,0,canvas.width,canvas.height); }},5000);
+}
+
+// ==================== RIPPLE EFFECT ====================
+function attachRipple(el){
+    el.addEventListener('click', function(e){
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+        this.appendChild(ripple);
+        setTimeout(()=> ripple.remove(), 550);
+    });
 }
 
 // ==================== 50 SOAL MATEMATIKA (DIPERBAHARUI) ====================
@@ -401,6 +540,8 @@ function updateAnswerAndSave(qid, value) {
         const fbDiv = document.getElementById(`fb_${qid}`);
         if(fbDiv) fbDiv.innerHTML = '';
     }
+    const card = document.getElementById(`card_${qid}`);
+    if(card){ card.classList.remove('answered-correct','answered-wrong'); }
     saveToStorage();
     updateScoreDisplay();
 }
@@ -410,9 +551,11 @@ function evaluateQuestion(qid) {
     if(!q) return;
     let raw = userAnswers[qid] || "";
     let fbDiv = document.getElementById(`fb_${qid}`);
+    let card = document.getElementById(`card_${qid}`);
     
     if(raw === ""){ 
         if(fbDiv) fbDiv.innerHTML = `<div class="warning-message">⚠️ Pilih jawaban dulu!</div>`; 
+        if(card){ card.classList.remove('answered-correct','answered-wrong'); void card.offsetWidth; card.classList.add('answered-wrong'); }
         return; 
     }
     
@@ -439,6 +582,11 @@ function evaluateQuestion(qid) {
         resHtml += `<div class="explanation-box">${q.penyelesaian}</div>`;
         fbDiv.innerHTML = resHtml;
     }
+    if(card){
+        card.classList.remove('answered-correct','answered-wrong');
+        void card.offsetWidth;
+        card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+    }
     updateScoreDisplay();
 }
 
@@ -463,6 +611,7 @@ function renderCards(){
     questions.forEach((q) => {
         let card = document.createElement('div');
         card.className = 'question-card';
+        card.id = `card_${q.id}`;
         
         let diffClass = getDiffClass(q.diff);
         let typeLabel = q.type === 'mc' ? 'Pilihan Ganda' : q.type === 'tf' ? 'Benar/Salah' : 'Pilihan Ganda';
@@ -526,11 +675,17 @@ function renderCards(){
             <div class="feedback-area" id="fb_${q.id}"></div>
         `;
         grid.appendChild(card);
+        attachRipple(card.querySelector('.check-btn'));
+        attachRipple(card.querySelector('.pembahasan-btn'));
         
         if(userAnswers[q.id] && answerStatus[q.id]) {
             evaluateQuestion(q.id);
         }
     });
+    // If page loads and splash already gone (e.g. cached), reveal immediately
+    if(!document.getElementById('splash-screen')){
+        revealCards();
+    }
 }
 
 window.updateMultipleAnswer = function(qid) {
@@ -542,6 +697,8 @@ window.updateMultipleAnswer = function(qid) {
     let ans = values.join(',');
     userAnswers[qid] = ans;
     answerStatus[qid] = false;
+    const card = document.getElementById(`card_${qid}`);
+    if(card){ card.classList.remove('answered-correct','answered-wrong'); }
     saveToStorage();
     updateScoreDisplay();
     let fbDiv = document.getElementById(`fb_${qid}`);
@@ -554,10 +711,49 @@ function computeScore(){
     return c; 
 }
 
+function countAnswered(){
+    let c = 0;
+    for(let i=1;i<=50;i++) if(userAnswers[i] && userAnswers[i] !== "") c++;
+    return c;
+}
+
+// Smooth count-up animation for the score display
+let displayedScore = 0;
+function animateScoreTo(target){
+    const span = document.getElementById('liveScoreDisplay');
+    if(!span) return;
+    const start = displayedScore;
+    const diff = target - start;
+    if(diff === 0){ span.innerHTML = `🏆 SKOR: ${target} / 50`; return; }
+    const duration = 400;
+    const startTime = performance.now();
+    function step(now){
+        const t = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const current = Math.round(start + diff * eased);
+        span.innerHTML = `🏆 SKOR: ${current} / 50`;
+        if(t < 1){ requestAnimationFrame(step); }
+        else { displayedScore = target; }
+    }
+    requestAnimationFrame(step);
+}
+
 function updateScoreDisplay(){
     let sc = computeScore();
-    let span = document.getElementById('liveScoreDisplay');
-    if(span) span.innerHTML = `🏆 SKOR: ${sc} / 50`;
+    const span = document.getElementById('liveScoreDisplay');
+    if(span){
+        animateScoreTo(sc);
+        if(sc !== lastScore){
+            span.classList.remove('bump');
+            void span.offsetWidth;
+            span.classList.add('bump');
+        }
+    }
+    const progressFill = document.getElementById('progressFill');
+    if(progressFill){
+        const answered = countAnswered();
+        progressFill.style.width = (answered/50*100) + '%';
+    }
     if(sc === 50 && lastScore !== 50){ 
         startConfetti(); 
     }
@@ -576,6 +772,8 @@ function resetAll(){
         answerStatus[i] = false; 
         let fb = document.getElementById(`fb_${i}`); 
         if(fb) fb.innerHTML = ''; 
+        let card = document.getElementById(`card_${i}`);
+        if(card) card.classList.remove('answered-correct','answered-wrong');
     } 
     document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(inp => inp.checked = false);
     saveToStorage();
@@ -589,11 +787,30 @@ window.updateMultipleAnswer = updateMultipleAnswer;
 
 loadFromStorage();
 renderCards();
+displayedScore = computeScore();
 updateScoreDisplay();
 
 document.getElementById('checkAllBtn')?.addEventListener('click', checkAll);
 document.getElementById('resetBtn')?.addEventListener('click', resetAll);
 document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+const scrollBtn = document.getElementById('scrollTopBtn');
+const infoBar = document.getElementById('infoBar');
+window.addEventListener('scroll', () => {
+    if(scrollBtn){
+        if(window.scrollY > 400) scrollBtn.classList.add('visible');
+        else scrollBtn.classList.remove('visible');
+    }
+    if(infoBar){
+        if(window.scrollY > 10) infoBar.classList.add('scrolled');
+        else infoBar.classList.remove('scrolled');
+    }
+});
+
+['checkAllBtn','resetBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) attachRipple(el);
+});
 </script>
 </body>
 </html>
