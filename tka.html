@@ -12,6 +12,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* PERBAIKAN: Mencegah scroll saat splash screen aktif */
         body {
             font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
             background: linear-gradient(145deg, #eef2ff 0%, #c7d2fe 100%);
@@ -19,6 +20,12 @@
             line-height: 1.45;
             padding: 16px;
             min-height: 100vh;
+            overflow: hidden; /* Mencegah scroll saat loading */
+        }
+
+        /* Saat splash selesai, izinkan scroll */
+        body.scroll-enabled {
+            overflow-y: auto;
         }
 
         .container {
@@ -30,6 +37,12 @@
             overflow: hidden;
             animation: fadeInScale 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
             backdrop-filter: blur(2px);
+            opacity: 0; /* Awalnya invisible, baru muncul setelah splash hilang */
+            transition: opacity 0.8s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
         }
 
         @keyframes fadeInScale {
@@ -37,6 +50,26 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
+        .question-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08);
+            border: 1px solid #eef2ff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -8px rgba(0,0,0,0.12);
+        }
+
+        .question-card:active {
+            transform: scale(0.99);
+        }
+
+        /* PERBAIKAN: Splash screen benar-benar menutupi semuanya */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -51,6 +84,13 @@
             z-index: 9999;
             transition: opacity 0.8s ease, visibility 0.8s;
             overflow: hidden;
+        }
+
+        /* PERBAIKAN: Saat splash hilang, body bisa scroll */
+        .splash-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Agar tidak menghalangi interaksi */
         }
 
         .stars {
@@ -214,11 +254,6 @@
             flex-wrap: wrap;
         }
 
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
             padding: 1.8rem 1.5rem;
@@ -305,21 +340,6 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-        }
-
-        .question-card {
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08);
-            border: 1px solid #eef2ff;
-            transition: all 0.2s;
-            animation: cardFadeIn 0.4s ease forwards;
-            opacity: 0;
-        }
-
-        @keyframes cardFadeIn {
-            to { opacity: 1; transform: translateY(0);}
-            from { opacity: 0; transform: translateY(12px);}
         }
 
         .card-header {
@@ -612,7 +632,6 @@
             cursor: pointer;
         }
 
-        /* Toast notification */
         .toast-save {
             position: fixed;
             bottom: 80px;
@@ -666,7 +685,7 @@
 <canvas id="confetti-canvas"></canvas>
 <div id="toast-save" class="toast-save">💾 Jawaban tersimpan otomatis</div>
 
-<div class="container">
+<div class="container" id="mainContainer">
     <div class="hero">
         <h1>🧠 MATH ACADEMY <span class="badge-40">40 SOAL</span></h1>
         <div class="subhead">⚡ Bilangan | Aljabar | Geometri | Statistika | Peluang ⚡</div>
@@ -916,7 +935,6 @@
                 answerStatus = JSON.parse(savedStatus);
             } catch(e) { answerStatus = {}; }
         }
-        // Pastikan semua id dari 1-40 ada di object
         for(let i=1;i<=40;i++) {
             if(userAnswers[i] === undefined) userAnswers[i] = "";
             if(answerStatus[i] === undefined) answerStatus[i] = false;
@@ -926,7 +944,6 @@
     function saveToStorage() {
         localStorage.setItem('math_academy_answers', JSON.stringify(userAnswers));
         localStorage.setItem('math_academy_status', JSON.stringify(answerStatus));
-        // Tampilkan toast notifikasi singkat
         const toast = document.getElementById('toast-save');
         if(toast) {
             toast.style.opacity = '1';
@@ -934,13 +951,10 @@
         }
     }
 
-    // Fungsi update jawaban + auto save
     function updateAnswerAndSave(qid, value) {
         userAnswers[qid] = value;
-        // Reset status kebenaran karena jawaban berubah
         if(answerStatus[qid] === true) {
             answerStatus[qid] = false;
-            // Hapus feedback jika ada
             const fbDiv = document.getElementById(`fb_${qid}`);
             if(fbDiv) fbDiv.innerHTML = '';
         }
@@ -948,7 +962,6 @@
         updateScoreDisplay();
     }
 
-    // Normalisasi jawaban
     function normalizeAnswer(val){
         let str = val.trim().replace(/,/g, '.');
         if(str === "") return "";
@@ -974,7 +987,7 @@
         let correctNorm = normalizeAnswer(q.correct);
         let isCorrect = (normalizedInput === correctNorm);
         answerStatus[qid] = isCorrect;
-        saveToStorage(); // Simpan status kebenaran
+        saveToStorage();
         
         if(fbDiv){
             let resultHtml = isCorrect ? 
@@ -1031,9 +1044,8 @@
             let fb = document.getElementById(`fb_${i}`);
             if(fb) fb.innerHTML = '';
         }
-        saveToStorage(); // Hapus dari storage setelah reset
+        saveToStorage();
         updateScoreDisplay();
-        // Tampilkan toast reset
         const toast = document.getElementById('toast-save');
         if(toast) {
             toast.style.background = "#ef4444";
@@ -1098,7 +1110,6 @@
             if(!q) continue;
             const card = document.createElement('div');
             card.className = 'question-card';
-            card.style.animationDelay = `${i * 0.03}s`;
             const placeholderText = getPlaceholder(q);
             card.innerHTML = `
                 <div class="card-header">
@@ -1237,14 +1248,24 @@
     window.addEventListener('load',()=>{
         createStars();
         createFloatingParticles();
-        loadFromStorage();      // Muat data dari local storage
-        renderAllCards();       // Render dengan nilai yang sudah dimuat
-        updateScoreDisplay();   // Update skor berdasarkan status yang dimuat
+        loadFromStorage();
+        renderAllCards();
+        updateScoreDisplay();
+        
+        // Tampilkan container setelah splash hilang
+        const container = document.getElementById('mainContainer');
+        
         setTimeout(()=>{
             clearInterval(percentInterval);
             const splash = document.getElementById('splash-screen');
             if(splash){
-                splash.classList.add('fade-out');
+                splash.classList.add('splash-hidden');
+                // Aktifkan scroll
+                document.body.classList.add('scroll-enabled');
+                // Tampilkan container
+                if(container) {
+                    container.classList.add('visible');
+                }
                 setTimeout(()=>{ 
                     if(splash.parentNode) splash.remove(); 
                 }, 800);
@@ -1276,7 +1297,6 @@
         }
     });
 
-    // Expose function ke global agar bisa dipanggil dari onclick
     window.evaluateQuestion = evaluateQuestion;
     window.showExplanationOnly = showExplanationOnly;
 </script>
