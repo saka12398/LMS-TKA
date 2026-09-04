@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>TKA Olympiad | 60 Soal + Auto-Save</title>
+    <title>TKA Matematika | 50 Soal + Auto-Save</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            font-family: 'Poppins', system-ui, sans-serif;
             background: linear-gradient(145deg, #eef2ff 0%, #c7d2fe 100%);
             color: #0f172a;
             line-height: 1.45;
@@ -24,10 +25,8 @@
         }
         #splash-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
             background: radial-gradient(ellipse at center, #0a0f2a 0%, #020617 100%);
             display: flex;
             justify-content: center;
@@ -59,7 +58,7 @@
             border-bottom: 4px solid #facc15;
         }
         .hero h1 { font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .badge-60 { background: #facc15; color: #0f172a; padding: 4px 14px; border-radius: 60px; font-size: 0.8rem; font-weight: 800; }
+        .badge-50 { background: #facc15; color: #0f172a; padding: 4px 14px; border-radius: 60px; font-size: 0.8rem; font-weight: 800; }
         .subhead { font-size: 0.7rem; opacity: 0.9; margin-top: 4px; }
         .info-bar {
             background: #ffffffdd; backdrop-filter: blur(8px); padding: 10px 20px;
@@ -67,7 +66,7 @@
             gap: 10px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 20;
         }
         .score-card { background: #0f172a; padding: 6px 18px; border-radius: 50px; font-weight: bold; color: #facc15; }
-        .btn-group { display: flex; gap: 10px; }
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
         .btn { border: none; padding: 6px 18px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
         .btn-primary { background: #3b82f6; color: white; }
         .btn-warning { background: #f59e0b; color: white; }
@@ -76,53 +75,76 @@
         .quiz-grid { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
         .question-card { background: white; border-radius: 28px; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); border: 1px solid #eef2ff; }
         .card-header { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: #fefce8; border-radius: 28px 28px 20px 20px; flex-wrap: wrap; }
-        .num-badge { width: 34px; height: 34px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; }
-        .difficulty-tag, .category-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
+        .num-badge { width: 34px; height: 34px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; flex-shrink: 0; }
+        .difficulty-tag, .category-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.65rem; font-weight: 700; }
+        .diff-easy { background: #d1fae5; color: #065f46; }
         .diff-medium { background: #fef3c7; color: #b45309; }
         .diff-hard { background: #fee2e2; color: #b91c1c; }
         .diff-hot { background: #fce7f3; color: #be185d; }
         .diff-extreme { background: #ede9fe; color: #5b21b6; }
         .category-tag { background: #dbeafe; color: #1e40af; }
-        .question-text { font-size: 0.95rem; font-weight: 600; padding: 0.8rem 1.2rem 0.2rem; color: #0c4a6e; }
+        .question-text { font-size: 0.92rem; font-weight: 600; padding: 0.8rem 1.2rem 0.2rem; color: #0c4a6e; line-height: 1.6; }
+        .question-text .math { font-family: 'Times New Roman', serif; font-size: 1.05rem; }
+        .options-wrapper { padding: 0.3rem 1.2rem; }
+        .option-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 8px 14px; margin: 4px 0;
+            background: #fafcff; border-radius: 14px;
+            border: 1px solid #e2e8f0; cursor: pointer;
+            transition: 0.2s;
+        }
+        .option-item:hover { background: #fefce8; border-color: #facc15; }
+        .option-item input[type="radio"] {
+            width: 18px; height: 18px; accent-color: #facc15; flex-shrink: 0;
+            cursor: pointer;
+        }
+        .option-item label { flex: 1; cursor: pointer; font-size: 0.85rem; color: #334155; }
+        .option-item .math { font-family: 'Times New Roman', serif; }
         .input-wrapper { padding: 0.2rem 1.2rem; }
-        .answer-input { width: 100%; padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 60px; font-family: monospace; background: #fafcff; }
+        .answer-input { width: 100%; padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 60px; font-family: monospace; background: #fafcff; font-size: 0.9rem; }
         .answer-input:focus { border-color: #facc15; outline: none; }
-        .button-group-dual { display: flex; gap: 10px; margin: 12px 1.2rem 8px; width: calc(100% - 2.4rem); }
-        .check-btn, .pembahasan-btn { flex: 1; padding: 9px; border-radius: 60px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; }
+        .button-group-dual { display: flex; gap: 10px; margin: 12px 1.2rem 8px; width: calc(100% - 2.4rem); flex-wrap: wrap; }
+        .check-btn, .pembahasan-btn { flex: 1; padding: 9px; border-radius: 60px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; min-width: 120px; }
         .check-btn { background: linear-gradient(95deg, #3b82f6, #2563eb); color: white; }
         .pembahasan-btn { background: linear-gradient(95deg, #f59e0b, #d97706); color: white; }
         .feedback-area { padding: 0.6rem 1.2rem 1.2rem; }
         .result-correct { background: #d1fae5; color: #065f46; border-left: 6px solid #10b981; padding: 10px; border-radius: 20px; margin-bottom: 8px; font-weight: bold; }
         .result-wrong { background: #fee2e2; color: #991b1b; border-left: 6px solid #ef4444; padding: 10px; border-radius: 20px; margin-bottom: 8px; font-weight: bold; }
         .warning-message { background: #fef3c7; color: #92400e; border-left: 6px solid #f59e0b; padding: 10px; border-radius: 20px; }
-        .explanation-box { background: #f8fafc; padding: 14px; border-radius: 20px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #e2e8f0; }
-        .scroll-top { position: fixed; bottom: 20px; right: 20px; background: #1e293b; width: 44px; height: 44px; border-radius: 30px; display: flex; align-items: center; justify-content: center; color: #facc15; cursor: pointer; z-index: 99; }
+        .explanation-box { background: #f8fafc; padding: 14px; border-radius: 20px; font-size: 0.85rem; line-height: 1.7; border: 1px solid #e2e8f0; }
+        .explanation-box .math { font-family: 'Times New Roman', serif; font-size: 0.95rem; }
+        .scroll-top { position: fixed; bottom: 20px; right: 20px; background: #1e293b; width: 44px; height: 44px; border-radius: 30px; display: flex; align-items: center; justify-content: center; color: #facc15; cursor: pointer; z-index: 99; border: none; font-size: 1.2rem; }
         #confetti-canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1000; }
         .toast-once {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #0f172a;
-            color: #facc15;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            z-index: 1001;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            font-family: monospace;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: #0f172a; color: #facc15; padding: 10px 24px; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 600; z-index: 1001; opacity: 0;
+            transition: opacity 0.4s ease; pointer-events: none; white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: monospace;
         }
-        @media (max-width: 550px) { 
-            body { padding: 8px; } 
+        @media (max-width: 550px) {
+            body { padding: 8px; }
             .button-group-dual { flex-direction: column; }
             .toast-once { font-size: 0.7rem; white-space: nowrap; bottom: 20px; padding: 8px 16px; }
+            .option-item label { font-size: 0.78rem; }
         }
-        sup, sub { font-size: 0.7rem; }
+        .true-false-wrapper { padding: 0.3rem 1.2rem; display: flex; gap: 16px; flex-wrap: wrap; }
+        .tf-option { display: flex; align-items: center; gap: 8px; }
+        .tf-option input[type="radio"] { width: 18px; height: 18px; accent-color: #facc15; cursor: pointer; }
+        .tf-option label { cursor: pointer; font-size: 0.85rem; font-weight: 600; }
+        .tf-option .benar { color: #10b981; }
+        .tf-option .salah { color: #ef4444; }
+        .multiple-option {
+            display: flex; align-items: center; gap: 12px;
+            padding: 8px 14px; margin: 4px 0;
+            background: #fafcff; border-radius: 14px;
+            border: 1px solid #e2e8f0; cursor: pointer;
+            transition: 0.2s;
+        }
+        .multiple-option:hover { background: #fefce8; border-color: #facc15; }
+        .multiple-option input[type="checkbox"] { width: 18px; height: 18px; accent-color: #facc15; flex-shrink: 0; cursor: pointer; }
+        .multiple-option label { flex: 1; cursor: pointer; font-size: 0.85rem; color: #334155; }
+        .footer-note { background: #f1f5f9; text-align: center; padding: 12px; font-size: 0.7rem; color: #475569; }
     </style>
 </head>
 <body>
@@ -131,21 +153,21 @@
 
 <div class="container">
     <div class="hero">
-        <h1>📘 TEST PERSIAPAN TKA <span class="badge-60">60 SOAL</span></h1>
-        <div class="subhead">Bilangan | Aljabar | Geometri | Statistika | Peluang | Aritmatika Sosial | PLSV | Himpunan | Fungsi | Transformasi</div>
-        <div style="margin-top:5px;">🎯 Semangat Latihan Soal 🎉</div>
+        <h1>📘 TKA MATEMATIKA <span class="badge-50">50 SOAL</span></h1>
+        <div class="subhead">Bilangan | Aljabar | Geometri | Statistika | Peluang | Trigonometri | Aritmatika Sosial</div>
+        <div style="margin-top:5px;">🎯 Latihan Soal TKA dengan Auto-Save</div>
     </div>
-   <div class="info-bar">
-    <div class="score-card" id="liveScoreDisplay">🏆 SKOR: 0 / 60</div>
-    <div class="btn-group">
-        <a href="index.html" class="btn btn-home" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">🏠 HOME</a>
-        <button class="btn btn-primary" id="checkAllBtn">🔍 CEK SEMUA</button>
-        <button class="btn btn-warning" id="resetBtn">🔄 RESET</button>
+    <div class="info-bar">
+        <div class="score-card" id="liveScoreDisplay">🏆 SKOR: 0 / 50</div>
+        <div class="btn-group">
+            <a href="index.html" class="btn btn-home" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">🏠 HOME</a>
+            <button class="btn btn-primary" id="checkAllBtn">✅ CEK SEMUA</button>
+            <button class="btn btn-warning" id="resetBtn">🔄 RESET</button>
+        </div>
     </div>
-</div>
     <div class="quiz-grid" id="quizGrid"></div>
-    <div class="footer-note" style="background:#f1f5f9; text-align:center; padding:12px; font-size:0.7rem;">
-        💡 <strong>Panduan:</strong> CEK JAWABAN → muncul benar/salah + penyelesaian. LIHAT PEMBAHASAN → contoh soal serupa + rumus.<br>
+    <div class="footer-note">
+        💡 <strong>Panduan:</strong> CEK JAWABAN → muncul benar/salah + pembahasan. LIHAT PEMBAHASAN → contoh soal serupa + rumus.<br>
         🔒 <strong>Auto-Save aktif:</strong> Jawaban tersimpan otomatis, tetap ada meskipun refresh halaman!
     </div>
 </div>
@@ -154,348 +176,261 @@
 <div id="splash-screen">
     <div class="stars" id="stars"></div>
     <div class="splash-content">
-        <div class="math-logo">🏅</div>
-        <h1 class="splash-title">TEST TKA CHALLENGE</h1>
-        <p class="splash-sub" style="color:#a5b4fc;">60 SOAL FUNDAMENTAL</p>
+        <div class="math-logo">📐</div>
+        <h1 class="splash-title">TKA CHALLENGE</h1>
+        <p style="color:#a5b4fc;">50 SOAL MATEMATIKA</p>
         <div class="loader-track"><div class="loader-fill"></div></div>
         <div class="loader-percent" style="color:#facc15; margin-top:10px;" id="loadingPercent">0%</div>
     </div>
 </div>
 
 <script>
-    // ==================== STARS & SPLASH ====================
-    function createStars(){
-        const starsDiv = document.getElementById('stars');
-        if(!starsDiv) return;
-        for(let i=0;i<120;i++){
-            let s = document.createElement('div');
-            s.classList.add('star');
-            s.style.left = Math.random()*100+'%';
-            s.style.top = Math.random()*100+'%';
-            s.style.width = Math.random()*3+1+'px';
-            s.style.height = s.style.width;
-            s.style.animationDelay = Math.random()*4+'s';
-            s.style.animationDuration = Math.random()*2+2+'s';
-            starsDiv.appendChild(s);
-        }
+// ==================== STARS & SPLASH ====================
+function createStars(){
+    const starsDiv = document.getElementById('stars');
+    if(!starsDiv) return;
+    for(let i=0;i<120;i++){
+        let s = document.createElement('div');
+        s.classList.add('star');
+        s.style.left = Math.random()*100+'%';
+        s.style.top = Math.random()*100+'%';
+        s.style.width = Math.random()*3+1+'px';
+        s.style.height = s.style.width;
+        s.style.animationDelay = Math.random()*4+'s';
+        s.style.animationDuration = Math.random()*2+2+'s';
+        starsDiv.appendChild(s);
     }
-    createStars();
-    let percentVal=0;
-    const pInterval = setInterval(()=>{
-        if(percentVal<100){ percentVal+=Math.floor(Math.random()*6)+3; if(percentVal>100) percentVal=100;
-        document.getElementById('loadingPercent') && (document.getElementById('loadingPercent').innerText=percentVal+'%');}
-    },70);
-    
-    let toastOnceShown = false;
-    
-    window.addEventListener('load',()=>{
-        setTimeout(()=>{
-            clearInterval(pInterval);
-            const splash = document.getElementById('splash-screen');
-            if(splash){ splash.classList.add('fade-out'); setTimeout(()=>{ if(splash.parentNode) splash.remove(); },700);}
-            
-            if(!toastOnceShown){
-                toastOnceShown = true;
-                const toast = document.getElementById('toast-once');
-                if(toast){
-                    toast.style.opacity = '1';
-                    setTimeout(() => {
-                        if(toast) toast.style.opacity = '0';
-                    }, 2500);
-                }
-            }
-        },2500);
-    });
+}
+createStars();
+let percentVal=0;
+const pInterval = setInterval(()=>{
+    if(percentVal<100){ percentVal+=Math.floor(Math.random()*6)+3; if(percentVal>100) percentVal=100;
+    document.getElementById('loadingPercent') && (document.getElementById('loadingPercent').innerText=percentVal+'%');}
+},70);
 
-    // ==================== CONFETTI ====================
-    const canvas = document.getElementById('confetti-canvas');
-    let ctx = canvas.getContext('2d');
-    let animId = null;
-    let particles = [];
-    function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize',resizeCanvas); resizeCanvas();
-    class ConfettiP{
-        constructor(){
-            this.x = Math.random()*canvas.width;
-            this.y = Math.random()*canvas.height - canvas.height;
-            this.size = Math.random()*8+4;
-            this.speedY = Math.random()*6+4;
-            this.speedX = Math.random()*2-1;
-            this.color = `hsl(${Math.random()*360},80%,65%)`;
-            this.rot = Math.random()*360;
-            this.rotSpeed = Math.random()*10-5;
-        }
-        update(){ this.y+=this.speedY; this.x+=this.speedX; this.rot+=this.rotSpeed; return this.y < canvas.height+80; }
-        draw(){ ctx.save(); ctx.translate(this.x,this.y); ctx.rotate(this.rot*Math.PI/180); ctx.fillStyle=this.color; ctx.fillRect(-this.size/2,-this.size/2,this.size,this.size); ctx.restore(); }
-    }
-    function startConfetti(){
-        if(animId) cancelAnimationFrame(animId);
-        particles = [];
-        for(let i=0;i<220;i++) particles.push(new ConfettiP());
-        function animate(){
-            if(!ctx) return;
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            let alive=false;
-            for(let p of particles) { if(p.update()) alive=true; p.draw(); }
-            if(alive) animId = requestAnimationFrame(animate);
-            else { cancelAnimationFrame(animId); animId=null; ctx.clearRect(0,0,canvas.width,canvas.height); }
-        }
-        animate();
-        setTimeout(()=>{ if(animId){ cancelAnimationFrame(animId); animId=null; ctx.clearRect(0,0,canvas.width,canvas.height); }},5000);
-    }
+let toastOnceShown = false;
 
-    // ==================== 60 SOAL LENGKAP (TIDAK ADA YANG DIUBAH, HANYA DIPERBAIKI STRUKTUR ARRAY NYA) ====================
-const questions = [
-  { id: 1, diff: "Hard", cat: "Aljabar", text: "Jika (x + y)² = 49 dan xy = 10, maka nilai x² + y² = ?", correct: "29", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (x + y)² = x² + 2xy + y²<br>📌 49 = x² + y² + 2(10)<br>📌 49 = x² + y² + 20<br>📌 x² + y² = 49 - 20 = <strong>29</strong>", contoh: "📖 <strong>CONTOH:</strong> (a+b)²=36, ab=8 → a²+b²=36-16=20<br>📌 <strong>TRIK:</strong> a²+b² = (a+b)² - 2ab" },
-
-  { id: 2, diff: "Hot", cat: "Aljabar", text: "Jika a + b = 5 dan a² + b² = 17, maka nilai ab = ?", correct: "4", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (a + b)² = a² + 2ab + b²<br>📌 5² = 17 + 2ab<br>📌 25 = 17 + 2ab<br>📌 2ab = 8 → ab = <strong>4</strong>", contoh: "📖 <strong>CONTOH:</strong> a+b=7, a²+b²=25 → ab=(49-25)/2=12<br>📌 <strong>TRIK:</strong> ab = [(a+b)² - (a²+b²)]/2" },
-
-  { id: 3, diff: "Ekstrem", cat: "Aljabar", text: "Jika x + 1/x = 5, maka nilai x² + 1/x² = ?", correct: "23", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (x + 1/x)² = x² + 2(x)(1/x) + 1/x²<br>📌 5² = x² + 2 + 1/x²<br>📌 25 = x² + 1/x² + 2<br>📌 x² + 1/x² = 25 - 2 = <strong>23</strong>", contoh: "📖 <strong>CONTOH:</strong> x+1/x=3 → x²+1/x²=9-2=7<br>📌 <strong>TRIK:</strong> Kuadratkan kedua ruas!" },
-
-  { id: 4, diff: "Hard", cat: "Bilangan", text: "Nilai dari (3² × 3⁴) ÷ 3⁵ = ?", correct: "3", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 3² × 3⁴ = 3²⁺⁴ = 3⁶<br>📌 3⁶ ÷ 3⁵ = 3⁶⁻⁵ = 3¹ = <strong>3</strong>", contoh: "📖 <strong>CONTOH:</strong> (2³×2⁵)÷2⁴ = 2⁸⁻⁴=2⁴=16<br>📌 <strong>TRIK:</strong> Jumlahkan pangkat untuk perkalian, kurangkan untuk pembagian!" },
-
-  { id: 5, diff: "Hot", cat: "Bilangan", text: "Bentuk sederhana dari (2a³b⁻²)² ÷ (4a²b⁻⁴) adalah...", correct: "a⁴", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (2a³b⁻²)² = 4a⁶b⁻⁴<br>📌 4a⁶b⁻⁴ ÷ 4a²b⁻⁴ = a⁶⁻² × b⁻⁴⁺⁴ = a⁴ × b⁰ = <strong>a⁴</strong>", contoh: "📖 <strong>CONTOH:</strong> (3x²y⁻¹)² ÷ 9xy⁻² = 9x⁴y⁻² ÷ 9xy⁻² = x³<br>📌 <strong>TRIK:</strong> Sederhanakan koefisien dan pangkat secara terpisah!" },
-
-  { id: 6, diff: "Ekstrem", cat: "Bilangan", text: "Jika 2ⁿ = 64 dan 3ᵐ = 81, maka nilai n × m = ?", correct: "12", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 2ⁿ = 64 = 2⁶ → n = 6<br>📌 3ᵐ = 81 = 3⁴ → m = 4<br>📌 n × m = 6 × 4 = <strong>24</strong>", contoh: "📖 <strong>CONTOH:</strong> 5ᵃ=125→a=3, 2ᵇ=32→b=5 → a×b=15<br>📌 <strong>TRIK:</strong> Ubah ruas kanan ke basis yang sama!" },
-
-  { id: 7, diff: "Hard", cat: "Persamaan", text: "Himpunan penyelesaian dari 3x + 5 = 2x - 7 adalah...", correct: "-12", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 3x + 5 = 2x - 7<br>📌 3x - 2x = -7 - 5<br>📌 x = <strong>-12</strong>", contoh: "📖 <strong>CONTOH:</strong> 4x-3=2x+9 → 2x=12 → x=6<br>📌 <strong>TRIK:</strong> Kumpulkan variabel di kiri, konstanta di kanan!" },
-
-  { id: 8, diff: "Hot", cat: "Persamaan", text: "Nilai x yang memenuhi pertidaksamaan 2x - 5 ≤ 3x + 4 adalah...", correct: "x≥-9", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 2x - 5 ≤ 3x + 4<br>📌 2x - 3x ≤ 4 + 5<br>📌 -x ≤ 9<br>📌 x ≥ <strong>-9</strong>", contoh: "📖 <strong>CONTOH:</strong> 3x-7≤2x+5 → x≤12<br>📌 <strong>TRIK:</strong> Perhatikan tanda saat membagi dengan negatif!" },
-
-  { id: 9, diff: "Ekstrem", cat: "Persamaan", text: "Sistem persamaan 2x + 3y = 12 dan 3x - 2y = 5 memiliki penyelesaian x = p dan y = q. Nilai p × q = ?", correct: "2", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Eliminasi: (2x+3y=12)×2 → 4x+6y=24<br>📌 (3x-2y=5)×3 → 9x-6y=15<br>📌 Jumlahkan: 13x = 39 → x = 3<br>📌 Substitusi: 2(3)+3y=12 → 6+3y=12 → 3y=6 → y=2<br>📌 p×q = 3×2 = <strong>6</strong>", contoh: "📖 <strong>CONTOH:</strong> x+y=5, x-y=1 → x=3,y=2 → xy=6<br>📌 <strong>TRIK:</strong> Eliminasi salah satu variabel terlebih dahulu!" },
-
-  { id: 10, diff: "Hard", cat: "Fungsi", text: "Diketahui f(x) = 2x - 3 dan g(x) = x² + 1. Nilai (f ∘ g)(2) = ?", correct: "7", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (f ∘ g)(x) = f(g(x))<br>📌 g(2) = 2² + 1 = 4 + 1 = 5<br>📌 f(5) = 2(5) - 3 = 10 - 3 = <strong>7</strong>", contoh: "📖 <strong>CONTOH:</strong> f(x)=3x, g(x)=x+2 → (f∘g)(4)=f(6)=18<br>📌 <strong>TRIK:</strong> Kerjakan dari dalam ke luar!" },
-
-  { id: 11, diff: "Hot", cat: "Fungsi", text: "Jika f(x) = ax + b, f(2) = 7, dan f(5) = 16, maka nilai a + b = ?", correct: "5", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 2a + b = 7<br>📌 5a + b = 16<br>📌 Kurangkan: 3a = 9 → a = 3<br>📌 2(3) + b = 7 → 6 + b = 7 → b = 1<br>📌 a + b = 3 + 1 = <strong>4</strong>", contoh: "📖 <strong>CONTOH:</strong> f(1)=4, f(3)=10 → a=3,b=1 → a+b=4<br>📌 <strong>TRIK:</strong> Eliminasi b dengan mengurangkan kedua persamaan!" },
-
-  { id: 12, diff: "Ekstrem", cat: "Fungsi", text: "Domain dari fungsi f(x) = √(x² - 16) adalah...", correct: "x≤-4 atau x≥4", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Syarat: x² - 16 ≥ 0<br>📌 x² ≥ 16<br>📌 x ≤ -4 atau x ≥ 4<br>📌 Df = {x | x ≤ -4 atau x ≥ 4}", contoh: "📖 <strong>CONTOH:</strong> √(x²-9) → x≤-3 atau x≥3<br>📌 <strong>TRIK:</strong> Ingat! Dalam akar harus ≥ 0" },
-
-  { id: 13, diff: "Hard", cat: "Peluang", text: "Dua buah dadu dilempar bersama-sama. Peluang muncul jumlah mata dadu lebih dari 9 adalah...", correct: "1/6", type: "pecahan", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🎲 Ruang sampel = 36<br>🎲 Jumlah > 9: 10,11,12<br>🎲 Jumlah 10: (4,6),(5,5),(6,4) → 3<br>🎲 Jumlah 11: (5,6),(6,5) → 2<br>🎲 Jumlah 12: (6,6) → 1<br>🎲 Total = 6 cara<br>🎲 Peluang = 6/36 = <strong>1/6</strong>", contoh: "📖 <strong>CONTOH:</strong> Peluang jumlah >8 = 10/36=5/18<br>📌 <strong>TRIK:</strong> Hitung manual pasangan yang memenuhi!" },
-
-  { id: 14, diff: "Hot", cat: "Peluang", text: "Sebuah kantong berisi 4 bola merah, 3 bola putih, dan 5 bola biru. Diambil 2 bola sekaligus. Peluang terambil 2 bola berbeda warna adalah...", correct: "47/66", type: "pecahan", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🎨 Total bola = 12, C(12,2) = 66<br>🎨 Pasangan beda warna:<br>📌 Merah-Putih = 4×3 = 12<br>📌 Merah-Biru = 4×5 = 20<br>📌 Putih-Biru = 3×5 = 15<br>🎨 Total = 12+20+15 = 47<br>🎨 Peluang = <strong>47/66</strong>", contoh: "📖 <strong>CONTOH:</strong> 3 merah,2 putih → peluang beda = (3×2)/C(5,2)=6/10=3/5<br>📌 <strong>TRIK:</strong> Hitung semua kemungkinan pasangan beda warna!" },
-
-  { id: 15, diff: "Ekstrem", cat: "Peluang", text: "Peluang seorang siswa lulus ujian Matematika adalah 0,7 dan lulus Fisika adalah 0,6. Jika peluang lulus keduanya 0,4, maka peluang lulus setidaknya satu mata pelajaran adalah...", correct: "0.9", type: "desimal", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 P(A∪B) = P(A) + P(B) - P(A∩B)<br>📌 = 0,7 + 0,6 - 0,4<br>📌 = 1,3 - 0,4 = <strong>0,9</strong>", contoh: "📖 <strong>CONTOH:</strong> P(A)=0,8, P(B)=0,5, P(A∩B)=0,3 → P(A∪B)=1,0<br>📌 <strong>TRIK:</strong> Gunakan rumus gabungan!" },
-
-  { id: 16, diff: "Hard", cat: "Transformasi", text: "Titik A(4, -2) direfleksikan terhadap sumbu X, lalu dilanjutkan translasi T(2, 3). Koordinat akhir titik A adalah...", correct: "(6,5)", type: "point", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🔄 Refleksi sumbu X: (x,y) → (x,-y) → (4,2)<br>🔄 Translasi (2,3): (4+2, 2+3) = <strong>(6,5)</strong>", contoh: "📖 <strong>CONTOH:</strong> (3,-1) refleksi X → (3,1) translasi (1,2) → (4,3)<br>📌 <strong>TRIK:</strong> Kerjakan transformasi dari kiri ke kanan!" },
-
-  { id: 17, diff: "Hot", cat: "Transformasi", text: "Titik B(-3, 5) diputar 90° searah jarum jam dengan pusat O(0,0), lalu didilatasi dengan faktor skala 2. Koordinat akhirnya adalah...", correct: "(10,6)", type: "point", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🔄 Rotasi -90°: (x,y) → (y,-x) → (5,3)<br>🔄 Dilatasi skala 2: (5×2, 3×2) = <strong>(10,6)</strong>", contoh: "📖 <strong>CONTOH:</strong> (2,4) rotasi -90° → (4,-2) dilatasi 3 → (12,-6)<br>📌 <strong>TRIK:</strong> Rotasi -90°: (x,y)→(y,-x)" },
-
-  { id: 18, diff: "Ekstrem", cat: "Transformasi", text: "Titik C(2, 1) dicerminkan terhadap garis y = x, lalu dicerminkan lagi terhadap sumbu Y. Bayangan akhirnya adalah...", correct: "(-1,2)", type: "point", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🔄 Refleksi y=x: (x,y) → (y,x) → (1,2)<br>🔄 Refleksi sumbu Y: (x,y) → (-x,y) → <strong>(-1,2)</strong>", contoh: "📖 <strong>CONTOH:</strong> (3,4) refleksi y=x → (4,3) refleksi Y → (-4,3)<br>📌 <strong>TRIK:</strong> Refleksi y=x: tukar x dan y!" },
-
-  { id: 19, diff: "Hard", cat: "Aritmatika Sosial", text: "Seorang pedagang membeli 2 lusin piring seharga Rp360.000. Setelah 6 piring pecah, sisanya dijual dengan harga Rp18.000 per piring. Persentase kerugiannya adalah...", correct: "10", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📝 2 lusin = 24 piring<br>📝 Harga per piring = 360.000 ÷ 24 = Rp15.000<br>📝 Piring tersisa = 24 - 6 = 18 piring<br>📝 Hasil penjualan = 18 × 18.000 = Rp324.000<br>📝 Rugi = 360.000 - 324.000 = Rp36.000<br>📝 %Rugi = (36.000 ÷ 360.000) × 100% = <strong>10%</strong>", contoh: "📖 <strong>CONTOH:</strong> Beli 1 lusin Rp180.000, 2 pecah, jual @Rp16.000 → rugi?<br>📌 <strong>TRIK:</strong> Hitung harga per unit terlebih dahulu!" },
-
-  { id: 20, diff: "Hot", cat: "Aritmatika Sosial", text: "Seorang penjual membeli barang dengan harga Rp800.000. Ia ingin mendapat untung 25% setelah memberikan diskon 20%. Harga jual barang tersebut sebelum diskon adalah...", correct: "1250000", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Untung 25% → Harga jual setelah diskon = 800.000 × 1,25 = 1.000.000<br>📌 Diskon 20% berarti harga jual = 80% × Harga awal<br>📌 80% × Harga awal = 1.000.000<br>📌 Harga awal = 1.000.000 ÷ 0,8 = <strong>Rp1.250.000</strong>", contoh: "📖 <strong>CONTOH:</strong> HB=500.000, untung 20% → HJ=600.000, diskon 10% → harga awal=600.000÷0,9=666.667<br>📌 <strong>TRIK:</strong> Kerjakan mundur dari yang diketahui!" },
-
-  { id: 21, diff: "Ekstrem", cat: "Aritmatika Sosial", text: "Sebuah barang dijual dengan harga Rp1.200.000 setelah diskon 20% dan mendapat untung 20%. Harga beli barang tersebut adalah...", correct: "800000", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Harga diskon = 80% × Harga awal = 1.200.000<br>📌 Harga awal = 1.200.000 ÷ 0,8 = 1.500.000<br>📌 Untung 20% dari HB → HJ = 120% × HB<br>📌 1.200.000 = 1,2 × HB<br>📌 HB = 1.200.000 ÷ 1,2 = <strong>Rp800.000</strong>", contoh: "📖 <strong>CONTOH:</strong> HJ=600.000 setelah diskon 10% dan untung 20% → HB=600.000÷1,2÷0,9=555.555<br>📌 <strong>TRIK:</strong> Pisahkan pengaruh diskon dan untung!" },
-
-  { id: 22, diff: "Hard", cat: "Geometri", text: "Sebuah segitiga siku-siku memiliki sisi siku-siku 7 cm dan 24 cm. Panjang jari-jari lingkaran luarnya adalah...", correct: "12.5", type: "desimal", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📐 Sisi miring = √(7² + 24²) = √(49 + 576) = √625 = 25 cm<br>📌 Jari-jari lingkaran luar segitiga siku-siku = setengah sisi miring<br>📌 R = 25 ÷ 2 = <strong>12,5 cm</strong>", contoh: "📖 <strong>CONTOH:</strong> sisi 5,12 → miring=13 → R=6,5 cm<br>📌 <strong>TRIK:</strong> R = c/2 untuk segitiga siku-siku!" },
-
-  { id: 23, diff: "Hot", cat: "Geometri", text: "Keliling sebuah persegi panjang adalah 48 cm. Jika panjangnya 4 cm lebih dari lebarnya, maka luas persegi panjang tersebut adalah...", correct: "140", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 K = 2(p + l) = 48 → p + l = 24<br>📌 p = l + 4<br>📌 (l + 4) + l = 24 → 2l = 20 → l = 10 cm<br>📌 p = 14 cm<br>📌 L = p × l = 14 × 10 = <strong>140 cm²</strong>", contoh: "📖 <strong>CONTOH:</strong> K=40, p=l+6 → l=7, p=13, L=91<br>📌 <strong>TRIK:</strong> Gunakan substitusi untuk mencari panjang dan lebar!" },
-
-  { id: 24, diff: "Ekstrem", cat: "Geometri", text: "Luas lingkaran adalah 154 cm² (π = 22/7). Keliling lingkaran tersebut adalah...", correct: "44", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>⚪ L = πr² = 154<br>⚪ 22/7 × r² = 154<br>⚪ r² = 154 × 7/22 = 1078/22 = 49<br>⚪ r = 7 cm<br>⚪ K = 2πr = 2 × 22/7 × 7 = 2 × 22 = <strong>44 cm</strong>", contoh: "📖 <strong>CONTOH:</strong> L=616 → r²=616×7/22=196 → r=14, K=88<br>📌 <strong>TRIK:</strong> Cari jari-jari dulu dari luas!" },
-
-  { id: 25, diff: "Hard", cat: "Bangun Ruang", text: "Sebuah kubus memiliki luas permukaan 150 cm². Volume kubus tersebut adalah...", correct: "125", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🧊 LP = 6 × s² = 150<br>🧊 s² = 150 ÷ 6 = 25<br>🧊 s = 5 cm<br>🧊 V = s³ = 5³ = <strong>125 cm³</strong>", contoh: "📖 <strong>CONTOH:</strong> LP=216 → s²=36 → s=6 → V=216<br>📌 <strong>TRIK:</strong> s = √(LP/6)" },
-
-  { id: 26, diff: "Hot", cat: "Bangun Ruang", text: "Sebuah balok berukuran 12 cm × 9 cm × 8 cm. Panjang diagonal ruang balok tersebut adalah...", correct: "17", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📦 d = √(p² + l² + t²)<br>📦 = √(12² + 9² + 8²)<br>📦 = √(144 + 81 + 64)<br>📦 = √289 = <strong>17 cm</strong>", contoh: "📖 <strong>CONTOH:</strong> 6,8,10 → √(36+64+100)=√200=10√2<br>📌 <strong>TRIK:</strong> d² = p² + l² + t²" },
-
-  { id: 27, diff: "Ekstrem", cat: "Bangun Ruang", text: "Sebuah tabung memiliki volume 1.540 cm³ dan tinggi 10 cm (π = 22/7). Luas permukaan tabung tanpa tutup adalah...", correct: "748", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🧴 V = πr²t = 1.540<br>🧴 22/7 × r² × 10 = 1.540<br>🧴 r² = 1.540 × 7 ÷ (22 × 10) = 10.780 ÷ 220 = 49<br>🧴 r = 7 cm<br>🧴 LP tanpa tutup = πr² + 2πrt<br>🧴 = (22/7×49) + (2×22/7×7×10)<br>🧴 = 154 + 440 = <strong>594 cm²</strong>", contoh: "📖 <strong>CONTOH:</strong> V=770, t=5 → r=7, LP tanpa tutup=154+220=374<br>📌 <strong>TRIK:</strong> LP tanpa tutup = πr(r + 2t)" },
-
-  { id: 28, diff: "Hard", cat: "Statistika", text: "Rata-rata nilai 10 siswa adalah 75. Jika nilai seorang siswa bernama Budi disertakan, rata-ratanya menjadi 76. Nilai Budi adalah...", correct: "86", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📊 Jumlah 10 siswa = 75 × 10 = 750<br>📊 Jumlah 11 siswa = 76 × 11 = 836<br>📊 Nilai Budi = 836 - 750 = <strong>86</strong>", contoh: "📖 <strong>CONTOH:</strong> 5 siswa rata-rata 80, jadi 6 siswa rata-rata 82 → nilai baru = 6×82 - 5×80 = 92<br>📌 <strong>TRIK:</strong> Nilai baru = (n+1)×rata baru - n×rata lama" },
-
-  { id: 29, diff: "Hot", cat: "Statistika", text: "Median dari data: 4, 6, 8, 5, 7, 9, 5, 8, 6, 7 adalah...", correct: "6.5", type: "desimal", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📊 Urutkan data: 4,5,5,6,6,7,7,8,8,9<br>📊 n = 10 (genap)<br>📊 Median = (data ke-5 + data ke-6) ÷ 2<br>📊 = (6 + 7) ÷ 2 = 13 ÷ 2 = <strong>6,5</strong>", contoh: "📖 <strong>CONTOH:</strong> 2,3,4,5 → median=(3+4)/2=3,5<br>📌 <strong>TRIK:</strong> Urutkan data terlebih dahulu!" },
-
-  { id: 30, diff: "Ekstrem", cat: "Statistika", text: "Dari 5 bilangan, rata-ratanya 12. Jika bilangan terbesar 20 dan terkecil 8, maka rata-rata tiga bilangan lainnya adalah...", correct: "10.67", type: "desimal", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📊 Jumlah 5 bilangan = 12 × 5 = 60<br>📊 Jumlah 3 bilangan lainnya = 60 - (20 + 8) = 60 - 28 = 32<br>📊 Rata-rata 3 bilangan = 32 ÷ 3 = <strong>10,67</strong>", contoh: "📖 <strong>CONTOH:</strong> 6 bilangan rata-rata 10, terbesar 15, terkecil 5 → 4 lainnya = 60-20=40, rata=10<br>📌 <strong>TRIK:</strong> Kurangi total dengan nilai ekstrem!" },
-   { id: 31, diff: "Hard", cat: "Aljabar", text: "Hasil kali (x - 3)(x + 5) adalah...", correct: "x²+2x-15", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (x-3)(x+5) = x·x + x·5 - 3·x - 3·5<br>📌 = x² + 5x - 3x - 15<br>📌 = <strong>x² + 2x - 15</strong>", contoh: "📖 <strong>CONTOH:</strong> (x-2)(x+4) = x²+2x-8<br>📌 <strong>TRIK:</strong> FOIL (First, Outer, Inner, Last)" },
-
-  { id: 32, diff: "Hot", cat: "Aljabar", text: "Pemfaktoran dari x² + 7x + 12 adalah...", correct: "(x+3)(x+4)", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Cari dua bilangan: p+q=7, p×q=12<br>📌 p=3, q=4<br>📌 x²+7x+12 = <strong>(x+3)(x+4)</strong>", contoh: "📖 <strong>CONTOH:</strong> x²+5x+6 = (x+2)(x+3)<br>📌 <strong>TRIK:</strong> Cari dua bilangan yang jumlah = b dan hasil kali = c" },
-
-  { id: 33, diff: "Ekstrem", cat: "Aljabar", text: "Jika a² + b² = 25 dan a + b = 7, maka nilai ab = ?", correct: "12", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (a+b)² = a² + 2ab + b²<br>📌 7² = 25 + 2ab<br>📌 49 = 25 + 2ab<br>📌 2ab = 24 → ab = <strong>12</strong>", contoh: "📖 <strong>CONTOH:</strong> a²+b²=13, a+b=5 → ab=(25-13)/2=6<br>📌 <strong>TRIK:</strong> ab = [(a+b)² - (a²+b²)]/2" },
-
-  { id: 34, diff: "Hard", cat: "Bilangan", text: "Nilai dari (√75 - √48) ÷ √3 = ?", correct: "1", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 √75 = 5√3, √48 = 4√3<br>📌 (5√3 - 4√3) ÷ √3 = (√3) ÷ √3 = <strong>1</strong>", contoh: "📖 <strong>CONTOH:</strong> (√27-√12)÷√3 = (3√3-2√3)÷√3 = 1<br>📌 <strong>TRIK:</strong> Sederhanakan akar terlebih dahulu!" },
-
-  { id: 35, diff: "Hot", cat: "Bilangan", text: "Bentuk sederhana dari (8√2) ÷ (2√4) adalah...", correct: "2√2", type: "akar", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 (8√2) ÷ (2√4) = (8√2) ÷ (2×2)<br>📌 = (8√2) ÷ 4 = <strong>2√2</strong>", contoh: "📖 <strong>CONTOH:</strong> (12√3)÷(3√9)= (12√3)÷(3×3)= (12√3)÷9= (4√3)/3<br>📌 <strong>TRIK:</strong> Sederhanakan akar dan koefisien secara terpisah!" },
-
-  { id: 36, diff: "Ekstrem", cat: "Bilangan", text: "Jika √a + √b = 7 dan a - b = 21, maka nilai √a - √b = ?", correct: "3", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 a - b = (√a + √b)(√a - √b)<br>📌 21 = 7 × (√a - √b)<br>📌 √a - √b = 21 ÷ 7 = <strong>3</strong>", contoh: "📖 <strong>CONTOH:</strong> √a+√b=5, a-b=20 → √a-√b=4<br>📌 <strong>TRIK:</strong> a-b = (√a+√b)(√a-√b)" },
-
-  { id: 37, diff: "Hard", cat: "Persamaan", text: "Nilai x yang memenuhi persamaan 3(x - 2) = 2(x + 4) adalah...", correct: "14", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 3x - 6 = 2x + 8<br>📌 3x - 2x = 8 + 6<br>📌 x = <strong>14</strong>", contoh: "📖 <strong>CONTOH:</strong> 4(x-3)=2(x+5) → 4x-12=2x+10 → 2x=22 → x=11<br>📌 <strong>TRIK:</strong> Distributif lalu kumpulkan variabel!" },
-
-  { id: 38, diff: "Hot", cat: "Persamaan", text: "Penyelesaian dari 2x - 5 < 3x + 4 adalah...", correct: "x>-9", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 2x - 5 < 3x + 4<br>📌 2x - 3x < 4 + 5<br>📌 -x < 9<br>📌 x > <strong>-9</strong>", contoh: "📖 <strong>CONTOH:</strong> 3x-7<2x+5 → x<12<br>📌 <strong>TRIK:</strong> Perhatikan tanda saat membagi/mengali negatif!" },
-
-  { id: 39, diff: "Ekstrem", cat: "Persamaan", text: "Diketahui sistem persamaan: 2x + y = 10 dan x - 2y = 5. Nilai x - y = ?", correct: "3", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Eliminasi: (2x+y=10)×2 → 4x+2y=20<br>📌 (x-2y=5) → x-2y=5<br>📌 Jumlah: 5x = 25 → x = 5<br>📌 2(5)+y=10 → 10+y=10 → y=0<br>📌 x - y = 5 - 0 = <strong>5</strong>", contoh: "📖 <strong>CONTOH:</strong> 3x+y=11, x-y=1 → x=3,y=2 → x-y=1<br>📌 <strong>TRIK:</strong> Eliminasi untuk mencari nilai variabel!" },
-
-  { id: 40, diff: "Hard", cat: "Fungsi", text: "Diketahui f(x) = 3x - 2. Nilai f⁻¹(7) adalah...", correct: "3", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 f(x) = 3x - 2<br>📌 Misal f(x) = y → y = 3x - 2<br>📌 3x = y + 2 → x = (y+2)/3<br>📌 f⁻¹(y) = (y+2)/3<br>📌 f⁻¹(7) = (7+2)/3 = 9/3 = <strong>3</strong>", contoh: "📖 <strong>CONTOH:</strong> f(x)=2x+1 → f⁻¹(x)=(x-1)/2 → f⁻¹(5)=2<br>📌 <strong>TRIK:</strong> Invers: tukar x dan y, lalu selesaikan untuk y" },
-
-  { id: 41, diff: "Hot", cat: "Fungsi", text: "Jika g(x) = x² - 2x, maka nilai g(3) - g(2) = ?", correct: "5", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 g(3) = 3² - 2(3) = 9 - 6 = 3<br>📌 g(2) = 2² - 2(2) = 4 - 4 = 0<br>📌 g(3) - g(2) = 3 - 0 = <strong>3</strong>", contoh: "📖 <strong>CONTOH:</strong> h(x)=x²+3x → h(2)-h(1)=10-4=6<br>📌 <strong>TRIK:</strong> Hitung masing-masing fungsi lalu operasikan!" },
-
-  { id: 42, diff: "Ekstrem", cat: "Fungsi", text: "Domain dari fungsi f(x) = (x-3)/(x²-9) adalah...", correct: "x≠3 dan x≠-3", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Syarat: penyebut ≠ 0<br>📌 x² - 9 ≠ 0<br>📌 x² ≠ 9<br>📌 x ≠ 3 dan x ≠ -3<br>📌 Df = {x | x ≠ 3 dan x ≠ -3}", contoh: "📖 <strong>CONTOH:</strong> f(x)=(x-2)/(x²-4) → x≠2 dan x≠-2<br>📌 <strong>TRIK:</strong> Penyebut tidak boleh nol!" },
-
-  { id: 43, diff: "Hard", cat: "Peluang", text: "Sebuah dadu dilempar 120 kali. Frekuensi harapan muncul mata dadu ganjil adalah...", correct: "60", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🎲 Mata dadu ganjil: 1,3,5 → n(A)=3<br>🎲 P(ganjil) = 3/6 = 1/2<br>🎲 Frekuensi harapan = 1/2 × 120 = <strong>60</strong>", contoh: "📖 <strong>CONTOH:</strong> Dadu 180 kali, harapan genap = 90<br>📌 <strong>TRIK:</strong> Fh = P(A) × n" },
-
-  { id: 44, diff: "Hot", cat: "Peluang", text: "Dua koin dilempar bersama. Peluang muncul paling sedikit satu gambar adalah...", correct: "3/4", type: "pecahan", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🪙 Ruang sampel: (A,A),(A,G),(G,A),(G,G)=4<br>🪙 Paling sedikit satu G: (A,G),(G,A),(G,G)=3<br>🪙 Peluang = 3/4 = <strong>3/4</strong>", contoh: "📖 <strong>CONTOH:</strong> 3 koin → minimal 2 gambar = 4/8=1/2<br>📌 <strong>TRIK:</strong> Hitung komplemen: 1 - P(tidak ada gambar)" },
-
-  { id: 45, diff: "Ekstrem", cat: "Peluang", text: "Peluang seorang anak lulus ujian Matematika adalah 0,8 dan lulus Fisika 0,7. Jika peluang lulus keduanya 0,6, maka peluang lulus Matematika tetapi tidak lulus Fisika adalah...", correct: "0.2", type: "desimal", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 P(M ∩ F') = P(M) - P(M ∩ F)<br>📌 = 0,8 - 0,6 = <strong>0,2</strong>", contoh: "📖 <strong>CONTOH:</strong> P(A)=0,9, P(A∩B)=0,5 → P(A∩B')=0,4<br>📌 <strong>TRIK:</strong> P(A∩B') = P(A) - P(A∩B)" },
-
-  { id: 46, diff: "Hard", cat: "Transformasi", text: "Titik D(2, -3) ditranslasikan oleh T(-4, 5), lalu direfleksikan terhadap sumbu X. Koordinat akhirnya adalah...", correct: "(-2,-2)", type: "point", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🔄 Translasi (-4,5): (2-4, -3+5) = (-2,2)<br>🔄 Refleksi sumbu X: (x,y) → (x,-y) → <strong>(-2,-2)</strong>", contoh: "📖 <strong>CONTOH:</strong> (3,-1) translasi (-2,4) → (1,3) refleksi X → (1,-3)<br>📌 <strong>TRIK:</strong> Kerjakan transformasi secara berurutan!" },
-
-  { id: 47, diff: "Hot", cat: "Transformasi", text: "Titik E(4, -2) dirotasi 90° berlawanan jarum jam, lalu didilatasi dengan faktor skala 1/2. Koordinat akhirnya adalah...", correct: "(1,2)", type: "point", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🔄 Rotasi +90°: (x,y) → (-y,x) → (2,4)<br>🔄 Dilatasi 1/2: (2×½, 4×½) = <strong>(1,2)</strong>", contoh: "📖 <strong>CONTOH:</strong> (6,8) rotasi +90° → (-8,6) dilatasi 1/2 → (-4,3)<br>📌 <strong>TRIK:</strong> Rotasi +90°: (x,y)→(-y,x)" },
-
-  { id: 48, diff: "Ekstrem", cat: "Transformasi", text: "Titik F(3, 5) dicerminkan terhadap garis y = -x, lalu dicerminkan lagi terhadap sumbu Y. Bayangan akhirnya adalah...", correct: "(-5,-3)", type: "point", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🔄 Refleksi y=-x: (x,y) → (-y,-x) → (-5,-3)<br>🔄 Refleksi sumbu Y: (x,y) → (-x,y) → (5,-3)<br>📌 Hasil akhir = <strong>(5,-3)</strong>", contoh: "📖 <strong>CONTOH:</strong> (2,4) refleksi y=-x → (-4,-2) refleksi Y → (4,-2)<br>📌 <strong>TRIK:</strong> Refleksi y=-x: (x,y)→(-y,-x)" },
-
-  { id: 49, diff: "Hard", cat: "Aritmatika Sosial", text: "Seorang pedagang membeli 1 kodi baju seharga Rp2.400.000. Ia menjual 20% dari baju tersebut dengan harga Rp150.000 per buah, dan sisanya dengan harga Rp120.000 per buah. Berapa persen keuntungannya?", correct: "10", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📝 1 kodi = 20 baju<br>📝 HB per baju = 2.400.000 ÷ 20 = Rp120.000<br>📝 20% = 4 baju dijual @150.000 = 600.000<br>📝 16 baju dijual @120.000 = 1.920.000<br>📝 Total HJ = 600.000 + 1.920.000 = 2.520.000<br>📝 Untung = 2.520.000 - 2.400.000 = 120.000<br>📝 %Untung = (120.000/2.400.000)×100% = <strong>5%</strong>", contoh: "📖 <strong>CONTOH:</strong> 1 lusin Rp600.000, 4 dijual @60.000, 8 @50.000 → HJ=240.000+400.000=640.000, untung=40.000, %=6,67<br>📌 <strong>TRIK:</strong> Hitung HJ total lalu bandingkan dengan HB" },
-
-  { id: 50, diff: "Hot", cat: "Aritmatika Sosial", text: "Sebuah barang dijual dengan harga Rp900.000. Jika pedagang rugi 10%, maka harga beli barang tersebut adalah...", correct: "1000000", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Rugi 10% berarti HJ = 90% × HB<br>📌 900.000 = 0,9 × HB<br>📌 HB = 900.000 ÷ 0,9 = <strong>Rp1.000.000</strong>", contoh: "📖 <strong>CONTOH:</strong> HJ=450.000, rugi 10% → HB=450.000÷0,9=500.000<br>📌 <strong>TRIK:</strong> HB = HJ ÷ (100% - %rugi)" },
-
-  { id: 51, diff: "Ekstrem", cat: "Aritmatika Sosial", text: "Harga jual sebuah tas adalah Rp240.000. Jika pedagang memberikan diskon 20% dan masih mendapat untung 20%, maka harga beli tas tersebut adalah...", correct: "160000", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 Harga diskon = 80% × Harga awal = 240.000<br>📌 Harga awal = 240.000 ÷ 0,8 = 300.000<br>📌 Untung 20% → HJ = 120% × HB<br>📌 240.000 = 1,2 × HB<br>📌 HB = 240.000 ÷ 1,2 = <strong>Rp200.000</strong>", contoh: "📖 <strong>CONTOH:</strong> HJ=200.000 setelah diskon 25%, untung 25% → HB=200.000÷1,25÷0,75=213.333<br>📌 <strong>TRIK:</strong> Pisahkan diskon dan untung" },
-
-  { id: 52, diff: "Hard", cat: "Geometri", text: "Luas sebuah persegi adalah 64 cm². Keliling persegi tersebut adalah...", correct: "32", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 L = s² = 64 → s = 8 cm<br>📌 K = 4 × s = 4 × 8 = <strong>32 cm</strong>", contoh: "📖 <strong>CONTOH:</strong> L=36 → s=6 → K=24<br>📌 <strong>TRIK:</strong> s = √L" },
-
-  { id: 53, diff: "Hot", cat: "Geometri", text: "Sebuah segitiga memiliki sisi 5 cm, 12 cm, dan 13 cm. Jenis segitiga tersebut adalah...", correct: "Siku-siku", type: "string", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 5² + 12² = 25 + 144 = 169<br>📌 13² = 169<br>📌 Karena 5² + 12² = 13², maka segitiga <strong>siku-siku</strong>", contoh: "📖 <strong>CONTOH:</strong> 6,8,10 → 36+64=100 → siku-siku<br>📌 <strong>TRIK:</strong> Gunakan kebalikan teorema Pythagoras!" },
-
-  { id: 54, diff: "Ekstrem", cat: "Geometri", text: "Panjang diagonal sebuah persegi panjang adalah 13 cm. Jika lebarnya 5 cm, maka panjang persegi panjang adalah...", correct: "12", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📌 d² = p² + l²<br>📌 13² = p² + 5²<br>📌 169 = p² + 25<br>📌 p² = 144 → p = <strong>12 cm</strong>", contoh: "📖 <strong>CONTOH:</strong> d=10, l=6 → p²=100-36=64 → p=8<br>📌 <strong>TRIK:</strong> p² = d² - l²" },
-
-  { id: 55, diff: "Hard", cat: "Bangun Ruang", text: "Volume sebuah kubus adalah 216 cm³. Luas permukaan kubus tersebut adalah...", correct: "216", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🧊 V = s³ = 216 → s = 6 cm<br>🧊 LP = 6 × s² = 6 × 36 = <strong>216 cm²</strong>", contoh: "📖 <strong>CONTOH:</strong> V=125 → s=5 → LP=150<br>📌 <strong>TRIK:</strong> s = ∛V" },
-
-  { id: 56, diff: "Hot", cat: "Bangun Ruang", text: "Sebuah balok memiliki panjang 10 cm, lebar 8 cm, dan tinggi 6 cm. Luas permukaan balok tersebut adalah...", correct: "376", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📦 LP = 2(pl + pt + lt)<br>📦 = 2(10×8 + 10×6 + 8×6)<br>📦 = 2(80 + 60 + 48)<br>📦 = 2 × 188 = <strong>376 cm²</strong>", contoh: "📖 <strong>CONTOH:</strong> p=6,l=5,t=4 → LP=2(30+24+20)=148<br>📌 <strong>TRIK:</strong> Hitung luas setiap pasang sisi lalu jumlahkan" },
-
-  { id: 57, diff: "Ekstrem", cat: "Bangun Ruang", text: "Sebuah kerucut memiliki jari-jari 7 cm dan garis pelukis 25 cm. Luas permukaan kerucut adalah... (π=22/7)", correct: "704", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>🧁 LP = πr(r + s)<br>🧁 = 22/7 × 7 × (7 + 25)<br>🧁 = 22 × 32 = <strong>704 cm²</strong>", contoh: "📖 <strong>CONTOH:</strong> r=14, s=50 → LP=22/7×14×64=22×2×64=2.816<br>📌 <strong>TRIK:</strong> LP = πr(r+s)" },
-
-  { id: 58, diff: "Hard", cat: "Statistika", text: "Nilai rata-rata ulangan Matematika dari 5 siswa adalah 80. Jika nilai dua siswa masing-masing 90 dan 85, maka rata-rata tiga siswa lainnya adalah...", correct: "75", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📊 Jumlah 5 siswa = 80 × 5 = 400<br>📊 Jumlah 2 siswa = 90 + 85 = 175<br>📊 Jumlah 3 siswa = 400 - 175 = 225<br>📊 Rata-rata 3 siswa = 225 ÷ 3 = <strong>75</strong>", contoh: "📖 <strong>CONTOH:</strong> 4 siswa rata-rata 75, 2 siswa @80,70 → 2 lainnya = 300-150=150, rata=75<br>📌 <strong>TRIK:</strong> Jumlah total - jumlah yang diketahui" },
-
-  { id: 59, diff: "Hot", cat: "Statistika", text: "Modus dari data: 7, 8, 6, 7, 9, 8, 7, 10, 8, 8 adalah...", correct: "8", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📊 Frekuensi: 6=1, 7=3, 8=4, 9=1, 10=1<br>📊 Nilai dengan frekuensi tertinggi adalah 8 (muncul 4 kali)<br>📊 Modus = <strong>8</strong>", contoh: "📖 <strong>CONTOH:</strong> 2,2,3,3,3,4 → modus=3<br>📌 <strong>TRIK:</strong> Cari nilai yang paling sering muncul" },
-
-  { id: 60, diff: "Ekstrem", cat: "Statistika", text: "Median dari data: 3, 5, 2, 6, 4, 7, 5, 8, 9 adalah...", correct: "5", type: "bulat", penyelesaian: "📘 <strong>Pembahasan:</strong><br>📊 Urutkan: 2,3,4,5,5,6,7,8,9<br>📊 n = 9 (ganjil)<br>📊 Median = data ke-(9+1)/2 = data ke-5<br>📊 Data ke-5 = <strong>5</strong>", contoh: "📖 <strong>CONTOH:</strong> 1,3,2,4,5 → urut:1,2,3,4,5 → median=3<br>📌 <strong>TRIK:</strong> Urutkan data, lalu cari nilai tengah" }
-];
-
-// Gabungkan semua soal
-    
-    // ==================== AUTO SAVE ====================
-    let userAnswers = {};
-    let answerStatus = {};
-    let lastScore = 0;
-    
-    function loadFromStorage() {
-        const savedAnswers = localStorage.getItem('tka_answers_60');
-        const savedStatus = localStorage.getItem('tka_status_60');
-        if (savedAnswers) {
-            try {
-                userAnswers = JSON.parse(savedAnswers);
-            } catch(e) { userAnswers = {}; }
-        }
-        if (savedStatus) {
-            try {
-                answerStatus = JSON.parse(savedStatus);
-            } catch(e) { answerStatus = {}; }
-        }
-        for(let i=1;i<=60;i++) {
-            if(userAnswers[i] === undefined) userAnswers[i] = "";
-            if(answerStatus[i] === undefined) answerStatus[i] = false;
-        }
-    }
-    
-    function saveToStorage() {
-        localStorage.setItem('tka_answers_60', JSON.stringify(userAnswers));
-        localStorage.setItem('tka_status_60', JSON.stringify(answerStatus));
-    }
-    
-    function updateAnswerAndSave(qid, value) {
-        userAnswers[qid] = value;
-        if(answerStatus[qid] === true) {
-            answerStatus[qid] = false;
-            const fbDiv = document.getElementById(`fb_${qid}`);
-            if(fbDiv) fbDiv.innerHTML = '';
-        }
-        saveToStorage();
-        updateScoreDisplay();
-    }
-    
-    function normalizeAnswer(val, q){
-        let str = val.trim().replace(/,/g, '.');
-        if(str === "") return "";
-        if(q.type === "pecahan") return str.replace(/\s/g, '');
-        if(q.type === "akar" && str.includes('√')) return str;
-        if(q.type === "point" && str.match(/^\(\s*-?\d+\s*,\s*-?\d+\s*\)$/)) return str;
-        if(q.type === "string" || q.type === "set") return str;
-        let num = parseFloat(str);
-        return isNaN(num) ? str : num.toString();
-    }
-    
-function normalizeAnswer(val, q){
-    let str = val.trim().replace(/\s/g, '');
-    if(str === "") return "";
-    
-    // Untuk tipe point (koordinat) - lebih fleksibel
-    if(q.type === "point"){
-        // Terima format (5,6) atau (5,6) dengan spasi atau tanpa spasi
-        let match = str.match(/\(?\s*(-?\d+)\s*,\s*(-?\d+)\s*\)?/);
-        if(match){
-            return `(${match[1]},${match[2]})`;
-        }
-        return str;
-    }
-    
-    // Untuk tipe pecahan seperti 1/6 atau 31/45
-    if(q.type === "pecahan"){
-        // Sederhanakan pecahan ke bentuk paling sederhana
-        if(str.includes('/')){
-            let [num, den] = str.split('/').map(Number);
-            if(den && num){
-                let gcd = (a,b) => b === 0 ? a : gcd(b, a % b);
-                let g = gcd(num, den);
-                return `${num/g}/${den/g}`;
+window.addEventListener('load',()=>{
+    setTimeout(()=>{
+        clearInterval(pInterval);
+        const splash = document.getElementById('splash-screen');
+        if(splash){ splash.classList.add('fade-out'); setTimeout(()=>{ if(splash.parentNode) splash.remove(); },700);}
+        if(!toastOnceShown){
+            toastOnceShown = true;
+            const toast = document.getElementById('toast-once');
+            if(toast){
+                toast.style.opacity = '1';
+                setTimeout(() => { if(toast) toast.style.opacity = '0'; }, 2500);
             }
         }
-        return str;
+    },2500);
+});
+
+// ==================== CONFETTI ====================
+const canvas = document.getElementById('confetti-canvas');
+let ctx = canvas.getContext('2d');
+let animId = null;
+let particles = [];
+function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize',resizeCanvas); resizeCanvas();
+class ConfettiP{
+    constructor(){
+        this.x = Math.random()*canvas.width;
+        this.y = Math.random()*canvas.height - canvas.height;
+        this.size = Math.random()*8+4;
+        this.speedY = Math.random()*6+4;
+        this.speedX = Math.random()*2-1;
+        this.color = `hsl(${Math.random()*360},80%,65%)`;
+        this.rot = Math.random()*360;
+        this.rotSpeed = Math.random()*10-5;
     }
-    
-    // Untuk tipe akar
-    if(q.type === "akar"){
-        // Normalisasi: 8√3 vs 8√3 (sama)
-        return str.replace(/\*/g, '').toLowerCase();
+    update(){ this.y+=this.speedY; this.x+=this.speedX; this.rot+=this.rotSpeed; return this.y < canvas.height+80; }
+    draw(){ ctx.save(); ctx.translate(this.x,this.y); ctx.rotate(this.rot*Math.PI/180); ctx.fillStyle=this.color; ctx.fillRect(-this.size/2,-this.size/2,this.size,this.size); ctx.restore(); }
+}
+function startConfetti(){
+    if(animId) cancelAnimationFrame(animId);
+    particles = [];
+    for(let i=0;i<220;i++) particles.push(new ConfettiP());
+    function animate(){
+        if(!ctx) return;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        let alive=false;
+        for(let p of particles) { if(p.update()) alive=true; p.draw(); }
+        if(alive) animId = requestAnimationFrame(animate);
+        else { cancelAnimationFrame(animId); animId=null; ctx.clearRect(0,0,canvas.width,canvas.height); }
     }
-    
-    // Untuk tipe set seperti {1,2,3,4,5,6}
-    if(q.type === "set"){
-        // Hilangkan kurung kurawal, urutkan angka
-        let numbers = str.match(/\d+/g) || [];
-        numbers.sort((a,b) => Number(a) - Number(b));
-        return `{${numbers.join(',')}}`;
-    }
-    
-    // Untuk tipe string (persamaan garis)
-    if(q.type === "string"){
-        // Hilangkan spasi semua untuk perbandingan
-        return str.replace(/\s/g, '');
-    }
-    
-    // Untuk tipe desimal atau bulat
-    let num = parseFloat(str.replace(',', '.'));
-    if(isNaN(num)) return str;
-    // Hapus .0 jika bilangan bulat
-    if(q.type === "bulat" && Number.isInteger(num)){
-        return Math.floor(num).toString();
-    }
-    return num.toString();
+    animate();
+    setTimeout(()=>{ if(animId){ cancelAnimationFrame(animId); animId=null; ctx.clearRect(0,0,canvas.width,canvas.height); }},5000);
 }
 
-function evaluateQuestion(qid){
+// ==================== 50 SOAL MATEMATIKA ====================
+const questions = [
+    // ===== BILANGAN (1-10) =====
+    { id: 1, diff: "Medium", cat: "Peluang", type: "mc", text: "Sebuah hotel memiliki 30 kamar. 18 kamar pemandangan laut, 10 kamar Twin Bed, 6 kamar keduanya. Peluang tamu mendapat kamar pemandangan laut atau Twin Bed adalah...", options: ["A. 1/5", "B. 8/15", "C. 11/15", "D. 12/15", "E. 14/15"], correct: "C", penyelesaian: "n(S) = 30<br>n(A) = 18, n(B) = 10, n(A∩B) = 6<br>n(A∪B) = 18 + 10 - 6 = 22<br>P = 22/30 = <strong>11/15</strong>" },
+    
+    { id: 2, diff: "Hard", cat: "Bilangan", type: "mc", text: "Bentuk rasional dari (2 + √2)/(√6 - √2) adalah ...", options: ["A. (√6 + √2 - √3 + 1)/2", "B. (√6 + √2 + √3 + 1)/2", "C. (√6 + √2 - 2√3 + 1)/2", "D. (√6 + √2 - √3 + 1)/4", "E. (√6 + √2 + √3 + 1)/4"], correct: "A", penyelesaian: "(2 + √2)/(√6 - √2) × (√6 + √2)/(√6 + √2)<br>= (2√6 + 2√2 + √12 + 2)/(6 - 2)<br>= (2√6 + 2√2 + 2√3 + 2)/4<br>= <strong>(√6 + √2 + √3 + 1)/2</strong>" },
+    
+    { id: 3, diff: "Hot", cat: "Bilangan", type: "mc", text: "Tegangan = 2⁴×5² V, arus = 2⁻¹×5⁻¹ A, waktu = 2³×5 s. E = V×I×t. Jika rugi ½, energi bersih = ...", options: ["A. 2⁸×5⁵ J", "B. 2⁴×5³ J", "C. 80 J", "D. 32 J", "E. 5 J"], correct: "C", penyelesaian: "V = 2⁴×5², I = 2⁻¹×5⁻¹, t = 2³×5<br>E = 2⁴⁻¹⁺³ × 5²⁻¹⁺¹ = 2⁶ × 5² = 64 × 25 = 1.600 J<br>E bersih = ½ × 1.600 = <strong>800 J</strong>" },
+    
+    { id: 4, diff: "Hard", cat: "Bilangan", type: "mc", text: "Bakteri membelah setiap ½ hari. Awal 2 bakteri. Setiap 2 hari, ¼ mati. Bakteri setelah 3 hari = ...", options: ["A. 48", "B. 64", "C. 96", "D. 128", "E. 192"], correct: "C", penyelesaian: "3 hari = 6 kali pembelahan<br>2 → 4 → 8 → 16 → 32 → 64 → 128<br>Setelah 2 hari (4 kali): 32 - ¼(32) = 24<br>1 hari (2 kali): 24 → 48 → <strong>96</strong>" },
+    
+    { id: 5, diff: "Ekstrem", cat: "Bilangan", type: "tf", text: "Mebel: kayu max 20 m², waktu max 48 jam. Meja untung Rp500.000, kursi Rp300.000.", options: ["Mebel tidak dapat memproduksi 6 meja dan 5 kursi sekaligus", "Jika hanya kursi, maksimum 16 unit", "2 meja + 10 kursi > 8 meja", "Keuntungan maksimum Rp5.400.000"], correct: "S,B,S,S", penyelesaian: "(1) 6 meja+5 kursi: kayu=17≤20, waktu=39≤48 → BISA, jadi SALAH<br>(2) Hanya kursi: y≤16 → BENAR<br>(3) 2m+10k=1.000.000+3.000.000=4.000.000; 8m=4.000.000 → SAMA, SALAH<br>(4) Keuntungan max = Rp4.000.000 → SALAH" },
+    
+    { id: 6, diff: "Medium", cat: "Fungsi", type: "mc", text: "f(x) = √(2x+3), x ≥ -3/2. Nilai f⁻¹(3) = ...", options: ["A. 6", "B. 3", "C. 3/2", "D. -1/2", "E. -1"], correct: "B", penyelesaian: "f(x) = √(2x+3)<br>y = √(2x+3) → y² = 2x+3 → x = (y²-3)/2<br>f⁻¹(x) = (x²-3)/2<br>f⁻¹(3) = (9-3)/2 = <strong>3</strong>" },
+    
+    { id: 7, diff: "Hot", cat: "Fungsi", type: "mc", text: "g(x) = x-1, (f∘g)(x) = x³-4x. Nilai f(2) = ...", options: ["A. 9", "B. 13", "C. 15", "D. 17", "E. 25"], correct: "C", penyelesaian: "(f∘g)(x) = f(g(x)) = x³-4x<br>f(x-1) = x³-4x<br>Misal y = x-1 → x = y+1<br>f(y) = (y+1)³ - 4(y+1)<br>f(y) = y³+3y²-y-3<br>f(2) = 8+12-2-3 = <strong>15</strong>" },
+    
+    { id: 8, diff: "Hard", cat: "Geometri", type: "mc", text: "Karton persegi 30 cm, dipotong pojoknya untuk kotak tanpa tutup. Volume maksimum = ...", options: ["A. 2.000 cm³", "B. 3.000 cm³", "C. 4.000 cm³", "D. 5.000 cm³", "E. 6.000 cm³"], correct: "A", penyelesaian: "Misal potongan = x<br>V = (30-2x)²×x<br>V' = 0 → 12x²-240x+900=0 → x=5<br>V = (20)²×5 = <strong>2.000 cm³</strong>" },
+    
+    { id: 9, diff: "Medium", cat: "Bilangan", type: "mc", text: "Harga 3 buku + 2 penggaris = Rp18.000. Buku Rp1.000 lebih mahal dari penggaris. Harga 2 buku + 5 penggaris = ...", options: ["A. Rp19.000", "B. Rp23.000", "C. Rp25.000", "D. Rp27.000", "E. Rp30.000"], correct: "C", penyelesaian: "b = p + 1.000<br>3b + 2p = 18.000 → 3(p+1.000)+2p=18.000 → 5p=15.000 → p=3.000, b=4.000<br>2b+5p = 8.000+15.000 = <strong>Rp23.000</strong>" },
+    
+    { id: 10, diff: "Hot", cat: "Bilangan", type: "mc", text: "Nilai (3² × 3⁴) ÷ 3⁵ = ...", options: ["A. 3", "B. 9", "C. 27", "D. 81", "E. 243"], correct: "A", penyelesaian: "3²×3⁴ = 3⁶<br>3⁶ ÷ 3⁵ = 3¹ = <strong>3</strong>" },
+
+    // ===== ALJABAR (11-20) =====
+    { id: 11, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika (x+y)² = 49 dan xy = 10, maka x² + y² = ...", options: ["A. 19", "B. 29", "C. 39", "D. 49", "E. 59"], correct: "B", penyelesaian: "(x+y)² = x²+2xy+y²<br>49 = x²+y²+20<br>x²+y² = <strong>29</strong>" },
+    
+    { id: 12, diff: "Hot", cat: "Aljabar", type: "mc", text: "Jika a+b=5 dan a²+b²=17, maka ab = ...", options: ["A. 2", "B. 3", "C. 4", "D. 5", "E. 6"], correct: "C", penyelesaian: "(a+b)² = a²+2ab+b²<br>25 = 17+2ab → 2ab=8 → ab = <strong>4</strong>" },
+    
+    { id: 13, diff: "Ekstrem", cat: "Aljabar", type: "mc", text: "Jika x + 1/x = 5, maka x² + 1/x² = ...", options: ["A. 21", "B. 22", "C. 23", "D. 24", "E. 25"], correct: "C", penyelesaian: "(x+1/x)² = x²+2+1/x²<br>25 = x²+1/x²+2<br>x²+1/x² = <strong>23</strong>" },
+    
+    { id: 14, diff: "Medium", cat: "Persamaan", type: "mc", text: "Himpunan penyelesaian dari 3x + 5 = 2x - 7 adalah ...", options: ["A. 12", "B. 2", "C. -2", "D. -12", "E. 0"], correct: "D", penyelesaian: "3x+5 = 2x-7 → 3x-2x = -7-5 → x = <strong>-12</strong>" },
+    
+    { id: 15, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika a²+b²=25 dan a+b=7, maka ab = ...", options: ["A. 6", "B. 8", "C. 10", "D. 12", "E. 14"], correct: "D", penyelesaian: "(a+b)² = a²+2ab+b²<br>49 = 25+2ab → 2ab=24 → ab = <strong>12</strong>" },
+    
+    { id: 16, diff: "Medium", cat: "Aljabar", type: "mc", text: "Pemfaktoran dari x² + 7x + 12 adalah ...", options: ["A. (x+2)(x+6)", "B. (x+3)(x+4)", "C. (x+1)(x+12)", "D. (x-3)(x-4)", "E. (x+3)(x+5)"], correct: "B", penyelesaian: "p+q=7, p×q=12 → p=3, q=4<br>x²+7x+12 = <strong>(x+3)(x+4)</strong>" },
+    
+    { id: 17, diff: "Hot", cat: "Persamaan", type: "mc", text: "Nilai x yang memenuhi 2x - 5 ≤ 3x + 4 adalah ...", options: ["A. x≥9", "B. x≥-9", "C. x≤9", "D. x≤-9", "E. x>9"], correct: "B", penyelesaian: "2x-5 ≤ 3x+4 → 2x-3x ≤ 4+5 → -x ≤ 9 → x ≥ <strong>-9</strong>" },
+    
+    { id: 18, diff: "Ekstrem", cat: "Persamaan", type: "mc", text: "Sistem: 2x+3y=12 dan 3x-2y=5. Nilai x×y = ...", options: ["A. 2", "B. 4", "C. 6", "D. 8", "E. 10"], correct: "C", penyelesaian: "Eliminasi → 13x=39 → x=3<br>2(3)+3y=12 → y=2<br>x×y = 3×2 = <strong>6</strong>" },
+    
+    { id: 19, diff: "Hard", cat: "Fungsi", type: "mc", text: "f(x)=2x-3, g(x)=x²+1. Nilai (f∘g)(2) = ...", options: ["A. 3", "B. 5", "C. 7", "D. 9", "E. 11"], correct: "C", penyelesaian: "g(2)=4+1=5<br>f(5)=10-3 = <strong>7</strong>" },
+    
+    { id: 20, diff: "Hot", cat: "Fungsi", type: "mc", text: "f(x)=ax+b, f(2)=7, f(5)=16. Nilai a+b = ...", options: ["A. 2", "B. 3", "C. 4", "D. 5", "E. 6"], correct: "C", penyelesaian: "2a+b=7, 5a+b=16 → 3a=9 → a=3<br>6+b=7 → b=1<br>a+b = <strong>4</strong>" },
+
+    // ===== GEOMETRI (21-30) =====
+    { id: 21, diff: "Hard", cat: "Geometri", type: "mc", text: "Segitiga siku-siku sisi 7 cm dan 24 cm. Jari-jari lingkaran luar = ...", options: ["A. 10 cm", "B. 11 cm", "C. 12 cm", "D. 12,5 cm", "E. 13 cm"], correct: "D", penyelesaian: "c = √(7²+24²) = √625 = 25 cm<br>R = c/2 = <strong>12,5 cm</strong>" },
+    
+    { id: 22, diff: "Hot", cat: "Geometri", type: "mc", text: "Persegi panjang K=48 cm, panjang 4 cm lebih dari lebar. Luas = ...", options: ["A. 120 cm²", "B. 128 cm²", "C. 140 cm²", "D. 150 cm²", "E. 160 cm²"], correct: "C", penyelesaian: "p+l=24, p=l+4 → l=10, p=14<br>L = 14×10 = <strong>140 cm²</strong>" },
+    
+    { id: 23, diff: "Ekstrem", cat: "Geometri", type: "mc", text: "Luas lingkaran = 154 cm² (π=22/7). Keliling = ...", options: ["A. 22 cm", "B. 28 cm", "C. 44 cm", "D. 56 cm", "E. 88 cm"], correct: "C", penyelesaian: "πr²=154 → (22/7)r²=154 → r²=49 → r=7<br>K=2πr=2×(22/7)×7 = <strong>44 cm</strong>" },
+    
+    { id: 24, diff: "Hard", cat: "Bangun Ruang", type: "mc", text: "Kubus luas permukaan 150 cm². Volume = ...", options: ["A. 64 cm³", "B. 100 cm³", "C. 125 cm³", "D. 144 cm³", "E. 216 cm³"], correct: "C", penyelesaian: "6s²=150 → s²=25 → s=5<br>V=s³ = <strong>125 cm³</strong>" },
+    
+    { id: 25, diff: "Hot", cat: "Bangun Ruang", type: "mc", text: "Balok 12×9×8 cm. Diagonal ruang = ...", options: ["A. 15 cm", "B. 16 cm", "C. 17 cm", "D. 18 cm", "E. 19 cm"], correct: "C", penyelesaian: "d = √(12²+9²+8²) = √(144+81+64) = √289 = <strong>17 cm</strong>" },
+    
+    { id: 26, diff: "Medium", cat: "Geometri", type: "mc", text: "Persegi L=64 cm². Keliling = ...", options: ["A. 16 cm", "B. 24 cm", "C. 28 cm", "D. 32 cm", "E. 40 cm"], correct: "D", penyelesaian: "s²=64 → s=8<br>K=4×8 = <strong>32 cm</strong>" },
+    
+    { id: 27, diff: "Medium", cat: "Geometri", type: "mc", text: "Segitiga sisi 5, 12, 13 cm. Jenis segitiga = ...", options: ["A. Lancip", "B. Tumpul", "C. Siku-siku", "D. Sama sisi", "E. Sama kaki"], correct: "C", penyelesaian: "5²+12²=25+144=169=13² → <strong>Siku-siku</strong>" },
+    
+    { id: 28, diff: "Hard", cat: "Geometri", type: "mc", text: "Diagonal persegi panjang 13 cm, lebar 5 cm. Panjang = ...", options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm", "E. 16 cm"], correct: "C", penyelesaian: "d²=p²+l² → 169=p²+25 → p²=144 → p = <strong>12 cm</strong>" },
+    
+    { id: 29, diff: "Hard", cat: "Bangun Ruang", type: "mc", text: "Kubus V=216 cm³. Luas permukaan = ...", options: ["A. 144 cm²", "B. 196 cm²", "C. 200 cm²", "D. 216 cm²", "E. 256 cm²"], correct: "D", penyelesaian: "s³=216 → s=6<br>LP=6×36 = <strong>216 cm²</strong>" },
+    
+    { id: 30, diff: "Medium", cat: "Bangun Ruang", type: "mc", text: "Balok 10×8×6 cm. Luas permukaan = ...", options: ["A. 320 cm²", "B. 340 cm²", "C. 360 cm²", "D. 376 cm²", "E. 400 cm²"], correct: "D", penyelesaian: "LP=2(10×8+10×6+8×6) = 2(80+60+48) = <strong>376 cm²</strong>" },
+
+    // ===== STATISTIKA & PELUANG (31-40) =====
+    { id: 31, diff: "Hard", cat: "Peluang", type: "mc", text: "Dua dadu dilempar. Peluang jumlah > 9 adalah ...", options: ["A. 1/6", "B. 1/4", "C. 1/3", "D. 5/18", "E. 1/2"], correct: "A", penyelesaian: "Jumlah >9: 10,11,12<br>Total cara = 6 dari 36 → 6/36 = <strong>1/6</strong>" },
+    
+    { id: 32, diff: "Hard", cat: "Statistika", type: "mc", text: "Rata-rata 10 siswa = 75. Nilai Budi masuk, rata-rata 76. Nilai Budi = ...", options: ["A. 80", "B. 82", "C. 84", "D. 86", "E. 88"], correct: "D", penyelesaian: "Jumlah 10 = 750, jumlah 11 = 836<br>Nilai Budi = 836-750 = <strong>86</strong>" },
+    
+    { id: 33, diff: "Hot", cat: "Statistika", type: "mc", text: "Median data: 4,6,8,5,7,9,5,8,6,7 = ...", options: ["A. 5", "B. 5,5", "C. 6", "D. 6,5", "E. 7"], correct: "D", penyelesaian: "Urut: 4,5,5,6,6,7,7,8,8,9<br>Median = (6+7)/2 = <strong>6,5</strong>" },
+    
+    { id: 34, diff: "Medium", cat: "Peluang", type: "mc", text: "Dadu dilempar 120 kali. Frekuensi harapan muncul ganjil = ...", options: ["A. 40", "B. 50", "C. 60", "D. 70", "E. 80"], correct: "C", penyelesaian: "P(ganjil)=3/6=1/2<br>Fh = 120×1/2 = <strong>60</strong>" },
+    
+    { id: 35, diff: "Medium", cat: "Peluang", type: "mc", text: "Dua koin dilempar. Peluang minimal satu gambar = ...", options: ["A. 1/4", "B. 1/2", "C. 3/4", "D. 1/3", "E. 2/3"], correct: "C", penyelesaian: "Ruang sampel: (A,A),(A,G),(G,A),(G,G)=4<br>Minimal satu G: 3 cara → 3/4" },
+    
+    { id: 36, diff: "Medium", cat: "Statistika", type: "mc", text: "Modus data: 7,8,6,7,9,8,7,10,8,8 = ...", options: ["A. 6", "B. 7", "C. 8", "D. 9", "E. 10"], correct: "C", penyelesaian: "Frekuensi: 8 muncul 4 kali (terbanyak) → Modus = <strong>8</strong>" },
+    
+    { id: 37, diff: "Medium", cat: "Statistika", type: "mc", text: "Median data: 3,5,2,6,4,7,5,8,9 = ...", options: ["A. 3", "B. 4", "C. 5", "D. 6", "E. 7"], correct: "C", penyelesaian: "Urut: 2,3,4,5,5,6,7,8,9<br>Median data ke-5 = <strong>5</strong>" },
+    
+    { id: 38, diff: "Hard", cat: "Peluang", type: "mc", text: "6 grup putra, 4 putri. Diambil 2 satu per satu. Peluang putra lalu putri = ...", options: ["A. 4/15", "B. 2/5", "C. 3/10", "D. 1/3", "E. 5/12"], correct: "A", penyelesaian: "P(putra) = 6/10 = 3/5<br>P(putri setelah putra) = 4/9<br>P = 3/5 × 4/9 = 12/45 = <strong>4/15</strong>" },
+    
+    { id: 39, diff: "Ekstrem", cat: "Peluang", type: "mc", text: "P(A)=0,7, P(B)=0,6, P(A∩B)=0,4. P(A∪B)=...", options: ["A. 0,7", "B. 0,8", "C. 0,9", "D. 1,0", "E. 1,1"], correct: "C", penyelesaian: "P(A∪B)=0,7+0,6-0,4 = <strong>0,9</strong>" },
+    
+    { id: 40, diff: "Hot", cat: "Peluang", type: "mc", text: "Dari 10 gadget: 4 smartphone, 3 smartwatch, 2 tablet, 1 smart tag. Pernyataan benar? (jawab dengan nomor)", options: ["1. Peluang smartphone = 40%", "2. Peluang bukan tablet = 0,2", "3. Peluang smart tag = 1/5", "4. Peluang bukan smartwatch = 70%"], correct: "1,3,4", penyelesaian: "1. 4/10=40% → BENAR<br>2. Bukan tablet = 8/10=0,8 → SALAH<br>3. Smart tag = 1/10=1/5 → BENAR<br>4. Bukan smartwatch = 7/10=70% → BENAR" },
+
+    // ===== TRIGONOMETRI (41-45) =====
+    { id: 41, diff: "Hard", cat: "Trigonometri", type: "mc", text: "sin A = 1/a, A tumpul. cos A = ...", options: ["A. a/√(a²+1)", "B. 1/√(a²+1)", "C. √(a²-1)/a", "D. -√(a²-1)/a", "E. -√(a²+1)/a"], correct: "D", penyelesaian: "cos²A = 1 - 1/a² = (a²-1)/a²<br>cos A = ±√(a²-1)/a<br>A tumpul → cos negatif → <strong>-√(a²-1)/a</strong>" },
+    
+    { id: 42, diff: "Easy", cat: "Trigonometri", type: "mc", text: "sin 30° + cos 60° = ...", options: ["A. 0", "B. 1/2", "C. 1", "D. 3/2", "E. 2"], correct: "C", penyelesaian: "sin 30° = 1/2, cos 60° = 1/2<br>1/2 + 1/2 = <strong>1</strong>" },
+    
+    { id: 43, diff: "Easy", cat: "Trigonometri", type: "mc", text: "tan 45° - sin 30° = ...", options: ["A. 0", "B. 1/2", "C. 1", "D. 3/2", "E. 2"], correct: "B", penyelesaian: "tan 45° = 1, sin 30° = 1/2<br>1 - 1/2 = <strong>1/2</strong>" },
+    
+    { id: 44, diff: "Medium", cat: "Trigonometri", type: "mc", text: "tan A = 3/4 (lancip). sin A = ...", options: ["A. 3/5", "B. 4/5", "C. 3/4", "D. 1/2", "E. 5/3"], correct: "A", penyelesaian: "depan=3, samping=4, miring=5<br>sin A = 3/5" },
+    
+    { id: 45, diff: "Easy", cat: "Trigonometri", type: "mc", text: "cos 60° × sin 30° = ...", options: ["A. 0", "B. 1/4", "C. 1/2", "D. 3/4", "E. 1"], correct: "B", penyelesaian: "cos 60°=1/2, sin 30°=1/2<br>1/2 × 1/2 = <strong>1/4</strong>" },
+
+    // ===== ARITMATIKA SOSIAL (46-50) =====
+    { id: 46, diff: "Hard", cat: "Aritmatika Sosial", type: "mc", text: "Cihuy: 2b+p+3q=19k, Vero: b+2p+2q=17k, Vera: 3b+2p+q=20k. Saki beli 1 masing-masing = ...", options: ["A. Rp9.000", "B. Rp10.000", "C. Rp10.500", "D. Rp11.000", "E. Rp12.000"], correct: "D", penyelesaian: "Dengan eliminasi diperoleh b=4.000, p=3.000, q=4.000<br>Total = 4.000+3.000+4.000 = <strong>Rp11.000</strong>" },
+    
+    { id: 47, diff: "Hard", cat: "Aritmatika Sosial", type: "mc", text: "Alas piring diameter 35 cm, dihias pita. Harga pita Rp5.000/m. 180 buah, biaya = ...", options: ["A. Rp6.930.000", "B. Rp1.980.000", "C. Rp1.000.000", "D. Rp990.000", "E. Rp900.000"], correct: "D", penyelesaian: "K = πd = (22/7)×35 = 110 cm = 1,1 m<br>Total pita = 1,1×180 = 198 m<br>Biaya = 198×5.000 = <strong>Rp990.000</strong>" },
+    
+    { id: 48, diff: "Hard", cat: "Statistika", type: "mc", text: "Modus dari data: 58-60(2), 61-63(6), 64-66(9), 67-69(6), 70-72(4), 73-75(3) = ...", options: ["A. 64,0", "B. 64,5", "C. 65,0", "D. 65,5", "E. 66,0"], correct: "C", penyelesaian: "Kelas modus: 64-66 (f=9)<br>Tb=63,5, d₁=3, d₂=3, c=3<br>Mo=63,5 + 3/(3+3)×3 = 63,5 + 1,5 = <strong>65,0</strong>" },
+    
+    { id: 49, diff: "Hot", cat: "Aritmatika Sosial", type: "mc", text: "Pak Budi modal Rp50.000.000, butuh Rp200.000.000. Tabungan awal Rp5.000.000 + Rp1.500.000/bulan. Hambatan: bulan 5 & 9 keluar Rp5.000.000, bulan 7 kenaikan turun 20%. Manakah yang BENAR?", options: ["A. Dengan kendala, tetap bisa buka", "B. Tanpa persaingan bisa buka", "C. Kenaikan Rp1.700.000/bulan bisa buka", "D. A dan B benar", "E. B dan C benar"], correct: "E", penyelesaian: "Dengan kendala: total < 200.000 → SALAH<br>Tanpa persaingan: total > 200.000 → BENAR<br>Dengan Rp1.700.000: total > 200.000 → BENAR" },
+    
+    { id: 50, diff: "Hard", cat: "Peluang", type: "mc", text: "Doorprize: 5 KL, 5 Bangkok, 10 bintang5, 10 bintang4, 10 kosong. Anto ke-6, sudah terambil 1 KL, 1 Bangkok, 2 bintang4, 1 kosong. Peluang KL = ...", options: ["A. 1/10", "B. 1/9", "C. 4/35", "D. 5/36", "E. 1/7"], correct: "C", penyelesaian: "Sisa KL=4, Bangkok=4, B5=10, B4=8, Kosong=9<br>Total sisa = 35<br>Peluang = <strong>4/35</strong>" }
+];
+
+// ==================== AUTO SAVE ====================
+let userAnswers = {};
+let answerStatus = {};
+let lastScore = 0;
+
+function loadFromStorage() {
+    const savedAnswers = localStorage.getItem('tka_math_50_answers');
+    const savedStatus = localStorage.getItem('tka_math_50_status');
+    if (savedAnswers) {
+        try { userAnswers = JSON.parse(savedAnswers); } catch(e) { userAnswers = {}; }
+    }
+    if (savedStatus) {
+        try { answerStatus = JSON.parse(savedStatus); } catch(e) { answerStatus = {}; }
+    }
+    for(let i=1;i<=50;i++) {
+        if(userAnswers[i] === undefined) userAnswers[i] = "";
+        if(answerStatus[i] === undefined) answerStatus[i] = false;
+    }
+}
+
+function saveToStorage() {
+    localStorage.setItem('tka_math_50_answers', JSON.stringify(userAnswers));
+    localStorage.setItem('tka_math_50_status', JSON.stringify(answerStatus));
+}
+
+function updateAnswerAndSave(qid, value) {
+    userAnswers[qid] = value;
+    if(answerStatus[qid] === true) {
+        answerStatus[qid] = false;
+        const fbDiv = document.getElementById(`fb_${qid}`);
+        if(fbDiv) fbDiv.innerHTML = '';
+    }
+    saveToStorage();
+    updateScoreDisplay();
+}
+
+function evaluateQuestion(qid) {
     let q = questions.find(qq => qq.id === qid);
     if(!q) return;
     let raw = userAnswers[qid] || "";
     let fbDiv = document.getElementById(`fb_${qid}`);
     
     if(raw === ""){ 
-        if(fbDiv) fbDiv.innerHTML = `<div class="warning-message">⚠️ Isi jawaban dulu!</div>`; 
+        if(fbDiv) fbDiv.innerHTML = `<div class="warning-message">⚠️ Pilih jawaban dulu!</div>`; 
         return; 
     }
     
-    let norm = normalizeAnswer(raw, q);
-    let correctNorm = q.correct;
+    let isCorrect = false;
+    let correctAnswer = q.correct;
     
-    // Normalisasi jawaban benar juga
-    let normalizedCorrect = normalizeAnswer(correctNorm, q);
-    let isCorrect = (norm === normalizedCorrect);
-    
-    // Debug: console.log(`Q${qid}: user="${norm}" vs correct="${normalizedCorrect}" → ${isCorrect}`);
+    if(q.type === "mc") {
+        isCorrect = (raw === correctAnswer);
+    } else if(q.type === "tf") {
+        isCorrect = (raw === correctAnswer);
+    } else if(q.type === "mc-multiple") {
+        let userArr = raw.split(',').map(s => s.trim()).sort();
+        let correctArr = correctAnswer.split(',').map(s => s.trim()).sort();
+        isCorrect = (userArr.join(',') === correctArr.join(','));
+    }
     
     answerStatus[qid] = isCorrect;
     saveToStorage();
@@ -503,118 +438,169 @@ function evaluateQuestion(qid){
     if(fbDiv){
         let resHtml = isCorrect ? 
             `<div class="result-correct">✅ BENAR! Jawaban Anda: ${raw}</div>` : 
-            `<div class="result-wrong">❌ SALAH! Jawaban Anda: ${raw}<br>📌 Kunci Jawaban: ${q.correct}</div>`;
+            `<div class="result-wrong">❌ SALAH! Jawaban Anda: ${raw}<br>📌 Kunci Jawaban: ${correctAnswer}</div>`;
         resHtml += `<div class="explanation-box">${q.penyelesaian}</div>`;
         fbDiv.innerHTML = resHtml;
     }
     updateScoreDisplay();
 }
-    
-    function showExplanationOnly(qid){
-        let q = questions.find(qq => qq.id === qid);
-        if(!q) return;
-        let fbDiv = document.getElementById(`fb_${qid}`);
-        if(fbDiv){
-            fbDiv.innerHTML = `<div class="explanation-box">${q.contoh}</div>`;
+
+function showExplanationOnly(qid){
+    let q = questions.find(qq => qq.id === qid);
+    if(!q) return;
+    let fbDiv = document.getElementById(`fb_${qid}`);
+    if(fbDiv){
+        fbDiv.innerHTML = `<div class="explanation-box"><strong>📖 PEMBAHASAN:</strong><br>${q.penyelesaian}</div>`;
+    }
+}
+
+function getDiffClass(diff) {
+    const map = { 'Easy': 'diff-easy', 'Medium': 'diff-medium', 'Hard': 'diff-hard', 'Hot': 'diff-hot', 'Ekstrem': 'diff-extreme' };
+    return map[diff] || 'diff-medium';
+}
+
+function renderCards(){
+    const grid = document.getElementById('quizGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    questions.forEach((q) => {
+        let card = document.createElement('div');
+        card.className = 'question-card';
+        
+        let diffClass = getDiffClass(q.diff);
+        let typeLabel = q.type === 'mc' ? 'Pilihan Ganda' : q.type === 'tf' ? 'Benar/Salah' : 'Pilihan Ganda';
+        
+        let optionsHtml = '';
+        if(q.type === 'mc') {
+            optionsHtml = `<div class="options-wrapper">`;
+            q.options.forEach(opt => {
+                let letter = opt[0];
+                let checked = (userAnswers[q.id] === letter) ? 'checked' : '';
+                optionsHtml += `
+                    <div class="option-item">
+                        <input type="radio" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${checked} onchange="updateAnswerAndSave(${q.id}, this.value)">
+                        <label for="q${q.id}_${letter}">${opt}</label>
+                    </div>
+                `;
+            });
+            optionsHtml += `</div>`;
+        } else if(q.type === 'tf') {
+            optionsHtml = `<div class="true-false-wrapper">`;
+            let tfValues = ['BENAR', 'SALAH'];
+            tfValues.forEach(val => {
+                let checked = (userAnswers[q.id] === val) ? 'checked' : '';
+                let cls = val === 'BENAR' ? 'benar' : 'salah';
+                optionsHtml += `
+                    <div class="tf-option">
+                        <input type="radio" name="q${q.id}" value="${val}" id="q${q.id}_${val}" ${checked} onchange="updateAnswerAndSave(${q.id}, this.value)">
+                        <label for="q${q.id}_${val}" class="${cls}">${val}</label>
+                    </div>
+                `;
+            });
+            optionsHtml += `</div>`;
+        } else if(q.type === 'mc-multiple') {
+            optionsHtml = `<div class="options-wrapper">`;
+            q.options.forEach(opt => {
+                let letter = opt[0];
+                let checked = (userAnswers[q.id] && userAnswers[q.id].includes(letter)) ? 'checked' : '';
+                optionsHtml += `
+                    <div class="multiple-option">
+                        <input type="checkbox" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${checked} onchange="updateMultipleAnswer(${q.id})">
+                        <label for="q${q.id}_${letter}">${opt}</label>
+                    </div>
+                `;
+            });
+            optionsHtml += `</div>`;
         }
-    }
-    
-    function getPlaceholder(q){
-        if(q.type === "desimal") return "contoh: 12.5 atau 0.75";
-        if(q.type === "pecahan") return "contoh: 3/4 atau 31/45";
-        if(q.type === "bulat") return "contoh: 12 atau 5";
-        if(q.type === "akar") return "contoh: 8√3 atau 2√38";
-        if(q.type === "point") return "contoh: (5,6) atau (-5,-3)";
-        if(q.type === "set") return "contoh: {1,2,3}";
-        if(q.type === "string") return "contoh: y=4x-5";
-        return "ketik jawaban di sini";
-    }
-    
-    function renderCards(){
-        const grid = document.getElementById('quizGrid');
-        if(!grid) return;
-        grid.innerHTML = '';
-        for(let i=1;i<=60;i++){
-            let q = questions.find(qq => qq.id === i);
-            if(!q) continue;
-            let card = document.createElement('div');
-            card.className = 'question-card';
-            let diffClass = '';
-            if(q.diff === 'Sedang') diffClass = 'diff-medium';
-            else if(q.diff === 'Hard') diffClass = 'diff-hard';
-            else if(q.diff === 'Hot') diffClass = 'diff-hot';
-            else diffClass = 'diff-extreme';
-            
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="num-badge">${i}</div>
-                    <div class="difficulty-tag ${diffClass}">🔥 ${q.diff}</div>
-                    <div class="category-tag">📌 ${q.cat}</div>
-                </div>
-                <div class="question-text">${q.text}</div>
-                <div class="input-wrapper"><input type="text" class="answer-input" id="input_${i}" placeholder="${getPlaceholder(q)}" value="${userAnswers[i] || ''}"></div>
-                <div class="button-group-dual">
-                    <button class="check-btn" onclick="evaluateQuestion(${i})">✅ CEK JAWABAN</button>
-                    <button class="pembahasan-btn" onclick="showExplanationOnly(${i})">📖 LIHAT PEMBAHASAN</button>
-                </div>
-                <div class="feedback-area" id="fb_${i}"></div>
-            `;
-            grid.appendChild(card);
-            
-            const inp = document.getElementById(`input_${i}`);
-            if(inp){
-                inp.addEventListener('input', (e) => {
-                    updateAnswerAndSave(i, e.target.value);
-                });
-            }
+        
+        card.innerHTML = `
+            <div class="card-header">
+                <div class="num-badge">${q.id}</div>
+                <div class="difficulty-tag ${diffClass}">${q.diff}</div>
+                <div class="category-tag">${q.cat}</div>
+                <div class="category-tag" style="background:#e2e8f0;color:#475569;">${typeLabel}</div>
+            </div>
+            <div class="question-text">${q.text}</div>
+            ${optionsHtml}
+            <div class="button-group-dual">
+                <button class="check-btn" onclick="evaluateQuestion(${q.id})">✅ CEK JAWABAN</button>
+                <button class="pembahasan-btn" onclick="showExplanationOnly(${q.id})">📖 PEMBAHASAN</button>
+            </div>
+            <div class="feedback-area" id="fb_${q.id}"></div>
+        `;
+        grid.appendChild(card);
+        
+        // Restore status if already evaluated
+        if(userAnswers[q.id] && answerStatus[q.id]) {
+            evaluateQuestion(q.id);
         }
-    }
-    
-    function computeScore(){ 
-        let c = 0; 
-        for(let i=1;i<=60;i++) if(answerStatus[i]) c++; 
-        return c; 
-    }
-    
-    function updateScoreDisplay(){
-        let sc = computeScore();
-        let span = document.getElementById('liveScoreDisplay');
-        if(span) span.innerHTML = `🏆 SKOR: ${sc} / 60`;
-        if(sc === 60 && lastScore !== 60){ 
-            startConfetti(); 
-        }
-        lastScore = sc;
-    }
-    
-    function checkAll(){ 
-        for(let i=1;i<=60;i++){ 
-            evaluateQuestion(i); 
-        } 
-    }
-    
-    function resetAll(){ 
-        for(let i=1;i<=60;i++){ 
-            let inp = document.getElementById(`input_${i}`); 
-            if(inp) inp.value = ''; 
-            userAnswers[i] = ''; 
-            answerStatus[i] = false; 
-            let fb = document.getElementById(`fb_${i}`); 
-            if(fb) fb.innerHTML = ''; 
-        } 
-        saveToStorage();
-        updateScoreDisplay(); 
-    }
-    
-    window.evaluateQuestion = evaluateQuestion;
-    window.showExplanationOnly = showExplanationOnly;
-    
-    loadFromStorage();
-    renderCards();
+    });
+}
+
+// Untuk multiple choice dengan checkbox
+window.updateMultipleAnswer = function(qid) {
+    let q = questions.find(qq => qq.id === qid);
+    if(!q) return;
+    let checkboxes = document.querySelectorAll(`input[name="q${qid}"]:checked`);
+    let values = [];
+    checkboxes.forEach(cb => values.push(cb.value));
+    let ans = values.join(',');
+    userAnswers[qid] = ans;
+    answerStatus[qid] = false;
+    saveToStorage();
     updateScoreDisplay();
-    
-    document.getElementById('checkAllBtn')?.addEventListener('click', checkAll);
-    document.getElementById('resetBtn')?.addEventListener('click', resetAll);
-    document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+    let fbDiv = document.getElementById(`fb_${qid}`);
+    if(fbDiv) fbDiv.innerHTML = '';
+};
+
+function computeScore(){ 
+    let c = 0; 
+    for(let i=1;i<=50;i++) if(answerStatus[i]) c++; 
+    return c; 
+}
+
+function updateScoreDisplay(){
+    let sc = computeScore();
+    let span = document.getElementById('liveScoreDisplay');
+    if(span) span.innerHTML = `🏆 SKOR: ${sc} / 50`;
+    if(sc === 50 && lastScore !== 50){ 
+        startConfetti(); 
+    }
+    lastScore = sc;
+}
+
+function checkAll(){ 
+    for(let i=1;i<=50;i++){ 
+        evaluateQuestion(i); 
+    } 
+}
+
+function resetAll(){ 
+    for(let i=1;i<=50;i++){ 
+        userAnswers[i] = ''; 
+        answerStatus[i] = false; 
+        let fb = document.getElementById(`fb_${i}`); 
+        if(fb) fb.innerHTML = ''; 
+    } 
+    // Reset radio/checkbox
+    document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(inp => inp.checked = false);
+    saveToStorage();
+    updateScoreDisplay(); 
+}
+
+// ====== INIT ======
+window.evaluateQuestion = evaluateQuestion;
+window.showExplanationOnly = showExplanationOnly;
+window.updateAnswerAndSave = updateAnswerAndSave;
+window.updateMultipleAnswer = updateMultipleAnswer;
+
+loadFromStorage();
+renderCards();
+updateScoreDisplay();
+
+document.getElementById('checkAllBtn')?.addEventListener('click', checkAll);
+document.getElementById('resetBtn')?.addEventListener('click', resetAll);
+document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 </script>
 </body>
 </html>
