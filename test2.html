@@ -1018,28 +1018,35 @@ function evaluateMultiQuestion(id, q) {
 }
 
 // Fungsi untuk mengecek jawaban benar/salah (checkbox)
+// Fungsi untuk mengecek jawaban benar/salah (checkbox)
 function evaluateBenarSalah(id, q) {
-    let checkboxes = document.querySelectorAll(`input[name="q${id}"]:checked`);
+    let checkboxes = document.querySelectorAll(`input[name="q${id}"]`);
     let selected = [];
     checkboxes.forEach(cb => {
-        // Ambil nilai dari label
-        let label = cb.parentElement.querySelector('label').textContent.trim();
-        selected.push(label);
+        if(cb.checked) {
+            let label = cb.parentElement.querySelector('label').textContent.trim();
+            // Hapus tanda ✓ atau ✗ di akhir
+            label = label.replace(/ [✓✗]$/, '');
+            selected.push(label);
+        }
     });
     
     if(selected.length === 0) {
-        document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Pilih jawaban terlebih dahulu!</div>`;
+        document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Centang pernyataan yang BENAR!</div>`;
         return;
     }
     
     let benar = true;
-    let correctArr = q.correct;
-    // Cek semua pernyataan
+    let correctArr = q.correct; // array ["Benar", "Salah", "Benar"] dst
     let options = q.options;
+    
     for(let i = 0; i < options.length; i++) {
         let isChecked = selected.includes(options[i]);
         let shouldBeChecked = (correctArr[i] === "Benar" || correctArr[i] === "Tepat");
-        if(isChecked !== shouldBeChecked) { benar = false; break; }
+        if(isChecked !== shouldBeChecked) { 
+            benar = false; 
+            break; 
+        }
     }
     
     answerStatus[id] = benar;
@@ -1047,11 +1054,30 @@ function evaluateBenarSalah(id, q) {
     
     let fbDiv = document.getElementById(`fb_${id}`);
     let resultHtml = benar ? 
-        `<div class="result-correct">✅ <strong>BENAR!</strong> Jawaban Anda sesuai kunci</div>` :
-        `<div class="result-wrong">❌ <strong>SALAH!</strong><br>Jawaban benar: <strong>${correctArr.join(', ')}</strong></div>`;
-    resultHtml += `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP + ANALISIS JEBAKAN:</strong><br>${q.explanation}</div>`;
+        `<div class="result-correct">✅ <strong>BENAR!</strong> Jawaban Anda tepat!</div>` :
+        `<div class="result-wrong">❌ <strong>SALAH!</strong><br>Jawaban yang benar: <strong>${correctArr.join(', ')}</strong></div>`;
+    resultHtml += `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP:</strong><br>${q.explanation}</div>`;
     fbDiv.innerHTML = resultHtml;
     updateScore();
+}
+
+// Fungsi toggle untuk checkbox benar/salah
+function toggleBenarSalah(checkbox, label) {
+    // Toggle checked
+    checkbox.checked = !checkbox.checked;
+    
+    // Update tampilan
+    if (checkbox.checked) {
+        label.style.color = '#10b981';
+        label.style.fontWeight = '600';
+        label.innerHTML = label.textContent.replace(/ [✓✗]$/, '') + ' ✓';
+    } else {
+        label.style.color = '#334155';
+        label.style.fontWeight = '400';
+        label.innerHTML = label.textContent.replace(/ [✓✗]$/, '');
+    }
+    
+    checkbox.dispatchEvent(new Event('change'));
 }
 
 window.evaluateQuestion = function(id) {
