@@ -889,6 +889,106 @@
             outline-color: var(--light-pink);
         }
 
+        /* ===== AI FLOATING BUTTON ===== */
+        .ai-fab {
+            position: fixed;
+            right: clamp(16px, 4vw, 28px);
+            bottom: clamp(16px, 4vw, 28px);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 8500;
+            box-shadow: 0 10px 28px rgba(127, 180, 255, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+            animation: fabFloat 3.2s ease-in-out infinite;
+            transition: transform 0.35s var(--ease-pop), box-shadow 0.35s ease;
+        }
+
+        .ai-fab::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid rgba(127, 227, 255, 0.4);
+            animation: fabPulse 2.2s ease-out infinite;
+        }
+
+        @keyframes fabPulse {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            80% { transform: scale(1.35); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fabFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .ai-fab:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 14px 34px rgba(127, 180, 255, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+        }
+
+        .ai-fab:active { transform: scale(0.96); }
+
+        .ai-fab i {
+            font-size: 24px;
+            color: var(--ink);
+            filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.25));
+        }
+
+        .ai-fab-label {
+            position: absolute;
+            right: 74px;
+            top: 50%;
+            transform: translateY(-50%) translateX(6px);
+            background: rgba(8, 11, 26, 0.92);
+            border: 1px solid var(--border-dark);
+            color: var(--star-white);
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .ai-fab:hover .ai-fab-label {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        body.light-mode .ai-fab {
+            background: linear-gradient(135deg, var(--light-pink), var(--light-purple));
+            box-shadow: 0 10px 28px rgba(255, 143, 184, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+        }
+
+        body.light-mode .ai-fab::before { border-color: rgba(255, 143, 184, 0.45); }
+
+        body.light-mode .ai-fab:hover {
+            box-shadow: 0 14px 34px rgba(255, 143, 184, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+        }
+
+        body.light-mode .ai-fab i { color: #fff; }
+
+        body.light-mode .ai-fab-label {
+            background: rgba(255, 250, 253, 0.96);
+            border: 1px solid var(--light-border);
+            color: var(--light-text);
+        }
+
+        @media (max-width: 480px) {
+            .ai-fab { width: 52px; height: 52px; }
+            .ai-fab i { font-size: 20px; }
+            .ai-fab-label { display: none; }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (min-width: 640px) and (max-width: 1023px) {
             .subjects-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1007,6 +1107,11 @@
         <p>© 2025 LMS Stellar · TKA Preparation SMA — Latihan • Test • E-Book</p>
     </div>
 </div>
+
+<a href="alarich-ai.html" class="ai-fab" aria-label="Buka Alarich AI">
+    <i class="fa-solid fa-robot"></i>
+    <span class="ai-fab-label">Tanya Alarich AI</span>
+</a>
 
 <script>
 // ========== COSMOS CANVAS: constellation (dark) / sparkle (light) ==========
