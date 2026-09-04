@@ -296,11 +296,11 @@
             max-width: 300px;
         }
 
-        /* ===== SUBJECTS GRID ===== */
+        /* ===== SUBJECTS GRID - BARU ===== */
         .subjects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: clamp(12px, 2.4vw, 18px);
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(12px, 2vw, 18px);
             margin-bottom: clamp(40px, 8vw, 60px);
             animation: fadeIn 0.9s ease 0.15s both;
         }
@@ -316,13 +316,13 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-dark);
             border-radius: 20px;
-            padding: 24px 16px;
+            padding: 20px 12px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.45s var(--ease-pop), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
             position: relative;
             overflow: hidden;
-            min-height: 190px;
+            min-height: 160px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -356,8 +356,8 @@
         .subject-card.active::after {
             content: '';
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 10px;
+            right: 10px;
             width: 6px;
             height: 6px;
             border-radius: 50%;
@@ -372,8 +372,8 @@
         }
 
         .subject-icon {
-            font-size: 46px;
-            margin-bottom: 12px;
+            font-size: 36px;
+            margin-bottom: 8px;
             display: block;
             position: relative;
             z-index: 2;
@@ -387,20 +387,31 @@
         }
 
         .subject-card h2 {
-            font-size: 1.02rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--star-white);
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             position: relative;
             z-index: 2;
         }
 
         .subject-desc {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.3;
             position: relative;
             z-index: 2;
+        }
+
+        .subject-number {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: 700;
+            z-index: 2;
+            letter-spacing: 0.04em;
         }
 
         /* ===== MODE PANEL ===== */
@@ -1078,6 +1089,53 @@
             }
             .speech-bubble.show { transform: translateY(0) translateX(0); bottom: calc(100% + 12px); }
         }
+
+        /* ===== RESPONSIVE SUBJECTS ===== */
+        @media (max-width: 992px) {
+            .subjects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .subjects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .subject-card {
+                min-height: 130px;
+                padding: 16px 10px;
+            }
+            .subject-icon {
+                font-size: 28px;
+            }
+            .subject-card h2 {
+                font-size: 0.8rem;
+            }
+            .subject-desc {
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .subjects-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .subject-card {
+                min-height: 110px;
+                padding: 12px 8px;
+            }
+            .subject-icon {
+                font-size: 24px;
+                margin-bottom: 4px;
+            }
+            .subject-card h2 {
+                font-size: 0.7rem;
+            }
+            .subject-desc {
+                font-size: 0.55rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1121,32 +1179,37 @@
             <div class="logo-core">📚</div>
         </div>
         <h1>TKA Preparation</h1>
-        <p class="header-subtitle">Bahasa Indonesia • Bahasa Inggris • Matematika • IPA</p>
+        <p class="header-subtitle">Bahasa Indonesia • Bahasa Inggris • Matematika • Biologi • Kimia</p>
         <div class="divider"></div>
     </div>
 
     <div class="subjects-grid">
         <div class="subject-card" id="cardBindoTKA" tabindex="0" role="button">
+            <span class="subject-number">01</span>
             <div class="subject-icon">📖</div>
             <h2>B.Indonesia</h2>
             <div class="subject-desc">Literasi · Tata Bahasa</div>
         </div>
         <div class="subject-card" id="cardBingTKA" tabindex="0" role="button">
+            <span class="subject-number">02</span>
             <div class="subject-icon">🌍</div>
             <h2>B.Inggris</h2>
             <div class="subject-desc">Reading · Grammar</div>
         </div>
         <div class="subject-card" id="cardMathTKA" tabindex="0" role="button">
+            <span class="subject-number">03</span>
             <div class="subject-icon">📐</div>
             <h2>Matematika</h2>
             <div class="subject-desc">Aljabar · Geometri</div>
         </div>
         <div class="subject-card" id="cardIpaBioTKA" tabindex="0" role="button">
+            <span class="subject-number">04</span>
             <div class="subject-icon">🧬</div>
             <h2>Biologi</h2>
             <div class="subject-desc">Sistem · Ekosistem</div>
         </div>
         <div class="subject-card" id="cardIpaKimTKA" tabindex="0" role="button">
+            <span class="subject-number">05</span>
             <div class="subject-icon">⚗️</div>
             <h2>Kimia</h2>
             <div class="subject-desc">Atom · Reaksi</div>
@@ -1475,7 +1538,7 @@ document.addEventListener('click', (e) => {
 
 document.getElementById('aboutOption').addEventListener('click', (e) => {
     e.preventDefault();
-    alert('✨ LMS Stellar - TKA Preparation SMA ✨\n\nPlatform belajar persiapan TKA SMA dengan 5 mata pelajaran:\n📖 Bahasa Indonesia\n🌍 Bahasa Inggris\n📐 Matematika\n🧬 IPA Biologi\n⚗️ IPA Kimia\n\n✨ Dilengkapi Latihan, Test, dan E-Book!');
+    alert('✨ LMS Stellar - TKA Preparation SMA ✨\n\nPlatform belajar persiapan TKA SMA dengan 5 mata pelajaran:\n📖 Bahasa Indonesia\n🌍 Bahasa Inggris\n📐 Matematika\n🧬 Biologi\n⚗️ Kimia\n\n✨ Dilengkapi Latihan, Test, dan E-Book!');
 });
 
 document.getElementById('helpOption').addEventListener('click', (e) => {
@@ -1610,13 +1673,12 @@ const speechMessages = [
     "Klik aku untuk tanya jawab! 💡",
     "Semangat! Kamu pasti bisa! 🚀"
 ];
-// ========== AI FAB NAVIGATION ==========
+
 document.getElementById('aiFab').addEventListener('click', function(e) {
-    // Cegah speech bubble conflict
     e.stopPropagation();
-    // Arahkan ke halaman Alarich AI
     window.location.href = 'alarich-ai.html';
 });
+
 let messageIndex = 0;
 let isShowing = false;
 let timeoutId = null;
@@ -1625,20 +1687,13 @@ const speechText = document.getElementById('speechText');
 const aiFab = document.getElementById('aiFab');
 
 function showNextMessage() {
-    // Update text
     speechText.textContent = speechMessages[messageIndex];
-    
-    // Show bubble
     speechBubble.classList.add('show');
     isShowing = true;
-    
-    // Hide after 3.5 seconds
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
         speechBubble.classList.remove('show');
         isShowing = false;
-        
-        // Move to next message after 1.5 second pause
         timeoutId = setTimeout(() => {
             messageIndex = (messageIndex + 1) % speechMessages.length;
             showNextMessage();
@@ -1646,23 +1701,17 @@ function showNextMessage() {
     }, 3500);
 }
 
-// Start the looping after 2 seconds
-setTimeout(() => {
-    showNextMessage();
-}, 2000);
+setTimeout(showNextMessage, 2000);
 
-// Also show message when user hovers/clicks the AI
 aiFab.addEventListener('mouseenter', () => {
     if (!isShowing) {
         clearTimeout(timeoutId);
         speechText.textContent = speechMessages[messageIndex];
         speechBubble.classList.add('show');
         isShowing = true;
-        
         timeoutId = setTimeout(() => {
             speechBubble.classList.remove('show');
             isShowing = false;
-            // Resume loop after pause
             timeoutId = setTimeout(() => {
                 messageIndex = (messageIndex + 1) % speechMessages.length;
                 showNextMessage();
@@ -1673,7 +1722,6 @@ aiFab.addEventListener('mouseenter', () => {
 
 aiFab.addEventListener('click', () => {
     clearTimeout(timeoutId);
-    // Show a random encouraging message on click
     const clickMessages = [
         "Wah, semangat belajarnya! 🔥",
         "Tanya apa aja, aku siap! 🤖",
@@ -1684,7 +1732,6 @@ aiFab.addEventListener('click', () => {
     speechText.textContent = randomMsg;
     speechBubble.classList.add('show');
     isShowing = true;
-    
     timeoutId = setTimeout(() => {
         speechBubble.classList.remove('show');
         isShowing = false;
