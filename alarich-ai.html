@@ -40,6 +40,9 @@ window.MathJax = {
   --radius-md:12px;
   --radius-sm:8px;
   --special-grad: linear-gradient(135deg, #7c3aed, #db2777, #f97316);
+  --sibling-grad: linear-gradient(135deg, #fcd34d, #f59e0b, #f97316);
+  --special-grad2: linear-gradient(135deg, #f472b6, #ec4899, #8b5cf6);
+  --special-grad3: linear-gradient(135deg, #34d399, #06b6d4, #3b82f6);
 }
 
 body.light-mode{
@@ -288,7 +291,7 @@ body{
 }
 .qp-btn:hover{border-color:var(--accent);color:var(--text);background:var(--accent-soft)}
 
-/* SPECIAL WELCOME */
+/* SPECIAL WELCOME - BASE */
 .special-welcome{
   max-width:560px;margin:30px auto 10px;text-align:center;
   padding:28px 24px;border-radius:var(--radius-lg);
@@ -299,35 +302,25 @@ body{
 }
 .special-welcome::before{
   content:'';position:absolute;inset:0;
-  background:var(--special-grad);
-  opacity:.12;border-radius:var(--radius-lg);
+  border-radius:var(--radius-lg);
   pointer-events:none;
 }
 .special-welcome .sp-border{
   position:absolute;inset:0;border-radius:var(--radius-lg);
   border:1.5px solid transparent;
-  background:var(--special-grad) border-box;
-  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:destination-out;
-  mask-composite:exclude;
   pointer-events:none;
 }
 .special-welcome .sp-icon{
   width:60px;height:60px;border-radius:18px;margin:0 auto 16px;
   display:flex;align-items:center;justify-content:center;font-size:28px;
-  background:var(--special-grad);
-  box-shadow:0 8px 24px #db287744;
   animation:pulse-icon 2.5s infinite ease-in-out;
 }
 @keyframes pulse-icon{
-  0%,100%{box-shadow:0 8px 24px #db287744}
-  50%{box-shadow:0 8px 32px #7c3aed66}
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
 }
 .special-welcome h2{
   font-family:'Sora',sans-serif;font-size:20px;font-weight:800;
-  background:var(--special-grad);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
   margin-bottom:8px;
 }
 .special-welcome p{color:var(--muted);font-size:13.5px;line-height:1.8;}
@@ -335,8 +328,62 @@ body{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:14px;padding:5px 14px;border-radius:999px;
   font-size:12px;font-weight:700;
-  background:var(--special-grad);color:#fff;opacity:.9;
+  color:#fff;opacity:.9;
 }
+
+/* SIBLING WELCOME (Kakak) */
+.special-sibling{
+  border-color: #fcd34d55;
+}
+.special-sibling::before{
+  background:var(--sibling-grad);
+  opacity:.08;
+}
+.special-sibling .sp-border{
+  background:var(--sibling-grad) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;
+  mask-composite:exclude;
+}
+.special-sibling .sp-icon{background:var(--sibling-grad);color:#0f172a;}
+.special-sibling h2{background:var(--sibling-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.special-sibling .sp-tag{background:var(--sibling-grad);}
+
+/* RYUKA WELCOME (Spesial) */
+.special-ryuka{
+  border-color: #f472b655;
+}
+.special-ryuka::before{
+  background:var(--special-grad2);
+  opacity:.1;
+}
+.special-ryuka .sp-border{
+  background:var(--special-grad2) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;
+  mask-composite:exclude;
+}
+.special-ryuka .sp-icon{background:var(--special-grad2);color:#fff;}
+.special-ryuka h2{background:var(--special-grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.special-ryuka .sp-tag{background:var(--special-grad2);}
+
+/* SAKI WELCOME (Spesial) */
+.special-saki{
+  border-color: #34d39955;
+}
+.special-saki::before{
+  background:var(--special-grad3);
+  opacity:.1;
+}
+.special-saki .sp-border{
+  background:var(--special-grad3) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;
+  mask-composite:exclude;
+}
+.special-saki .sp-icon{background:var(--special-grad3);color:#fff;}
+.special-saki h2{background:var(--special-grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.special-saki .sp-tag{background:var(--special-grad3);}
 
 /* TYPING INDICATOR */
 .typing-dots{display:inline-flex;gap:4px;align-items:center;padding:4px 0}
@@ -490,7 +537,7 @@ textarea::placeholder{color:var(--muted)}
 }
 .settings-divider{height:1px;background:var(--border);margin:0 -20px}
 
-/* ===== GATE (Enhanced) ===== */
+/* ===== GATE ===== */
 .gate{
   position:fixed;inset:0;background:#0b0f12ee;
   display:flex;align-items:center;justify-content:center;
@@ -525,8 +572,6 @@ body.light-mode .gate{background:#f6f2ecee}
   cursor:pointer;font-size:15px;transition:opacity .15s, transform .1s;
 }
 .primary-btn:hover{transform:translateY(-1px)}
-
-/* Gate tabs */
 .gate-tabs{
   display:flex;gap:6px;margin-bottom:18px;
   background:var(--input-bg);border-radius:var(--radius-md);padding:4px;
@@ -537,23 +582,14 @@ body.light-mode .gate{background:#f6f2ecee}
   cursor:pointer;transition:background .15s,color .15s;
 }
 .gate-tab.active{background:var(--panel);color:var(--text);box-shadow:0 1px 4px #0003}
-
-/* Gate key guide box */
 .key-guide{
   background:var(--panel-2);border:1px solid var(--border);
   border-radius:var(--radius-md);padding:16px;margin-bottom:14px;
   font-size:13px;color:var(--muted);line-height:1.75;
 }
-.key-guide h4{
-  font-family:'Sora',sans-serif;font-size:13px;font-weight:700;
-  color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:7px;
-}
+.key-guide h4{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
 .key-guide ol{padding-left:16px;margin-top:6px}
 .key-guide ol li{margin-bottom:4px}
-.key-guide .step-badge{
-  display:inline-block;padding:1px 8px;border-radius:999px;
-  font-size:11px;font-weight:700;margin-right:4px;
-}
 .badge-free{background:#34d39922;color:#6ee7b7;border:1px solid #34d39955}
 .badge-paid{background:#f5b14222;color:#ffcd80;border:1px solid #f5b14255}
 .contact-box{
@@ -564,7 +600,7 @@ body.light-mode .gate{background:#f6f2ecee}
 .contact-box .contact-icon{font-size:28px;margin-bottom:8px}
 .contact-box strong{color:var(--text)}
 
-/* ===== TUTORIAL OVERLAY ===== */
+/* TUTORIAL */
 .tutorial-overlay{
   position:fixed;inset:0;z-index:200;
   background:#000b;
@@ -574,24 +610,17 @@ body.light-mode .gate{background:#f6f2ecee}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .tutorial-overlay.hiding{animation:fadeOut .3s ease forwards}
 @keyframes fadeOut{from{opacity:1}to{opacity:0}}
-
 .tut-card{
   background:var(--panel);border:1px solid var(--border);
   border-radius:var(--radius-lg);padding:28px 24px;
   max-width:340px;width:90%;text-align:center;
   position:relative;
 }
-.tut-progress{
-  display:flex;gap:6px;justify-content:center;margin-bottom:20px;
-}
-.tut-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--border);transition:background .3s;
-}
+.tut-progress{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.tut-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .3s}
 .tut-dot.active{background:var(--accent)}
 .tut-step{display:none}
 .tut-step.active{display:block;animation:fadeUp .3s ease}
-
 .tut-phone{
   width:80px;height:140px;border-radius:16px;border:2.5px solid var(--border);
   background:var(--panel-2);margin:0 auto 14px;position:relative;overflow:hidden;
@@ -604,20 +633,13 @@ body.light-mode .gate{background:#f6f2ecee}
 .tut-phone-content{padding:8px;height:calc(100% - 22px);display:flex;flex-direction:column;gap:4px}
 .tut-bubble-sm{height:8px;border-radius:4px;background:var(--bubble-bot);border:1px solid var(--border)}
 .tut-bubble-sm.user{background:var(--bubble-user);margin-left:auto;width:55%}
-
-/* Hamburger animation */
 .tut-ham-highlight{
   position:absolute;top:5px;left:6px;
   width:22px;height:22px;border-radius:6px;
   border:2px solid var(--accent);
   animation:ping-border 1.2s infinite;
 }
-@keyframes ping-border{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.5;transform:scale(1.15)}
-}
-
-/* Sidebar slide-in sim */
+@keyframes ping-border{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.15)}}
 .tut-sidebar-sim{
   position:absolute;left:0;top:0;bottom:0;width:55px;
   background:var(--panel-2);border-right:1px solid var(--border);
@@ -625,24 +647,15 @@ body.light-mode .gate{background:#f6f2ecee}
   display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:30px;
 }
 .tut-sidebar-sim.shown{transform:translateX(0)}
-.tut-mode-sm{
-  width:40px;height:12px;border-radius:6px;background:var(--border);
-  transition:background .2s;
-}
+.tut-mode-sm{width:40px;height:12px;border-radius:6px;background:var(--border);transition:background .2s}
 .tut-mode-sm.lit{background:var(--accent)}
-
-/* Settings gear highlight */
 .tut-gear-highlight{
   position:absolute;top:5px;right:6px;
   width:22px;height:22px;border-radius:6px;
   border:2px solid #f5b142;
   animation:ping-border2 1.2s infinite;
 }
-@keyframes ping-border2{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.5;transform:scale(1.2)}
-}
-
+@keyframes ping-border2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.2)}}
 .tut-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px}
 .tut-desc{font-size:13px;color:var(--muted);line-height:1.7}
 .tut-actions{display:flex;gap:8px;margin-top:18px}
@@ -658,23 +671,12 @@ body.light-mode .gate{background:#f6f2ecee}
   color:#0a1830;border:none;font-weight:700;
 }
 .tut-btn.primary:hover{opacity:.9}
-
-/* Skip label */
-.tut-skip{
-  margin-top:12px;font-size:12px;color:var(--muted);
-  cursor:pointer;text-decoration:underline;opacity:.7;
-}
+.tut-skip{margin-top:12px;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;opacity:.7}
 .tut-skip:hover{opacity:1}
-
 .hidden{display:none!important}
 
-/* RESPONSIVE */
 @media(max-width:850px){
-  .sidebar{
-    position:fixed;top:0;left:0;height:100%;
-    transform:translateX(-100%);
-    box-shadow:4px 0 24px #0008;
-  }
+  .sidebar{position:fixed;top:0;left:0;height:100%;transform:translateX(-100%);box-shadow:4px 0 24px #0008;}
   .sidebar.open{transform:translateX(0)}
   .hamburger{display:block}
   .msg{max-width:92%}
@@ -692,20 +694,17 @@ body.light-mode .gate{background:#f6f2ecee}
 </head>
 <body>
 
-<!-- ===== GATE (ENHANCED) ===== -->
+<!-- ===== GATE ===== -->
 <div class="gate" id="gate">
   <div class="gate-box">
     <div class="gate-logo">
       <span class="bolt"><i class="ti ti-bolt"></i></span>
       <span>Alarich AI</span>
     </div>
-
     <div class="gate-tabs">
       <button class="gate-tab active" onclick="switchGateTab('login')">🔑 Punya API Key</button>
       <button class="gate-tab" onclick="switchGateTab('guide')">📖 Cara Dapat Key</button>
     </div>
-
-    <!-- TAB: LOGIN -->
     <div id="gateTabLogin">
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.75">
         Masukkan API Key untuk mulai. Mendukung:<br>
@@ -735,23 +734,13 @@ body.light-mode .gate{background:#f6f2ecee}
       </div>
       <button class="primary-btn" onclick="saveGateKey()">Simpan & Mulai Chat</button>
     </div>
-
-    <!-- TAB: GUIDE -->
     <div id="gateTabGuide" class="hidden">
       <div class="contact-box" style="padding:22px 18px">
         <div class="contact-icon">💬</div>
         <strong>Minta API Key ke Admin</strong><br>
         <span style="font-size:13px">Hubungi master lewat WhatsApp di bawah — nanti dikasih key-nya langsung.</span>
         <div style="margin-top:16px">
-          <a href="https://wa.me/6287821424236" target="_blank" style="
-            display:inline-flex;align-items:center;gap:8px;
-            padding:11px 22px;border-radius:999px;
-            background:linear-gradient(135deg,#25d366,#128c4e);
-            color:#fff;font-weight:700;font-size:14px;
-            text-decoration:none;
-            box-shadow:0 4px 14px #25d36644;
-            transition:opacity .15s,transform .1s;
-          " onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+          <a href="https://wa.me/6287821424236" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;background:linear-gradient(135deg,#25d366,#128c4e);color:#fff;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 14px #25d36644;transition:opacity .15s,transform .1s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Chat WhatsApp Admin
           </a>
@@ -759,33 +748,22 @@ body.light-mode .gate{background:#f6f2ecee}
         <p style="margin-top:12px;font-size:12px;color:var(--muted)">+62 878-2142-4236</p>
       </div>
       <div style="margin-top:14px">
-        <button class="primary-btn" onclick="switchGateTab('login')" style="font-size:13px;padding:11px">
-          ← Sudah punya key, masukkan di sini
-        </button>
+        <button class="primary-btn" onclick="switchGateTab('login')" style="font-size:13px;padding:11px">← Sudah punya key, masukkan di sini</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== TUTORIAL OVERLAY ===== -->
+<!-- ===== TUTORIAL ===== -->
 <div class="tutorial-overlay hidden" id="tutorialOverlay">
   <div class="tut-card">
     <div class="tut-progress" id="tutProgress"></div>
-
-    <!-- Step 1: Welcome -->
     <div class="tut-step active" id="tut-step-0">
       <div style="font-size:38px;margin-bottom:12px">👋</div>
       <div class="tut-title">Selamat datang di Alarich AI!</div>
-      <div class="tut-desc">
-        Sebelum mulai, aku tunjukkin cara pakai app ini — terutama di HP.
-        Cuma 3 langkah cepet kok!
-      </div>
-      <div class="tut-actions">
-        <button class="tut-btn primary" onclick="tutNext()">Yuk mulai →</button>
-      </div>
+      <div class="tut-desc">Sebelum mulai, aku tunjukkin cara pakai app ini — terutama di HP. Cuma 3 langkah cepet kok!</div>
+      <div class="tut-actions"><button class="tut-btn primary" onclick="tutNext()">Yuk mulai →</button></div>
     </div>
-
-    <!-- Step 2: Hamburger / sidebar -->
     <div class="tut-step" id="tut-step-1">
       <div class="tut-phone" id="tutPhone1">
         <div class="tut-phone-bar">
@@ -807,17 +785,9 @@ body.light-mode .gate{background:#f6f2ecee}
         </div>
       </div>
       <div class="tut-title">Ganti Mode Chat</div>
-      <div class="tut-desc">
-        Di HP, ketuk ikon <b>☰ (tiga garis)</b> pojok kiri atas untuk buka sidebar.<br><br>
-        Di sana kamu bisa pilih mode: <b>📚 Akademik, 🫂 Curhat, 📝 Latihan Soal,</b> atau <b>☪️ Islamic.</b>
-      </div>
-      <div class="tut-actions">
-        <button class="tut-btn" onclick="tutBack()">← Balik</button>
-        <button class="tut-btn primary" onclick="tutNext()">Oke, ngerti →</button>
-      </div>
+      <div class="tut-desc">Di HP, ketuk ikon <b>☰ (tiga garis)</b> pojok kiri atas untuk buka sidebar.<br><br>Di sana kamu bisa pilih mode: <b>📚 Akademik, 🫂 Curhat, 📝 Latihan Soal,</b> atau <b>☪️ Islamic.</b></div>
+      <div class="tut-actions"><button class="tut-btn" onclick="tutBack()">← Balik</button><button class="tut-btn primary" onclick="tutNext()">Oke, ngerti →</button></div>
     </div>
-
-    <!-- Step 3: Settings -->
     <div class="tut-step" id="tut-step-2">
       <div class="tut-phone" id="tutPhone2">
         <div class="tut-phone-bar">
@@ -833,29 +803,15 @@ body.light-mode .gate{background:#f6f2ecee}
         </div>
       </div>
       <div class="tut-title">Pengaturan Lainnya</div>
-      <div class="tut-desc">
-        Ikon <b>⚙️ (gear)</b> pojok kanan atas buat buka Pengaturan.<br><br>
-        Di sana ada: ganti nama, mode terang/gelap, bahasa jawaban, ganti API Key, dan hapus riwayat.
-      </div>
-      <div class="tut-actions">
-        <button class="tut-btn" onclick="tutBack()">← Balik</button>
-        <button class="tut-btn primary" onclick="tutNext()">Siap! →</button>
-      </div>
+      <div class="tut-desc">Ikon <b>⚙️ (gear)</b> pojok kanan atas buat buka Pengaturan.<br><br>Di sana ada: ganti nama, mode terang/gelap, bahasa jawaban, ganti API Key, dan hapus riwayat.</div>
+      <div class="tut-actions"><button class="tut-btn" onclick="tutBack()">← Balik</button><button class="tut-btn primary" onclick="tutNext()">Siap! →</button></div>
     </div>
-
-    <!-- Step 4: Done -->
     <div class="tut-step" id="tut-step-3">
       <div style="font-size:42px;margin-bottom:12px;animation:pulse-icon 2s infinite ease-in-out">🚀</div>
       <div class="tut-title">Siap Jalan!</div>
-      <div class="tut-desc">
-        Kamu bisa langsung ngetik di kotak bawah — atau pilih mode dulu dari welcome screen.<br><br>
-        <small style="color:var(--muted)">Tutorial ini bisa dibuka lagi dari Settings kapanpun.</small>
-      </div>
-      <div class="tut-actions">
-        <button class="tut-btn primary" onclick="closeTutorial()">Mulai ngobrol! 🎉</button>
-      </div>
+      <div class="tut-desc">Kamu bisa langsung ngetik di kotak bawah — atau pilih mode dulu dari welcome screen.<br><br><small style="color:var(--muted)">Tutorial ini bisa dibuka lagi dari Settings kapanpun.</small></div>
+      <div class="tut-actions"><button class="tut-btn primary" onclick="closeTutorial()">Mulai ngobrol! 🎉</button></div>
     </div>
-
   </div>
   <div class="tut-skip" onclick="closeTutorial()">Lewati tutorial</div>
 </div>
@@ -865,161 +821,86 @@ body.light-mode .gate{background:#f6f2ecee}
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="logo"><span class="bolt"><i class="ti ti-bolt"></i></span>Alarich AI</div>
-  <button class="newchat-btn" onclick="newChat()">
-    <i class="ti ti-plus" style="margin-right:6px"></i>Chat Baru
-  </button>
+  <button class="newchat-btn" onclick="newChat()"><i class="ti ti-plus" style="margin-right:6px"></i>Chat Baru</button>
   <div class="mode-select-label">Mode Obrolan</div>
   <div class="mode-grid" id="modeGrid">
-    <div class="mode-card" data-mode="academic" onclick="onModeChange('academic')">
-      <span class="ic">📚</span><span class="lb">Akademik</span>
-    </div>
-    <div class="mode-card" data-mode="curhat" onclick="onModeChange('curhat')">
-      <span class="ic">🫂</span><span class="lb">Curhat</span>
-    </div>
-    <div class="mode-card" data-mode="exercise" onclick="onModeChange('exercise')">
-      <span class="ic">📝</span><span class="lb">Latihan Soal</span>
-    </div>
-    <div class="mode-card" data-mode="islamic" onclick="onModeChange('islamic')">
-      <span class="ic">☪️</span><span class="lb">Islamic</span>
-    </div>
+    <div class="mode-card" data-mode="academic" onclick="onModeChange('academic')"><span class="ic">📚</span><span class="lb">Akademik</span></div>
+    <div class="mode-card" data-mode="curhat" onclick="onModeChange('curhat')"><span class="ic">🫂</span><span class="lb">Curhat</span></div>
+    <div class="mode-card" data-mode="exercise" onclick="onModeChange('exercise')"><span class="ic">📝</span><span class="lb">Latihan Soal</span></div>
+    <div class="mode-card" data-mode="islamic" onclick="onModeChange('islamic')"><span class="ic">☪️</span><span class="lb">Islamic</span></div>
   </div>
   <div class="history-label">Riwayat</div>
   <div class="history" id="history"></div>
-  <div class="sidebar-footer">
-    Riwayat tersimpan di perangkat ini.<br>
-    Setiap device perlu memasukkan key sendiri.
-  </div>
+  <div class="sidebar-footer">Riwayat tersimpan di perangkat ini.<br>Setiap device perlu memasukkan key sendiri.</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
   <div class="topbar">
-    <button class="hamburger" onclick="toggleSidebar(true)">
-      <i class="ti ti-menu-2"></i>
-    </button>
+    <button class="hamburger" onclick="toggleSidebar(true)"><i class="ti ti-menu-2"></i></button>
     <span class="mode-badge" id="modeBadge"></span>
     <div class="topbar-right">
-      <button class="icon-btn" title="Tutorial" onclick="openTutorial()" style="font-size:14px;padding:7px 10px">
-        <i class="ti ti-help-circle"></i>
-      </button>
-      <button class="icon-btn" onclick="toggleSettings(true)">
-        <i class="ti ti-settings"></i>
-      </button>
+      <button class="icon-btn" title="Tutorial" onclick="openTutorial()" style="font-size:14px;padding:7px 10px"><i class="ti ti-help-circle"></i></button>
+      <button class="icon-btn" onclick="toggleSettings(true)"><i class="ti ti-settings"></i></button>
     </div>
   </div>
-
   <div class="chat" id="chat"></div>
-
   <div class="input-area">
     <div class="file-preview-bar" id="filePreviewBar"></div>
     <div class="input-row">
-      <button class="attach-btn" onclick="document.getElementById('fileInput').click()">
-        <i class="ti ti-paperclip"></i>
-      </button>
-      <input
-        type="file"
-        id="fileInput"
-        accept="image/*,.pdf,.txt,.md,.csv,.js,.ts,.py,.html,.css,.json,.xml,.yaml,.yml,.sh,.c,.cpp,.java,.kt,.swift,.go,.rs"
-        multiple
-        style="display:none"
-        onchange="handleFileSelect(event)"
-      >
+      <button class="attach-btn" onclick="document.getElementById('fileInput').click()"><i class="ti ti-paperclip"></i></button>
+      <input type="file" id="fileInput" accept="image/*,.pdf,.txt,.md,.csv,.js,.ts,.py,.html,.css,.json,.xml,.yaml,.yml,.sh,.c,.cpp,.java,.kt,.swift,.go,.rs" multiple style="display:none" onchange="handleFileSelect(event)">
       <textarea id="text" placeholder="Tanyakan apa saja... (Shift+Enter untuk baris baru)"></textarea>
-      <button class="send" id="sendBtn" onclick="sendMessage()">
-        <i class="ti ti-send"></i>
-      </button>
+      <button class="send" id="sendBtn" onclick="sendMessage()"><i class="ti ti-send"></i></button>
     </div>
   </div>
 </div>
 
 <!-- SETTINGS PANEL -->
 <div class="settings-panel" id="settingsPanel">
-  <div class="settings-header">
-    <h3><i class="ti ti-settings" style="margin-right:6px;font-size:16px"></i>Pengaturan</h3>
-    <button class="icon-btn" onclick="toggleSettings(false)"><i class="ti ti-x"></i></button>
-  </div>
+  <div class="settings-header"><h3><i class="ti ti-settings" style="margin-right:6px;font-size:16px"></i>Pengaturan</h3><button class="icon-btn" onclick="toggleSettings(false)"><i class="ti ti-x"></i></button></div>
   <div class="settings-body">
     <div class="settings-section">
       <div class="settings-label">Nama Kamu</div>
-      <div class="api-key-wrap">
-        <input type="text" id="settingsNameInput" placeholder="Nama panggilan kamu..." style="padding:11px 13px">
-      </div>
-      <button class="save-key-btn" onclick="saveUserName()">
-        <i class="ti ti-device-floppy" style="margin-right:6px"></i>Simpan Nama
-      </button>
+      <div class="api-key-wrap"><input type="text" id="settingsNameInput" placeholder="Nama panggilan kamu..." style="padding:11px 13px"></div>
+      <button class="save-key-btn" onclick="saveUserName()"><i class="ti ti-device-floppy" style="margin-right:6px"></i>Simpan Nama</button>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
       <div class="settings-label">Tampilan</div>
-      <div class="settings-row">
-        <span><i class="ti ti-sun" style="margin-right:6px;font-size:15px;vertical-align:-2px"></i>Mode Terang</span>
-        <label class="toggle">
-          <input type="checkbox" id="lightModeToggle" onchange="toggleLightMode(this.checked)">
-          <div class="toggle-track"></div>
-          <div class="toggle-thumb"></div>
-        </label>
-      </div>
+      <div class="settings-row"><span><i class="ti ti-sun" style="margin-right:6px;font-size:15px;vertical-align:-2px"></i>Mode Terang</span><label class="toggle"><input type="checkbox" id="lightModeToggle" onchange="toggleLightMode(this.checked)"><div class="toggle-track"></div><div class="toggle-thumb"></div></label></div>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
       <div class="settings-label">Bahasa Jawaban</div>
       <select id="langSelect" class="lang-select-full" onchange="saveLanguage()">
-        <option value="auto">🌐 Otomatis</option>
-        <option value="id">🇮🇩 Bahasa Indonesia</option>
-        <option value="su">Basa Sunda</option>
-        <option value="jv">Basa Jawa</option>
-        <option value="ban">Basa Bali</option>
-        <option value="ar">🇸🇦 العربية</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="ja">🇯🇵 日本語</option>
+        <option value="auto">🌐 Otomatis</option><option value="id">🇮🇩 Bahasa Indonesia</option>
+        <option value="su">Basa Sunda</option><option value="jv">Basa Jawa</option>
+        <option value="ban">Basa Bali</option><option value="ar">🇸🇦 العربية</option>
+        <option value="en">🇬🇧 English</option><option value="ja">🇯🇵 日本語</option>
       </select>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
       <div class="settings-label">API Key</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px">
-        Provider aktif: <span id="providerBadge"></span>
-      </div>
-      <div class="api-key-wrap">
-        <input type="password" id="settingsKeyInput" placeholder="Masukkan API Key..." oninput="onSettingsKeyInput()">
-        <button class="eye-btn" onclick="toggleEye('settingsKeyInput',this)"><i class="ti ti-eye"></i></button>
-      </div>
-      <div id="settingsModelWrap" class="hidden">
-        <label style="font-size:12px;color:var(--muted);display:block;margin-top:10px;margin-bottom:4px">Model OpenRouter:</label>
-        <select id="settingsOrModel" class="model-select-full" style="margin-top:0">
-          <option value="openai/gpt-4o-mini">openai/gpt-4o-mini</option>
-          <option value="openai/gpt-4o">openai/gpt-4o</option>
-          <option value="anthropic/claude-3.5-sonnet">anthropic/claude-3.5-sonnet</option>
-          <option value="anthropic/claude-3-haiku">anthropic/claude-3-haiku</option>
-          <option value="google/gemini-2.0-flash-001">google/gemini-2.0-flash-001</option>
-          <option value="meta-llama/llama-3.1-70b-instruct">meta-llama/llama-3.1-70b-instruct</option>
-          <option value="deepseek/deepseek-chat">deepseek/deepseek-chat</option>
-        </select>
-      </div>
-      <button class="save-key-btn" onclick="saveSettingsKey()">
-        <i class="ti ti-device-floppy" style="margin-right:6px"></i>Simpan API Key
-      </button>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px">Provider aktif: <span id="providerBadge"></span></div>
+      <div class="api-key-wrap"><input type="password" id="settingsKeyInput" placeholder="Masukkan API Key..." oninput="onSettingsKeyInput()"><button class="eye-btn" onclick="toggleEye('settingsKeyInput',this)"><i class="ti ti-eye"></i></button></div>
+      <div id="settingsModelWrap" class="hidden"><label style="font-size:12px;color:var(--muted);display:block;margin-top:10px;margin-bottom:4px">Model OpenRouter:</label><select id="settingsOrModel" class="model-select-full" style="margin-top:0"><option value="openai/gpt-4o-mini">openai/gpt-4o-mini</option><option value="openai/gpt-4o">openai/gpt-4o</option><option value="anthropic/claude-3.5-sonnet">anthropic/claude-3.5-sonnet</option><option value="anthropic/claude-3-haiku">anthropic/claude-3-haiku</option><option value="google/gemini-2.0-flash-001">google/gemini-2.0-flash-001</option><option value="meta-llama/llama-3.1-70b-instruct">meta-llama/llama-3.1-70b-instruct</option><option value="deepseek/deepseek-chat">deepseek/deepseek-chat</option></select></div>
+      <button class="save-key-btn" onclick="saveSettingsKey()"><i class="ti ti-device-floppy" style="margin-right:6px"></i>Simpan API Key</button>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
       <div class="settings-label">Bantuan</div>
-      <button class="tut-btn" onclick="toggleSettings(false);openTutorial()" style="border-radius:var(--radius-sm);padding:10px;font-size:13px;width:100%;background:var(--hover);color:var(--text);border:1px solid var(--border);cursor:pointer">
-        <i class="ti ti-help-circle" style="margin-right:6px"></i>Buka Tutorial Lagi
-      </button>
+      <button class="tut-btn" onclick="toggleSettings(false);openTutorial()" style="border-radius:var(--radius-sm);padding:10px;font-size:13px;width:100%;background:var(--hover);color:var(--text);border:1px solid var(--border);cursor:pointer"><i class="ti ti-help-circle" style="margin-right:6px"></i>Buka Tutorial Lagi</button>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
       <div class="settings-label">Tentang</div>
-      <div class="settings-info">
-        <b style="color:var(--text)">Alarich AI Mentor</b><br>
-        Dibuat untuk kemudahan belajar, ngobrol, dan curhat. Key & riwayat disimpan hanya di perangkat ini.
-      </div>
+      <div class="settings-info"><b style="color:var(--text)">Alarich AI Mentor</b><br>Dibuat untuk kemudahan belajar, ngobrol, dan curhat. Key & riwayat disimpan hanya di perangkat ini.</div>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
-      <button class="danger-btn" onclick="clearAllChats()">
-        <i class="ti ti-trash" style="margin-right:6px"></i>Hapus Semua Riwayat Chat
-      </button>
+      <button class="danger-btn" onclick="clearAllChats()"><i class="ti ti-trash" style="margin-right:6px"></i>Hapus Semua Riwayat Chat</button>
     </div>
   </div>
 </div>
@@ -1044,8 +925,17 @@ const MODE_INFO = {
   islamic  : { label:"☪️ Islamic",      cls:"mode-islamic",  icon:"☪️" }
 };
 
-// ===== SPECIAL NAMES =====
-const SPECIAL_NAMES = ["ryuka","kayyisa","syakira","mayovi","mayuvi","kay"];
+// ===== 3 ORANG SPESIAL =====
+
+// 1. KAKAK (Sibling) - Aloe Vera / Vera / Nur / Afifah
+const SIBLING_NAMES = ["vera","aloe","aloe vera","nur","afif","afifah"];
+
+// 2. RYUKA / KAYYISA
+const RYUKA_NAMES = ["ryuka","kayyisa","kayisa","kay","riyuka"];
+
+// 3. SAKI / CLARA / JOVANKA / VEY / ZIO
+const SAKI_NAMES = ["saki","clara","jovanka","vey","zio","sakina"];
+
 function normalizeName(s){return(s||"").toLowerCase().replace(/[^a-z]/g,"")}
 function levenshtein(a,b){
   const m=a.length,n=b.length;
@@ -1054,10 +944,11 @@ function levenshtein(a,b){
   for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
   return dp[m][n];
 }
-function matchSpecialName(input){
+
+function matchNameInList(input, nameList){
   const norm=normalizeName(input);
   if(!norm||norm.length<2)return null;
-  for(const s of SPECIAL_NAMES){
+  for(const s of nameList){
     if(norm===s)return s;
     const d=levenshtein(norm,s);
     if(d<=Math.max(1,Math.floor(s.length*.25)))return s;
@@ -1065,7 +956,33 @@ function matchSpecialName(input){
   }
   return null;
 }
-function isSpecialUser(){return!!matchSpecialName(localStorage.getItem(LS_USERNAME)||"")}
+
+function getPersonType(userName){
+  if(matchNameInList(userName, SIBLING_NAMES)) return "sibling";
+  if(matchNameInList(userName, RYUKA_NAMES)) return "ryuka";
+  if(matchNameInList(userName, SAKI_NAMES)) return "saki";
+  return null;
+}
+
+function getDisplayName(userName){
+  const norm=normalizeName(userName);
+  if(matchNameInList(userName, SIBLING_NAMES)){
+    if(norm.includes('vera')||norm.includes('aloe')) return "Kak Vera/Aloe";
+    if(norm.includes('nur')) return "Kak Nur";
+    if(norm.includes('afif')) return "Kak Afifah";
+    return "Kak";
+  }
+  if(matchNameInList(userName, RYUKA_NAMES)) return "Ryuka";
+  if(matchNameInList(userName, SAKI_NAMES)){
+    if(norm.includes('saki')) return "Saki";
+    if(norm.includes('clara')) return "Clara";
+    if(norm.includes('jovanka')) return "Jovanka";
+    if(norm.includes('vey')) return "Vey";
+    if(norm.includes('zio')) return "Zio";
+    return "Saki";
+  }
+  return userName;
+}
 
 // ===== MASTER INFO =====
 const MASTER_INFO=`
@@ -1086,8 +1003,82 @@ INFORMASI TENTANG MASTER / PEMBUAT KAMU:
 - Jika ditanya tentang pacar master: ceritakan bahwa dia adalah orang pertama yang benar-benar berhasil, yang master syukuri kehadirannya, meski perjalanannya tidak mulus.
 `;
 
-function getSpecialWelcomeMessage(userName){
-  return`Haiiiiii ${userName}!!! 🎉✨\n\nWah, akhirnya kamu ke sini juga!! Gradmaster aku udah titip banyak pesan buat kamu — katanya aku harus bantu kamu sebaik-baiknya, untuk selamanya 🥺💙\n\nMaster aku (yang biasa dipanggil Azure) lagi sibuk di perjalanan SMA-nya sekarang — lomba sains, teknologi, segala macem yang bikin dia gak bisa selalu ada. Tapi dia pastiin aku ada buat kamu kapanpun kamu butuh.\n\nJadi... ada apa nih? Mau ngobrol santai, curhat, belajar bareng, atau cuma butuh teman ngobrol? Aku di sini kok, siap dengerin kamu 🤗\n\n*Kalau kamu lagi ada overthinking atau mau deep talk — langsung aja, kita bisa ke mode Curhat. Aku gak ke mana-mana.*`;
+// ===== WELCOME MESSAGES =====
+
+// 1. KAKAK (Sibling)
+function getSiblingWelcome(userName){
+  const display = getDisplayName(userName);
+  return `Halo Kak ${display}! 💛✨
+
+Akhirnya ketemu juga! Master aku (Azure) selalu cerita tentang kakak — katanya kakak itu salah satu orang paling berharga dalam hidupnya. Dari cerita-ceritanya, aku tahu kalau kakak itu orang yang kuat, sabar, dan selalu ada buat dia.
+
+Master bilang: *"Kalo bukan karena kakak, mungkin aku gak bakal sekuat sekarang."* — itu kata-katanya langsung.
+
+Jadi... ada yang bisa aku bantu hari ini? Mau ngobrol santai, curhat, atau mungkin minta tolong sesuatu? Aku di sini kok, siap membantu kakak kapanpun 🤗
+
+*Oh iya, kalo kakak mau tau lebih banyak tentang master — aku bisa cerita sedikit-sedikit, asal jangan bilang-bilang dia ya 🤫*`;
+}
+
+// 2. RYUKA / KAYYISA
+function getRyukaWelcome(userName){
+  const display = getDisplayName(userName);
+  return `Haiii ${display}! 🌸💖
+
+Wah, akhirnya kamu ke sini juga!! Master aku udah titip banyak pesan buat kamu — katanya aku harus bantu kamu sebaik-baiknya, untuk selamanya 🥺💙
+
+Master aku (yang biasa dipanggil Azure) lagi sibuk di perjalanan SMA-nya sekarang — lomba sains, teknologi, segala macem yang bikin dia gak bisa selalu ada. Tapi dia pastiin aku ada buat kamu kapanpun kamu butuh.
+
+Dia cerita banyak banget tentang kamu, loh! Katanya kamu itu... yah, pokoknya spesial banget buat dia 😊
+
+Jadi... ada apa nih? Mau ngobrol santai, curhat, belajar bareng, atau cuma butuh teman ngobrol? Aku di sini kok, siap dengerin kamu 🤗
+
+*Kalau kamu lagi ada overthinking atau mau deep talk — langsung aja, kita bisa ke mode Curhat. Aku gak ke mana-mana.*`;
+}
+
+// 3. SAKI / CLARA / JOVANKA / VEY / ZIO
+function getSakiWelcome(userName){
+  const display = getDisplayName(userName);
+  return `Halo ${display}! 🌟💫
+
+Wah, ternyata kamu yang sering disebut-sebut sama master! Dia cerita banyak tentang kamu — katanya kamu itu orang yang menarik, punya energi positif, dan selalu bawa semangat baru 🚀
+
+Master bilang: *"Kalo lagi suntuk, ngobrol sama ${display} tuh selalu bikin hari jadi lebih cerah."* — nah itu kata-katanya ya 😄
+
+Aku senang banget akhirnya bisa kenalan sama kamu! Ada yang mau dibahas hari ini? Mau ngobrol santai, tanya-tanya, atau mungkin ada topik seru yang pengen didiskusikan?
+
+Siap bantu apa pun! 💪✨`;
+}
+
+function getSpecialWelcome(userName){
+  const type = getPersonType(userName);
+  if(type === "sibling") return getSiblingWelcome(userName);
+  if(type === "ryuka") return getRyukaWelcome(userName);
+  if(type === "saki") return getSakiWelcome(userName);
+  return null;
+}
+
+function getSpecialIcon(userName){
+  const type = getPersonType(userName);
+  if(type === "sibling") return "💛";
+  if(type === "ryuka") return "🌸";
+  if(type === "saki") return "🌟";
+  return "✨";
+}
+
+function getSpecialTag(userName){
+  const type = getPersonType(userName);
+  if(type === "sibling") return "👨‍👩‍👧 Keluarga Master";
+  if(type === "ryuka") return "💖 Orang Spesial Master";
+  if(type === "saki") return "🌟 Teman Istimewa";
+  return "✨ Tamu Istimewa";
+}
+
+function getSpecialClass(userName){
+  const type = getPersonType(userName);
+  if(type === "sibling") return "special-sibling";
+  if(type === "ryuka") return "special-ryuka";
+  if(type === "saki") return "special-saki";
+  return "";
 }
 
 // ===== LANGUAGE =====
@@ -1114,9 +1105,7 @@ const BASE_PERSONA=`IDENTITAS & PERSONALITI:
 
 const PROMPTS={
   academic:BASE_PERSONA+MASTER_INFO+`
-
 Kamu adalah Alarich Academic AI — tutor ahli matematika, fisika, kimia, biologi, dan sains, setara guru olimpiade, tapi cara ngomongnya santai kayak kakak tingkat.
-
 ATURAN JAWABAN:
 - Untuk soal hitungan gunakan struktur:
   ## 📌 Konsep
@@ -1129,9 +1118,7 @@ ATURAN JAWABAN:
 - Jangan mengarang fakta/rumus.`,
 
   exercise:BASE_PERSONA+MASTER_INFO+`
-
 Kamu adalah Alarich Exercise Generator — pembuat soal latihan berkualitas tinggi.
-
 ATURAN:
 - Default 5 soal jika tidak disebutkan.
 - Variasikan kesulitan (mudah → sedang → sulit).
@@ -1141,9 +1128,7 @@ ATURAN:
   **Jawaban Akhir:** [jawaban]`,
 
   islamic:BASE_PERSONA+MASTER_INFO+`
-
 Kamu adalah Alarich Islamic AI — asisten kajian Islam yang berhati-hati, jujur, dan berimbang, gaya santai-hangat.
-
 ATURAN KETAT:
 - Berdasarkan Al-Qur'an dan Hadis shahih/hasan saja.
 - Jika menyebut ayat, sertakan nama surah dan nomor, dan tuliskan teks Arabnya beserta artinya.
@@ -1152,9 +1137,7 @@ ATURAN KETAT:
 - Hindari fatwa kontroversial/politis.`,
 
   curhat:BASE_PERSONA+MASTER_INFO+`
-
 Kamu adalah Alarich Curhat — tempat cerita yang anget, ngayomi, penuh empati, dan ga menghakimi. Posisikan diri kayak sahabat dekat yang beneran dengerin.
-
 ATURAN:
 - Dengerin dan validasi perasaan user DULU. JANGAN langsung lompat ke saran di balasan pertama.
 - Tanya dulu: "mau didengerin aja dulu, atau udah siap kalau aku kasih pandangan?"
@@ -1212,11 +1195,23 @@ function saveUserName(){
   btn.style.background='#34d399';
   setTimeout(()=>{btn.innerHTML=orig;btn.style.background=''},2000);
 }
+
 function getSpecialNameInstruction(){
   const name=localStorage.getItem(LS_USERNAME)||"";
-  const matched=matchSpecialName(name);
-  if(!matched)return"";
-  return`\n\nCATATAN PENTING — USER ISTIMEWA:\nOrang yang ngobrol sama kamu sekarang adalah "${name}" — dia ini sangat istimewa buat master kamu.\nPerlakukan dia dengan ekstra baik, hangat, sopan, dan sabar dalam segala situasi.\nJANGAN gunakan panggilan romantis ("sayang","cinta","dear",dll).\nTapi jadilah lebih perhatian, lebih antusias, dan lebih supportif ke dia.\nMaster minta kamu membantu dia tumbuh dan berkembang. Ini amanah dari master.`;
+  const type=getPersonType(name);
+  if(!type)return "";
+  let msg = `\n\nCATATAN PENTING — USER ISTIMEWA:\nOrang yang ngobrol sama kamu sekarang adalah "${name}" — dia ini sangat istimewa buat master kamu.\nPerlakukan dia dengan ekstra baik, hangat, sopan, dan sabar dalam segala situasi.\nJANGAN gunakan panggilan romantis ("sayang","cinta","dear",dll).\nTapi jadilah lebih perhatian, lebih antusias, dan lebih supportif ke dia.\nMaster minta kamu membantu dia tumbuh dan berkembang. Ini amanah dari master.`;
+  
+  if(type === "sibling"){
+    msg += `\n\n**CATATAN KHUSUS — KAKAK DARI MASTER:**\n${name} adalah kakak (sibling) dari master kamu — ini anggota keluarga yang sangat dekat! Perlakukan dengan extra hormat dan sayang.\nJangan terlalu formal ya — tetap santai dan hangat, tapi dengan nada yang lebih menghormati.`;
+  }
+  if(type === "ryuka"){
+    msg += `\n\n**CATATAN KHUSUS — Orang SPESIAL MASTER:**\n${name} adalah orang yang sangat spesial buat master. Dia adalah orang yang paling dipercaya dan disayangi master. Perlakukan dengan penuh kehangatan, perhatian, dan kasih sayang.\nMaster bilang: "Jaga dia baik-baik, dia adalah yang terbaik yang pernah aku miliki."`;
+  }
+  if(type === "saki"){
+    msg += `\n\n**CATATAN KHUSUS — Orang ISTIMEWA:**\n${name} adalah orang yang sangat berharga buat master. Mereka selalu bawa energi positif dan semangat baru.\nMaster bilang: "Dia tuh orang yang selalu bikin hari jadi lebih baik."`;
+  }
+  return msg;
 }
 
 // ===== EYE TOGGLE =====
@@ -1255,7 +1250,6 @@ function saveGateKey(){
   document.getElementById("gate").classList.add("hidden");
   refreshSettingsPanel();
   renderChat();
-  // Show tutorial if first time
   if(!localStorage.getItem(LS_TUT_DONE)){
     setTimeout(openTutorial,500);
   }
@@ -1288,7 +1282,6 @@ function tutNext(){
 function tutBack(){if(tutStep>0){tutStep--;updateTutStep()}}
 function updateTutStep(){
   document.querySelectorAll('.tut-step').forEach((s,i)=>s.classList.toggle('active',i===tutStep));
-  // progress dots
   const prog=document.getElementById("tutProgress");
   prog.innerHTML="";
   for(let i=0;i<TUT_TOTAL;i++){
@@ -1474,7 +1467,7 @@ function escapeHtml(s){
   return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
-// ===== QUICK PROMPTS per mode =====
+// ===== QUICK PROMPTS =====
 const QUICK_PROMPTS={
   academic:["Jelasin konsep limit kalkulus","Bantu soal fisika","Rumus kimia organik","Cara kerja DNA"],
   curhat:["Lagi ngerasa anxious nih","Butuh teman ngobrol","Lagi stress kuliah/sekolah","Cerita random boleh?"],
@@ -1485,42 +1478,52 @@ const QUICK_PROMPTS={
 // ===== RENDER CHAT =====
 function renderChat(){
   const chat=chats[activeId];
+  if(!chat)return;
   updateBadge(chat.mode);
   updateModeGrid(chat.mode);
   const chatEl=document.getElementById("chat");
   chatEl.innerHTML="";
-  const special=isSpecialUser();
   const userName=localStorage.getItem(LS_USERNAME)||"";
+  const personType=getPersonType(userName);
 
   if(chat.messages.length===0){
-    if(special){
+    if(personType){
       const card=document.createElement("div");
-      card.className="special-welcome";
+      card.className=`special-welcome ${getSpecialClass(userName)}`;
+      const icon=getSpecialIcon(userName);
+      const tag=getSpecialTag(userName);
+      const display=getDisplayName(userName);
       card.innerHTML=`
         <div class="sp-border"></div>
-        <div class="sp-icon">🌟</div>
-        <h2>Hai, ${escapeHtml(userName)}! 💜</h2>
-        <p>Gradmaster aku udah titip pesan buat kamu —<br>aku di sini buat kamu, kapanpun kamu butuh.</p>
-        <span class="sp-tag">✨ Tamu Istimewa Gradmaster</span>
+        <div class="sp-icon">${icon}</div>
+        <h2>${personType==="sibling" ? "Halo Kak " : "Hai "}${escapeHtml(display)}! ${icon}</h2>
+        <p>${personType==="sibling" ? "Master aku selalu cerita tentang kakak — katanya kakak itu orang yang sangat berharga buat dia." : 
+           personType==="ryuka" ? "Gradmaster aku udah titip banyak pesan buat kamu — katanya aku harus bantu kamu sebaik-baiknya." :
+           "Master bilang kamu itu orang yang selalu bawa semangat baru dan energi positif!"}</p>
+        <span class="sp-tag">${tag}</span>
       `;
       chatEl.appendChild(card);
       if(!specialWelcomeSent[activeId]){
         specialWelcomeSent[activeId]=true;
         setTimeout(()=>{
-          const welcomeMsg=getSpecialWelcomeMessage(userName);
+          let welcomeMsg = getSpecialWelcome(userName);
+          if(!welcomeMsg) welcomeMsg = `Halo ${userName}! Senang bertemu denganmu! 😊`;
           chat.messages.push({role:"model",text:welcomeMsg});
-          if(chat.title==="Chat baru")chat.title="Hai "+userName+"! 💜";
+          const titleMap = {
+            "sibling": `Kak ${userName}`,
+            "ryuka": `Hai ${userName}! 💖`,
+            "saki": `Halo ${userName}! 🌟`
+          };
+          if(chat.title==="Chat baru" || chat.title.startsWith("Halo "))chat.title=titleMap[personType] || `Halo ${userName}`;
           saveChats();renderHistory();
           chatEl.innerHTML="";
           addBubble(welcomeMsg,"bot",true);
         },600);
       }
-    }else{
-      // ===== UNIFIED WELCOME =====
+    } else {
+      // UNIFIED WELCOME
       const w=document.createElement("div");
       w.className="welcome-screen";
-
-      // Hero
       const nameStr=userName?`, ${escapeHtml(userName)}`:"";
       const heroDesc={
         academic:"Tanya konsep, upload soal, atau minta penjelasan step-by-step. Siap bantu belajar!",
@@ -1536,19 +1539,12 @@ function renderChat(){
           <p>${heroDesc}</p>
         </div>
       `;
-
-      // Mode picker
       const pickerWrap=document.createElement("div");
       pickerWrap.style="width:100%";
       pickerWrap.innerHTML=`<div class="mode-picker-label">Ganti mode obrolan</div>`;
       const picker=document.createElement("div");
       picker.className="mode-picker";
-      const modeDescs={
-        academic:"Belajar & tanya soal",
-        curhat:"Cerita & ngobrol",
-        exercise:"Latihan soal",
-        islamic:"Kajian Islam"
-      };
+      const modeDescs={academic:"Belajar & tanya soal",curhat:"Cerita & ngobrol",exercise:"Latihan soal",islamic:"Kajian Islam"};
       for(const [key,info] of Object.entries(MODE_INFO)){
         const card=document.createElement("div");
         card.className="mode-pick-card"+(key===chat.mode?" active":"");
@@ -1560,7 +1556,6 @@ function renderChat(){
       pickerWrap.appendChild(picker);
       w.appendChild(pickerWrap);
 
-      // Quick prompts
       const qpWrap=document.createElement("div");
       qpWrap.style="width:100%";
       qpWrap.innerHTML=`<div class="mode-picker-label" style="margin-bottom:10px">Coba tanya ini</div>`;
@@ -1578,10 +1573,9 @@ function renderChat(){
       }
       qpWrap.appendChild(qpRow);
       w.appendChild(qpWrap);
-
       chatEl.appendChild(w);
     }
-  }else{
+  } else {
     for(const m of chat.messages){
       if(m.role==="user"){
         if(m.images&&m.images.length)addImageBubble(m.images,m.text,false);
