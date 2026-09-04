@@ -289,7 +289,8 @@
             transform: translateX(3px);
         }
 
-        .option input {
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
             width: 16px;
             height: 16px;
             cursor: pointer;
@@ -303,6 +304,26 @@
             font-size: 0.8rem;
             color: #334155;
             font-weight: 500;
+        }
+
+        .multi-badge {
+            font-size: 0.55rem;
+            background: #8b5cf6;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 50px;
+            margin-left: auto;
+            font-weight: 600;
+        }
+
+        .benar-salah-badge {
+            font-size: 0.55rem;
+            background: #f59e0b;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 50px;
+            margin-left: auto;
+            font-weight: 600;
         }
 
         .button-group-vertical {
@@ -387,6 +408,17 @@
             border-radius: 14px;
             margin-bottom: 8px;
             font-size: 0.8rem;
+        }
+
+        .result-partial {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
+            border-left: 5px solid #f59e0b;
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
         }
 
         .explanation-box {
@@ -696,6 +728,14 @@
             visibility: hidden;
         }
 
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+
         @media (max-width: 600px) {
             body { padding: 10px; }
             .hero h1 { font-size: 1.3rem; }
@@ -773,7 +813,8 @@
 
     <div class="footer-note">
         💡 <strong>Petunjuk:</strong> Pilih jawaban, klik CEK untuk melihat pembahasan lengkap. Jawaban otomatis tersimpan.<br>
-        📌 Setiap soal dirancang dengan jebakan khas olimpiade, pastikan membaca dengan cermat.
+        📌 <span style="background:#8b5cf6;padding:2px 10px;border-radius:50px;color:white;font-weight:600;font-size:0.6rem;">☑️</span> Soal dengan tanda centang memiliki <strong>jawaban lebih dari satu</strong> (pilih menggunakan checkbox).<br>
+        📌 <span style="background:#f59e0b;padding:2px 10px;border-radius:50px;color:white;font-weight:600;font-size:0.6rem;">✓✗</span> Soal dengan tanda centang silang adalah soal <strong>Benar/Salah</strong> (pilih checkbox).
     </div>
 </div>
 
@@ -803,19 +844,22 @@
 
 <script>
 // ======================= 50 SOAL BAHASA INDONESIA =======================
+// Tandai soal dengan:
+// - multi: true = jawaban lebih dari satu (pakai checkbox)
+// - benarSalah: true = soal Benar/Salah (pakai checkbox, jawaban berupa array)
 const soalData = [
-    // Soal 1-10 dari file
+    // Soal 1-10
     { id: 1, kompetensi: "Makna Istilah", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut. Hal tersebut merupakan sebuah ancaman besar. Dibutuhkan tindakan skala besar untuk berpindah dari kecenderungan tersebut mengingat banyak pihak yang terlibat dalam bidang pekerjaan ini. Masyarakat sektor swasta dan masyarakat sipil perlu mobilisasi untuk menangkap peluang ekonomi lain di luar dari pengelolaan plastik.", soal: "Makna istilah mobilisasi pada paragraf kedua teks tersebut adalah", options: ["A. bergerak bersama", "B. melangkah cepat", "C. beradu cepat", "D. mengatur bersama", "E. berpikir Bersama"], correct: "A", explanation: "📌 **PEMBAHASAN:** Mobilisasi berarti menggerakkan atau mengerahkan orang untuk bergerak bersama mencapai tujuan." },
     
     { id: 2, kompetensi: "Gagasan Utama", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut. Hal tersebut merupakan sebuah ancaman besar.", soal: "Apa gagasan utama yang disampaikan pada paragraf pertama teks tersebut?", options: ["A. Ancaman plastik terhadap lautan.", "B. Efek dari pemanasan laut.", "C. Kadar tingkat keasaman laut.", "D. Pemompaan CO2 ke atmosfer.", "E. Ancaman bagi negara berkembang."], correct: "A", explanation: "📌 **PEMBAHASAN:** Paragraf pertama berfokus pada ancaman plastik terhadap lautan, meskipun juga menyebut pemanasan dan CO2." },
     
-    { id: 3, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut.", soal: "Mengapa lautan menghadapi ancaman pada 2050? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Sampah plastik di laut akan lebih banyak daripada jumlah ikan.", "B. Lautan akan terus mengalami pemanasan dan semakin asam.", "C. Manusia terus memompa lebih banyak CO2 ke atmosfer.", "D. Jumlah ikan yang terancam punah semakin banyak.", "E. Penggunaan plastik terus meningkat dan tidak dikelola dengan baik"], correct: "A,B,C,E", explanation: "📌 **PEMBAHASAN:** Teks menyebutkan ancaman sampah plastik, pemanasan, CO2, dan penggunaan plastik. Opsi D tidak disebut." },
+    { id: 3, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut.", soal: "Mengapa lautan menghadapi ancaman pada 2050? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Sampah plastik di laut akan lebih banyak daripada jumlah ikan.", "B. Lautan akan terus mengalami pemanasan dan semakin asam.", "C. Manusia terus memompa lebih banyak CO2 ke atmosfer.", "D. Jumlah ikan yang terancam punah semakin banyak.", "E. Penggunaan plastik terus meningkat dan tidak dikelola dengan baik"], correct: ["A","B","C","E"], multi: true, explanation: "📌 **PEMBAHASAN:** Teks menyebutkan ancaman sampah plastik, pemanasan, CO2, dan penggunaan plastik. Opsi D tidak disebut." },
     
-    { id: 4, kompetensi: "Analisis Kalimat", teks: "informasi", bacaan: "Solusi tersebut tidak mudah. Fakta bahwa harga minyak yang rendah mengakibatkan biaya yang dibutuhkan untuk daur ulang plastik jauh lebih mahal daripada memproduksi yang baru. Kondisi lain yang menunjukkan ekonomi di negara berkembang tumbuh lebih besar menjadikan penggunaan plastik juga meningkat. Solusi yang dibutuhkan adalah cara kita menggunakan plastik. Misalnya dengan mengurangi penggunaan plastik dalam kemasan atau menggunakannya kembali sebanyak yang kita bisa.", soal: "Mengapa penulis menggunakan kalimat 'Solusi tersebut tidak mudah' pada teks? Tentukan Benar atau Salah untuk setiap pernyataan berikut!", options: ["Menginformasikan kepada pembaca bahwa pemecahan masalah sampah merupakan tanggung jawab utama kita sebagai masyarakat sipil sehingga sulit untuk diselesaikan.", "Menunjukkan kepada pembaca bahwa permasalahan sampah plastik sangat rumit dan tidak bisa diselesaikan dalam jangka waktu singkat.", "Membuktikan kepada pembaca bahwa permasalahan sampah yang rumit disebabkan pemecahan masalah yang bergantung pada perekonomian negara berkembang."], correct: "Salah, Benar, Salah", explanation: "📌 **PEMBAHASAN:** Kalimat 'Solusi tersebut tidak mudah' menunjukkan kerumitan, bukan tanggung jawab masyarakat sipil atau perekonomian negara berkembang secara spesifik." },
+    { id: 4, kompetensi: "Analisis Kalimat", teks: "informasi", bacaan: "Solusi tersebut tidak mudah. Fakta bahwa harga minyak yang rendah mengakibatkan biaya yang dibutuhkan untuk daur ulang plastik jauh lebih mahal daripada memproduksi yang baru. Kondisi lain yang menunjukkan ekonomi di negara berkembang tumbuh lebih besar menjadikan penggunaan plastik juga meningkat. Solusi yang dibutuhkan adalah cara kita menggunakan plastik. Misalnya dengan mengurangi penggunaan plastik dalam kemasan atau menggunakannya kembali sebanyak yang kita bisa.", soal: "Mengapa penulis menggunakan kalimat 'Solusi tersebut tidak mudah' pada teks? Tentukan Benar atau Salah untuk setiap pernyataan berikut!", options: ["Menginformasikan kepada pembaca bahwa pemecahan masalah sampah merupakan tanggung jawab utama kita sebagai masyarakat sipil sehingga sulit untuk diselesaikan.", "Menunjukkan kepada pembaca bahwa permasalahan sampah plastik sangat rumit dan tidak bisa diselesaikan dalam jangka waktu singkat.", "Membuktikan kepada pembaca bahwa permasalahan sampah yang rumit disebabkan pemecahan masalah yang bergantung pada perekonomian negara berkembang."], correct: ["Salah","Benar","Salah"], benarSalah: true, explanation: "📌 **PEMBAHASAN:** Kalimat 'Solusi tersebut tidak mudah' menunjukkan kerumitan, bukan tanggung jawab masyarakat sipil atau perekonomian negara berkembang secara spesifik." },
     
-    { id: 5, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Apa permasalahan yang dihadapi tokoh aku dalam kutipan tersebut? Tentukan Benar atau Salah untuk setiap pernyataan berikut!", options: ["Kekecewaan dan kesedihan tokoh aku terhadap sikap Ayahnya yang tidak mengizinkannya masuk sekolah di musim maddongi, padahal dia harus mempersiapkan diri untuk bersaing dalam lomba dengan siswa sekolah lain.", "Kemarahan hati tokoh aku terhadap Ayahnya yang melarang dia pergi sekolah karena sedang musim maddongi di sawah dan dia diberi tugas menghalau burung yang hinggap pada padi di sawah mereka.", "Perasaan tertekan tokoh aku terhadap peraturan keluarganya yang mengharuskan dia tidak masuk sekolah setiap musim maddongi, padahal dia ingin sekali belajar dan tidak mau ketinggalan pelajaran."], correct: "Benar, Benar, Salah", explanation: "📌 **PEMBAHASAN:** Tokoh mengalami kekecewaan dan kemarahan karena Ayah melarang sekolah di musim maddongi. Pernyataan ketiga salah karena tidak disebutkan peraturan keluarga yang mengharuskan tidak masuk sekolah setiap musim maddongi." },
+    { id: 5, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Apa permasalahan yang dihadapi tokoh aku dalam kutipan tersebut? Tentukan Benar atau Salah untuk setiap pernyataan berikut!", options: ["Kekecewaan dan kesedihan tokoh aku terhadap sikap Ayahnya yang tidak mengizinkannya masuk sekolah di musim maddongi, padahal dia harus mempersiapkan diri untuk bersaing dalam lomba dengan siswa sekolah lain.", "Kemarahan hati tokoh aku terhadap Ayahnya yang melarang dia pergi sekolah karena sedang musim maddongi di sawah dan dia diberi tugas menghalau burung yang hinggap pada padi di sawah mereka.", "Perasaan tertekan tokoh aku terhadap peraturan keluarganya yang mengharuskan dia tidak masuk sekolah setiap musim maddongi, padahal dia ingin sekali belajar dan tidak mau ketinggalan pelajaran."], correct: ["Benar","Benar","Salah"], benarSalah: true, explanation: "📌 **PEMBAHASAN:** Tokoh mengalami kekecewaan dan kemarahan karena Ayah melarang sekolah di musim maddongi. Pernyataan ketiga salah karena tidak disebutkan peraturan keluarga yang mengharuskan tidak masuk sekolah setiap musim maddongi." },
     
-    { id: 6, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Apa yang akan terjadi jika tokoh aku tidak datang ke rumah iyye? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Iyye akan datang menasehati Ayah karena melarang tokoh aku untuk belajar.", "B. Tokoh aku akan kehilangan kesempatan belajar untuk mengikuti lomba.", "C. Ayah akan tetap melarang tokoh aku untuk belajar dan mengikuti lomba.", "D. Permasalahan tokoh aku dan ayah akan berlarut karena tidak terselesaikan.", "E. Tokoh aku tidak akan bisa fokus untuk belajar dan mengikuti lomba yang diadakan sekolah."], correct: "B,D,E", explanation: "📌 **PEMBAHASAN:** Jika tidak ke iyye, masalah tidak terselesaikan, Ayah tetap melarang, dan tokoh tidak bisa fokus belajar. Opsi A salah karena iyye tidak akan datang jika tokoh tidak datang." },
+    { id: 6, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Apa yang akan terjadi jika tokoh aku tidak datang ke rumah iyye? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Iyye akan datang menasehati Ayah karena melarang tokoh aku untuk belajar.", "B. Tokoh aku akan kehilangan kesempatan belajar untuk mengikuti lomba.", "C. Ayah akan tetap melarang tokoh aku untuk belajar dan mengikuti lomba.", "D. Permasalahan tokoh aku dan ayah akan berlarut karena tidak terselesaikan.", "E. Tokoh aku tidak akan bisa fokus untuk belajar dan mengikuti lomba yang diadakan sekolah."], correct: ["B","D","E"], multi: true, explanation: "📌 **PEMBAHASAN:** Jika tidak ke iyye, masalah tidak terselesaikan, Ayah tetap melarang, dan tokoh tidak bisa fokus belajar. Opsi A salah karena iyye tidak akan datang jika tokoh tidak datang." },
     
     { id: 7, kompetensi: "Nilai Sosial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Keterkaitan nilai sosial dalam kutipan cerpen tersebut dengan kehidupan sehari-hari adalah ...", options: ["A. Masih ditemukan orang tua yang tidak memedulikan pendidikan anaknya demi membantu pekerjaan mereka.", "B. Terbenturnya cita-cita anak karena tradisi sebuah keluarga yang mengutamakan anak mampu bekerja mandiri.", "C. Asumsi bahwa bekerja lebih bermanfaat daripada sekolah yang dianggap tidak menghasilkan apa-apa untuk keluarga.", "D. Kebiasaan anak-anak tidak sekolah di musim maddongi demi menjalankan tradisi di lingkungan keluarga mereka.", "E. Orang tua mengarahkan anak-anak untuk rajin bekerja membantu mereka di sawah agar bisa melanjutkan kehidupannya kelak."], correct: "B", explanation: "📌 **PEMBAHASAN:** Nilai sosial yang tergambar adalah benturan antara cita-cita anak (pendidikan/lomba) dengan tradisi keluarga (musim maddongi). Opsi B paling tepat." },
     
@@ -823,7 +867,7 @@ const soalData = [
     
     { id: 9, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Teks 1: Rhodamin B adalah zat pewarna yang tersedia di pasar untuk industri tekstil... Teks 2: Rhodamin B berbentuk serbuk kristal, berwarna hijau atau ungu kemerahan...", soal: "Pernyataan yang tepat sesuai isi kedua teks tersebut berkaitan dengan Rhodamin B adalah ...", options: ["A. Rhodamin B sering disalahgunakan sebagai pewarna makanan karena menawarkan cita rasa yang tinggi.", "B. Rhodamin B berdampak buruk bagi kesehatan, tetapi diperlukan pada industri, seperti tekstil dan kertas.", "C. Rhodamin B berdampak buruk bagi kesehatan, tetapi mudah ditemukan pada kembang gula dan sirup.", "D. Rhodamin B yang berbentuk serbuk kristal dan berwarna hijau digunakan pada industri tekstil dan kertas.", "E. Rhodamin B berdampak buruk bagi kesehatan, meskipun dampak itu baru terlihat beberapa tahun kemudian."], correct: "B", explanation: "📌 **PEMBAHASAN:** Kedua teks menyebutkan Rhodamin B berbahaya bagi kesehatan tetapi digunakan dalam industri tekstil dan kertas." },
     
-    { id: 10, kompetensi: "Tujuan Penulis", teks: "informasi", bacaan: "Teks 1: Rhodamin B adalah zat pewarna... Teks 2: Rhodamin B berbentuk serbuk kristal...", soal: "Mengapa kedua teks tersebut menyebutkan dampak kesehatan yang timbul dari konsumsi pangan yang terkontaminasi Rhodamin B? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Mendorong masyarakat untuk menghindari Rhodamin B dalam berbagai keperluan.", "B. Meningkatkan kesadaran masyarakat tentang bahaya Rhodamin B dalam makanan", "C. Menunjukkan bahwa Rhodamin B aman digunakan dalam industri tekstil dan kertas.", "D. Menjelaskan bahwa Rhodamin B adalah zat berbahaya jika dikonsumsi, terutama dalam jangka panjang.", "E. Memperingatkan masyarakat agar menghindari makanan berwarna mencolok yang berisiko mengandung Rhodamin B."], correct: "A,B,D,E", explanation: "📌 **PEMBAHASAN:** Tujuan teks adalah meningkatkan kesadaran dan peringatan. Opsi C salah karena justru menunjukkan bahaya." },
+    { id: 10, kompetensi: "Tujuan Penulis", teks: "informasi", bacaan: "Teks 1: Rhodamin B adalah zat pewarna... Teks 2: Rhodamin B berbentuk serbuk kristal...", soal: "Mengapa kedua teks tersebut menyebutkan dampak kesehatan yang timbul dari konsumsi pangan yang terkontaminasi Rhodamin B? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Mendorong masyarakat untuk menghindari Rhodamin B dalam berbagai keperluan.", "B. Meningkatkan kesadaran masyarakat tentang bahaya Rhodamin B dalam makanan", "C. Menunjukkan bahwa Rhodamin B aman digunakan dalam industri tekstil dan kertas.", "D. Menjelaskan bahwa Rhodamin B adalah zat berbahaya jika dikonsumsi, terutama dalam jangka panjang.", "E. Memperingatkan masyarakat agar menghindari makanan berwarna mencolok yang berisiko mengandung Rhodamin B."], correct: ["A","B","D","E"], multi: true, explanation: "📌 **PEMBAHASAN:** Tujuan teks adalah meningkatkan kesadaran dan peringatan. Opsi C salah karena justru menunjukkan bahaya." },
     
     // Soal 11-20
     { id: 11, kompetensi: "Gagasan Utama", teks: "informasi", bacaan: "Penggunaan transportasi publik dapat mengurangi jumlah kendaraan pribadi di jalan raya. Ketika lebih banyak masyarakat menggunakan bus dan kereta, jumlah emisi dari kendaraan pribadi dapat ditekan. Selain itu, transportasi publik membantu mengurangi kemacetan karena satu kendaraan dapat mengangkut banyak penumpang. Namun, manfaat tersebut hanya dapat dirasakan secara optimal apabila layanan transportasi tersedia secara aman, nyaman, terjangkau, dan tepat waktu.", soal: "Apa gagasan utama paragraf tersebut?", options: ["A. Kendaraan pribadi menghasilkan emisi yang tinggi.", "B. Transportasi publik dapat memberi manfaat lingkungan dan lalu lintas jika didukung layanan yang baik.", "C. Bus dan kereta mampu mengangkut banyak penumpang.", "D. Masyarakat harus meninggalkan kendaraan pribadi.", "E. Kemacetan hanya dapat diatasi dengan transportasi publik."], correct: "B", explanation: "📌 **PEMBAHASAN:** Paragraf menyebutkan manfaat transportasi publik, tetapi menekankan bahwa manfaat optimal hanya jika layanan baik." },
@@ -832,9 +876,9 @@ const soalData = [
     
     { id: 13, kompetensi: "Hubungan Sebab-Akibat", teks: "informasi", bacaan: "Air hujan yang jatuh di kawasan perkotaan sering tidak langsung meresap ke tanah karena permukaan jalan dan bangunan didominasi material kedap air. Akibatnya, air mengalir cepat menuju saluran drainase. Jika kapasitas saluran tidak mencukupi, genangan dapat terjadi. Oleh sebab itu, pembuatan taman resapan dan penggunaan permukaan yang mampu menyerap air dapat menjadi bagian dari pengelolaan banjir.", soal: "Hubungan sebab-akibat yang paling tepat berdasarkan teks adalah ...", options: ["A. Taman resapan menyebabkan permukaan kota menjadi kedap air.", "B. Material kedap air mempercepat limpasan sehingga dapat meningkatkan risiko genangan.", "C. Saluran drainase selalu menyebabkan banjir di perkotaan.", "D. Hujan tidak dapat meresap ke tanah karena taman resapan terlalu banyak.", "E. Bangunan tinggi merupakan satu-satunya penyebab banjir."], correct: "B", explanation: "📌 **PEMBAHASAN:** Material kedap air menyebabkan air mengalir cepat dan meningkatkan risiko genangan." },
     
-    { id: 14, kompetensi: "Manfaat Ekonomi Digital", teks: "informasi", bacaan: "Ekonomi digital telah membawa perubahan besar dalam berbagai aspek bisnis...", soal: "Pernyataan yang sesuai dengan manfaat ekonomi digital berdasarkan pola teks UKM adalah ... Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Harga produk menjadi lebih murah.", "B. Jangkauan pemasaran menjadi lebih luas.", "C. Data pelanggan dapat dianalisis untuk menentukan strategi promosi.", "D. Keamanan data tidak lagi menjadi perhatian."], correct: "B,C", explanation: "📌 **PEMBAHASAN:** Manfaat ekonomi digital adalah jangkauan luas dan analisis data pelanggan." },
+    { id: 14, kompetensi: "Manfaat Ekonomi Digital", teks: "informasi", bacaan: "Ekonomi digital telah membawa perubahan besar dalam berbagai aspek bisnis...", soal: "Pernyataan yang sesuai dengan manfaat ekonomi digital berdasarkan pola teks UKM adalah ... Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Harga produk menjadi lebih murah.", "B. Jangkauan pemasaran menjadi lebih luas.", "C. Data pelanggan dapat dianalisis untuk menentukan strategi promosi.", "D. Keamanan data tidak lagi menjadi perhatian."], correct: ["B","C"], multi: true, explanation: "📌 **PEMBAHASAN:** Manfaat ekonomi digital adalah jangkauan luas dan analisis data pelanggan." },
     
-    { id: 15, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "vera menatap layar ponselnya. Pesan dari sahabatnya belum juga dibalas. Sebenarnya ia ingin langsung menelepon, tetapi ia teringat percakapan mereka kemarin. Sahabatnya mengatakan bahwa ia membutuhkan waktu untuk menyelesaikan persoalan keluarganya. vera akhirnya meletakkan ponsel dan memilih menunggu. Baginya, menjaga perasaan sahabat lebih penting daripada memaksakan jawaban.", soal: "Sifat tokoh vera yang paling tepat adalah ...", options: ["A. Ceroboh dan terburu-buru", "B. Sabar dan menghargai orang lain", "C. Pemarah dan keras kepala", "D. Acuh dan tidak peduli", "E. Ragu-ragu dalam mengambil keputusan"], correct: "B", explanation: "📌 **PEMBAHASAN:** vera memilih menunggu dan menjaga perasaan sahabat, menunjukkan kesabaran dan penghargaan." },
+    { id: 15, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "vera menatap layar ponselnya. Pesan dari sahabatnya belum juga dibalas. Sebenarnya ia ingin langsung menelepon, tetapi ia teringat percakapan mereka kemarin. Sahabatnya mengatakan bahwa ia membutuhkan waktu untuk menyelesaikan persoalan keluarganya. vera akhirnya meletakkan ponsel dan memilih menunggu. Baginya, menjaga perasaan sahabat lebih penting daripada memaksakan jawaban.", soal: "Sifat tokoh vere yang paling tepat adalah ...", options: ["A. Ceroboh dan terburu-buru", "B. Sabar dan menghargai orang lain", "C. Pemarah dan keras kepala", "D. Acuh dan tidak peduli", "E. Ragu-ragu dalam mengambil keputusan"], correct: "B", explanation: "📌 **PEMBAHASAN:** vera memilih menunggu dan menjaga perasaan sahabat, menunjukkan kesabaran dan penghargaan." },
     
     { id: 16, kompetensi: "Nilai Sosial", teks: "fiksi", bacaan: "Di pasar desa, Nenek selalu membawa tas kain sendiri. Ia menolak kantong plastik meskipun pedagang menawarkannya secara cuma-cuma. 'Kalau setiap orang mengambil satu kantong, coba bayangkan berapa banyak sampah yang terkumpul dalam sehari,' katanya. Pedagang itu tersenyum dan mulai menyimpan beberapa tas kain untuk pelanggan lain.", soal: "Nilai yang paling menonjol dalam kutipan tersebut adalah ...", options: ["A. Keberanian melawan pedagang", "B. Kepedulian terhadap lingkungan melalui kebiasaan sederhana", "C. Keinginan menghemat uang", "D. Persaingan antarpedagang", "E. Keinginan menunjukkan diri kepada orang lain"], correct: "B", explanation: "📌 **PEMBAHASAN:** Nenek menunjukkan kepedulian lingkungan dengan menolak kantong plastik." },
     
@@ -849,13 +893,14 @@ const soalData = [
     // Soal 21-30
     { id: 21, kompetensi: "Tujuan Penulis", teks: "informasi", bacaan: "Sebagian masyarakat memilih berbelanja secara daring karena praktis dan menyediakan banyak pilihan. Namun, kemudahan tersebut juga dapat mendorong pembelian impulsif. Iklan yang muncul berulang kali dan promosi dengan batas waktu tertentu dapat membuat konsumen merasa harus segera membeli. Oleh karena itu, kemampuan mengendalikan kebutuhan dan keinginan menjadi penting dalam aktivitas belanja digital.", soal: "Apa tujuan utama penulis?", options: ["A. Mengajak pembaca berhenti berbelanja daring.", "B. Menjelaskan manfaat dan risiko belanja daring serta pentingnya mengendalikan diri.", "C. Membuktikan bahwa semua iklan digital menipu konsumen.", "D. Membandingkan harga toko daring dan toko fisik.", "E. Menjelaskan cara membuat iklan digital."], correct: "B", explanation: "📌 **PEMBAHASAN:** Penulis menjelaskan manfaat dan risiko, serta menekankan pentingnya mengendalikan diri." },
     
-    { id: 22, kompetensi: "Simpulan", teks: "informasi", bacaan: "Di sebuah desa, warga sepakat mengubah lahan kosong menjadi kebun bersama. Setiap keluarga mendapat jadwal untuk merawat tanaman. Hasil panen sebagian digunakan untuk kebutuhan warga, sedangkan sebagian lainnya dijual untuk membeli bibit baru. Setelah beberapa musim, lahan yang sebelumnya terbengkalai menjadi sumber pangan sekaligus kegiatan bersama.", soal: "Apa manfaat program tersebut yang dapat disimpulkan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Memanfaatkan lahan yang sebelumnya tidak produktif.", "B. Memperkuat kerja sama antarwarga.", "C. Menghilangkan seluruh kebutuhan pangan warga.", "D. Menyediakan hasil yang dapat mendukung keberlanjutan program.", "E. Membuat warga tidak perlu bekerja lagi."], correct: "A,B,D", explanation: "📌 **PEMBAHASAN:** Program memanfaatkan lahan, memperkuat kerja sama, dan menyediakan hasil untuk keberlanjutan." },
+    { id: 22, kompetensi: "Simpulan", teks: "informasi", bacaan: "Di sebuah desa, warga sepakat mengubah lahan kosong menjadi kebun bersama. Setiap keluarga mendapat jadwal untuk merawat tanaman. Hasil panen sebagian digunakan untuk kebutuhan warga, sedangkan sebagian lainnya dijual untuk membeli bibit baru. Setelah beberapa musim, lahan yang sebelumnya terbengkalai menjadi sumber pangan sekaligus kegiatan bersama.", soal: "Apa manfaat program tersebut yang dapat disimpulkan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Memanfaatkan lahan yang sebelumnya tidak produktif.", "B. Memperkuat kerja sama antarwarga.", "C. Menghilangkan seluruh kebutuhan pangan warga.", "D. Menyediakan hasil yang dapat mendukung keberlanjutan program.", "E. Membuat warga tidak perlu bekerja lagi."], correct: ["A","B","D"], multi: true, explanation: "📌 **PEMBAHASAN:** Program memanfaatkan lahan, memperkuat kerja sama, dan menyediakan hasil untuk keberlanjutan." },
     
     { id: 23, kompetensi: "Majas", teks: "fiksi", bacaan: "'Perpustakaan itu bukan gudang buku,' ujar kepala sekolah. 'Ia adalah jendela yang membuat kita dapat melihat dunia tanpa harus meninggalkan ruangan.'", soal: "Majas yang dominan pada ungkapan 'perpustakaan ... adalah jendela' adalah ...", options: ["A. Metafora", "B. Hiperbola", "C. Ironi", "D. Litotes", "E. Personifikasi"], correct: "A", explanation: "📌 **PEMBAHASAN:** 'Perpustakaan adalah jendela' adalah metafora, membandingkan secara langsung tanpa kata pembanding." },
     
     { id: 24, kompetensi: "Sikap Penulis", teks: "informasi", bacaan: "Pemerintah daerah memperbaiki jalur sepeda di beberapa ruas jalan. Kebijakan itu diharapkan membuat masyarakat merasa lebih aman ketika bersepeda. Akan tetapi, keberadaan jalur sepeda saja belum cukup. Pengguna kendaraan lain juga perlu menghormati jalur tersebut agar manfaatnya dapat dirasakan bersama.", soal: "Pernyataan yang paling sesuai dengan sikap penulis adalah ...", options: ["A. Mendukung jalur sepeda, tetapi menekankan perlunya kepatuhan pengguna jalan.", "B. Menolak jalur sepeda karena mengurangi ruang kendaraan.", "C. Menganggap sepeda tidak cocok digunakan di kota.", "D. Menganggap pemerintah tidak memiliki peran dalam transportasi.", "E. Mengusulkan semua kendaraan diganti sepeda."], correct: "A", explanation: "📌 **PEMBAHASAN:** Penulis mendukung jalur sepeda, tetapi menekankan kepatuhan pengguna jalan." },
     
-    { id: 25, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Saki menerima penghargaan setelah memenangkan lomba seni musik. Teman-temannya memuji hasil karyanya. Namun, Saki justru berkata bahwa ia masih perlu belajar karena beberapa bagian tulisannya belum sesuai harapan. Ia kemudian meminta gurunya memberikan kritik agar karya berikutnya lebih baik.", soal: "Sikap Saki menunjukkan ...", options: ["A. Rendah diri secara berlebihan", "B. Tidak menghargai penghargaan", "C. Terbuka terhadap evaluasi dan memiliki keinginan untuk berkembang", "D. Tidak percaya pada kemampuan sendiri", "E. Menganggap kritik sebagai bentuk hukuman"], correct: "C", explanation: "📌 **PEMBAHASAN:** Saki meminta kritik untuk memperbaiki karyanya, menunjukkan keterbukaan dan keinginan berkembang. Ia tidak merendahkan diri berlebihan (A), tidak meremehkan penghargaan (B), bukan tidak percaya diri (D), dan tidak menganggap kritik sebagai hukuman (E)." },    
+    { id: 25, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "saki menerima penghargaan setelah memenangkan lomba seni musik. Teman-temannya memuji hasil karyanya. Namun, saki justru berkata bahwa ia masih perlu belajar karena beberapa bagian tulisannya belum sesuai harapan. Ia kemudian meminta gurunya memberikan kritik agar karya berikutnya lebih baik.", soal: "Sikap Saki menunjukkan ...", options: ["A. Rendah diri secara berlebihan", "B. Tidak menghargai penghargaan", "C. Terbuka terhadap evaluasi dan memiliki keinginan untuk berkembang", "D. Tidak percaya pada kemampuan sendiri", "E. Menganggap kritik sebagai bentuk hukuman"], correct: "C", explanation: "📌 **PEMBAHASAN:** Saki meminta kritik untuk memperbaiki karyanya, menunjukkan keterbukaan dan keinginan berkembang." },
+    
     { id: 26, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "(1) Pemerintah memperluas ruang terbuka hijau di kawasan padat penduduk. (2) Langkah tersebut dilakukan karena suhu kawasan perkotaan cenderung meningkat. (3) Selain itu, ruang terbuka hijau dapat menyediakan tempat bagi masyarakat untuk beraktivitas. (4) Dengan demikian, kebijakan tersebut memiliki manfaat ekologis sekaligus sosial.", soal: "Hubungan makna kalimat (1) dan (2) adalah ...", options: ["A. Pertentangan", "B. Sebab-akibat", "C. Perbandingan", "D. Penambahan", "E. Penegasan ulang"], correct: "B", explanation: "📌 **PEMBAHASAN:** Kalimat (2) menjelaskan sebab dari langkah yang disebutkan di kalimat (1)." },
     
     { id: 27, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Sebuah koperasi sekolah mulai menggunakan sistem pembayaran nontunai. Pencatatan transaksi menjadi lebih teratur karena setiap pembayaran tersimpan dalam sistem. Meski demikian, pengelola tetap menyediakan pilihan pembayaran tunai bagi siswa yang mengalami kendala menggunakan sistem digital. Kebijakan tersebut membuat perubahan berlangsung secara bertahap.", soal: "Mengapa pengelola tetap menyediakan pembayaran tunai?", options: ["A. Karena pembayaran digital tidak memiliki manfaat.", "B. Karena semua siswa menolak teknologi.", "C. Untuk mengakomodasi siswa yang mengalami kendala dalam menggunakan sistem digital.", "D. Agar pencatatan transaksi menjadi lebih sulit.", "E. Untuk menghapus penggunaan sistem digital."], correct: "C", explanation: "📌 **PEMBAHASAN:** Pengelola menyediakan tunai untuk mengakomodasi siswa yang mengalami kendala." },
@@ -869,11 +914,11 @@ const soalData = [
     // Soal 31-40
     { id: 31, kompetensi: "Makna Kata Serapan", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau. Tak satupun barang tertinggal di rumah lama. Begitu juga dengan sahabatku, kami harus berpisah.", soal: "Penggunaan kata serapan boyongan dapat memperjelas peristiwa yang dialami tokoh saya, yaitu ...", options: ["A. Peristiwa pindahan yang sering dialami pegawai suatu instansi untuk kepentingan promosi jabatan.", "B. Peristiwa pindah rumah dari kampung halaman ke tempat yang jauh untuk jangka waktu lama.", "C. Pindah rumah bersama seluruh anggota keluarga dengan membawa semua barang rumah tangga.", "D. Pindah rumah untuk mengikuti tugas kedinasan orang tua di tempat baru yang letaknya sangat jauh.", "E. Kegiatan pindah rumah untuk sementara waktu dan akan berpindah lagi ke rumah dinas yang lain."], correct: "C", explanation: "📌 **PEMBAHASAN:** Boyongan berarti pindah rumah bersama seluruh anggota keluarga dengan membawa semua barang." },
     
-    { id: 32, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau...", soal: "Peristiwa apa yang mungkin akan terjadi kepada sahabatnya jika tokoh saya tidak ikut mencari jangkrik malam itu? Tentukan Tepat atau Tidak Tepat untuk setiap pernyataan berikut!", options: ["Sahabat tokoh saya masih memiliki seragam pramuka untuk dipakai.", "Punggung sahabat tokoh saya tidak akan memiliki luka bakar.", "Sahabat tokoh saya akan mencari jangkrik tanpa perlu berlari."], correct: "Tepat, Tepat, Tidak Tepat", explanation: "📌 **PEMBAHASAN:** Jika tokoh tidak ikut, seragam tidak terbakar, punggung sahabat tidak luka, dan sahabat tidak perlu berlari menolong." },
+    { id: 32, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau...", soal: "Peristiwa apa yang mungkin akan terjadi kepada sahabatnya jika tokoh saya tidak ikut mencari jangkrik malam itu? Tentukan Tepat atau Tidak Tepat untuk setiap pernyataan berikut!", options: ["Sahabat tokoh saya masih memiliki seragam pramuka untuk dipakai.", "Punggung sahabat tokoh saya tidak akan memiliki luka bakar.", "Sahabat tokoh saya akan mencari jangkrik tanpa perlu berlari."], correct: ["Tepat","Tepat","Tidak Tepat"], benarSalah: true, explanation: "📌 **PEMBAHASAN:** Jika tokoh tidak ikut, seragam tidak terbakar, punggung sahabat tidak luka, dan sahabat tidak perlu berlari menolong." },
     
-    { id: 33, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah...", soal: "Kalimat mana saja dari dalam kutipan cerpen tersebut yang membuktikan karakter sahabat tokoh saya merupakan seorang yang setia kawan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Saya langsung menyatakan ingin ikut, tapi dia keberatan.", "B. Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja.", "C. Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya.", "D. Dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang.", "E. Rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya."], correct: "C,D,E", explanation: "📌 **PEMBAHASAN:** Tindakan menolong, menggendong, dan rasa tanggung jawab menunjukkan kesetiaan kawan." },
+    { id: 33, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah...", soal: "Kalimat mana saja dari dalam kutipan cerpen tersebut yang membuktikan karakter sahabat tokoh saya merupakan seorang yang setia kawan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Saya langsung menyatakan ingin ikut, tapi dia keberatan.", "B. Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja.", "C. Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya.", "D. Dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang.", "E. Rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya."], correct: ["C","D","E"], multi: true, explanation: "📌 **PEMBAHASAN:** Tindakan menolong, menggendong, dan rasa tanggung jawab menunjukkan kesetiaan kawan." },
     
-    { id: 34, kompetensi: "Kata Serapan", teks: "informasi", bacaan: "(1) Perubahan iklim yang semakin nyata dan ancaman terhadap kelestarian bumi menuntut kita untuk mencari solusi efektif dalam menjaga keseimbangan alam...", soal: "Manakah kalimat yang memiliki penggunaan kata serapan yang tepat? Tentukan Tepat atau Tidak Tepat pada setiap pernyataan berikut!", options: ["Kata 'deforestasi' pada kalimat (2) paragraf kedua.", "Kata 'menginvestigasi' pada kalimat (2) paragraf ketiga.", "Kata 'polusi' pada kalimat (1) paragraf keempat."], correct: "Tepat, Tepat, Tepat", explanation: "📌 **PEMBAHASAN:** Semua kata serapan tersebut digunakan dengan tepat sesuai konteks." },
+    { id: 34, kompetensi: "Kata Serapan", teks: "informasi", bacaan: "(1) Perubahan iklim yang semakin nyata dan ancaman terhadap kelestarian bumi menuntut kita untuk mencari solusi efektif dalam menjaga keseimbangan alam...", soal: "Manakah kalimat yang memiliki penggunaan kata serapan yang tepat? Tentukan Tepat atau Tidak Tepat pada setiap pernyataan berikut!", options: ["Kata 'deforestasi' pada kalimat (2) paragraf kedua.", "Kata 'menginvestigasi' pada kalimat (2) paragraf ketiga.", "Kata 'polusi' pada kalimat (1) paragraf keempat."], correct: ["Tepat","Tepat","Tepat"], benarSalah: true, explanation: "📌 **PEMBAHASAN:** Semua kata serapan tersebut digunakan dengan tepat sesuai konteks." },
     
     { id: 35, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "(1) Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global yang meningkat, dan naiknya permukaan air laut. (2) Hal tersebut juga memicu deforestasi, polusi, dan mengancam keberagaman hayati di seluruh dunia. (3) Oleh karena itu, kita harus mengambil langkah tegas agar dampak perubahan iklim ini tidak semakin parah...", soal: "Hubungan makna antara kalimat (2) dan (3) pada paragraf kedua adalah ...", options: ["A. Akibat-sebab yang diperkuat dengan contoh deforestasi dan kerusakan lingkungan", "B. Sebab-akibat yang mengajak pembaca untuk mengambil langkah tegas", "C. Penegasan yang diperinci dengan contoh konkret yang bisa diaplikasikan pembaca", "D. Perbandingan dari dua pandangan terkait dampak negatif deforestasi", "E. Penyimpulan bahwa teknologi hijau merupakan solusi masalah deforestasi"], correct: "B", explanation: "📌 **PEMBAHASAN:** Kalimat (2) menjelaskan dampak, kalimat (3) mengajak mengambil langkah tegas (akibat)." },
     
@@ -892,17 +937,18 @@ const soalData = [
     
     { id: 42, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Layur, Teruslah Berlayar...", soal: "Bagaimana reaksi yang ditunjukkan oleh Bapak ketika rumahnya luluh lantak dan bondet buatannya melukai Layur?", options: ["A. Merasa trauma dan membutuhkan waktu untuk menyendiri", "B. Menunjukkan respons yang biasa seperti tidak terjadi apa-apa", "C. Sangat terkejut dan sungguh menyesal atas apa yang dilakukan", "D. Marah terhadap orang lain dan merasa panik yang luar biasa", "E. Bingung dan berusaha mencerna terhadap apa yang telah terjadi"], correct: "C", explanation: "📌 **PEMBAHASAN:** Bapak sangat menyesal atas ledakan yang melukai Layur." },
     
-    { id: 43, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Layur, Teruslah Berlayar...", soal: "Bagaimana kisah yang sesuai untuk menutup cerita Layur merasa lega pada cerita tersebut?", options: ["A. Bapak meminta maaf pada Layur dan menceritakan penyebabnya pulang terlambat", "B. Bapak membimbing Layur pulang dan berjanji untuk tidak pulang terlambat lagi", "C. Bapak memeluk Layur dan merasa senang karena akhirnya ia bisa bertemu putrinya kembali", "D. Layur membereskan sampan dan memberikan hasil tangkapan yang tidak seberapa kepada Bapak", "E. Layur berterima kasih kepada Bapak karena telah menunggunya pulang dari melaut berhari-hari"], correct: "C", explanation: "📌 **PEMBAHASAN:** Penutup yang paling sesuai adalah pertemuan yang mengharukan antara Bapak dan Layur." },
+    { id: 43, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Akiro menatap langit senja yang merona jingga, sama seperti rona pipi Geulius saat pertama kali mereka bertemu. 'Kau tahu,' ucap Akiro lirih, 'hatiku adalah lautan dan kau adalah bulan yang selalu menarik pasang surutku.' Geulius tersenyum, matanya berkaca-kaca. 'Dan kau adalah angin yang selalu membawa lembaran-lembaran rinduku terbang tinggi.' Mereka berdua terdiam, menikmati detik-detik yang terasa seperti keabadian. Akiro menggenggam erat tangan Geulius, seolah takut kehilangan momen yang begitu sempurna. 'Aku tak pernah tahu,' bisik Akiro, 'bahwa kebahagiaan bisa sebesar ini, sehangat pelukan mentari di pagi hari.' Geulius hanya mengangguk, karena kata-kata tak lagi mampu mengungkapkan apa yang ia rasakan.", soal: "Majas yang paling dominan dalam kutipan tersebut adalah...", options: ["A. Metafora dan Personifikasi", "B. Hiperbola dan Ironi", "C. Metafora dan Hiperbola", "D. Personifikasi dan Litotes", "E. Ironi dan Sinekdoke"], correct: "C", explanation: "📌 **PEMBAHASAN:** Kutipan menggunakan majas Metafora (hatiku adalah lautan, kau adalah bulan, kau adalah angin) dan Hiperbola (kebahagiaan sebesar ini, detik-detik terasa seperti keabadian). Opsi C tepat. Opsi A kurang tepat karena tidak ada personifikasi. Opsi B, D, E tidak sesuai karena tidak ada ironi, litotes, atau sinekdoke dalam kutipan." },
     
     { id: 44, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Bagaimana hubungan makna antara paragraf 1 dan paragraf 2 dalam teks tersebut?", options: ["A. Paragraf 2 menjelaskan akibat dari fenomena sampah yang diuraikan di paragraf 1", "B. Paragraf 2 menyajikan solusi awal untuk permasalahan yang diperkenalkan di paragraf 1", "C. Paragraf 2 memberikan contoh spesifik dari jenis sampah yang disebutkan di paragraf 1", "D. Paragraf 2 mengkritisi data yang rancu tentang sampah yang disajikan di paragraf 1", "E. Paragraf 2 menguraikan penyebab dari permasalahan yang dijabarkan di paragraf 1"], correct: "E", explanation: "📌 **PEMBAHASAN:** Paragraf 2 menjelaskan penyebab dari permasalahan sampah yang disebutkan di paragraf 1." },
     
-    { id: 45, kompetensi: "Data Pendukung", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Data apa saja yang mendukung opini penulis tersebut? Klik pilihan Benar atau Salah untuk setiap pernyataan sesuai isi teks!", options: ["Peningkatan aktivitas manusia yang menyebabkan lingkungan tercemar didukung oleh data lonjakan timbunan sampah medis sebesar 30-50%", "Tingginya jumlah dan jenis limbah didukung oleh data bahwa 96% paket dibungkus dengan plastik tebal dan bubble wrap", "Kebakaran hutan yang merusak ekosistem didukung data bahwa Indonesia merupakan negara ke-2 penyumbang sampah"], correct: "Benar, Benar, Salah", explanation: "📌 **PEMBAHASAN:** Data sampah medis dan plastik mendukung. Data Indonesia sebagai penyumbang sampah tidak mendukung kebakaran hutan." },
+    { id: 45, kompetensi: "Data Pendukung", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Data apa saja yang mendukung opini penulis tersebut? Klik pilihan Benar atau Salah untuk setiap pernyataan sesuai isi teks!", options: ["Peningkatan aktivitas manusia yang menyebabkan lingkungan tercemar didukung oleh data lonjakan timbunan sampah medis sebesar 30-50%", "Tingginya jumlah dan jenis limbah didukung oleh data bahwa 96% paket dibungkus dengan plastik tebal dan bubble wrap", "Kebakaran hutan yang merusak ekosistem didukung data bahwa Indonesia merupakan negara ke-2 penyumbang sampah"], correct: ["Benar","Benar","Salah"], benarSalah: true, explanation: "📌 **PEMBAHASAN:** Data sampah medis dan plastik mendukung. Data Indonesia sebagai penyumbang sampah tidak mendukung kebakaran hutan." },
     
     { id: 46, kompetensi: "Makna Istilah", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Mengapa penulis memilih istilah 'bahu-membahu' untuk menggambarkan peran semua pihak dalam upaya pelestarian lingkungan?", options: ["A. Memperkuat makna pentingnya kolaborasi berbagai pihak untuk mencapai tujuan", "B. Memberikan sedikit kesan informal yang mungkin kurang pas untuk teks opini", "C. Mengindikasikan bahwa idiom lebih cocok digunakan untuk konteks fisik", "D. Menyiratkan adanya paksaan atau tekanan dari satu pihak kepada pihak lain", "E. Menunjukkan bahwa konteks ini terlalu ambigu dan tidak ada definisi yang jelas"], correct: "A", explanation: "📌 **PEMBAHASAN:** 'Bahu-membahu' memperkuat makna kolaborasi dan kerja sama." },
     
     { id: 47, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Vera dan Vero adalah sahabat dekat Saki sejak kecil. Suatu hari, Saki mengalami musibah rumahnya kebakaran. Vera segera datang membantu membersihkan puing-puing, sementara Vero sibuk menghubungi kerabat Saki untuk memberi kabar. Saki yang terkejut dan sedih hanya bisa terdiam, tetapi ia sangat berterima kasih atas bantuan kedua sahabatnya itu.", soal: "Berdasarkan teks tersebut, perbedaan sikap Vera dan Vero dalam membantu Saki adalah...", options: ["A. Vera membantu secara fisik, sedangkan Vero membantu secara komunikasi", "B. Vera sibuk menelepon, sedangkan Vero membersihkan puing-puing", "C. Vera dan Vero sama-sama membersihkan puing-puing rumah Saki", "D. Vera membantu Saki, sedangkan Vero justru meninggalkan Saki", "E. Vera dan Vero sama-sama menghubungi kerabat Saki"], correct: "A", explanation: "📌 **PEMBAHASAN:** Teks menyebutkan bahwa Vera 'segera datang membantu membersihkan puing-puing' (bantuan fisik) sedangkan Vero 'sibuk menghubungi kerabat Saki untuk memberi kabar' (bantuan komunikasi). Opsi A tepat. Opsi B terbalik, Opsi C dan E salah karena mereka melakukan hal yang berbeda, Opsi D salah karena Vero juga membantu." },
-        
+    
     { id: 48, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Saki, Vera, dan Vero berjanji akan selalu saling membantu dalam suka maupun duka. Mereka bertiga telah melalui berbagai masa sulit bersama. Ketika Saki jatuh sakit, Vera dan Vero bergantian menjaganya di rumah sakit. Ketika Vera kehilangan pekerjaan, Saki dan Vero membantunya mencari lowongan kerja. Ketika Vero menghadapi masalah keluarga, Saki dan Vera selalu ada untuk mendengarkan keluh kesahnya.", soal: "Nilai persahabatan yang paling menonjol dari ketiga tokoh tersebut adalah...", options: ["A. Persahabatan hanya bertahan saat senang saja", "B. Saling membantu dan setia dalam segala kondisi", "C. Persahabatan harus selalu menguntungkan diri sendiri", "D. Saling bersaing untuk menunjukkan siapa yang terbaik", "E. Persahabatan tidak penting dalam kehidupan"], correct: "B", explanation: "📌 **PEMBAHASAN:** Ketiga tokoh saling membantu dalam berbagai situasi sulit: Saki sakit (dijaga), Vera kehilangan pekerjaan (dibantu cari kerja), Vero masalah keluarga (didengarkan). Ini menunjukkan nilai saling membantu dan setia dalam segala kondisi. Opsi B tepat. Opsi A, C, D, E bertentangan dengan isi teks." },
+    
     { id: 49, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Prospek Ekonomi Global di Tengah Ketidakpastian...", soal: "Manakah pernyataan yang dapat menjadi kelanjutan teks tersebut?", options: ["A. Peran aktif IMF dan Bank Dunia dalam menanggulangi krisis ekonomi dan pembentukan SDM di negara berkembang secara global", "B. Dampak langsung kebijakan suku bunga bank sentral terhadap tingkat pengangguran di setiap negara dan menjadi masalah global", "C. Analisis mendalam mengenai skenario dan kemungkinan-kemungkinan terkait evolusi inflasi, respons kebijakan, serta situasi geopolitik", "D. Analisis mengenai skenario dan kemungkinan-kemungkinan terkait evolusi inflasi, respons kebijakan, serta situasi geopolitik global", "E. Pentingnya investasi di sektor manufaktur untuk meningkatkan ekspor dan mengurangi gangguan rantai pasok secara global"], correct: "C", explanation: "📌 **PEMBAHASAN:** Kelanjutan yang logis adalah analisis mendalam tentang skenario dan kemungkinan yang terkait dengan inflasi, kebijakan, dan geopolitik." },
     
     { id: 50, kompetensi: "Analisis Cerita", teks: "fiksi", bacaan: "Roh Meratus...", soal: "Latar tempat yang tergambar dalam cerita tersebut adalah ...", options: ["A. sebuah perkampungan penduduk adat", "B. daerah perkotaan yang ramai", "C. pegunungan batu yang tandus", "D. hutan belantara yang lebat", "E. pantai dengan pasir putih"], correct: "D", explanation: "📌 **PEMBAHASAN:** Deskripsi pohon besar, sinar matahari hampir tidak menembus, lumut, dan sulur menunjukkan hutan belantara yang lebat." }
@@ -937,8 +983,91 @@ function updateScore() {
     document.getElementById('liveScoreDisplay').innerHTML = `🏆 SKOR: ${correct} / 50`;
 }
 
+// Fungsi untuk mengecek jawaban checkbox (multi)
+function evaluateMultiQuestion(id, q) {
+    let checkboxes = document.querySelectorAll(`input[name="q${id}"]:checked`);
+    let selected = [];
+    checkboxes.forEach(cb => selected.push(cb.value));
+    
+    if(selected.length === 0) {
+        document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Pilih jawaban terlebih dahulu!</div>`;
+        return;
+    }
+    
+    let benar = true;
+    let correctArr = q.correct;
+    // Cek apakah semua jawaban benar terpilih
+    for(let c of correctArr) {
+        if(!selected.includes(c)) { benar = false; break; }
+    }
+    // Cek apakah ada jawaban yang salah dipilih
+    for(let s of selected) {
+        if(!correctArr.includes(s)) { benar = false; break; }
+    }
+    
+    answerStatus[id] = benar;
+    saveStorage();
+    
+    let fbDiv = document.getElementById(`fb_${id}`);
+    let resultHtml = benar ? 
+        `<div class="result-correct">✅ <strong>BENAR!</strong> Jawaban Anda: ${selected.join(', ')} (Kunci: ${correctArr.join(', ')})</div>` :
+        `<div class="result-wrong">❌ <strong>SALAH!</strong><br>Jawaban Anda: ${selected.join(', ')}<br>Jawaban benar: <strong>${correctArr.join(', ')}</strong></div>`;
+    resultHtml += `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP + ANALISIS JEBAKAN:</strong><br>${q.explanation}</div>`;
+    fbDiv.innerHTML = resultHtml;
+    updateScore();
+}
+
+// Fungsi untuk mengecek jawaban benar/salah (checkbox)
+function evaluateBenarSalah(id, q) {
+    let checkboxes = document.querySelectorAll(`input[name="q${id}"]:checked`);
+    let selected = [];
+    checkboxes.forEach(cb => {
+        // Ambil nilai dari label
+        let label = cb.parentElement.querySelector('label').textContent.trim();
+        selected.push(label);
+    });
+    
+    if(selected.length === 0) {
+        document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Pilih jawaban terlebih dahulu!</div>`;
+        return;
+    }
+    
+    let benar = true;
+    let correctArr = q.correct;
+    // Cek semua pernyataan
+    let options = q.options;
+    for(let i = 0; i < options.length; i++) {
+        let isChecked = selected.includes(options[i]);
+        let shouldBeChecked = (correctArr[i] === "Benar" || correctArr[i] === "Tepat");
+        if(isChecked !== shouldBeChecked) { benar = false; break; }
+    }
+    
+    answerStatus[id] = benar;
+    saveStorage();
+    
+    let fbDiv = document.getElementById(`fb_${id}`);
+    let resultHtml = benar ? 
+        `<div class="result-correct">✅ <strong>BENAR!</strong> Jawaban Anda sesuai kunci</div>` :
+        `<div class="result-wrong">❌ <strong>SALAH!</strong><br>Jawaban benar: <strong>${correctArr.join(', ')}</strong></div>`;
+    resultHtml += `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP + ANALISIS JEBAKAN:</strong><br>${q.explanation}</div>`;
+    fbDiv.innerHTML = resultHtml;
+    updateScore();
+}
+
 window.evaluateQuestion = function(id) {
     let q = soalData.find(x=>x.id===id);
+    
+    // Cek tipe soal
+    if(q.multi) {
+        evaluateMultiQuestion(id, q);
+        return;
+    }
+    if(q.benarSalah) {
+        evaluateBenarSalah(id, q);
+        return;
+    }
+    
+    // Soal pilihan ganda biasa (radio)
     let jawab = userAnswers[id];
     if(!jawab) {
         document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Pilih jawaban terlebih dahulu!</div>`;
@@ -962,13 +1091,16 @@ window.showExplanation = function(id) {
     document.getElementById(`fb_${id}`).innerHTML = `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP & STRATEGI MENJAWAB SOAL OLIMPIADE:</strong><br>${q.explanation}</div>`;
 };
 
-function checkAll() { for(let i=1;i<=50;i++) evaluateQuestion(i); }
+function checkAll() { 
+    for(let i=1;i<=50;i++) evaluateQuestion(i); 
+}
+
 function resetAll() {
     for(let i=1;i<=50;i++) {
         userAnswers[i] = "";
         answerStatus[i] = false;
-        let radios = document.getElementsByName(`q${i}`);
-        radios.forEach(r => r.checked = false);
+        let inputs = document.querySelectorAll(`input[name="q${i}"]`);
+        inputs.forEach(inp => inp.checked = false);
         document.getElementById(`fb_${i}`).innerHTML = "";
     }
     saveStorage();
@@ -978,13 +1110,19 @@ function resetAll() {
 function showAllAnswers() {
     let modal = document.getElementById('answerModal');
     let container = document.getElementById('answerListContainer');
-    container.innerHTML = soalData.map(q => `<div class="answer-item"><span>${q.id}. ${q.soal.substring(0,30)}...</span><span>${q.correct}</span></div>`).join('');
+    container.innerHTML = soalData.map(q => {
+        let kunci = Array.isArray(q.correct) ? q.correct.join(', ') : q.correct;
+        return `<div class="answer-item"><span>${q.id}. ${q.soal.substring(0,30)}...</span><span>${kunci}</span></div>`;
+    }).join('');
     modal.style.display = 'flex';
 }
 
 function copyAnswers() {
     let text = "KUNCI JAWABAN BAHASA INDONESIA (50 SOAL - SULIT & MENJEBAK)\n\n";
-    soalData.forEach(q => { text += `${q.id}. ${q.correct} - ${q.soal.substring(0,45)}\n`; });
+    soalData.forEach(q => { 
+        let kunci = Array.isArray(q.correct) ? q.correct.join(', ') : q.correct;
+        text += `${q.id}. ${kunci} - ${q.soal.substring(0,45)}\n`; 
+    });
     navigator.clipboard.writeText(text);
     alert("✅ Kunci jawaban disalin!");
 }
@@ -997,11 +1135,23 @@ function render() {
         card.className = 'question-card';
         card.style.animationDelay = `${idx * 0.015}s`;
         let kompetensiColor = q.kompetensi.includes("Pemahaman Tekstual") ? "#3b82f6" : (q.kompetensi.includes("Pemahaman Inferensial") ? "#10b981" : (q.kompetensi.includes("Makna") ? "#8b5cf6" : "#f59e0b"));
+        
+        let inputType = 'radio';
+        let extraBadge = '';
+        if(q.multi) {
+            inputType = 'checkbox';
+            extraBadge = `<span class="multi-badge">☑️ Pilih lebih dari satu</span>`;
+        } else if(q.benarSalah) {
+            inputType = 'checkbox';
+            extraBadge = `<span class="benar-salah-badge">✓✗ Benar/Salah</span>`;
+        }
+        
         card.innerHTML = `
             <div class="card-header">
                 <div class="num-badge">${q.id}</div>
                 <div class="kompetensi-tag" style="background:${kompetensiColor}15; color:${kompetensiColor};">📌 ${q.kompetensi}</div>
                 <div class="teks-tag">📄 ${q.teks === 'informasi' ? 'Teks Informasi' : 'Teks Fiksi'}</div>
+                ${extraBadge}
             </div>
             <div class="reading-text">📖 ${q.bacaan}</div>
             <div class="question-text">❓ ${q.soal}</div>
@@ -1014,20 +1164,59 @@ function render() {
         `;
         grid.appendChild(card);
         let optDiv = document.getElementById(`opt_${q.id}`);
-        q.options.forEach(opt => {
-            let letter = opt[0];
-            let div = document.createElement('div');
-            div.className = 'option';
-            div.innerHTML = `<input type="radio" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${userAnswers[q.id]===letter ? 'checked' : ''}><label for="q${q.id}_${letter}">${opt}</label>`;
-            div.querySelector('input').addEventListener('change', (e) => {
-                userAnswers[q.id] = e.target.value;
-                answerStatus[q.id] = false;
-                saveStorage();
-                updateScore();
-                document.getElementById(`fb_${q.id}`).innerHTML = "";
+        
+        // Untuk soal benar/salah, options-nya adalah array string biasa
+        if(q.benarSalah) {
+            q.options.forEach((optText, index) => {
+                let div = document.createElement('div');
+                div.className = 'option';
+                let letter = String.fromCharCode(65 + index); // A, B, C, ...
+                div.innerHTML = `
+                    <input type="checkbox" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${userAnswers[q.id] ? 'checked' : ''}>
+                    <label for="q${q.id}_${letter}">${letter}. ${optText}</label>
+                `;
+                div.querySelector('input').addEventListener('change', (e) => {
+                    // Simpan jawaban
+                    let checked = document.querySelectorAll(`input[name="q${q.id}"]:checked`);
+                    let vals = [];
+                    checked.forEach(cb => vals.push(cb.value));
+                    userAnswers[q.id] = vals.join(',');
+                    answerStatus[q.id] = false;
+                    saveStorage();
+                    updateScore();
+                    document.getElementById(`fb_${q.id}`).innerHTML = "";
+                });
+                optDiv.appendChild(div);
             });
-            optDiv.appendChild(div);
-        });
+        } else {
+            // Untuk soal pilihan ganda biasa atau multi
+            q.options.forEach(opt => {
+                let letter = opt[0];
+                let div = document.createElement('div');
+                div.className = 'option';
+                div.innerHTML = `
+                    <input type="${inputType}" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${userAnswers[q.id] ? 'checked' : ''}>
+                    <label for="q${q.id}_${letter}">${opt}</label>
+                `;
+                div.querySelector('input').addEventListener('change', (e) => {
+                    if(q.multi) {
+                        // Checkbox - kumpulkan semua yang dicentang
+                        let checked = document.querySelectorAll(`input[name="q${q.id}"]:checked`);
+                        let vals = [];
+                        checked.forEach(cb => vals.push(cb.value));
+                        userAnswers[q.id] = vals.join(',');
+                    } else {
+                        userAnswers[q.id] = e.target.value;
+                    }
+                    answerStatus[q.id] = false;
+                    saveStorage();
+                    updateScore();
+                    document.getElementById(`fb_${q.id}`).innerHTML = "";
+                });
+                optDiv.appendChild(div);
+            });
+        }
+        
         if(userAnswers[q.id] && answerStatus[q.id]) evaluateQuestion(q.id);
     });
 }
