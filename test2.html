@@ -814,7 +814,7 @@
     <div class="footer-note">
         💡 <strong>Petunjuk:</strong> Pilih jawaban, klik CEK untuk melihat pembahasan lengkap. Jawaban otomatis tersimpan.<br>
         📌 <span style="background:#8b5cf6;padding:2px 10px;border-radius:50px;color:white;font-weight:600;font-size:0.6rem;">☑️</span> Soal dengan tanda centang memiliki <strong>jawaban lebih dari satu</strong> (pilih menggunakan checkbox).<br>
-        📌 <span style="background:#f59e0b;padding:2px 10px;border-radius:50px;color:white;font-weight:600;font-size:0.6rem;">✓✗</span> Soal dengan tanda centang silang adalah soal <strong>Benar/Salah</strong> (pilih checkbox).
+        📌 <span style="background:#f59e0b;padding:2px 10px;border-radius:50px;color:white;font-weight:600;font-size:0.6rem;">✓✗</span> Soal dengan tanda centang silang adalah soal <strong>Benar/Salah</strong> (centang pernyataan yang BENAR).
     </div>
 </div>
 
@@ -844,9 +844,6 @@
 
 <script>
 // ======================= 50 SOAL BAHASA INDONESIA =======================
-// Tandai soal dengan:
-// - multi: true = jawaban lebih dari satu (pakai checkbox)
-// - benarSalah: true = soal Benar/Salah (pakai checkbox, jawaban berupa array)
 const soalData = [
     // Soal 1-10
     { id: 1, kompetensi: "Makna Istilah", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut. Hal tersebut merupakan sebuah ancaman besar. Dibutuhkan tindakan skala besar untuk berpindah dari kecenderungan tersebut mengingat banyak pihak yang terlibat dalam bidang pekerjaan ini. Masyarakat sektor swasta dan masyarakat sipil perlu mobilisasi untuk menangkap peluang ekonomi lain di luar dari pengelolaan plastik.", soal: "Makna istilah mobilisasi pada paragraf kedua teks tersebut adalah", options: ["A. bergerak bersama", "B. melangkah cepat", "C. beradu cepat", "D. mengatur bersama", "E. berpikir Bersama"], correct: "A", explanation: "📌 **PEMBAHASAN:** Mobilisasi berarti menggerakkan atau mengerahkan orang untuk bergerak bersama mencapai tujuan." },
@@ -996,11 +993,9 @@ function evaluateMultiQuestion(id, q) {
     
     let benar = true;
     let correctArr = q.correct;
-    // Cek apakah semua jawaban benar terpilih
     for(let c of correctArr) {
         if(!selected.includes(c)) { benar = false; break; }
     }
-    // Cek apakah ada jawaban yang salah dipilih
     for(let s of selected) {
         if(!correctArr.includes(s)) { benar = false; break; }
     }
@@ -1017,31 +1012,27 @@ function evaluateMultiQuestion(id, q) {
     updateScore();
 }
 
-// Fungsi untuk mengecek jawaban benar/salah (checkbox)
-// Fungsi untuk mengecek jawaban benar/salah (checkbox)
+// ======================= PERBAIKAN UNTUK SOAL BENAR/SALAH =======================
 function evaluateBenarSalah(id, q) {
     let checkboxes = document.querySelectorAll(`input[name="q${id}"]`);
-    let selected = [];
+    let selectedLetters = [];
     checkboxes.forEach(cb => {
         if(cb.checked) {
-            let label = cb.parentElement.querySelector('label').textContent.trim();
-            // Hapus tanda ✓ atau ✗ di akhir
-            label = label.replace(/ [✓✗]$/, '');
-            selected.push(label);
+            selectedLetters.push(cb.value);
         }
     });
     
-    if(selected.length === 0) {
+    if(selectedLetters.length === 0) {
         document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Centang pernyataan yang BENAR!</div>`;
         return;
     }
     
     let benar = true;
     let correctArr = q.correct; // array ["Benar", "Salah", "Benar"] dst
-    let options = q.options;
     
-    for(let i = 0; i < options.length; i++) {
-        let isChecked = selected.includes(options[i]);
+    for(let i = 0; i < correctArr.length; i++) {
+        let letter = String.fromCharCode(65 + i); // A, B, C, ...
+        let isChecked = selectedLetters.includes(letter);
         let shouldBeChecked = (correctArr[i] === "Benar" || correctArr[i] === "Tepat");
         if(isChecked !== shouldBeChecked) { 
             benar = false; 
@@ -1063,18 +1054,17 @@ function evaluateBenarSalah(id, q) {
 
 // Fungsi toggle untuk checkbox benar/salah
 function toggleBenarSalah(checkbox, label) {
-    // Toggle checked
     checkbox.checked = !checkbox.checked;
     
-    // Update tampilan
     if (checkbox.checked) {
         label.style.color = '#10b981';
         label.style.fontWeight = '600';
-        label.innerHTML = label.textContent.replace(/ [✓✗]$/, '') + ' ✓';
+        let text = label.textContent.replace(/ ✓$/, '').trim();
+        label.innerHTML = text + ' ✓';
     } else {
         label.style.color = '#334155';
         label.style.fontWeight = '400';
-        label.innerHTML = label.textContent.replace(/ [✓✗]$/, '');
+        label.innerHTML = label.textContent.replace(/ ✓$/, '').trim();
     }
     
     checkbox.dispatchEvent(new Event('change'));
@@ -1083,7 +1073,6 @@ function toggleBenarSalah(checkbox, label) {
 window.evaluateQuestion = function(id) {
     let q = soalData.find(x=>x.id===id);
     
-    // Cek tipe soal
     if(q.multi) {
         evaluateMultiQuestion(id, q);
         return;
@@ -1127,6 +1116,12 @@ function resetAll() {
         answerStatus[i] = false;
         let inputs = document.querySelectorAll(`input[name="q${i}"]`);
         inputs.forEach(inp => inp.checked = false);
+        let labels = document.querySelectorAll(`input[name="q${i}"] + label`);
+        labels.forEach(lb => {
+            lb.style.color = '#334155';
+            lb.style.fontWeight = '400';
+            lb.innerHTML = lb.textContent.replace(/ ✓$/, '').trim();
+        });
         document.getElementById(`fb_${i}`).innerHTML = "";
     }
     saveStorage();
@@ -1191,18 +1186,43 @@ function render() {
         grid.appendChild(card);
         let optDiv = document.getElementById(`opt_${q.id}`);
         
-        // Untuk soal benar/salah, options-nya adalah array string biasa
+        // ======================= SOAL BENAR/SALAH =======================
         if(q.benarSalah) {
             q.options.forEach((optText, index) => {
                 let div = document.createElement('div');
                 div.className = 'option';
-                let letter = String.fromCharCode(65 + index); // A, B, C, ...
+                let letter = String.fromCharCode(65 + index);
                 div.innerHTML = `
-                    <input type="checkbox" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${userAnswers[q.id] ? 'checked' : ''}>
-                    <label for="q${q.id}_${letter}">${letter}. ${optText}</label>
+                    <input type="checkbox" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}">
+                    <label for="q${q.id}_${letter}" style="cursor:pointer;user-select:none;">${letter}. ${optText}</label>
                 `;
-                div.querySelector('input').addEventListener('change', (e) => {
-                    // Simpan jawaban
+                
+                let checkbox = div.querySelector('input');
+                let label = div.querySelector('label');
+                
+                // Restore state jika ada
+                let saved = userAnswers[q.id] || "";
+                if(saved.includes(letter)) {
+                    checkbox.checked = true;
+                    label.style.color = '#10b981';
+                    label.style.fontWeight = '600';
+                    label.innerHTML = label.textContent + ' ✓';
+                }
+                
+                // Event klik pada div atau label
+                div.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'INPUT') return;
+                    toggleBenarSalah(checkbox, label);
+                });
+                
+                // Event klik pada checkbox
+                checkbox.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleBenarSalah(checkbox, label);
+                });
+                
+                // Event change untuk menyimpan
+                checkbox.addEventListener('change', function() {
                     let checked = document.querySelectorAll(`input[name="q${q.id}"]:checked`);
                     let vals = [];
                     checked.forEach(cb => vals.push(cb.value));
@@ -1212,10 +1232,11 @@ function render() {
                     updateScore();
                     document.getElementById(`fb_${q.id}`).innerHTML = "";
                 });
+                
                 optDiv.appendChild(div);
             });
         } else {
-            // Untuk soal pilihan ganda biasa atau multi
+            // ======================= SOAL PILIHAN GANDA BIASA ATAU MULTI =======================
             q.options.forEach(opt => {
                 let letter = opt[0];
                 let div = document.createElement('div');
@@ -1226,7 +1247,6 @@ function render() {
                 `;
                 div.querySelector('input').addEventListener('change', (e) => {
                     if(q.multi) {
-                        // Checkbox - kumpulkan semua yang dicentang
                         let checked = document.querySelectorAll(`input[name="q${q.id}"]:checked`);
                         let vals = [];
                         checked.forEach(cb => vals.push(cb.value));
