@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>E-BOOK TKA ENGLISH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1E2A24;
+            --ink-soft: #2C3B33;
+            --paper: #F3EEE1;
+            --card: #FBF9F2;
+            --brass: #A2803F;
+            --brass-light: #C7A662;
+            --rule: #DCD3BC;
+            --text: #262620;
+            --muted: #726C5C;
+            --wine: #7A3A34;
+            --sage: #5F6E52;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--paper);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 20px 14px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 0 rgba(30,42,36,0.04), 0 20px 40px -24px rgba(30,42,36,0.35);
+            border: 1px solid var(--rule);
+        }
+
+        /* ====== HEADER ====== */
+        .header {
+            background: var(--ink);
+            padding: 3rem 2.5rem 2.2rem;
+            color: #F3EEE1;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            display: block;
+            width: 56px;
+            height: 2px;
+            background: var(--brass-light);
+            margin: 18px auto 0;
+        }
+
+        .header .kicker {
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            color: var(--brass-light);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 2.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .header p.deck {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1rem;
+            opacity: 0.82;
+            margin-top: 14px;
+            max-width: 32em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header .type-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-top: 22px;
+            font-size: 0.78rem;
+            color: #D9D2BF;
+        }
+
+        .header .type-list span {
+            padding: 0 12px;
+            border-right: 1px solid rgba(243,238,225,0.2);
+        }
+
+        .header .type-list span:last-child { border-right: none; }
+
+        /* ====== SEARCH & FILTER ====== */
+        .search-section {
+            background: var(--card);
+            padding: 18px 2.5rem;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .search-section input {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 2px;
+            border: none;
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+            font-size: 0.85rem;
+            font-family: inherit;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            transition: border-color 0.2s;
+        }
+
+        .search-section input::placeholder { color: var(--muted); }
+
+        .search-section input:focus {
+            border-bottom-color: var(--brass);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 4px 0;
+            border: none;
+            background: none;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .filter-btn:hover { color: var(--ink); }
+
+        .filter-btn.active {
+            color: var(--ink);
+            border-bottom-color: var(--brass);
+        }
+
+        /* ====== CONTENT ====== */
+        .content { padding: 2.2rem 2.5rem; }
+
+        .section { margin-bottom: 2.6rem; }
+        .section:last-child { margin-bottom: 0; }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            padding-left: 14px;
+            border-left: 3px solid var(--brass);
+        }
+
+        .section-title .badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 18px;
+            padding-left: 17px;
+            font-style: italic;
+        }
+
+        /* ====== CARD GRID ====== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .card-grid { grid-template-columns: 1fr; }
+            .content { padding: 1.4rem 1.2rem; }
+            .header { padding: 2.2rem 1.4rem 1.8rem; }
+            .header h1 { font-size: 1.6rem; }
+            .search-section { flex-direction: column; align-items: stretch; padding: 16px 1.2rem; }
+        }
+
+        .card {
+            background: var(--paper);
+            border-radius: 4px;
+            padding: 16px 18px;
+            border: 1px solid var(--rule);
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--brass);
+            transform: translateY(-2px);
+        }
+
+        .card.numbered {
+            position: relative;
+            padding-top: 30px;
+        }
+
+        .card.numbered .index {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-family: 'Fraunces', serif;
+            font-size: 0.95rem;
+            color: var(--brass);
+            font-weight: 600;
+        }
+
+        .card .card-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--wine);
+            margin-bottom: 4px;
+        }
+
+        .card h4 {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .card p { font-size: 0.82rem; color: var(--text); line-height: 1.65; }
+        .card p + p { margin-top: 4px; }
+
+        .card .example {
+            background: var(--card);
+            padding: 8px 12px;
+            border-radius: 3px;
+            margin-top: 10px;
+            font-size: 0.78rem;
+            border-left: 2px solid var(--brass-light);
+            color: #3A382E;
+            font-style: italic;
+        }
+
+        .card .example strong { font-style: normal; color: var(--ink); }
+
+        /* ====== TABLE STYLE ====== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 8px 0 12px;
+            border-radius: 4px;
+            border: 1px solid var(--rule);
+        }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+
+        table th {
+            background: var(--ink);
+            color: var(--brass-light);
+            padding: 9px 14px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--rule);
+            background: var(--card);
+        }
+
+        table tr:last-child td { border-bottom: none; }
+        table tr:hover td { background: #F5F0E4; }
+
+        /* ====== HIGHLIGHT ====== */
+        .highlight {
+            background: #FFFDF6;
+            padding: 12px 16px;
+            border-radius: 3px;
+            border: 1px solid var(--rule);
+            border-left: 3px solid var(--brass);
+            margin: 8px 0;
+            font-size: 0.82rem;
+        }
+
+        /* ====== FOOTER ====== */
+        .footer {
+            background: var(--ink);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.72rem;
+            color: #C9C2AE;
+        }
+
+        .footer strong {
+            font-family: 'Fraunces', serif;
+            color: var(--brass-light);
+            font-weight: 600;
+        }
+
+        /* ====== SCROLL TOP ====== */
+        .scroll-top {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            background: var(--ink);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brass-light);
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(30,42,36,0.3);
+            z-index: 99;
+            font-size: 1.1rem;
+            transition: opacity 0.25s, transform 0.25s, background 0.2s;
+            opacity: 0;
+            transform: scale(0.85);
+            border: none;
+        }
+
+        .scroll-top.visible { opacity: 1; transform: scale(1); }
+        .scroll-top:hover { background: var(--brass); color: var(--ink); }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ====== HEADER ====== -->
+        <div class="header">
+            <div class="kicker">Panduan Belajar</div>
+            <h1>E-Book TKA English</h1>
+            <p class="deck">Text types, sentence structure, vocabulary, and discourse cohesion — everything you need to read the exam like a native.</p>
+            <div class="type-list">
+                <span>Descriptive</span>
+                <span>Recount</span>
+                <span>Narrative</span>
+                <span>Procedure</span>
+                <span>Exposition</span>
+            </div>
+        </div>
+
+        <!-- ====== SEARCH & FILTER ====== -->
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Cari: deforestation, metaphor, S-V-O, conjunctions, facts, prediction...">
+            <div class="filter-buttons" id="filterButtons">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="figurative">Majas</button>
+                <button class="filter-btn" data-filter="structure">Struktur</button>
+                <button class="filter-btn" data-filter="sentences">Kalimat</button>
+                <button class="filter-btn" data-filter="vocabulary">Kosakata</button>
+                <button class="filter-btn" data-filter="discourse">Wacana</button>
+            </div>
+        </div>
+
+        <!-- ====== CONTENT ====== -->
+        <div class="content" id="contentArea">
+
+            <!-- ====== SECTION: TEXT TYPES ====== -->
+            <div class="section" data-category="structure">
+                <div class="section-title">Text Types <span class="badge">5 jenis</span></div>
+                <div class="section-subtitle">Jenis teks yang diujikan dalam TKA Bahasa Inggris</div>
+
+                <div class="card-grid" id="textTypesGrid">
+                    <div class="card numbered" data-tags="structure descriptive">
+                        <span class="index">01</span>
+                        <div class="card-tag">Descriptive</div>
+                        <h4>Describing People, Places, Things</h4>
+                        <p>Uses specific nouns & adjectives, present tense, sensory details.</p>
+                        <div class="example"><strong>Example:</strong> "Bali is a beautiful island with stunning landscapes and rich culture."</div>
+                    </div>
+
+                    <div class="card numbered" data-tags="structure recount">
+                        <span class="index">02</span>
+                        <div class="card-tag">Recount</div>
+                        <h4>Retelling Past Events</h4>
+                        <p>Uses past tense, time connectives (then, after that, finally).</p>
+                        <div class="example"><strong>Example:</strong> "Last summer, I had the opportunity to work as an intern at a local sports club."</div>
+                    </div>
+
+                    <div class="card numbered" data-tags="structure narrative">
+                        <span class="index">03</span>
+                        <div class="card-tag">Narrative</div>
+                        <h4>Stories with Conflict & Resolution</h4>
+                        <p>Has characters, setting, plot, and often a moral lesson.</p>
+                        <div class="example"><strong>Example:</strong> "The lion learned that even small creatures can do great things."</div>
+                    </div>
+
+                    <div class="card numbered" data-tags="structure procedure">
+                        <span class="index">04</span>
+                        <div class="card-tag">Procedure</div>
+                        <h4>How to Do or Make Something</h4>
+                        <p>Uses imperative verbs, time connectives (first, then, finally).</p>
+                        <div class="example"><strong>Example:</strong> "First, wash all the fruits carefully. Then peel the banana."</div>
+                    </div>
+
+                    <div class="card numbered" data-tags="structure exposition">
+                        <span class="index">05</span>
+                        <div class="card-tag">Analytical Exposition</div>
+                        <h4>Presenting Arguments & Persuading</h4>
+                        <p>Uses present tense, modals (should, must, can), thesis → arguments → reiteration.</p>
+                        <div class="example"><strong>Example:</strong> "I strongly believe that social media harms teen mental health."</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: SENTENCE STRUCTURE ====== -->
+            <div class="section" data-category="sentences structure">
+                <div class="section-title">Sentence Structure <span class="badge">S-V-O</span></div>
+                <div class="section-subtitle">Struktur kalimat dasar dan aktif-pasif</div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="sentences structure">
+                        <div class="card-tag">Basic Structure</div>
+                        <h4>Subject + Verb + Object (S-V-O)</h4>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Element</th><th>Description</th><th>Example</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>S</strong> (Subject)</td><td>Who does the action</td><td>The lion</td></tr>
+                                    <tr><td><strong>V</strong> (Verb)</td><td>The action</td><td>caught</td></tr>
+                                    <tr><td><strong>O</strong> (Object)</td><td>Receives the action</td><td>the mouse</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="example"><strong>Examples:</strong> "The lion caught the mouse." (S-V-O) · "Son Tinh arrived early." (S-V)</div>
+                    </div>
+
+                    <div class="card" data-tags="sentences structure">
+                        <div class="card-tag">Active vs Passive</div>
+                        <h4>Active & Passive Voice</h4>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Voice</th><th>Structure</th><th>Example</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Active</strong></td><td>S + V + O</td><td>The mouse chewed the rope.</td></tr>
+                                    <tr><td><strong>Passive</strong></td><td>S + to be + V3</td><td>The rope was chewed by the mouse.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="example"><strong>From the text:</strong> "The land was covered with floods." (Passive)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: CONJUNCTIONS ====== -->
+            <div class="section" data-category="discourse">
+                <div class="section-title">Discourse Cohesion & Conjunctions <span class="badge">kohesi</span></div>
+                <div class="section-subtitle">Konjungsi dan penghubung antar kalimat</div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">Types of Conjunctions</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Type</th><th>Function</th><th>Examples</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Addition</strong></td><td>Add information</td><td>and, also, moreover, furthermore</td></tr>
+                                    <tr><td><strong>Contrast</strong></td><td>Show difference</td><td>but, however, although, nevertheless</td></tr>
+                                    <tr><td><strong>Cause-Effect</strong></td><td>Show reason/result</td><td>because, therefore, so, consequently</td></tr>
+                                    <tr><td><strong>Sequence</strong></td><td>Show order</td><td>first, then, after that, finally</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">Key Conjunctions</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Conjunction</th><th>Meaning</th><th>Function</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>However</strong></td><td>Namun</td><td>Contrast</td></tr>
+                                    <tr><td><strong>Therefore</strong></td><td>Oleh karena itu</td><td>Cause-effect</td></tr>
+                                    <tr><td><strong>Moreover</strong></td><td>Selain itu</td><td>Addition</td></tr>
+                                    <tr><td><strong>Consequently</strong></td><td>Akibatnya</td><td>Result</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="example"><strong>Example:</strong> "Social media has benefits, <strong>however</strong>, it also brings serious problems."</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: VOCABULARY ====== -->
+            <div class="section" data-category="vocabulary">
+                <div class="section-title">Vocabulary Building <span class="badge">kosakata</span></div>
+                <div class="section-subtitle">Istilah teknis dan kosakata frekuensi tinggi</div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="vocabulary">
+                        <div class="card-tag">Technical Terms</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Term</th><th>Meaning</th><th>Indonesian</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Deforestation</strong></td><td>The clearing of forests</td><td>Deforestasi</td></tr>
+                                    <tr><td><strong>Downstreaming</strong></td><td>Processing raw materials</td><td>Hilirisasi</td></tr>
+                                    <tr><td><strong>Substitution</strong></td><td>Replacing one thing with another</td><td>Substitusi</td></tr>
+                                    <tr><td><strong>Conservation</strong></td><td>Protecting natural resources</td><td>Konservasi</td></tr>
+                                    <tr><td><strong>Ecosystem</strong></td><td>A biological community</td><td>Ekosistem</td></tr>
+                                    <tr><td><strong>Sustainable</strong></td><td>Able to be maintained</td><td>Berkelanjutan</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card" data-tags="vocabulary">
+                        <div class="card-tag">High-Frequency Words</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>English</th><th>Indonesian</th><th>Used In</th></tr></thead>
+                                <tbody>
+                                    <tr><td>environment</td><td>lingkungan</td><td>Social issues</td></tr>
+                                    <tr><td>advantage</td><td>keuntungan</td><td>Argumentative texts</td></tr>
+                                    <tr><td>challenge</td><td>tantangan</td><td>Narrative/Recount</td></tr>
+                                    <tr><td>impact</td><td>dampak</td><td>Exposition texts</td></tr>
+                                    <tr><td>benefit</td><td>manfaat</td><td>Exposition texts</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: COMPETENCIES ====== -->
+            <div class="section" data-category="structure discourse">
+                <div class="section-title">Competency Levels <span class="badge">3 level</span></div>
+                <div class="section-subtitle">Pemahaman Tekstual · Inferensial · Evaluasi & Apresiasi</div>
+
+                <div class="card-grid">
+                    <div class="card numbered" data-tags="structure">
+                        <span class="index">1</span>
+                        <div class="card-tag">Pemahaman Tekstual</div>
+                        <p><strong>What it tests:</strong> Finding explicit information directly stated in the text.</p>
+                        <p><strong>Key Skills:</strong> Identifying main ideas, finding details, understanding vocabulary in context.</p>
+                        <div class="example"><strong>Question Pattern:</strong> "What does the text say about...?" · "According to the passage..."</div>
+                    </div>
+
+                    <div class="card numbered" data-tags="discourse">
+                        <span class="index">2</span>
+                        <div class="card-tag">Pemahaman Inferensial</div>
+                        <p><strong>What it tests:</strong> Understanding implied information and drawing conclusions.</p>
+                        <p><strong>Key Skills:</strong> Making predictions, drawing conclusions, identifying cause-effect.</p>
+                        <div class="example"><strong>Question Pattern:</strong> "What can be inferred...?" · "What will most likely happen...?"</div>
+                    </div>
+
+                    <div class="card numbered" data-tags="structure discourse">
+                        <span class="index">3</span>
+                        <div class="card-tag">Evaluasi & Apresiasi</div>
+                        <p><strong>What it tests:</strong> Making judgments and responding to texts emotionally and aesthetically.</p>
+                        <p><strong>Key Skills:</strong> Evaluating arguments, identifying author's purpose, responding to moral lessons.</p>
+                        <div class="example"><strong>Question Pattern:</strong> "What is the main lesson...?" · "Which statements support the argument...?"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: FACTS & OPINIONS ====== -->
+            <div class="section" data-category="structure">
+                <div class="section-title">Facts vs Opinions <span class="badge">analisis</span></div>
+                <div class="section-subtitle">Membedakan fakta dan opini dalam teks</div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="structure">
+                        <div class="card-tag">Facts</div>
+                        <p>Can be verified · based on evidence · objective</p>
+                        <div class="example"><strong>Example:</strong> "The sun rises in the east." · "Indonesia has more than 17,000 islands."</div>
+                    </div>
+
+                    <div class="card" data-tags="structure">
+                        <div class="card-tag">Opinions</div>
+                        <p>Subjective · based on belief/feeling · cannot be proven</p>
+                        <div class="example"><strong>Example:</strong> "Social media is harmful to teenagers." · "Bali is the most beautiful island."</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: STORY ELEMENTS ====== -->
+            <div class="section" data-category="discourse">
+                <div class="section-title">Story Elements <span class="badge">narrative</span></div>
+                <div class="section-subtitle">Elemen-elemen dalam teks naratif/fiksi</div>
+
+                <div class="card" data-tags="discourse" style="margin-bottom:0;">
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>Element</th><th>Description</th><th>Question to Ask</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Setting</strong></td><td>Where and when the story happens</td><td>Where does this story take place?</td></tr>
+                                <tr><td><strong>Characters</strong></td><td>Who is in the story</td><td>Who are the main characters?</td></tr>
+                                <tr><td><strong>Conflict</strong></td><td>The problem in the story</td><td>What problem do the characters face?</td></tr>
+                                <tr><td><strong>Plot</strong></td><td>The sequence of events</td><td>What happens in the story?</td></tr>
+                                <tr><td><strong>Resolution</strong></td><td>How the conflict is solved</td><td>How is the problem solved?</td></tr>
+                                <tr><td><strong>Moral</strong></td><td>The lesson learned</td><td>What can we learn from this story?</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: CAUSE & EFFECT ====== -->
+            <div class="section" data-category="discourse">
+                <div class="section-title">Cause and Effect <span class="badge">sebab-akibat</span></div>
+                <div class="section-subtitle">Hubungan sebab-akibat dalam teks</div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">Signal Words</div>
+                        <p><strong>Cause:</strong> because, since, as, due to</p>
+                        <p><strong>Effect:</strong> therefore, so, consequently, thus, hence, as a result</p>
+                    </div>
+
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">Example</div>
+                        <div class="example"><strong>Cause:</strong> Thuy Tinh lost the competition.</div>
+                        <div class="example"><strong>Effect:</strong> He attacked with floods.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: COMPARE & CONTRAST ====== -->
+            <div class="section" data-category="discourse">
+                <div class="section-title">Compare and Contrast <span class="badge">persamaan & perbedaan</span></div>
+                <div class="section-subtitle">Membandingkan informasi dalam teks</div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">Compare (Similarities)</div>
+                        <p>Show how things are alike</p>
+                        <p><strong>Signal words:</strong> both, also, similarly, likewise</p>
+                        <div class="example"><strong>Example:</strong> Both Son Tinh and Thuy Tinh love the princess.</div>
+                    </div>
+
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">Contrast (Differences)</div>
+                        <p>Show how things are different</p>
+                        <p><strong>Signal words:</strong> but, however, unlike, although</p>
+                        <div class="example"><strong>Example:</strong> Son Tinh is calm, but Thuy Tinh is angry.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: TIPS ====== -->
+            <div class="section" data-category="structure discourse">
+                <div class="section-title">Tips for TKA English <span class="badge">strategi</span></div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="structure">
+                        <div class="card-tag">Before Reading</div>
+                        <p>Preview the questions – know what to look for</p>
+                        <p>Identify the text type – predict the structure</p>
+                        <p>Note the competency – explicit or implicit information?</p>
+                    </div>
+
+                    <div class="card" data-tags="discourse">
+                        <div class="card-tag">During Reading</div>
+                        <p>Read actively – underline key points</p>
+                        <p>Pay attention to transitions – however, therefore, moreover</p>
+                        <p>Notice the author's tone – persuasive? informative? entertaining?</p>
+                    </div>
+
+                    <div class="card" data-tags="structure discourse">
+                        <div class="card-tag">Answering Questions</div>
+                        <p>Eliminate wrong answers – remove obviously incorrect options</p>
+                        <p>Return to the text – find evidence for your answer</p>
+                        <p>For multiple answers – check each option individually</p>
+                        <p>Don't overthink – the answer is usually supported by the text</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== SECTION: QUICK REFERENCE ====== -->
+            <div class="section" data-category="structure discourse">
+                <div class="section-title">Quick Reference <span class="badge">ringkasan</span></div>
+
+                <div class="card-grid">
+                    <div class="card" data-tags="structure">
+                        <div class="card-tag">Competencies</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Level</th><th>What to Look For</th><th>Question Words</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Textual</strong></td><td>Explicit information</td><td>What, Where, When, Who</td></tr>
+                                    <tr><td><strong>Inferential</strong></td><td>Implied meaning</td><td>Why, How, What can be inferred</td></tr>
+                                    <tr><td><strong>Evaluation</strong></td><td>Judgments, opinions</td><td>Should, What is the lesson</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card" data-tags="structure">
+                        <div class="card-tag">Text Types</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Type</th><th>Key Features</th><th>Tenses</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Descriptive</strong></td><td>Adjectives, sensory details</td><td>Present</td></tr>
+                                    <tr><td><strong>Recount</strong></td><td>Time connectives, personal</td><td>Past</td></tr>
+                                    <tr><td><strong>Narrative</strong></td><td>Characters, plot, conflict</td><td>Past</td></tr>
+                                    <tr><td><strong>Procedure</strong></td><td>Imperatives, steps</td><td>Present</td></tr>
+                                    <tr><td><strong>Exposition</strong></td><td>Arguments, persuasion</td><td>Present</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== FOOTER ====== -->
+            <div class="footer">
+                <strong>E-Book TKA English</strong><br>
+                Disusun berdasarkan Muatan dan Kompetensi TKA Bahasa Inggris · Level A2–B1 CEFR
+            </div>
+
+        </div><!-- end content -->
+    </div><!-- end container -->
+
+    <!-- ====== SCROLL TOP ====== -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+
+    <script>
+        // ====== SEARCH & FILTER ======
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+        const sections = document.querySelectorAll('.section');
+
+        function filterContent() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+
+            cards.forEach(card => {
+                const tags = card.dataset.tags || '';
+                const text = card.textContent.toLowerCase();
+                const tagMatch = activeFilter === 'all' || tags.includes(activeFilter);
+                const searchMatch = searchTerm === '' || text.includes(searchTerm);
+
+                if (tagMatch && searchMatch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            sections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.card:not(.hidden)');
+                if (visibleCards.length === 0 && section.querySelector('.card-grid')) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterContent);
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterContent();
+            });
+        });
+
+        // ====== SCROLL TOP ======
+        const scrollBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ====== INIT ======
+        filterContent();
+    </script>
+
+</body>
+</html>

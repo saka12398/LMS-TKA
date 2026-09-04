@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>TKA | English – 50 Premium Questions (Hard & Tricky)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1E2A24;
+      --ink-soft: #2C3B33;
+      --paper: #F3EEE1;
+      --card: #FBF9F2;
+      --brass: #A2803F;
+      --brass-light: #C7A662;
+      --brass-soft: #F3ECDA;
+      --rule: #DCD3BC;
+      --text: #262620;
+      --muted: #726C5C;
+      --wine: #7A3A34;
+      --wine-soft: #F3E7E4;
+      --sage: #55654A;
+      --sage-soft: #EBEEE3;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px 14px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      box-shadow: 0 1px 0 rgba(30,42,36,0.04), 0 20px 40px -24px rgba(30,42,36,0.35);
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      background: var(--ink);
+      padding: 2.4rem 1.5rem 1.9rem;
+      color: #F3EEE1;
+      text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 2px;
+      background: var(--brass-light);
+      margin: 16px auto 0;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      letter-spacing: -0.01em;
+      animation: heroRise 0.6s ease-out both;
+    }
+    .hero h1 span {
+      font-family: 'Inter', sans-serif;
+      background: var(--brass-light);
+      color: var(--ink);
+      padding: 3px 14px;
+      border-radius: 40px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      opacity: 0.82;
+      margin-top: 10px;
+      animation: heroRise 0.6s ease-out 0.08s both;
+    }
+    .badge-group {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      font-size: 0.72rem;
+      color: #D9D2BF;
+      animation: heroRise 0.6s ease-out 0.16s both;
+    }
+    .badge-mapel {
+      padding: 0 12px;
+      border-right: 1px solid rgba(243,238,225,0.2);
+    }
+    .badge-mapel:last-child { border-right: none; }
+    @keyframes heroRise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ====== INFO BAR ====== */
+    .info-bar {
+      background: var(--card);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .score-card {
+      background: var(--ink);
+      padding: 7px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: var(--brass-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.2s ease;
+    }
+    .score-card.bump { animation: scoreBump 0.35s ease-out; }
+    @keyframes scoreBump { 0%{transform:scale(1);} 40%{transform:scale(1.06);} 100%{transform:scale(1);} }
+
+    .btn-group { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn {
+      border: 1px solid transparent;
+      padding: 7px 15px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: inherit;
+    }
+    .btn-primary { background: var(--ink); color: var(--brass-light); }
+    .btn-primary:hover { background: var(--ink-soft); }
+    .btn-warning { background: transparent; color: var(--wine); border-color: var(--wine); }
+    .btn-warning:hover { background: var(--wine-soft); }
+    .btn-home { background: transparent; color: var(--muted); border-color: var(--rule); text-decoration: none; }
+    .btn-home:hover { border-color: var(--muted); }
+    .btn-info { background: transparent; color: var(--brass); border-color: var(--brass-light); }
+    .btn-info:hover { background: var(--brass-soft); }
+
+    /* ====== QUIZ GRID ====== */
+    .quiz-grid { padding: 1.4rem; display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .question-card {
+      background: var(--card);
+      border-radius: 5px;
+      border: 1px solid var(--rule);
+      transition: border-color 0.2s;
+      animation: cardReveal 0.45s ease-out both;
+    }
+    @keyframes cardReveal { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .question-card:hover { border-color: var(--brass-light); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      flex-wrap: wrap;
+    }
+    .num-badge {
+      width: 28px; height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brass-light);
+      font-weight: 700;
+      font-family: 'Fraunces', serif;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .kompetensi-tag, .teks-tag, .answer-type-tag {
+      padding: 3px 11px;
+      border-radius: 40px;
+      font-size: 0.62rem;
+      font-weight: 600;
+    }
+    .kompetensi-tag { color: var(--brass); background: var(--brass-soft); }
+    .teks-tag { color: var(--sage); background: var(--sage-soft); }
+    .answer-type-tag { color: var(--ink-soft); background: var(--card); border: 1px solid var(--rule); }
+
+    .question-text {
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.9rem 1.2rem 0.3rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .reading-text {
+      background: var(--paper);
+      margin: 8px 1.2rem;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: #3A382E;
+      border-left: 2px solid var(--brass-light);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .options { padding: 0.3rem 1.2rem; display: flex; flex-direction: column; gap: 7px; }
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: var(--paper);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      border: 1px solid var(--rule);
+    }
+    .option:hover { background: var(--brass-soft); border-color: var(--brass-light); }
+    .option input[type="radio"], .option input[type="checkbox"] {
+      width: 17px; height: 17px;
+      cursor: pointer;
+      accent-color: var(--brass);
+      flex-shrink: 0;
+    }
+    .option label { flex:1; cursor:pointer; font-size:0.8rem; color:var(--text); font-weight:500; }
+
+    .button-group-vertical { display: flex; flex-direction: column; gap: 8px; margin: 12px 1.2rem 12px; }
+    .check-btn, .pembahasan-btn, .pembahasan-id-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border: 1px solid transparent;
+      text-align: center;
+      font-family: inherit;
+    }
+    .check-btn { background: var(--ink); color: var(--brass-light); }
+    .check-btn:hover { background: var(--ink-soft); }
+    .pembahasan-btn { background: transparent; color: var(--brass); border-color: var(--brass-light); }
+    .pembahasan-btn:hover { background: var(--brass-soft); }
+    .pembahasan-id-btn { background: transparent; color: var(--sage); border-color: #B7C2A9; }
+    .pembahasan-id-btn:hover { background: var(--sage-soft); }
+    .check-btn:active, .pembahasan-btn:active, .pembahasan-id-btn:active { transform: scale(0.98); }
+
+    .feedback-area { padding: 0.4rem 1.2rem 1rem; }
+    .result-correct {
+      background: var(--sage-soft);
+      color: var(--sage);
+      border-left: 3px solid var(--sage);
+      padding: 12px 14px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      animation: feedbackIn 0.3s ease-out;
+    }
+    .result-wrong {
+      background: var(--wine-soft);
+      color: var(--wine);
+      border-left: 3px solid var(--wine);
+      padding: 12px 14px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      animation: feedbackIn 0.3s ease-out;
+    }
+    .result-warning {
+      background: var(--brass-soft);
+      color: var(--brass);
+      border-left: 3px solid var(--brass-light);
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+    }
+    @keyframes feedbackIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+    .explanation-box, .explanation-box-id {
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      line-height: 1.65;
+      animation: feedbackIn 0.35s ease-out;
+    }
+    .explanation-box { background: var(--brass-soft); border: 1px solid #E7DBBC; color: var(--text); }
+    .explanation-box-id { background: var(--sage-soft); border: 1px solid #D3DAC7; color: var(--text); margin-top: 8px; }
+    .explanation-box strong { color: var(--brass); }
+    .explanation-box-id strong { color: var(--sage); }
+
+    .footer-note {
+      background: var(--ink);
+      color: #D9D2BF;
+      text-align: center;
+      padding: 16px;
+      font-size: 0.7rem;
+    }
+    .footer-note strong { color: var(--brass-light); font-family: 'Fraunces', serif; }
+    .footer-note span {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 30px;
+      background: rgba(243,238,225,0.08);
+      margin: 2px;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--ink);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brass-light);
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(30,42,36,0.3);
+      z-index: 99;
+      font-size: 1.1rem;
+      transition: opacity 0.25s, transform 0.25s, background 0.2s;
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    .scroll-top.visible { opacity:1; transform:scale(1); }
+    .scroll-top:hover { background: var(--brass); color: var(--ink); }
+
+    .toast-save {
+      position: fixed;
+      bottom: 76px;
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      background: var(--ink);
+      color: var(--brass-light);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast-save.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ====== SPLASH ====== */
+    #splash-screen {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100vh; height:100dvh;
+      background: radial-gradient(ellipse at 30% 30%, #253A31 0%, #101A15 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+      overflow: hidden;
+    }
+    .splash-bg-animation { position:absolute; width:100%; height:100%; }
+    .splash-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199,166,98,0.10) 0%, rgba(199,166,98,0.02) 70%);
+      animation: floatCircle 14s infinite ease-in-out;
+      pointer-events: none;
+    }
+    @keyframes floatCircle { 0%,100%{transform:translate(0,0) scale(1); opacity:0.5;} 50%{transform:translate(20px,-20px) scale(1.06); opacity:0.75;} }
+
+    .splash-content { text-align:center; z-index:10; position:relative; padding:20px; animation: splashFade 0.7s ease-out both; }
+    @keyframes splashFade { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
+
+    .splash-logo-wrapper { position:relative; width:100px; height:100px; margin:0 auto 22px; }
+    .splash-logo {
+      width:100px; height:100px;
+      background: linear-gradient(135deg, var(--brass-light), var(--brass));
+      border-radius: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      position:relative;
+      z-index:3;
+      box-shadow: 0 20px 40px -12px rgba(162,128,63,0.5);
+    }
+    .splash-logo-glow {
+      position:absolute;
+      top:-6px; left:-6px; right:-6px; bottom:-6px;
+      background: var(--brass-light);
+      border-radius: 32px;
+      opacity:0.28;
+      filter:blur(18px);
+      z-index:1;
+      animation: logoGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes logoGlow { from{opacity:0.2;} to{opacity:0.4;} }
+
+    .splash-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size:1.7rem;
+      letter-spacing:0.02em;
+      margin-bottom:8px;
+      display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
+      color: #F3EEE1;
+    }
+    .title-word {
+      opacity:0;
+      transform:translateY(14px);
+      animation: wordFloat 0.5s ease-out forwards;
+    }
+    .title-word:nth-child(1) { animation-delay:0.1s; }
+    .title-word:nth-child(2) { animation-delay:0.25s; }
+    .title-word:nth-child(3) { animation-delay:0.4s; color: var(--brass-light); }
+    @keyframes wordFloat { to{opacity:1; transform:translateY(0);} }
+
+    .splash-sub {
+      font-family: 'Inter', sans-serif;
+      color: #C7A662;
+      font-size:0.72rem;
+      letter-spacing:2px;
+      margin-top:6px;
+      opacity:0;
+      animation: heroRise 0.6s ease-out 0.55s forwards;
+    }
+    .splash-loader-container { width:220px; margin:28px auto 14px; }
+    .splash-loader { width:100%; height:2px; background:rgba(243,238,225,0.14); border-radius:10px; overflow:hidden; }
+    .splash-loader-fill {
+      width:0%; height:100%;
+      background: var(--brass-light);
+      border-radius:10px;
+      animation: loadingBar 2.4s cubic-bezier(0.3,0.1,0.2,1) forwards;
+    }
+    @keyframes loadingBar { 0%{width:0%;} 100%{width:100%;} }
+    .loader-percent { text-align:center; margin-top:10px; font-size:0.62rem; font-weight:600; color:#C7A662; letter-spacing:1px; font-family:monospace; }
+
+    .splash-text-animate { margin-top:22px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .animate-item {
+      font-size:0.64rem; color:#B8B0A0; padding:4px 12px;
+      background:rgba(243,238,225,0.05); border-radius:40px;
+      opacity:0; animation: itemFadeIn 0.5s ease-out forwards;
+    }
+    .animate-item:nth-child(1) { animation-delay:0.7s; }
+    .animate-item:nth-child(2) { animation-delay:0.85s; }
+    .animate-item:nth-child(3) { animation-delay:1s; }
+    @keyframes itemFadeIn { to { opacity:0.9; } }
+
+    .splash-footer-text { margin-top:24px; font-size:0.56rem; color:#6E7A6F; letter-spacing:2.5px; opacity:0; animation: heroRise 0.6s ease-out 1.1s forwards; }
+    .fade-out { opacity:0; visibility:hidden; }
+
+    @media (max-width:600px) {
+      body { padding:10px; }
+      .hero h1 { font-size:1.25rem; }
+      .info-bar { flex-direction:column; align-items:stretch; }
+      .score-card { justify-content:center; }
+      .btn-group { justify-content:center; }
+      .option label { font-size:0.72rem; }
+      .splash-logo-wrapper { width:76px; height:76px; }
+      .splash-logo { width:76px; height:76px; font-size:36px; border-radius:20px; }
+      .splash-title { font-size:1.25rem; gap:6px; }
+      .splash-loader-container { width:190px; }
+      .animate-item { font-size:0.56rem; padding:3px 10px; }
+      .toast-save { font-size:0.6rem; bottom:70px; }
+      .scroll-top { width:38px; height:38px; font-size:1rem; bottom:14px; right:14px; }
+    }
+
+    .modal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(16,26,21,0.65); backdrop-filter:blur(4px); z-index:1001;
+      justify-content:center; align-items:center; animation:modalBgFade 0.2s ease;
+    }
+    .modal-content {
+      background:var(--card); width:92%; max-width:520px; max-height:80vh;
+      border-radius:8px; overflow:hidden; border: 1px solid var(--rule);
+      animation:modalPop 0.28s ease-out;
+    }
+    .modal-header {
+      background:var(--ink); color:#F3EEE1; padding:14px 20px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .modal-header h3 { font-family:'Fraunces', serif; font-weight:600; font-size:1rem; }
+    .close-modal { background:none; border:none; color:#D9D2BF; font-size:24px; cursor:pointer; line-height:1; }
+    .modal-body { padding:18px; max-height:60vh; overflow-y:auto; }
+    .answer-item {
+      background:var(--paper); padding:8px 12px; border-radius:4px;
+      display:flex; justify-content:space-between; font-size:0.7rem; font-weight:500;
+      border: 1px solid var(--rule);
+    }
+    .answer-item span:last-child {
+      color:var(--ink); font-weight:700; background:var(--brass-soft);
+      padding:1px 10px; border-radius:20px;
+    }
+    .answer-list { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    @keyframes modalBgFade { from { opacity:0; } to { opacity:1; } }
+    @keyframes modalPop { from { opacity:0; transform:scale(0.96) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+  </style>
+</head>
+<body>
+
+<div id="splash-screen">
+  <div class="splash-bg-animation">
+    <div class="splash-circle" style="width:380px;height:380px;top:-110px;left:-110px;animation-delay:0s;"></div>
+    <div class="splash-circle" style="width:260px;height:260px;bottom:-60px;right:-60px;animation-delay:2s;"></div>
+    <div class="splash-circle" style="width:160px;height:160px;top:30%;right:6%;animation-delay:4s;"></div>
+  </div>
+  <div class="splash-content">
+    <div class="splash-logo-wrapper">
+      <div class="splash-logo-glow"></div>
+      <div class="splash-logo">📘</div>
+    </div>
+    <h1 class="splash-title">
+      <span class="title-word">TKA</span>
+      <span class="title-word">ENGLISH</span>
+      <span class="title-word">50</span>
+    </h1>
+    <p class="splash-sub">Olympiad · Hard & Tricky · Complete</p>
+    <div class="splash-loader-container">
+      <div class="splash-loader"><div class="splash-loader-fill"></div></div>
+      <div class="loader-percent" id="loaderPercent">0%</div>
+    </div>
+    <div class="splash-text-animate">
+      <span class="animate-item">Critical Analysis</span>
+      <span class="animate-item">Inference</span>
+      <span class="animate-item">Deep Evaluation</span>
+    </div>
+    <div class="splash-footer-text">50 QUESTIONS · FULL EXPLANATIONS</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <h1>TKA English <span>50 Q</span></h1>
+    <p>Textual Comprehension · Inferential · Evaluation & Appreciation</p>
+    <div class="badge-group">
+      <span class="badge-mapel">Hard & Tricky</span>
+      <span class="badge-mapel">Test TKA Style</span>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div class="score-card" id="liveScoreDisplay">Score: 0 / 50</div>
+    <div class="btn-group">
+      <a href="#" class="btn btn-home">Home</a>
+      <button class="btn btn-primary" id="checkAllBtn">Check all</button>
+      <button class="btn btn-info" id="showAllAnswersBtn">Key</button>
+      <button class="btn btn-warning" id="resetBtn">Reset</button>
+    </div>
+  </div>
+
+  <div class="quiz-grid" id="quizGrid"></div>
+
+  <div class="footer-note">
+    <strong>Tip.</strong> Select answer(s), then check to see the full explanation and traps.<br>
+    <span>Radio = single answer</span>
+    <span>Checkbox = multiple answers</span>
+  </div>
+</div>
+
+<div id="answerModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Answer key — 50 questions</h3>
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="answerListContainer" class="answer-list"></div>
+      <button class="btn btn-primary" id="copyAnswersBtn" style="margin-top:14px;width:100%;justify-content:center;">Copy all</button>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-top" id="scrollTopBtn">↑</div>
+<div id="toast-save" class="toast-save">Answers saved</div>
+
+<script>
+// ====== 50 ENGLISH QUESTIONS with isMulti flag and explanationId ======
+const soalData = [
+  // 1–5: King Hung Vuong VI (single)
+  { id:1, kompetensi:"Main Idea", teks:"fiction", isMulti:false, bacaan:"King Hung Vuong VI had a beautiful daughter...", soal:"Which outline shows the correct main points?", options:["A. King wanted the best husband → many princes came → Thuy Tinh arrived first → princess married Thuy Tinh.","B. King had a beautiful daughter → he looked for the right husband → Son Tinh and Thuy Tinh competed → Son Tinh won → Thuy Tinh attacked with floods but was defeated.","C. King asked his daughter to choose → she chose both princes → they fought → Thuy Tinh won.","D. King searched for a husband → Thuy Tinh won the test → Son Tinh drowned.","E. King invited princes → Son Tinh refused the challenge → Thuy Tinh won peacefully."], correct:"B", explanation:"Option B follows the entire plot correctly from beginning to end.", explanationId:"Pilihan B mengikuti seluruh alur utama cerita dari awal sampai akhir secara benar." },
+  { id:2, kompetensi:"Cause-Effect", teks:"fiction", isMulti:false, bacaan:"King Hung Vuong VI had a beautiful daughter...", soal:"Why did Thuy Tinh attack Son Tinh after the wedding?", options:["A. He was jealous of Son Tinh's victory.","B. He believed the King had lied to him.","C. He thought the princess loved him more.","D. He wanted to show off his power.","E. He had promised to fight until death."], correct:"A", explanation:"Thuy Tinh attacked because he was angry after losing to Son Tinh. He did not accept his defeat.", explanationId:"Thuy Tinh menyerang karena marah setelah kalah dari Son Tinh. Ia tidak menerima kekalahannya." },
+  { id:3, kompetensi:"Compare/Contrast", teks:"fiction", isMulti:false, bacaan:"King Hung Vuong VI had a beautiful daughter...", soal:"Which traits are similarities? (Both are not humans; They can control elements; They love the princess)", options:["A. All are similarities","B. Only first two","C. Only last two","D. Only first and last","E. None"], correct:"A", explanation:"All three traits are shared by both Son Tinh and Thuy Tinh.", explanationId:"Ketiga sifat tersebut dimiliki oleh Son Tinh dan Thuy Tinh, sehingga semuanya merupakan persamaan." },
+  { id:4, kompetensi:"Vocabulary", teks:"fiction", isMulti:false, bacaan:"...The King kept his promise...", soal:"What does 'kept his promise' mean?", options:["A. Forgot about his decision.","B. Changed his mind about the wedding.","C. Did what he had promised to do.","D. Delayed the marriage.","E. Asked for more gifts."], correct:"C", explanation:"'Keep a promise' means to do what you said you would do.", explanationId:"Keep a promise berarti menepati janji. Raja memberikan putrinya kepada Son Tinh karena Son Tinh datang lebih dahulu membawa hadiah." },
+  { id:5, kompetensi:"Moral Lesson", teks:"fiction", isMulti:true, bacaan:"King Hung Vuong VI...", soal:"What is the main lesson? (more than one)", options:["A. Accept defeat gracefully to prevent harm to others.","B. Be fair and follow the agreed rules in competitions.","C. Choose peaceful solutions rather than angry reactions.","D. Prepare honestly and present your gifts properly.","E. Respect leaders' decisions and community agreements."], correct:"A,B,C,E", explanation:"The story shows the bad consequences of not accepting defeat. Lessons: fairness, peace, respect.", explanationId:"Cerita menunjukkan akibat buruk dari tidak menerima kekalahan dan memilih kemarahan. Pelajaran utamanya adalah bersikap adil, menerima keputusan, dan memilih penyelesaian damai." },
+
+  // 6–7
+  { id:6, kompetensi:"Textual Understanding", teks:"information", isMulti:false, bacaan:"Bali, a beautiful island in Indonesia... West Bali National Park...", soal:"Which place is described as a protected area with rare animals and plants?", options:["A. Munduk Waterfall","B. West Bali National Park","C. Tegalalang Rice Terraces","D. Ubud Palace","E. Bali Beach"], correct:"B", explanation:"West Bali National Park is described as a protected area with forests, mangroves, coral reefs, and the rare Bali Starling.", explanationId:"West Bali National Park digambarkan sebagai kawasan lindung dengan hutan, mangrove, terumbu karang, dan Burung Jalak Bali yang langka." },
+  { id:7, kompetensi:"Inferential Understanding", teks:"information", isMulti:false, bacaan:"Bali, a beautiful island in Indonesia... Munduk Waterfall... Tegalalang Rice Terraces...", soal:"What can readers infer about the activities at Munduk Waterfall and Tegalalang Rice Terraces?", options:["A. Both places are mainly used for industrial activities.","B. Both places offer peaceful experiences connected to nature.","C. Both places are crowded urban attractions.","D. Both places are important for marine conservation.","E. Both places are located inside West Bali National Park."], correct:"B", explanation:"Munduk Waterfall is described as a peaceful place to relax, while Tegalalang offers a quiet and inspiring view of traditional farming. Both provide peaceful, nature-connected experiences.", explanationId:"Munduk Waterfall digambarkan sebagai tempat yang tenang untuk bersantai, sementara Tegalalang menawarkan pemandangan pertanian tradisional yang tenang dan menginspirasi. Keduanya memberikan pengalaman damai yang terhubung dengan alam." },
+
+  // 8
+  { id:8, kompetensi:"Supporting Details", teks:"information", isMulti:true, bacaan:"Bali, a beautiful island in Indonesia...", soal:"Which parts best support 'full of natural beauty'? (more than one)", options:["A. A peaceful area filled with green forests, calm mangrove swamps, and colorful coral reefs.","B. These terraces are shaped by generations of farmers who work the land by hand.","C. Water flows gently over rocky cliffs into a cool, clear pool. Mist rises...","D. In the morning, mist rises above the fields, and sunlight reflects...","E. Farmers in wide-brimmed hats plant rice carefully..."], correct:"A,C,D", explanation:"A,C,D directly describe natural scenery. B and E focus on activities.", explanationId:"A, C, dan D secara langsung menggambarkan pemandangan alam Bali. B dan E lebih berfokus pada aktivitas serta kehidupan para petani." },
+
+  // 9–11
+  { id:9, kompetensi:"Detail", teks:"information", isMulti:false, bacaan:"Last summer, I had the opportunity to work as an intern...", soal:"What did the writer do every morning?", options:["A. Made schedules.","B. Played football.","C. Prepared gifts.","D. Woke up early, arrived on time, and followed instructions.","E. Set up cones and checked emergency schedules."], correct:"D", explanation:"The text directly states: wake up early, arrive on time, follow instructions.", explanationId:"Teks secara langsung menyebutkan bahwa setiap pagi penulis harus bangun lebih awal, datang tepat waktu, dan mengikuti instruksi." },
+  { id:10, kompetensi:"Character Traits", teks:"information", isMulti:true, bacaan:"Last summer, I had the opportunity to work as an intern...", soal:"Best words to describe the writer's personality? (more than one)", options:["A. Careful and ready to help","B. Confident and enjoys working alone","C. Responsible and willing to learn","D. Friendly and works well with others","E. Creative and likes to try new things"], correct:"A,C,D", explanation:"The writer shows carefulness, responsibility, willingness to learn, and teamwork.", explanationId:"Penulis menunjukkan sikap hati-hati, bertanggung jawab, mau belajar, mampu bekerja sama, dan membantu ketika terjadi keadaan darurat." },
+  { id:11, kompetensi:"Prediction", teks:"information", isMulti:false, bacaan:"Last summer... I hope to work in a sports club again in the future.", soal:"What will the writer most likely do after finishing the internship?", options:["A. Consider a career in sports medicine","B. Stop working and focus only on school","C. Look for another chance to work in a sports club","D. Study medicine to become a doctor","E. Train as a professional football player"], correct:"C", explanation:"The writer says 'hopes to work in a sports club again in the future.'", explanationId:"Di akhir teks, penulis mengatakan bahwa ia hopes to work in a sports club again in the future." },
+
+  // 12–15
+  { id:12, kompetensi:"Inference", teks:"information", isMulti:true, bacaan:"Social Media Harms Teen Mental Health...", soal:"What happens if teenagers have poor sleep quality? (more than one)", options:["A. Teenagers' grades could drop.","B. Teens struggle to focus in class.","C. Teens are likely to feel stressed.","D. Teenagers will be more confident.","E. Teens will become mentally strong."], correct:"A,B,C", explanation:"Lack of sleep leads to poor focus, lower grades, and stress.", explanationId:"Teks menjelaskan bahwa kurang tidur dapat membuat siswa sulit fokus dan nilai mereka dapat menurun. Kondisi tersebut juga dapat meningkatkan stres." },
+  { id:13, kompetensi:"Persuasion", teks:"information", isMulti:true, bacaan:"Social Media Harms Teen Mental Health...", soal:"Which facts would make the text more persuasive? (more than one)", options:["A. Research data showing anxiety/depression due to social media.","B. Personal stories from teens who feel happier after reducing use.","C. Statistics about how many teens use social media daily.","D. A list of popular platforms.","E. Expert opinions from doctors/psychologists."], correct:"A,B,E", explanation:"Data, personal stories, and expert opinions strengthen the argument.", explanationId:"Data penelitian, pengalaman nyata, dan pendapat ahli dapat memberikan bukti yang lebih kuat untuk mendukung argumen penulis." },
+  { id:14, kompetensi:"Supporting Argument", teks:"information", isMulti:true, bacaan:"Social Media Harms...", soal:"Which statements support the author's argument? (more than one)", options:["A. 'When teens see pictures of people who seem perfect, they feel that they are not good enough.'","B. 'Many teenagers use their phones late at night, which reduces sleep time.'","C. 'Schools should teach students how to use social media in healthy ways.'","D. 'Social media helps teens stay connected...'","E. 'Victims of cyberbullying often feel alone, scared, and helpless.'"], correct:"A,B,E", explanation:"A,B,E give negative impacts. D is a benefit, C is a suggestion.", explanationId:"A, B, dan E memberikan alasan atau dampak negatif dari penggunaan media sosial. D justru menunjukkan manfaat media sosial, sedangkan C adalah saran." },
+  { id:15, kompetensi:"Overall Impression", teks:"information", isMulti:true, bacaan:"Social Media Harms...", soal:"Most prominent impression from the text? (more than one)", options:["A. Social media can make teens unhappy due to comparison.","B. Teens should completely stop using social media.","C. Too much social media disturbs sleep and focus.","D. Cyberbullying is serious and makes teens feel lonely.","E. Social media has only negative effects."], correct:"A,C,D", explanation:"The text does not say to stop completely nor that it has only negative effects.", explanationId:"Ketiga pilihan tersebut merupakan kesan utama yang didukung oleh isi teks. Penulis tidak mengatakan bahwa media sosial harus dihentikan sepenuhnya dan juga mengakui bahwa media sosial memiliki beberapa manfaat." },
+
+  // 16–20
+  { id:16, kompetensi:"Summary", teks:"fiction", isMulti:false, bacaan:"The Lion and the Mouse...", soal:"Which option best summarizes the story?", options:["A. A lion was walking through the jungle and gave food to a mouse.","B. A mouse disturbed a sleeping lion. Later, the lion was caught in a hunter's net, and the mouse freed him. The lesson is that even a small creature can help.","C. The lion and mouse became friends because they went on adventures together.","D. A storm trapped the lion, and the mouse called other animals for help.","E. The mouse helped the lion find food."], correct:"B", explanation:"B includes the beginning, problem, resolution, and moral.", explanationId:"Pilihan B mencakup awal, masalah, penyelesaian, dan pesan cerita dengan lengkap." },
+  { id:17, kompetensi:"Message", teks:"fiction", isMulti:true, bacaan:"The Lion and the Mouse...", soal:"Which statements best convey the message? (more than one)", options:["A. We should never wake up a sleeping animal.","B. Even the small and weak can help the strong.","C. It is always good to ask for help when we need it.","D. Lions are dangerous animals and should be avoided.","E. Never trust anyone who plays with your hair."], correct:"B,C", explanation:"The main message is that even small creatures can help, and it's good to ask for help.", explanationId:"Pesan utama cerita adalah bahwa makhluk kecil pun dapat memberikan bantuan besar dan kita tidak perlu ragu menerima bantuan ketika membutuhkannya." },
+  { id:18, kompetensi:"Detail", teks:"fiction", isMulti:false, bacaan:"The Lion and the Mouse...", soal:"Why did the lion let the mouse go?", options:["A. The lion was too tired to eat the mouse.","B. The mouse said he might help the lion one day.","C. The lion was happy to see the mouse.","D. The lion heard someone coming.","E. The mouse promised to bring food."], correct:"B", explanation:"The mouse promised to help the lion one day, and the lion let him go.", explanationId:"Mouse berjanji bahwa suatu hari ia akan membantu singa. Singa merasa lucu dengan janji tersebut tetapi akhirnya memilih melepaskannya." },
+  { id:19, kompetensi:"Prediction", teks:"fiction", isMulti:false, bacaan:"The Lion and the Mouse...", soal:"Which ending is best anticipated after the lion lets the mouse go?", options:["A. The mouse forgets about the lion and never helps him.","B. The lion gets into trouble and the mouse helps him.","C. The lion becomes angry at all small animals.","D. The mouse spreads the lion's kindness to other animals.","E. The mouse becomes the lion's loyal assistant."], correct:"B", explanation:"The most logical prediction is that the lion gets in trouble and the mouse helps.", explanationId:"B merupakan prediksi yang paling kuat berdasarkan janji mouse dan pola cerita. Kemudian memang benar bahwa singa mengalami masalah dan mouse membantunya." },
+  { id:20, kompetensi:"Character", teks:"fiction", isMulti:true, bacaan:"The Lion and the Mouse...", soal:"Which sentences help understand the lion's character? (more than one)", options:["A. 'The lion always took his afternoon nap under the shade of a big tree.'","B. 'He caught the mouse and questioned him for interrupting his nap.'","C. 'The lion was amused at the mouse's words and decided to spare his life.'","D. 'With his sharp teeth, the mouse nibbled through the net.'","E. 'The lion thanked the mouse immensely for his help.'"], correct:"B,C,E", explanation:"B shows strength/anger, C shows kindness, E shows gratitude.", explanationId:"B menunjukkan singa yang kuat dan mudah marah. C menunjukkan bahwa ia juga memiliki sisi baik. E menunjukkan bahwa ia mampu menghargai bantuan dari makhluk lain." },
+
+  // 21–24
+  { id:21, kompetensi:"Detail", teks:"information", isMulti:true, bacaan:"The Great Barrier Reef...", soal:"Which descriptions are clearly mentioned? (more than one)", options:["A. The reef was built by local communities.","B. The reef is located in the Pacific Ocean near Australia.","C. The reef can help protect the coast from big waves.","D. The reef is home to sea turtles and dolphins.","E. The reef has more than 10,000 coral islands."], correct:"B,C,D", explanation:"B,C,D are directly stated in the text.", explanationId:"B, C, dan D disebutkan secara langsung dalam teks. Informasi mengenai pembangunan oleh masyarakat lokal dan jumlah lebih dari 10.000 pulau tidak disebutkan." },
+  { id:22, kompetensi:"Vocabulary", teks:"information", isMulti:false, bacaan:"The Great Barrier Reef...", soal:"What does 'a different world under the sea' most likely mean?", options:["A. A safe place with bright reef","B. A peaceful place where people can live underwater","C. A colorful place that looks the same as land","D. A shining reef that is quiet","E. A calm place that looks beautiful and unique"], correct:"E", explanation:"It describes the underwater scenery as beautiful, colorful, and different from land.", explanationId:"Frasa tersebut merupakan gambaran bahwa pemandangan bawah laut sangat indah, berwarna-warni, dan terasa berbeda dari dunia di darat." },
+  { id:23, kompetensi:"Main Idea", teks:"information", isMulti:false, bacaan:"The Great Barrier Reef...", soal:"What is the main idea implied by the text?", options:["A. The reef is useful mainly for fishing.","B. The reef is large but not important.","C. The reef is a natural treasure that must be cared for.","D. The reef is only for scientists.","E. The reef should be closed to visitors."], correct:"C", explanation:"The text describes beauty and importance, implying it must be protected.", explanationId:"Teks tidak hanya menggambarkan keindahan Great Barrier Reef, tetapi juga menjelaskan pentingnya reef bagi lingkungan, hewan, dan manusia. Karena itu, reef perlu dijaga." },
+  { id:24, kompetensi:"Persuasion", teks:"information", isMulti:false, bacaan:"The Great Barrier Reef...", soal:"Which detail would best encourage people to visit the Great Barrier Reef?", options:["A. Visitors can see an Australian national park.","B. Visitors can stay in hotels around the reef.","C. Visitors can get there by boat or short flights.","D. Visitors can protect the coral and animals.","E. Visitors can see the coral by diving or swimming."], correct:"E", explanation:"E gives a direct, attractive experience.", explanationId:"Pilihan E memberikan pengalaman langsung yang menarik bagi wisatawan, yaitu melihat keindahan coral dengan diving atau swimming." },
+
+  // 25–30
+  { id:25, kompetensi:"Supporting Actions", teks:"information", isMulti:true, bacaan:"Why Teenagers Should Learn to Manage Their Money...", soal:"Which actions support smart money management? (more than one)", options:["A. Tracking daily expenses using a notebook or app","B. Spending more money than the monthly budget allows","C. Setting financial goals for the short and long term","D. Borrowing money whenever there is not enough left","E. Dividing money into saving, spending, and emergency funds"], correct:"A,C,E", explanation:"The text suggests tracking, setting goals, and dividing money.", explanationId:"Teks menyarankan mencatat pengeluaran, membuat tujuan finansial jangka pendek dan panjang, serta membagi uang untuk kebutuhan, tabungan, dan keadaan tidak terduga." },
+  { id:26, kompetensi:"Informative", teks:"information", isMulti:true, bacaan:"Why Teenagers Should Learn to Manage Their Money...", soal:"Which information would make the text more informative about student spending habits?", options:["A. A paragraph about the history of financial education in schools","B. A table showing common monthly high school students' expenses","C. A graph comparing saving habits between teenagers and adults","D. A chart listing popular entertainment choices among students","E. A paragraph about students' experiences in managing budgets"], correct:"B,E", explanation:"A table of expenses and student experiences directly inform spending habits.", explanationId:"Tabel pengeluaran bulanan secara langsung memberikan data tentang spending habits siswa. Pengalaman siswa dalam mengatur anggaran juga memberikan informasi yang relevan dan nyata." },
+  { id:27, kompetensi:"Purpose", teks:"information", isMulti:false, bacaan:"Smart Spending at School...", soal:"What is the main purpose of the text?", options:["A. To explain why students should never spend money.","B. To describe budgeting applications.","C. To explain ways students can manage their money wisely.","D. To persuade students to stop buying food.","E. To compare student allowances."], correct:"C", explanation:"The text discusses budgeting, recording, and saving — ways to manage money wisely.", explanationId:"Teks membahas budgeting, mencatat pengeluaran, dan menabung. Semua hal tersebut merupakan cara mengelola uang dengan bijak." },
+  { id:28, kompetensi:"Recommended Actions", teks:"information", isMulti:true, bacaan:"Smart Spending at School...", soal:"Which actions are recommended? (more than one)", options:["A. Making a daily budget","B. Recording expenses","C. Spending all allowance immediately","D. Saving money regularly","E. Buying expensive food every day"], correct:"A,B,D", explanation:"All three are mentioned as helpful habits.", explanationId:"Ketiganya disebutkan sebagai kebiasaan yang membantu siswa mengatur uang dengan baik." },
+  { id:29, kompetensi:"Inference", teks:"information", isMulti:false, bacaan:"Smart Spending at School...", soal:"What can be inferred from the text?", options:["A. Small purchases can become a problem if they happen repeatedly.","B. Students should avoid using money completely.","C. Saving is only useful for adults.","D. All students receive the same allowance.","E. Budgeting prevents students from enjoying money."], correct:"A", explanation:"Even small daily purchases can add up to a lot.", explanationId:"Walaupun satu pembelian kecil terlihat murah, pembelian yang dilakukan setiap hari dapat menghabiskan banyak uang." },
+  { id:30, kompetensi:"Author's Attitude", teks:"information", isMulti:false, bacaan:"Smart Spending at School...", soal:"Which statement best reflects the author's attitude toward spending?", options:["A. Spending is always irresponsible.","B. Students should spend without planning.","C. Students can enjoy their money while making responsible choices.","D. Students should save every cent.","E. Only adults can manage money."], correct:"C", explanation:"The author emphasizes balance between spending and saving.", explanationId:"Penulis tidak melarang siswa menikmati uang. Yang ditekankan adalah keseimbangan antara spending dan saving." },
+
+  // 31–35
+  { id:31, kompetensi:"Reason", teks:"information", isMulti:false, bacaan:"The School Garden Project...", soal:"What was the main reason the students started the garden project?", options:["A. They wanted to sell vegetables.","B. They wanted to use an unused area behind the library.","C. Their teacher ordered them to build it.","D. They wanted to replace the cooking club.","E. They wanted to build a new library."], correct:"B", explanation:"They saw an empty area and wanted to turn it into a garden.", explanationId:"Mereka melihat area kosong yang jarang digunakan dan ingin mengubahnya menjadi taman." },
+  { id:32, kompetensi:"Detail", teks:"information", isMulti:true, bacaan:"The School Garden Project...", soal:"Which plants were grown? (more than one)", options:["A. Tomatoes","B. Spinach","C. Rice","D. Sunflowers","E. Corn"], correct:"A,B,D", explanation:"Tomatoes, spinach, sunflowers are mentioned.", explanationId:"Tomatoes, spinach, dan sunflowers disebutkan langsung dalam teks. Rice dan corn tidak disebutkan." },
+  { id:33, kompetensi:"Problem", teks:"information", isMulti:false, bacaan:"The School Garden Project...", soal:"What problem did the students face?", options:["A. They did not have enough students.","B. The vegetables were stolen.","C. Some plants received too much sunlight.","D. Animals destroyed the garden.","E. They could not find seeds."], correct:"C", explanation:"Some plants didn't grow well due to too much sunlight.", explanationId:"Beberapa tanaman tidak tumbuh dengan baik karena terlalu banyak terkena sinar matahari." },
+  { id:34, kompetensi:"Inference", teks:"information", isMulti:false, bacaan:"The School Garden Project...", soal:"What can be inferred from their response?", options:["A. They were willing to find a solution.","B. They decided to stop.","C. They blamed the teacher.","D. They ignored the problem.","E. They gave away all plants."], correct:"A", explanation:"They discussed and moved the plants, showing problem-solving.", explanationId:"Mereka mendiskusikan masalah lalu memindahkan tanaman. Ini menunjukkan kemampuan problem-solving." },
+  { id:35, kompetensi:"Lessons", teks:"information", isMulti:true, bacaan:"The School Garden Project...", soal:"What lessons did the students learn? (more than one)", options:["A. Teamwork is important.","B. Problems can be solved through discussion.","C. Gardening is always easy.","D. Responsibility requires regular effort.","E. Every plant can grow anywhere."], correct:"A,B,D", explanation:"They learned teamwork, problem-solving, and responsibility.", explanationId:"Ketiga hal tersebut sesuai dengan pengalaman siswa selama mengerjakan proyek." },
+
+  // 36–40
+  { id:36, kompetensi:"Reason", teks:"information", isMulti:false, bacaan:"A Visit to the Science Museum...", soal:"Why did the class visit the museum?", options:["A. For a school activity","B. For a family vacation","C. To buy science equipment","D. To attend a competition","E. To meet famous scientists"], correct:"A", explanation:"The visit was part of a school activity.", explanationId:"Kunjungan tersebut merupakan bagian dari kegiatan sekolah." },
+  { id:37, kompetensi:"Activities", teks:"information", isMulti:true, bacaan:"A Visit to the Science Museum...", soal:"What did the students do in the interactive room? (more than one)", options:["A. Tested magnets","B. Created electrical circuits","C. Watched a football match","D. Observed how light changed direction","E. Built a spacecraft"], correct:"A,B,D", explanation:"All three are directly mentioned.", explanationId:"Ketiga aktivitas tersebut disebutkan secara langsung dalam teks." },
+  { id:38, kompetensi:"Opinion", teks:"information", isMulti:false, bacaan:"A Visit to the Science Museum...", soal:"What can be inferred about the writer's opinion?", options:["A. The museum was boring.","B. The museum was more interesting than expected.","C. The writer disliked science.","D. The writer wanted to leave early.","E. The museum was too difficult."], correct:"B", explanation:"The writer said it was 'more interesting than I had expected.'", explanationId:"Penulis mengatakan bahwa museum tersebut more interesting than I had expected." },
+  { id:39, kompetensi:"Purpose", teks:"information", isMulti:false, bacaan:"A Visit to the Science Museum...", soal:"Why did the guide encourage students to ask questions?", options:["A. To make the visit longer.","B. To help them learn actively.","C. To test their English.","D. To prepare them for an exam.","E. To entertain the guide."], correct:"B", explanation:"Students were encouraged to ask questions and do experiments.", explanationId:"Siswa tidak hanya membaca informasi, tetapi didorong untuk aktif bertanya dan melakukan eksperimen." },
+  { id:40, kompetensi:"Reflection", teks:"information", isMulti:false, bacaan:"A Visit to the Science Museum...", soal:"Which statement best expresses the writer's reflection?", options:["A. Science is difficult.","B. Museums should only display old objects.","C. Science can be learned through real experiences.","D. Students should avoid textbooks.","E. Experiments are unnecessary."], correct:"C", explanation:"The writer realized science can be explored through real experiences.", explanationId:"Pada bagian akhir, penulis menyadari bahwa ilmu pengetahuan dapat dipelajari melalui pengalaman nyata, bukan hanya dari buku." },
+
+  // 41–45
+  { id:41, kompetensi:"Purpose", teks:"information", isMulti:false, bacaan:"How to Make a Simple Fruit Salad...", soal:"What is the purpose of the text?", options:["A. To describe different fruits.","B. To explain how to make a simple fruit salad.","C. To tell a story about food.","D. To compare fruits and vegetables.","E. To explain how fruit grows."], correct:"B", explanation:"It's a procedure text with ingredients and steps.", explanationId:"Teks merupakan procedure text yang memberikan ingredients dan steps untuk membuat fruit salad." },
+  { id:42, kompetensi:"Sequence", teks:"information", isMulti:false, bacaan:"How to Make a Simple Fruit Salad...", soal:"What should be done before cutting the fruits?", options:["A. Add honey.","B. Put them in the refrigerator.","C. Wash them carefully.","D. Mix them with yogurt.","E. Serve them immediately."], correct:"C", explanation:"The first step is to wash all fruits carefully.", explanationId:"Langkah pertama adalah mencuci semua buah dengan hati-hati." },
+  { id:43, kompetensi:"Ingredients", teks:"information", isMulti:true, bacaan:"How to Make a Simple Fruit Salad...", soal:"Which ingredients are used? (more than one)", options:["A. Apple","B. Banana","C. Yogurt","D. Chocolate","E. Honey"], correct:"A,B,C,E", explanation:"All except chocolate are listed.", explanationId:"Keempat bahan tersebut tercantum dalam daftar ingredients. Chocolate tidak ada." },
+  { id:44, kompetensi:"Reason", teks:"information", isMulti:false, bacaan:"How to Make a Simple Fruit Salad...", soal:"Why should the grapes be cut in half if they are large?", options:["A. To make them sweeter.","B. To make them easier to mix and eat.","C. To change their color.","D. To remove all their seeds.","E. To make them colder."], correct:"B", explanation:"Cutting large grapes makes them easier to mix and eat.", explanationId:"Memotong anggur yang besar menjadi dua membuatnya lebih mudah dicampur dan dimakan." },
+  { id:45, kompetensi:"Hygiene", teks:"information", isMulti:false, bacaan:"How to Make a Simple Fruit Salad...", soal:"What would most likely happen if someone skipped washing the fruit?", options:["A. The salad would become sweeter.","B. The fruit would become softer.","C. The preparation would be less hygienic.","D. The yogurt would disappear.","E. The fruit would become larger."], correct:"C", explanation:"Washing is important for hygiene; skipping it makes preparation less hygienic.", explanationId:"Mencuci buah merupakan bagian penting dari kebersihan makanan. Jika dilewati, proses persiapan menjadi kurang higienis." },
+
+  // 46–50
+  { id:46, kompetensi:"Main Argument", teks:"information", isMulti:false, bacaan:"Students Should Use Public Transportation...", soal:"What is the author's main argument?", options:["A. Students should buy their own vehicles.","B. Students should use public transportation more often.","C. Public transportation should be free.","D. Cars are always dangerous.","E. Students should walk everywhere."], correct:"B", explanation:"The main statement is that students should use public transport more often.", explanationId:"Pernyataan utama penulis adalah bahwa siswa sebaiknya lebih sering menggunakan transportasi umum karena memiliki beberapa manfaat." },
+  { id:47, kompetensi:"Benefits", teks:"information", isMulti:true, bacaan:"Students Should Use Public Transportation...", soal:"What are the benefits of public transportation? (more than one)", options:["A. Reducing traffic","B. Saving energy","C. Developing independence","D. Making every journey faster","E. Eliminating all traffic"], correct:"A,B,C", explanation:"All three are mentioned as benefits.", explanationId:"Ketiga manfaat tersebut disebutkan dalam teks. Transportasi umum tidak selalu membuat perjalanan lebih cepat dan tidak menghilangkan seluruh kemacetan." },
+  { id:48, kompetensi:"Inference", teks:"information", isMulti:false, bacaan:"Students Should Use Public Transportation...", soal:"What can be inferred from the text?", options:["A. Public transportation has no disadvantages.","B. The author recognizes that public transportation has limitations.","C. Every student uses a bus.","D. Cars should be completely banned.","E. Public transportation is always faster."], correct:"B", explanation:"The author mentions limitations like limited routes and crowded buses.", explanationId:"Penulis secara jelas menyebutkan beberapa kekurangan, seperti rute yang terbatas dan bus yang bisa penuh." },
+  { id:49, kompetensi:"Supporting Info", teks:"information", isMulti:true, bacaan:"Students Should Use Public Transportation...", soal:"Which additional information would make the author's argument more convincing? (more than one)", options:["A. Statistics showing how many cars are used around schools","B. Data comparing fuel use between buses and private cars","C. A list of students' favorite subjects","D. Research about the benefits of independent travel","E. A list of popular school uniforms"], correct:"A,B,D", explanation:"Data on cars, fuel, and benefits of independence support the argument.", explanationId:"Data tentang jumlah kendaraan, penggunaan bahan bakar, dan manfaat kemandirian dapat menjadi bukti yang mendukung argumen penulis." },
+  { id:50, kompetensi:"Counterargument", teks:"information", isMulti:false, bacaan:"Students Should Use Public Transportation...", soal:"Which sentence best shows that the author considers another point of view?", options:["A. 'Many students travel to school every day.'","B. 'One bus can carry many passengers at the same time.'","C. 'However, public transportation is not perfect.'","D. 'These are useful skills that students can use later in life.'","E. 'Students should use public transportation more often.'"], correct:"C", explanation:"'However' signals that the author acknowledges limitations before returning to benefits.", explanationId:"Kata 'However' menunjukkan bahwa penulis mengakui adanya sudut pandang atau kekurangan lain sebelum kembali menjelaskan manfaat transportasi umum." }
+];
+
+// ====== STATE (in-memory only — no localStorage) ======
+let userAnswers = {};
+let answerStatus = {};
+
+function loadState() {
+  for(let i=1;i<=50;i++) {
+    userAnswers[i] = "";
+    answerStatus[i] = false;
+  }
+}
+function persistState() {
+  let toast = document.getElementById('toast-save');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1000);
+}
+function updateScore() {
+  let correct = 0;
+  for(let i=1;i<=50;i++) if(answerStatus[i]) correct++;
+  let el = document.getElementById('liveScoreDisplay');
+  el.innerHTML = `Score: ${correct} / 50`;
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+}
+
+function getSelectedValues(id) {
+  let inputs = document.getElementsByName(`q${id}`);
+  let selected = [];
+  for(let inp of inputs) if(inp.checked) selected.push(inp.value);
+  return selected;
+}
+
+window.evaluateQuestion = function(id) {
+  let q = soalData.find(x=>x.id===id);
+  let selected = getSelectedValues(id);
+
+  if(selected.length === 0) {
+    document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">Please select at least one answer.</div>`;
+    return;
+  }
+
+  let userAns = selected.join(',');
+  userAnswers[id] = userAns;
+
+  let correctArr = q.correct.split(',').map(s => s.trim());
+  let isCorrect = true;
+  let hasExtra = false;
+  let missing = [];
+
+  for(let c of correctArr) if(!selected.includes(c)) { isCorrect = false; missing.push(c); }
+  for(let s of selected) if(!correctArr.includes(s)) { isCorrect = false; hasExtra = true; }
+
+  answerStatus[id] = isCorrect;
+  persistState();
+
+  let fbDiv = document.getElementById(`fb_${id}`);
+  let resultHtml = "";
+
+  if(isCorrect) {
+    resultHtml = `<div class="result-correct">Correct — your answer: ${userAns} (key: ${q.correct})</div>`;
+  } else {
+    let msg = `Your answer: ${userAns}<br>Correct answer: <strong>${q.correct}</strong>`;
+    if(missing.length > 0) msg += `<br>Missing: ${missing.join(', ')}`;
+    if(hasExtra) msg += `<br>Extra selection(s)`;
+    resultHtml = `<div class="result-wrong">Not quite.<br>${msg}</div>`;
+  }
+  resultHtml += `<div class="explanation-box"><strong>English explanation.</strong><br>${q.explanation}</div>`;
+  resultHtml += `<div class="explanation-box-id"><strong>Pembahasan (Indonesia).</strong><br>${q.explanationId}</div>`;
+  fbDiv.innerHTML = resultHtml;
+  updateScore();
+};
+
+window.showExplanation = function(id) {
+  let q = soalData.find(x=>x.id===id);
+  document.getElementById(`fb_${id}`).innerHTML = `
+    <div class="explanation-box"><strong>English explanation.</strong><br>${q.explanation}</div>
+    <div class="explanation-box-id"><strong>Pembahasan (Indonesia).</strong><br>${q.explanationId}</div>
+  `;
+};
+
+window.showExplanationId = function(id) {
+  let q = soalData.find(x=>x.id===id);
+  document.getElementById(`fb_${id}`).innerHTML = `
+    <div class="explanation-box-id"><strong>Pembahasan (Indonesia).</strong><br>${q.explanationId}</div>
+  `;
+};
+
+function checkAll() { for(let i=1;i<=50;i++) evaluateQuestion(i); }
+function resetAll() {
+  for(let i=1;i<=50;i++) {
+    userAnswers[i] = "";
+    answerStatus[i] = false;
+    let inputs = document.getElementsByName(`q${i}`);
+    inputs.forEach(inp => inp.checked = false);
+    document.getElementById(`fb_${i}`).innerHTML = "";
+  }
+  persistState();
+  updateScore();
+}
+
+function showAllAnswers() {
+  let modal = document.getElementById('answerModal');
+  let container = document.getElementById('answerListContainer');
+  container.innerHTML = soalData.map(q => `<div class="answer-item"><span>${q.id}. ${q.soal.substring(0,30)}...</span><span>${q.correct}</span></div>`).join('');
+  modal.style.display = 'flex';
+}
+function copyAnswers() {
+  let text = "ANSWER KEY – ENGLISH (50 QUESTIONS – HARD & TRICKY)\n\n";
+  soalData.forEach(q => { text += `${q.id}. ${q.correct} - ${q.soal.substring(0,45)}\n`; });
+  navigator.clipboard.writeText(text);
+  alert("Answer key copied.");
+}
+
+function render() {
+  let grid = document.getElementById('quizGrid');
+  grid.innerHTML = '';
+  soalData.forEach((q, idx) => {
+    let card = document.createElement('div');
+    card.className = 'question-card';
+    card.style.animationDelay = `${Math.min(idx * 0.02, 0.3)}s`;
+
+    let inputType = q.isMulti ? 'checkbox' : 'radio';
+    let answerTypeLabel = q.isMulti ? 'Multiple' : 'Single';
+
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="num-badge">${q.id}</div>
+        <div class="kompetensi-tag">${q.kompetensi}</div>
+        <div class="teks-tag">${q.teks === 'information' ? 'Info' : 'Fiction'}</div>
+        <div class="answer-type-tag">${answerTypeLabel}</div>
+      </div>
+      <div class="reading-text">${q.bacaan}</div>
+      <div class="question-text">${q.soal}</div>
+      <div class="options" id="opt_${q.id}"></div>
+      <div class="button-group-vertical">
+        <button class="check-btn" onclick="evaluateQuestion(${q.id})">Check & explanation</button>
+        <button class="pembahasan-btn" onclick="showExplanation(${q.id})">View explanation (EN)</button>
+        <button class="pembahasan-id-btn" onclick="showExplanationId(${q.id})">Pembahasan (Indonesia)</button>
+      </div>
+      <div class="feedback-area" id="fb_${q.id}"></div>
+    `;
+    grid.appendChild(card);
+
+    let optDiv = document.getElementById(`opt_${q.id}`);
+    q.options.forEach(opt => {
+      let letter = opt[0];
+      let div = document.createElement('div');
+      div.className = 'option';
+      let checked = false;
+      if(userAnswers[q.id]) {
+        let saved = userAnswers[q.id].split(',');
+        if(saved.includes(letter)) checked = true;
+      }
+      div.innerHTML = `<input type="${inputType}" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${checked ? 'checked' : ''}><label for="q${q.id}_${letter}">${opt}</label>`;
+      div.querySelector('input').addEventListener('change', (e) => {
+        if(!q.isMulti) {
+          userAnswers[q.id] = e.target.value;
+        } else {
+          userAnswers[q.id] = "";
+        }
+        answerStatus[q.id] = false;
+        persistState();
+        updateScore();
+        document.getElementById(`fb_${q.id}`).innerHTML = "";
+      });
+      optDiv.appendChild(div);
+    });
+
+    if(userAnswers[q.id] && !q.isMulti) {
+      let inputs = document.getElementsByName(`q${q.id}`);
+      for(let inp of inputs) if(inp.value === userAnswers[q.id]) inp.checked = true;
+    }
+    if(userAnswers[q.id] && q.isMulti) {
+      let saved = userAnswers[q.id].split(',');
+      let inputs = document.getElementsByName(`q${q.id}`);
+      for(let inp of inputs) if(saved.includes(inp.value)) inp.checked = true;
+    }
+
+    if(userAnswers[q.id] && answerStatus[q.id]) evaluateQuestion(q.id);
+  });
+}
+
+// Splash loader
+function startLoaderAnimation() {
+  let startTime = null;
+  const duration = 2400;
+  const loaderElement = document.getElementById('loaderPercent');
+  if (!loaderElement) return;
+  function updatePercent(currentTime) {
+    if (!startTime) startTime = currentTime;
+    const elapsed = currentTime - startTime;
+    const percent = Math.min(Math.floor((elapsed / duration) * 100), 100);
+    loaderElement.textContent = percent + '%';
+    if (elapsed < duration) requestAnimationFrame(updatePercent);
+  }
+  requestAnimationFrame(updatePercent);
+}
+
+window.addEventListener('load', () => {
+  startLoaderAnimation();
+  setTimeout(() => {
+    let splash = document.getElementById('splash-screen');
+    if(splash) {
+      splash.classList.add('fade-out');
+      setTimeout(() => splash.remove(), 700);
+    }
+  }, 2400);
+});
+
+// Scroll
+window.addEventListener('scroll', () => {
+  let btn = document.getElementById('scrollTopBtn');
+  if(window.scrollY > 300) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// Modal
+document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+  document.getElementById('answerModal').style.display = 'none';
+});
+document.getElementById('answerModal')?.addEventListener('click', (e) => {
+  if(e.target === e.currentTarget) document.getElementById('answerModal').style.display = 'none';
+});
+
+loadState();
+render();
+updateScore();
+
+document.getElementById('checkAllBtn')?.addEventListener('click', checkAll);
+document.getElementById('resetBtn')?.addEventListener('click', resetAll);
+document.getElementById('showAllAnswersBtn')?.addEventListener('click', showAllAnswers);
+document.getElementById('copyAnswersBtn')?.addEventListener('click', copyAnswers);
+</script>
+</body>
+</html>

@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>TKA | Bahasa Indonesia - Olimpiade Premium (Sulit & Menjebak)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 100%);
+            color: #0f172a;
+            line-height: 1.6;
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            padding: 2rem 1.5rem;
+            color: white;
+            text-align: center;
+            border-bottom: 4px solid #facc15;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(250,204,21,0.08) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #facc15, #f59e0b);
+            color: #0f172a;
+            padding: 4px 16px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            margin-top: 8px;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .badge-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .badge-mapel {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-bar {
+            background: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .score-card {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #facc15;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 7px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary { background: #3b82f6; color: white; box-shadow: 0 2px 6px rgba(59,130,246,0.3); }
+        .btn-warning { background: #ef4444; color: white; box-shadow: 0 2px 6px rgba(239,68,68,0.3); }
+        .btn-home { background: #64748b; color: white; text-decoration: none; box-shadow: 0 2px 6px rgba(100,116,139,0.3); }
+        .btn-info { background: #8b5cf6; color: white; box-shadow: 0 2px 6px rgba(139,92,246,0.3); }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .quiz-grid {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px -8px rgba(0,0,0,0.06);
+            border: 1px solid #eef2ff;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: cardReveal 0.4s ease-out forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        @keyframes cardReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 20px 20px 12px 12px;
+            flex-wrap: wrap;
+        }
+
+        .num-badge {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .kompetensi-tag {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .teks-tag {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #b45309;
+            background: #fef3c7;
+        }
+
+        .question-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            padding: 0.8rem 1.2rem 0.3rem;
+            color: #0c4a6e;
+            line-height: 1.5;
+        }
+
+        .reading-text {
+            background: #f8fafc;
+            margin: 6px 1.2rem;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: #334155;
+            border-left: 4px solid #facc15;
+            font-family: 'Georgia', serif;
+        }
+
+        .options {
+            padding: 0.3rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            background: #fafcff;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .option:hover {
+            background: #fefce8;
+            border-color: #facc15;
+            transform: translateX(3px);
+        }
+
+        .option input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #facc15;
+            flex-shrink: 0;
+        }
+
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .button-group-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 10px 1.2rem 10px;
+        }
+
+        .check-btn, .pembahasan-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-align: center;
+        }
+
+        .check-btn {
+            background: linear-gradient(95deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+        }
+
+        .pembahasan-btn {
+            background: linear-gradient(95deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 12px rgba(245,158,11,0.3);
+        }
+
+        .check-btn:active, .pembahasan-btn:active {
+            transform: scale(0.97);
+        }
+
+        .feedback-area {
+            padding: 0.4rem 1.2rem 1rem;
+        }
+
+        .result-correct {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+            border-left: 5px solid #10b981;
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            animation: popCorrect 0.3s ease-out;
+        }
+
+        @keyframes popCorrect {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .result-wrong {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+            border-left: 5px solid #ef4444;
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            animation: shakeWrong 0.3s ease-out;
+        }
+
+        @keyframes shakeWrong {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+
+        .result-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 5px solid #f59e0b;
+            padding: 10px;
+            border-radius: 14px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+
+        .explanation-box {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            border: 1px solid #bae6fd;
+            animation: fadeSlide 0.4s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation-box strong {
+            color: #0369a1;
+        }
+
+        .footer-note {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            text-align: center;
+            padding: 12px;
+            font-size: 0.68rem;
+            color: #475569;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #facc15;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            z-index: 99;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .scroll-top:hover {
+            background: #facc15;
+            color: #0f172a;
+            transform: scale(1.1);
+        }
+
+        .toast-save {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #facc15;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* ========== SPLASH SCREEN ========== */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: radial-gradient(ellipse at 30% 40%, #0f172a 0%, #020024 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.8s;
+            overflow: hidden;
+        }
+
+        .splash-bg-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .splash-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.03) 70%);
+            animation: floatCircle 12s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes floatCircle {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            33% { transform: translate(40px, -40px) scale(1.1); opacity: 0.7; }
+            66% { transform: translate(-20px, 30px) scale(0.95); opacity: 0.4; }
+        }
+
+        .splash-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            animation: contentZoom 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            padding: 20px;
+        }
+
+        @keyframes contentZoom {
+            0% { opacity: 0; transform: scale(0.85); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        .splash-logo-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 20px;
+        }
+
+        .splash-logo {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+            position: relative;
+            z-index: 3;
+            animation: logoPulse 2s ease-in-out infinite;
+            box-shadow: 0 30px 50px -15px rgba(56, 189, 248, 0.4);
+        }
+
+        .splash-logo-glow {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: linear-gradient(135deg, #38bdf8, #a78bfa);
+            border-radius: 40px;
+            opacity: 0.4;
+            filter: blur(20px);
+            z-index: 1;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 30px 50px -15px rgba(56, 189, 248, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 40px 60px -10px rgba(129, 140, 248, 0.6); }
+        }
+
+        @keyframes logoGlow {
+            0% { opacity: 0.3; filter: blur(15px); }
+            100% { opacity: 0.6; filter: blur(25px); }
+        }
+
+        .splash-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .title-word {
+            background: linear-gradient(135deg, #38bdf8, #a78bfa, #c084fc);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGradient 3s ease infinite, wordFloat 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .title-word:nth-child(1) { animation-delay: 0.1s, 0.1s; }
+        .title-word:nth-child(2) { animation-delay: 0.3s, 0.1s; }
+        .title-word:nth-child(3) { animation-delay: 0.5s, 0.1s; }
+
+        @keyframes textGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes wordFloat {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .splash-sub {
+            color: #a5b4fc;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            text-shadow: 0 0 10px rgba(165,180,252,0.3);
+        }
+
+        .splash-loader-container {
+            width: 250px;
+            margin: 30px auto 16px;
+        }
+
+        .splash-loader {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .splash-loader-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #a78bfa, #c084fc);
+            background-size: 200% auto;
+            border-radius: 10px;
+            animation: loadingBar 2.5s cubic-bezier(0.25, 0.9, 0.5, 1) forwards;
+        }
+
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            30% { width: 45%; }
+            60% { width: 78%; }
+            100% { width: 100%; }
+        }
+
+        .loader-percent {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #38bdf8;
+            letter-spacing: 1px;
+            font-family: monospace;
+            animation: pulseText 1s ease infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .splash-text-animate {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .animate-item {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+            animation: itemFade 2.5s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .animate-item:nth-child(1) { animation-delay: 0s; }
+        .animate-item:nth-child(2) { animation-delay: 0.8s; }
+        .animate-item:nth-child(3) { animation-delay: 1.6s; }
+
+        @keyframes itemFade {
+            0%, 100% { opacity: 0.3; transform: translateY(0px); }
+            50% { opacity: 1; transform: translateY(-3px); text-shadow: 0 0 8px #38bdf8; color: #38bdf8; }
+        }
+
+        .splash-footer-text {
+            margin-top: 25px;
+            font-size: 0.55rem;
+            color: #475569;
+            letter-spacing: 3px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .hero h1 { font-size: 1.3rem; }
+            .info-bar { flex-direction: column; align-items: stretch; }
+            .score-card { justify-content: center; }
+            .btn-group { justify-content: center; }
+            .option label { font-size: 0.72rem; }
+            .splash-logo-wrapper { width: 80px; height: 80px; }
+            .splash-logo { width: 80px; height: 80px; font-size: 40px; border-radius: 24px; }
+            .splash-title { font-size: 1.3rem; gap: 6px; }
+            .splash-loader-container { width: 200px; }
+            .animate-item { font-size: 0.55rem; padding: 3px 10px; }
+            .toast-save { font-size: 0.6rem; bottom: 70px; white-space: nowrap; }
+            .scroll-top { width: 38px; height: 38px; font-size: 1rem; bottom: 14px; right: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="splash-screen">
+    <div class="splash-bg-animation">
+        <div class="splash-circle" style="width: 400px; height: 400px; top: -120px; left: -120px; animation-delay: 0s;"></div>
+        <div class="splash-circle" style="width: 280px; height: 280px; bottom: -60px; right: -60px; animation-delay: 2s;"></div>
+        <div class="splash-circle" style="width: 180px; height: 180px; top: 30%; right: 5%; animation-delay: 4s;"></div>
+        <div class="splash-circle" style="width: 130px; height: 130px; bottom: 20%; left: 0%; animation-delay: 1.5s;"></div>
+        <div class="splash-circle" style="width: 90px; height: 90px; top: 60%; left: 20%; animation-delay: 3s;"></div>
+    </div>
+    <div class="splash-content">
+        <div class="splash-logo-wrapper">
+            <div class="splash-logo-glow"></div>
+            <div class="splash-logo">📖</div>
+        </div>
+        <h1 class="splash-title">
+            <span class="title-word">TKA</span>
+            <span class="title-word">BAHASA</span>
+            <span class="title-word">INDONESIA</span>
+        </h1>
+        <p class="splash-sub">OLIMPIADE • 50 SOAL PREMIUM • SULIT & MENJEBAK</p>
+        <div class="splash-loader-container">
+            <div class="splash-loader">
+                <div class="splash-loader-fill"></div>
+            </div>
+            <div class="loader-percent" id="loaderPercent">0%</div>
+        </div>
+        <div class="splash-text-animate">
+            <span class="animate-item">⚡ Analisis Kritis</span>
+            <span class="animate-item">🎯 Inferensi Kompleks</span>
+            <span class="animate-item">🧠 Evaluasi Mendalam</span>
+        </div>
+        <div class="splash-footer-text">✨ TKA B.INDO 50 SOAL ✨</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="hero">
+        <h1>📖 TKA BAHASA INDONESIA <span>50 SOAL</span></h1>
+        <p>Olimpiade | Pemahaman Tekstual | Inferensial | Evaluasi & Apresiasi</p>
+        <div class="badge-group">
+            <span class="badge-mapel">🔥 Level Sulit & Menjebak</span>
+            <span class="badge-mapel">🎯 Soal Test TKA</span>
+        </div>
+    </div>
+
+    <div class="info-bar">
+        <div class="score-card" id="liveScoreDisplay">🏆 SKOR: 0 / 50</div>
+        <div class="btn-group">
+            <a href="index.html" class="btn btn-home">🏠 HOME</a>
+            <button class="btn btn-primary" id="checkAllBtn">✅ CEK SEMUA</button>
+            <button class="btn btn-info" id="showAllAnswersBtn">📋 KUNCI</button>
+            <button class="btn btn-warning" id="resetBtn">🔄 RESET</button>
+        </div>
+    </div>
+
+    <div class="quiz-grid" id="quizGrid"></div>
+
+    <div class="footer-note">
+        💡 <strong>Petunjuk:</strong> Pilih jawaban, klik CEK untuk melihat pembahasan lengkap. Jawaban otomatis tersimpan.<br>
+        📌 Setiap soal dirancang dengan jebakan khas olimpiade, pastikan membaca dengan cermat.
+    </div>
+</div>
+
+<div id="answerModal" class="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:1001;justify-content:center;align-items:center;animation:modalBgFade 0.2s ease;">
+    <div class="modal-content" style="background:white;width:92%;max-width:550px;max-height:80vh;border-radius:28px;overflow:hidden;animation:modalPop 0.3s cubic-bezier(0.34,1.2,0.64,1);">
+        <div class="modal-header" style="background:linear-gradient(135deg,#0f172a,#1e293b);color:white;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+            <h3 style="font-size:1rem;">📋 KUNCI JAWABAN 50 SOAL</h3>
+            <button class="close-modal" id="closeModalBtn" style="background:none;border:none;color:white;font-size:26px;cursor:pointer;">&times;</button>
+        </div>
+        <div class="modal-body" style="padding:18px;max-height:60vh;overflow-y:auto;">
+            <div id="answerListContainer" class="answer-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;"></div>
+            <button class="btn btn-primary" id="copyAnswersBtn" style="margin-top:14px;width:100%;justify-content:center;">📋 SALIN SEMUA</button>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-top" id="scrollTopBtn">↑</div>
+<div id="toast-save" class="toast-save">💾 Jawaban tersimpan</div>
+
+<style>
+    .modal { display: none; }
+    @keyframes modalBgFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalPop { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .answer-item { background: #f1f5f9; padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 500; }
+    .answer-item span:last-child { color: #0f172a; font-weight: 700; background: #facc15; padding: 1px 10px; border-radius: 20px; }
+</style>
+
+<script>
+// ======================= 50 SOAL BAHASA INDONESIA =======================
+const soalData = [
+    // Soal 1-10 dari file
+    { id: 1, kompetensi: "Makna Istilah", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut. Hal tersebut merupakan sebuah ancaman besar. Dibutuhkan tindakan skala besar untuk berpindah dari kecenderungan tersebut mengingat banyak pihak yang terlibat dalam bidang pekerjaan ini. Masyarakat sektor swasta dan masyarakat sipil perlu mobilisasi untuk menangkap peluang ekonomi lain di luar dari pengelolaan plastik.", soal: "Makna istilah mobilisasi pada paragraf kedua teks tersebut adalah", options: ["A. bergerak bersama", "B. melangkah cepat", "C. beradu cepat", "D. mengatur bersama", "E. berpikir Bersama"], correct: "A", explanation: "📌 **PEMBAHASAN:** Mobilisasi berarti menggerakkan atau mengerahkan orang untuk bergerak bersama mencapai tujuan." },
+    
+    { id: 2, kompetensi: "Gagasan Utama", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut. Hal tersebut merupakan sebuah ancaman besar.", soal: "Apa gagasan utama yang disampaikan pada paragraf pertama teks tersebut?", options: ["A. Ancaman plastik terhadap lautan.", "B. Efek dari pemanasan laut.", "C. Kadar tingkat keasaman laut.", "D. Pemompaan CO2 ke atmosfer.", "E. Ancaman bagi negara berkembang."], correct: "A", explanation: "📌 **PEMBAHASAN:** Paragraf pertama berfokus pada ancaman plastik terhadap lautan, meskipun juga menyebut pemanasan dan CO2." },
+    
+    { id: 3, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Lautan mengalami ancaman pemanasan dan menjadi semakin asam karena kita terus memompa lebih banyak CO2 ke atmosfer. Selain itu, lautan juga menghadapi ancaman lain dari manusia, yakni penggunaan plastik. Kehidupan modern saat ini didominasi oleh kemasan makanan berbahan plastik yang diolah dengan teknologi tinggi dan digunakan setiap hari oleh masyarakat. Dalam sebuah laporan telah disebutkan bahwa pada tahun 2050 sampah plastik di laut akan lebih banyak daripada jumlah ikan apabila kecenderungan ini terus berlanjut.", soal: "Mengapa lautan menghadapi ancaman pada 2050? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Sampah plastik di laut akan lebih banyak daripada jumlah ikan.", "B. Lautan akan terus mengalami pemanasan dan semakin asam.", "C. Manusia terus memompa lebih banyak CO2 ke atmosfer.", "D. Jumlah ikan yang terancam punah semakin banyak.", "E. Penggunaan plastik terus meningkat dan tidak dikelola dengan baik"], correct: "A,B,C,E", explanation: "📌 **PEMBAHASAN:** Teks menyebutkan ancaman sampah plastik, pemanasan, CO2, dan penggunaan plastik. Opsi D tidak disebut." },
+    
+    { id: 4, kompetensi: "Analisis Kalimat", teks: "informasi", bacaan: "Solusi tersebut tidak mudah. Fakta bahwa harga minyak yang rendah mengakibatkan biaya yang dibutuhkan untuk daur ulang plastik jauh lebih mahal daripada memproduksi yang baru. Kondisi lain yang menunjukkan ekonomi di negara berkembang tumbuh lebih besar menjadikan penggunaan plastik juga meningkat. Solusi yang dibutuhkan adalah cara kita menggunakan plastik. Misalnya dengan mengurangi penggunaan plastik dalam kemasan atau menggunakannya kembali sebanyak yang kita bisa.", soal: "Mengapa penulis menggunakan kalimat 'Solusi tersebut tidak mudah' pada teks? Tentukan Benar atau Salah untuk setiap pernyataan berikut!", options: ["Menginformasikan kepada pembaca bahwa pemecahan masalah sampah merupakan tanggung jawab utama kita sebagai masyarakat sipil sehingga sulit untuk diselesaikan.", "Menunjukkan kepada pembaca bahwa permasalahan sampah plastik sangat rumit dan tidak bisa diselesaikan dalam jangka waktu singkat.", "Membuktikan kepada pembaca bahwa permasalahan sampah yang rumit disebabkan pemecahan masalah yang bergantung pada perekonomian negara berkembang."], correct: "Salah, Benar, Salah", explanation: "📌 **PEMBAHASAN:** Kalimat 'Solusi tersebut tidak mudah' menunjukkan kerumitan, bukan tanggung jawab masyarakat sipil atau perekonomian negara berkembang secara spesifik." },
+    
+    { id: 5, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Apa permasalahan yang dihadapi tokoh aku dalam kutipan tersebut? Tentukan Benar atau Salah untuk setiap pernyataan berikut!", options: ["Kekecewaan dan kesedihan tokoh aku terhadap sikap Ayahnya yang tidak mengizinkannya masuk sekolah di musim maddongi, padahal dia harus mempersiapkan diri untuk bersaing dalam lomba dengan siswa sekolah lain.", "Kemarahan hati tokoh aku terhadap Ayahnya yang melarang dia pergi sekolah karena sedang musim maddongi di sawah dan dia diberi tugas menghalau burung yang hinggap pada padi di sawah mereka.", "Perasaan tertekan tokoh aku terhadap peraturan keluarganya yang mengharuskan dia tidak masuk sekolah setiap musim maddongi, padahal dia ingin sekali belajar dan tidak mau ketinggalan pelajaran."], correct: "Benar, Benar, Salah", explanation: "📌 **PEMBAHASAN:** Tokoh mengalami kekecewaan dan kemarahan karena Ayah melarang sekolah di musim maddongi. Pernyataan ketiga salah karena tidak disebutkan peraturan keluarga yang mengharuskan tidak masuk sekolah setiap musim maddongi." },
+    
+    { id: 6, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Apa yang akan terjadi jika tokoh aku tidak datang ke rumah iyye? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Iyye akan datang menasehati Ayah karena melarang tokoh aku untuk belajar.", "B. Tokoh aku akan kehilangan kesempatan belajar untuk mengikuti lomba.", "C. Ayah akan tetap melarang tokoh aku untuk belajar dan mengikuti lomba.", "D. Permasalahan tokoh aku dan ayah akan berlarut karena tidak terselesaikan.", "E. Tokoh aku tidak akan bisa fokus untuk belajar dan mengikuti lomba yang diadakan sekolah."], correct: "B,D,E", explanation: "📌 **PEMBAHASAN:** Jika tidak ke iyye, masalah tidak terselesaikan, Ayah tetap melarang, dan tokoh tidak bisa fokus belajar. Opsi A salah karena iyye tidak akan datang jika tokoh tidak datang." },
+    
+    { id: 7, kompetensi: "Nilai Sosial", teks: "fiksi", bacaan: "Aku terpana. Jawaban Ayah benar-benar membuatku hampir menangis histeris. Bagaimana tidak. Lomba semakin dekat, sementara masih banyak materi yang belum aku paham. Terbayang aku akan hancur dan tidak bisa bersaing dengan siswa sekolah lain. Ingin rasanya aku berteriak agar Ayahku tahu bagaimana kacaunya pikiranku. Namun, aku sadar bahwa ini adalah perbuatan yang tidak akan menyelesaikan masalah. Malah akan semakin membuat Ayahku geram. Otakku terus berpikir untuk mencari solusi terbaik. Sambil berjalan mengikuti Ayah dari belakang, aku mulai menyusun strategi. 'Bagaimana kalau aku ke rumah iyye-ku (nenek), menyampaikan masalahku ini. Ya, hanya dia yang mampu menundukkan Ayah.'", soal: "Keterkaitan nilai sosial dalam kutipan cerpen tersebut dengan kehidupan sehari-hari adalah ...", options: ["A. Masih ditemukan orang tua yang tidak memedulikan pendidikan anaknya demi membantu pekerjaan mereka.", "B. Terbenturnya cita-cita anak karena tradisi sebuah keluarga yang mengutamakan anak mampu bekerja mandiri.", "C. Asumsi bahwa bekerja lebih bermanfaat daripada sekolah yang dianggap tidak menghasilkan apa-apa untuk keluarga.", "D. Kebiasaan anak-anak tidak sekolah di musim maddongi demi menjalankan tradisi di lingkungan keluarga mereka.", "E. Orang tua mengarahkan anak-anak untuk rajin bekerja membantu mereka di sawah agar bisa melanjutkan kehidupannya kelak."], correct: "B", explanation: "📌 **PEMBAHASAN:** Nilai sosial yang tergambar adalah benturan antara cita-cita anak (pendidikan/lomba) dengan tradisi keluarga (musim maddongi). Opsi B paling tepat." },
+    
+    { id: 8, kompetensi: "Tujuan Penulis", teks: "informasi", bacaan: "Rhodamin B adalah zat pewarna yang tersedia di pasar untuk industri tekstil. Zat ini sering disalahgunakan sebagai zat pewarna makanan dan kosmetik di berbagai negara. Jenis makanan yang mengandung Rhodamin B di antaranya kerupuk, terasi, dan makanan ringan. Zat ini juga banyak ditemukan pada kembang gula, sirup, manisan, dawet, bubur, ikan asap, dan cendol. Tampilan makanan yang menggunakan zat ini cenderung menarik dan terkesan menawarkan cita rasa tinggi sehingga ketika harga jualnya tidak semahal tampilannya, banyak yang tertarik untuk membeli dan mengonsumsinya. Zat ini paling berbahaya bila dikonsumsi karena menyebabkan gangguan pada fungsi hati, bahkan kanker hati. Apabila mengonsumsi makanan yang mengandung Rhodamin B, dalam tubuh akan terjadi penumpukan lemak sehingga lama-kelamaan jumlahnya akan terus bertambah. Dampaknya baru akan kelihatan setelah puluhan tahun kemudian. Jika sudah masuk dalam tubuh, akan mengendap pada jaringan hati dan lemak, tidak dapat dikeluarkan, dan dalam jangka waktu lama bisa bersifat karsinogenik.", soal: "Tujuan penulis sesuai teks 1 adalah ...", options: ["A. Menginformasikan jenis dan rasa makanan yang mengandung Rhodamin B.", "B. Menjelaskan dampak penggunaan Rhodamin B pada bahan-bahan industri.", "C. Mengimbau agar masyarakat tidak menggunakan barang-barang yang mengandung Rhodamin B.", "D. Menginformasikan dampak mengonsumsi makanan yang mengandung Rhodamin B bagi tubuh.", "E. Menjelaskan gejala yang timbul akibat mengkonsumsi makanan yang mengandung Rhodamin B."], correct: "D", explanation: "📌 **PEMBAHASAN:** Teks 1 berfokus pada dampak mengonsumsi Rhodamin B bagi tubuh, seperti gangguan hati dan kanker." },
+    
+    { id: 9, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Teks 1: Rhodamin B adalah zat pewarna yang tersedia di pasar untuk industri tekstil... Teks 2: Rhodamin B berbentuk serbuk kristal, berwarna hijau atau ungu kemerahan...", soal: "Pernyataan yang tepat sesuai isi kedua teks tersebut berkaitan dengan Rhodamin B adalah ...", options: ["A. Rhodamin B sering disalahgunakan sebagai pewarna makanan karena menawarkan cita rasa yang tinggi.", "B. Rhodamin B berdampak buruk bagi kesehatan, tetapi diperlukan pada industri, seperti tekstil dan kertas.", "C. Rhodamin B berdampak buruk bagi kesehatan, tetapi mudah ditemukan pada kembang gula dan sirup.", "D. Rhodamin B yang berbentuk serbuk kristal dan berwarna hijau digunakan pada industri tekstil dan kertas.", "E. Rhodamin B berdampak buruk bagi kesehatan, meskipun dampak itu baru terlihat beberapa tahun kemudian."], correct: "B", explanation: "📌 **PEMBAHASAN:** Kedua teks menyebutkan Rhodamin B berbahaya bagi kesehatan tetapi digunakan dalam industri tekstil dan kertas." },
+    
+    { id: 10, kompetensi: "Tujuan Penulis", teks: "informasi", bacaan: "Teks 1: Rhodamin B adalah zat pewarna... Teks 2: Rhodamin B berbentuk serbuk kristal...", soal: "Mengapa kedua teks tersebut menyebutkan dampak kesehatan yang timbul dari konsumsi pangan yang terkontaminasi Rhodamin B? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Mendorong masyarakat untuk menghindari Rhodamin B dalam berbagai keperluan.", "B. Meningkatkan kesadaran masyarakat tentang bahaya Rhodamin B dalam makanan", "C. Menunjukkan bahwa Rhodamin B aman digunakan dalam industri tekstil dan kertas.", "D. Menjelaskan bahwa Rhodamin B adalah zat berbahaya jika dikonsumsi, terutama dalam jangka panjang.", "E. Memperingatkan masyarakat agar menghindari makanan berwarna mencolok yang berisiko mengandung Rhodamin B."], correct: "A,B,D,E", explanation: "📌 **PEMBAHASAN:** Tujuan teks adalah meningkatkan kesadaran dan peringatan. Opsi C salah karena justru menunjukkan bahaya." },
+    
+    // Soal 11-20
+    { id: 11, kompetensi: "Gagasan Utama", teks: "informasi", bacaan: "Penggunaan transportasi publik dapat mengurangi jumlah kendaraan pribadi di jalan raya. Ketika lebih banyak masyarakat menggunakan bus dan kereta, jumlah emisi dari kendaraan pribadi dapat ditekan. Selain itu, transportasi publik membantu mengurangi kemacetan karena satu kendaraan dapat mengangkut banyak penumpang. Namun, manfaat tersebut hanya dapat dirasakan secara optimal apabila layanan transportasi tersedia secara aman, nyaman, terjangkau, dan tepat waktu.", soal: "Apa gagasan utama paragraf tersebut?", options: ["A. Kendaraan pribadi menghasilkan emisi yang tinggi.", "B. Transportasi publik dapat memberi manfaat lingkungan dan lalu lintas jika didukung layanan yang baik.", "C. Bus dan kereta mampu mengangkut banyak penumpang.", "D. Masyarakat harus meninggalkan kendaraan pribadi.", "E. Kemacetan hanya dapat diatasi dengan transportasi publik."], correct: "B", explanation: "📌 **PEMBAHASAN:** Paragraf menyebutkan manfaat transportasi publik, tetapi menekankan bahwa manfaat optimal hanya jika layanan baik." },
+    
+    { id: 12, kompetensi: "Simpulan Tersirat", teks: "informasi", bacaan: "Sebuah sekolah mulai menerapkan perpustakaan digital. Siswa dapat mengakses buku melalui komputer maupun telepon pintar. Pada awal penerapan, sebagian siswa kesulitan karena belum terbiasa menggunakan katalog digital. Sekolah kemudian menyediakan pelatihan singkat dan petunjuk penggunaan. Setelah beberapa minggu, peminjaman buku meningkat karena siswa dapat mencari bahan bacaan tanpa harus menunggu petugas menemukan buku secara manual.", soal: "Simpulan tersirat yang paling tepat adalah ...", options: ["A. Perpustakaan digital selalu lebih murah daripada perpustakaan biasa.", "B. Siswa tidak lagi membutuhkan petugas perpustakaan.", "C. Pendampingan dapat membantu pengguna beradaptasi dengan teknologi baru.", "D. Semua siswa lebih menyukai membaca melalui telepon pintar.", "E. Katalog digital menyebabkan siswa membaca lebih sedikit."], correct: "C", explanation: "📌 **PEMBAHASAN:** Sekolah menyediakan pelatihan dan petunjuk, yang membantu siswa beradaptasi." },
+    
+    { id: 13, kompetensi: "Hubungan Sebab-Akibat", teks: "informasi", bacaan: "Air hujan yang jatuh di kawasan perkotaan sering tidak langsung meresap ke tanah karena permukaan jalan dan bangunan didominasi material kedap air. Akibatnya, air mengalir cepat menuju saluran drainase. Jika kapasitas saluran tidak mencukupi, genangan dapat terjadi. Oleh sebab itu, pembuatan taman resapan dan penggunaan permukaan yang mampu menyerap air dapat menjadi bagian dari pengelolaan banjir.", soal: "Hubungan sebab-akibat yang paling tepat berdasarkan teks adalah ...", options: ["A. Taman resapan menyebabkan permukaan kota menjadi kedap air.", "B. Material kedap air mempercepat limpasan sehingga dapat meningkatkan risiko genangan.", "C. Saluran drainase selalu menyebabkan banjir di perkotaan.", "D. Hujan tidak dapat meresap ke tanah karena taman resapan terlalu banyak.", "E. Bangunan tinggi merupakan satu-satunya penyebab banjir."], correct: "B", explanation: "📌 **PEMBAHASAN:** Material kedap air menyebabkan air mengalir cepat dan meningkatkan risiko genangan." },
+    
+    { id: 14, kompetensi: "Manfaat Ekonomi Digital", teks: "informasi", bacaan: "Ekonomi digital telah membawa perubahan besar dalam berbagai aspek bisnis...", soal: "Pernyataan yang sesuai dengan manfaat ekonomi digital berdasarkan pola teks UKM adalah ... Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Harga produk menjadi lebih murah.", "B. Jangkauan pemasaran menjadi lebih luas.", "C. Data pelanggan dapat dianalisis untuk menentukan strategi promosi.", "D. Keamanan data tidak lagi menjadi perhatian."], correct: "B,C", explanation: "📌 **PEMBAHASAN:** Manfaat ekonomi digital adalah jangkauan luas dan analisis data pelanggan." },
+    
+    { id: 15, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Rina menatap layar ponselnya. Pesan dari sahabatnya belum juga dibalas. Sebenarnya ia ingin langsung menelepon, tetapi ia teringat percakapan mereka kemarin. Sahabatnya mengatakan bahwa ia membutuhkan waktu untuk menyelesaikan persoalan keluarganya. Rina akhirnya meletakkan ponsel dan memilih menunggu. Baginya, menjaga perasaan sahabat lebih penting daripada memaksakan jawaban.", soal: "Sifat tokoh Rina yang paling tepat adalah ...", options: ["A. Ceroboh dan terburu-buru", "B. Sabar dan menghargai orang lain", "C. Pemarah dan keras kepala", "D. Acuh dan tidak peduli", "E. Ragu-ragu dalam mengambil keputusan"], correct: "B", explanation: "📌 **PEMBAHASAN:** Rina memilih menunggu dan menjaga perasaan sahabat, menunjukkan kesabaran dan penghargaan." },
+    
+    { id: 16, kompetensi: "Nilai Sosial", teks: "fiksi", bacaan: "Di pasar desa, Nenek selalu membawa tas kain sendiri. Ia menolak kantong plastik meskipun pedagang menawarkannya secara cuma-cuma. 'Kalau setiap orang mengambil satu kantong, coba bayangkan berapa banyak sampah yang terkumpul dalam sehari,' katanya. Pedagang itu tersenyum dan mulai menyimpan beberapa tas kain untuk pelanggan lain.", soal: "Nilai yang paling menonjol dalam kutipan tersebut adalah ...", options: ["A. Keberanian melawan pedagang", "B. Kepedulian terhadap lingkungan melalui kebiasaan sederhana", "C. Keinginan menghemat uang", "D. Persaingan antarpedagang", "E. Keinginan menunjukkan diri kepada orang lain"], correct: "B", explanation: "📌 **PEMBAHASAN:** Nenek menunjukkan kepedulian lingkungan dengan menolak kantong plastik." },
+    
+    { id: 17, kompetensi: "Analisis Konjungsi", teks: "informasi", bacaan: "Meskipun teknologi kecerdasan buatan mampu membantu manusia menyelesaikan berbagai pekerjaan dengan cepat, penggunaannya tetap membutuhkan pengawasan. Sistem dapat menghasilkan informasi yang tampak meyakinkan, tetapi belum tentu benar. Karena itu, pengguna perlu memeriksa sumber dan membandingkan informasi sebelum menjadikannya dasar keputusan.", soal: "Mengapa penulis menggunakan konjungsi 'Meskipun' pada awal teks?", options: ["A. Menunjukkan penambahan informasi yang sejenis.", "B. Menunjukkan hubungan pertentangan antara kemampuan AI dan kebutuhan pengawasan.", "C. Menunjukkan urutan proses penggunaan AI.", "D. Menunjukkan hubungan sebab-akibat secara langsung.", "E. Menunjukkan kesimpulan dari informasi sebelumnya."], correct: "B", explanation: "📌 **PEMBAHASAN:** 'Meskipun' menunjukkan pertentangan antara kemampuan AI dan kebutuhan pengawasan." },
+    
+    { id: 18, kompetensi: "Fakta", teks: "informasi", bacaan: "Hutan mangrove memiliki fungsi penting bagi wilayah pesisir. Akar mangrove dapat membantu menahan sedimen dan mengurangi energi gelombang. Ekosistem tersebut juga menjadi tempat hidup berbagai organisme. Selain manfaat ekologis, mangrove dapat mendukung kegiatan ekonomi masyarakat melalui perikanan dan ekowisata. Namun, manfaat itu dapat berkurang apabila kawasan mangrove terus mengalami kerusakan.", soal: "Pernyataan yang merupakan fakta sesuai teks adalah ...", options: ["A. Mangrove adalah ekosistem paling indah di dunia.", "B. Semua masyarakat pesisir memperoleh keuntungan dari mangrove.", "C. Akar mangrove dapat membantu menahan sedimen.", "D. Ekowisata selalu lebih menguntungkan daripada perikanan.", "E. Kerusakan mangrove pasti membuat seluruh organisme punah."], correct: "C", explanation: "📌 **PEMBAHASAN:** Fakta yang disebutkan adalah akar mangrove dapat menahan sedimen." },
+    
+    { id: 19, kompetensi: "Makna Tersirat", teks: "fiksi", bacaan: "'Jangan khawatir,' kata Damar sambil mengangkat payungnya. 'Kita mungkin terlambat, tetapi setidaknya kita tidak menyerah.' Hujan turun semakin deras. Temannya sempat berhenti karena jalan di depan berubah menjadi genangan. Damar kembali melangkah perlahan dan memberi isyarat agar temannya mengikuti dari belakang.", soal: "Makna tersirat dari tindakan Damar adalah ...", options: ["A. Damar ingin berjalan sendirian.", "B. Damar menunjukkan sikap pantang menyerah sekaligus memberi dukungan kepada temannya.", "C. Damar tidak peduli terhadap keadaan temannya.", "D. Damar sengaja membuat perjalanan menjadi lebih sulit.", "E. Damar takut terkena hujan."], correct: "B", explanation: "📌 **PEMBAHASAN:** Damar melanjutkan perjalanan dan memberi isyarat kepada temannya, menunjukkan sikap pantang menyerah dan dukungan." },
+    
+    { id: 20, kompetensi: "Pemahaman Inferensial", teks: "informasi", bacaan: "Program membaca selama lima belas menit sebelum pelajaran dimulai mulai diterapkan di sebuah sekolah. Pada bulan pertama, beberapa siswa menganggap kegiatan tersebut membosankan. Guru kemudian memberikan kebebasan memilih bacaan sesuai minat. Setelah beberapa bulan, siswa mulai lebih aktif berdiskusi mengenai isi buku dan merekomendasikan bacaan kepada teman.", soal: "Perubahan tersebut menunjukkan bahwa ...", options: ["A. Semua siswa sejak awal menyukai program membaca.", "B. Kebebasan memilih bacaan dapat meningkatkan keterlibatan siswa.", "C. Program membaca tidak membutuhkan peran guru.", "D. Diskusi membuat siswa berhenti membaca buku.", "E. Bacaan yang diwajibkan selalu lebih menarik."], correct: "B", explanation: "📌 **PEMBAHASAN:** Setelah siswa diberi kebebasan memilih bacaan, mereka lebih aktif berdiskusi." },
+    
+    // Soal 21-30
+    { id: 21, kompetensi: "Tujuan Penulis", teks: "informasi", bacaan: "Sebagian masyarakat memilih berbelanja secara daring karena praktis dan menyediakan banyak pilihan. Namun, kemudahan tersebut juga dapat mendorong pembelian impulsif. Iklan yang muncul berulang kali dan promosi dengan batas waktu tertentu dapat membuat konsumen merasa harus segera membeli. Oleh karena itu, kemampuan mengendalikan kebutuhan dan keinginan menjadi penting dalam aktivitas belanja digital.", soal: "Apa tujuan utama penulis?", options: ["A. Mengajak pembaca berhenti berbelanja daring.", "B. Menjelaskan manfaat dan risiko belanja daring serta pentingnya mengendalikan diri.", "C. Membuktikan bahwa semua iklan digital menipu konsumen.", "D. Membandingkan harga toko daring dan toko fisik.", "E. Menjelaskan cara membuat iklan digital."], correct: "B", explanation: "📌 **PEMBAHASAN:** Penulis menjelaskan manfaat dan risiko, serta menekankan pentingnya mengendalikan diri." },
+    
+    { id: 22, kompetensi: "Simpulan", teks: "informasi", bacaan: "Di sebuah desa, warga sepakat mengubah lahan kosong menjadi kebun bersama. Setiap keluarga mendapat jadwal untuk merawat tanaman. Hasil panen sebagian digunakan untuk kebutuhan warga, sedangkan sebagian lainnya dijual untuk membeli bibit baru. Setelah beberapa musim, lahan yang sebelumnya terbengkalai menjadi sumber pangan sekaligus kegiatan bersama.", soal: "Apa manfaat program tersebut yang dapat disimpulkan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Memanfaatkan lahan yang sebelumnya tidak produktif.", "B. Memperkuat kerja sama antarwarga.", "C. Menghilangkan seluruh kebutuhan pangan warga.", "D. Menyediakan hasil yang dapat mendukung keberlanjutan program.", "E. Membuat warga tidak perlu bekerja lagi."], correct: "A,B,D", explanation: "📌 **PEMBAHASAN:** Program memanfaatkan lahan, memperkuat kerja sama, dan menyediakan hasil untuk keberlanjutan." },
+    
+    { id: 23, kompetensi: "Majas", teks: "fiksi", bacaan: "'Perpustakaan itu bukan gudang buku,' ujar kepala sekolah. 'Ia adalah jendela yang membuat kita dapat melihat dunia tanpa harus meninggalkan ruangan.'", soal: "Majas yang dominan pada ungkapan 'perpustakaan ... adalah jendela' adalah ...", options: ["A. Metafora", "B. Hiperbola", "C. Ironi", "D. Litotes", "E. Personifikasi"], correct: "A", explanation: "📌 **PEMBAHASAN:** 'Perpustakaan adalah jendela' adalah metafora, membandingkan secara langsung tanpa kata pembanding." },
+    
+    { id: 24, kompetensi: "Sikap Penulis", teks: "informasi", bacaan: "Pemerintah daerah memperbaiki jalur sepeda di beberapa ruas jalan. Kebijakan itu diharapkan membuat masyarakat merasa lebih aman ketika bersepeda. Akan tetapi, keberadaan jalur sepeda saja belum cukup. Pengguna kendaraan lain juga perlu menghormati jalur tersebut agar manfaatnya dapat dirasakan bersama.", soal: "Pernyataan yang paling sesuai dengan sikap penulis adalah ...", options: ["A. Mendukung jalur sepeda, tetapi menekankan perlunya kepatuhan pengguna jalan.", "B. Menolak jalur sepeda karena mengurangi ruang kendaraan.", "C. Menganggap sepeda tidak cocok digunakan di kota.", "D. Menganggap pemerintah tidak memiliki peran dalam transportasi.", "E. Mengusulkan semua kendaraan diganti sepeda."], correct: "A", explanation: "📌 **PEMBAHASAN:** Penulis mendukung jalur sepeda, tetapi menekankan kepatuhan pengguna jalan." },
+    
+    { id: 25, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Nadia menerima penghargaan setelah memenangkan lomba menulis. Teman-temannya memuji hasil karyanya. Namun, Nadia justru berkata bahwa ia masih perlu belajar karena beberapa bagian tulisannya belum sesuai harapan. Ia kemudian meminta gurunya memberikan kritik agar karya berikutnya lebih baik.", soal: "Sikap Nadia menunjukkan ...", options: ["A. Rendah diri secara berlebihan", "B. Tidak menghargai penghargaan", "C. Terbuka terhadap evaluasi dan memiliki keinginan untuk berkembang", "D. Tidak percaya pada kemampuan sendiri", "E. Menganggap kritik sebagai bentuk hukuman"], correct: "C", explanation: "📌 **PEMBAHASAN:** Nadia meminta kritik untuk memperbaiki karyanya, menunjukkan keterbukaan dan keinginan berkembang." },
+    
+    { id: 26, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "(1) Pemerintah memperluas ruang terbuka hijau di kawasan padat penduduk. (2) Langkah tersebut dilakukan karena suhu kawasan perkotaan cenderung meningkat. (3) Selain itu, ruang terbuka hijau dapat menyediakan tempat bagi masyarakat untuk beraktivitas. (4) Dengan demikian, kebijakan tersebut memiliki manfaat ekologis sekaligus sosial.", soal: "Hubungan makna kalimat (1) dan (2) adalah ...", options: ["A. Pertentangan", "B. Sebab-akibat", "C. Perbandingan", "D. Penambahan", "E. Penegasan ulang"], correct: "B", explanation: "📌 **PEMBAHASAN:** Kalimat (2) menjelaskan sebab dari langkah yang disebutkan di kalimat (1)." },
+    
+    { id: 27, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Sebuah koperasi sekolah mulai menggunakan sistem pembayaran nontunai. Pencatatan transaksi menjadi lebih teratur karena setiap pembayaran tersimpan dalam sistem. Meski demikian, pengelola tetap menyediakan pilihan pembayaran tunai bagi siswa yang mengalami kendala menggunakan sistem digital. Kebijakan tersebut membuat perubahan berlangsung secara bertahap.", soal: "Mengapa pengelola tetap menyediakan pembayaran tunai?", options: ["A. Karena pembayaran digital tidak memiliki manfaat.", "B. Karena semua siswa menolak teknologi.", "C. Untuk mengakomodasi siswa yang mengalami kendala dalam menggunakan sistem digital.", "D. Agar pencatatan transaksi menjadi lebih sulit.", "E. Untuk menghapus penggunaan sistem digital."], correct: "C", explanation: "📌 **PEMBAHASAN:** Pengelola menyediakan tunai untuk mengakomodasi siswa yang mengalami kendala." },
+    
+    { id: 28, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Ketika listrik padam, seluruh rumah menjadi gelap. Sinta menyalakan lampu darurat dan membantu adiknya mencari lilin. 'Kita tunggu sampai listrik menyala kembali,' katanya. Di luar, hujan turun deras, tetapi Sinta tetap tenang dan memastikan semua pintu serta jendela tertutup.", soal: "Bagaimana karakter Sinta berdasarkan kutipan tersebut?", options: ["A. Panik dan ceroboh", "B. Tenang, sigap, dan bertanggung jawab", "C. Mudah menyerah", "D. Egois dan keras kepala", "E. Takut mengambil keputusan"], correct: "B", explanation: "📌 **PEMBAHASAN:** Sinta tetap tenang, menyalakan lampu, dan memastikan pintu tertutup." },
+    
+    { id: 29, kompetensi: "Simpulan", teks: "informasi", bacaan: "Penggunaan botol minum isi ulang dapat mengurangi kebutuhan terhadap botol sekali pakai. Kebiasaan tersebut memang terlihat sederhana, tetapi jika dilakukan oleh banyak orang secara konsisten, jumlah sampah yang dihasilkan dapat berkurang. Perubahan perilaku masyarakat karena itu menjadi salah satu bagian penting dalam upaya pengurangan sampah.", soal: "Simpulan yang paling tepat adalah ...", options: ["A. Botol sekali pakai harus segera dilarang di semua tempat.", "B. Perubahan kebiasaan sederhana dapat memberi dampak lingkungan apabila dilakukan secara luas dan konsisten.", "C. Sampah hanya dapat dikurangi melalui kebijakan pemerintah.", "D. Botol isi ulang tidak memiliki manfaat bagi lingkungan.", "E. Semua masyarakat sudah menggunakan botol isi ulang."], correct: "B", explanation: "📌 **PEMBAHASAN:** Kebiasaan sederhana dapat berdampak jika dilakukan secara luas dan konsisten." },
+    
+    { id: 30, kompetensi: "Gagasan Penulis", teks: "informasi", bacaan: "Tradisi lokal dapat tetap dipertahankan meskipun masyarakat mengalami perubahan zaman. Namun, pelestarian tradisi tidak berarti semua bentuk praktik harus dipertahankan tanpa pertimbangan. Jika suatu bagian tradisi menimbulkan beban yang tidak sesuai dengan kondisi masyarakat sekarang, penyesuaian dapat dilakukan tanpa menghilangkan nilai utama yang terkandung di dalamnya.", soal: "Pernyataan yang paling mencerminkan gagasan penulis adalah ...", options: ["A. Semua tradisi lama harus dihapus agar masyarakat modern berkembang.", "B. Tradisi harus dipertahankan persis seperti bentuk aslinya.", "C. Tradisi dapat dilestarikan dengan melakukan penyesuaian terhadap praktik yang sudah tidak sesuai.", "D. Perubahan zaman selalu menghilangkan nilai budaya.", "E. Nilai budaya hanya dapat dipertahankan melalui aturan yang ketat."], correct: "C", explanation: "📌 **PEMBAHASAN:** Penulis menekankan bahwa tradisi dapat dilestarikan dengan penyesuaian terhadap praktik yang tidak sesuai." },
+    
+    // Soal 31-40
+    { id: 31, kompetensi: "Makna Kata Serapan", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau. Tak satupun barang tertinggal di rumah lama. Begitu juga dengan sahabatku, kami harus berpisah.", soal: "Penggunaan kata serapan boyongan dapat memperjelas peristiwa yang dialami tokoh saya, yaitu ...", options: ["A. Peristiwa pindahan yang sering dialami pegawai suatu instansi untuk kepentingan promosi jabatan.", "B. Peristiwa pindah rumah dari kampung halaman ke tempat yang jauh untuk jangka waktu lama.", "C. Pindah rumah bersama seluruh anggota keluarga dengan membawa semua barang rumah tangga.", "D. Pindah rumah untuk mengikuti tugas kedinasan orang tua di tempat baru yang letaknya sangat jauh.", "E. Kegiatan pindah rumah untuk sementara waktu dan akan berpindah lagi ke rumah dinas yang lain."], correct: "C", explanation: "📌 **PEMBAHASAN:** Boyongan berarti pindah rumah bersama seluruh anggota keluarga dengan membawa semua barang." },
+    
+    { id: 32, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau...", soal: "Peristiwa apa yang mungkin akan terjadi kepada sahabatnya jika tokoh saya tidak ikut mencari jangkrik malam itu? Tentukan Tepat atau Tidak Tepat untuk setiap pernyataan berikut!", options: ["Sahabat tokoh saya masih memiliki seragam pramuka untuk dipakai.", "Punggung sahabat tokoh saya tidak akan memiliki luka bakar.", "Sahabat tokoh saya akan mencari jangkrik tanpa perlu berlari."], correct: "Tepat, Tepat, Tidak Tepat", explanation: "📌 **PEMBAHASAN:** Jika tokoh tidak ikut, seragam tidak terbakar, punggung sahabat tidak luka, dan sahabat tidak perlu berlari menolong." },
+    
+    { id: 33, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Hampir 25 tahun lalu kami berpisah...", soal: "Kalimat mana saja dari dalam kutipan cerpen tersebut yang membuktikan karakter sahabat tokoh saya merupakan seorang yang setia kawan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.", options: ["A. Saya langsung menyatakan ingin ikut, tapi dia keberatan.", "B. Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja.", "C. Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya.", "D. Dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang.", "E. Rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya."], correct: "C,D,E", explanation: "📌 **PEMBAHASAN:** Tindakan menolong, menggendong, dan rasa tanggung jawab menunjukkan kesetiaan kawan." },
+    
+    { id: 34, kompetensi: "Kata Serapan", teks: "informasi", bacaan: "(1) Perubahan iklim yang semakin nyata dan ancaman terhadap kelestarian bumi menuntut kita untuk mencari solusi efektif dalam menjaga keseimbangan alam...", soal: "Manakah kalimat yang memiliki penggunaan kata serapan yang tepat? Tentukan Tepat atau Tidak Tepat pada setiap pernyataan berikut!", options: ["Kata 'deforestasi' pada kalimat (2) paragraf kedua.", "Kata 'menginvestigasi' pada kalimat (2) paragraf ketiga.", "Kata 'polusi' pada kalimat (1) paragraf keempat."], correct: "Tepat, Tepat, Tepat", explanation: "📌 **PEMBAHASAN:** Semua kata serapan tersebut digunakan dengan tepat sesuai konteks." },
+    
+    { id: 35, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "(1) Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global yang meningkat, dan naiknya permukaan air laut. (2) Hal tersebut juga memicu deforestasi, polusi, dan mengancam keberagaman hayati di seluruh dunia. (3) Oleh karena itu, kita harus mengambil langkah tegas agar dampak perubahan iklim ini tidak semakin parah...", soal: "Hubungan makna antara kalimat (2) dan (3) pada paragraf kedua adalah ...", options: ["A. Akibat-sebab yang diperkuat dengan contoh deforestasi dan kerusakan lingkungan", "B. Sebab-akibat yang mengajak pembaca untuk mengambil langkah tegas", "C. Penegasan yang diperinci dengan contoh konkret yang bisa diaplikasikan pembaca", "D. Perbandingan dari dua pandangan terkait dampak negatif deforestasi", "E. Penyimpulan bahwa teknologi hijau merupakan solusi masalah deforestasi"], correct: "B", explanation: "📌 **PEMBAHASAN:** Kalimat (2) menjelaskan dampak, kalimat (3) mengajak mengambil langkah tegas (akibat)." },
+    
+    { id: 36, kompetensi: "Makna Kata", teks: "informasi", bacaan: "Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa...", soal: "Apa makna kata hajatan pada teks tersebut?", options: ["A. Kegiatan kerja bakti membersihkan lingkungan sekitar.", "B. Pertemuan rutin warga untuk membahas masalah lingkungan.", "C. Diskusi keluarga besar untuk menentukan pembagian warisan.", "D. Permohonan bantuan yang dilakukan tuan rumah kepada tetangga.", "E. Acara atau pesta yang diadakan untuk memperingati hal penting."], correct: "E", explanation: "📌 **PEMBAHASAN:** Hajatan berarti acara atau pesta untuk memperingati hal penting, seperti pernikahan atau khitanan." },
+    
+    { id: 37, kompetensi: "Gagasan Pendukung", teks: "informasi", bacaan: "Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa...", soal: "Manakah gagasan yang mendukung ide pokok bahwa buwuhan adalah bentuk utang?", options: ["A. Praktik buwuhan disertai dengan perjanjian utang piutang secara tertulis.", "B. Buwuhan disertai kesepakatan untuk selalu memberi lebih dari yang diterima.", "C. Bentuk buwuhan dapat berupa sedekah atau hibah yang harus dibayar kembali.", "D. Buwuhan dilakukan oleh tetangga dan kerabat sebagai bentuk pertukaran solidaritas.", "E. Penerima buwuhan merasa harus mengembalikan bantuan yang diterima di kemudian hari."], correct: "E", explanation: "📌 **PEMBAHASAN:** Gagasan yang mendukung buwuhan sebagai utang adalah adanya kewajiban moral untuk mengembalikan bantuan." },
+    
+    { id: 38, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa...", soal: "Hubungan makna paragraf kedua dan ketiga adalah ...", options: ["A. perbedaan jenis buwuhan berdasarkan jenis acara yang dilangsungkan", "B. penjelasan sebab dan akibat dari perbedaan pandangan mengenai buwuhan", "C. penjelasan dampak buruk dari adanya pandangan buwuhan sebagai sedekah", "D. perbedaan tata cara buwuhan pada beberapa kelurahan atau desa di Surabaya", "E. penjelasan hubungan hukum agama dengan pengertian masyarakat terhadap buwuhan"], correct: "B", explanation: "📌 **PEMBAHASAN:** Paragraf 2 menjelaskan pandangan buwuhan sebagai utang, paragraf 3 menjelaskan akibatnya." },
+    
+    { id: 39, kompetensi: "Kesimpulan", teks: "informasi", bacaan: "Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa...", soal: "Kalimat 'Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan...' dapat menjadi kesimpulan yang sesuai teks argumentasi tersebut karena ...", options: ["A. merangkum sebab-akibat dari adanya tradisi buwuhan di wilayah Surabaya", "B. menyimpulkan ketidaksetujuan masyarakat terhadap penghapusan tradisi buwuhan", "C. menyangkal pandangan negatif yang ada di masyarakat untuk pelestarian buwuhan", "D. menyimpulkan berbagai pandangan masyarakat terhadap konsep buwuhan", "E. menggarisbawahi solusi untuk melestarikan tradisi buwuhan di seluruh wilayah Jawa"], correct: "B", explanation: "📌 **PEMBAHASAN:** Kalimat kesimpulan menyimpulkan bahwa perlu pemahaman ulang agar nilai tolong-menolong tetap terjaga, yang berarti menyetujui pelestarian tradisi." },
+    
+    { id: 40, kompetensi: "Karakter Tokoh", teks: "fiksi", bacaan: "Layur, Teruslah Berlayar...", soal: "Berdasarkan teks tersebut, bagaimana sifat yang dimiliki oleh Layur?", options: ["A. Nekat dan optimis", "B. Mudah cemas dan tabah", "C. Penuh harap dan kasih sayang", "D. Suka menyendiri dan tegas", "E. Cepat panik dan menyalahkan keadaan"], correct: "C", explanation: "📌 **PEMBAHASAN:** Layur menunggu Bapak dengan penuh harap dan kasih sayang." },
+    
+    // Soal 41-50
+    { id: 41, kompetensi: "Pemahaman Tekstual", teks: "fiksi", bacaan: "Layur, Teruslah Berlayar...", soal: "Apa yang menyebabkan Layur kesal kepada Bapak?", options: ["A. Tidak pamit kepada Layur saat hendak berlayar", "B. Tidak membawa banyak ikan dari laut", "C. Tidak setuju Layur menunggu terlalu lama di pantai", "D. Tidak kunjung pulang setelah enam hari melaut", "E. Tidak menepati janjinya untuk pulang tepat waktu ketika melaut"], correct: "D", explanation: "📌 **PEMBAHASAN:** Layur kesal karena Bapak tidak pulang selama enam hari." },
+    
+    { id: 42, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Layur, Teruslah Berlayar...", soal: "Bagaimana reaksi yang ditunjukkan oleh Bapak ketika rumahnya luluh lantak dan bondet buatannya melukai Layur?", options: ["A. Merasa trauma dan membutuhkan waktu untuk menyendiri", "B. Menunjukkan respons yang biasa seperti tidak terjadi apa-apa", "C. Sangat terkejut dan sungguh menyesal atas apa yang dilakukan", "D. Marah terhadap orang lain dan merasa panik yang luar biasa", "E. Bingung dan berusaha mencerna terhadap apa yang telah terjadi"], correct: "C", explanation: "📌 **PEMBAHASAN:** Bapak sangat menyesal atas ledakan yang melukai Layur." },
+    
+    { id: 43, kompetensi: "Pemahaman Inferensial", teks: "fiksi", bacaan: "Layur, Teruslah Berlayar...", soal: "Bagaimana kisah yang sesuai untuk menutup cerita Layur merasa lega pada cerita tersebut?", options: ["A. Bapak meminta maaf pada Layur dan menceritakan penyebabnya pulang terlambat", "B. Bapak membimbing Layur pulang dan berjanji untuk tidak pulang terlambat lagi", "C. Bapak memeluk Layur dan merasa senang karena akhirnya ia bisa bertemu putrinya kembali", "D. Layur membereskan sampan dan memberikan hasil tangkapan yang tidak seberapa kepada Bapak", "E. Layur berterima kasih kepada Bapak karena telah menunggunya pulang dari melaut berhari-hari"], correct: "C", explanation: "📌 **PEMBAHASAN:** Penutup yang paling sesuai adalah pertemuan yang mengharukan antara Bapak dan Layur." },
+    
+    { id: 44, kompetensi: "Hubungan Makna", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Bagaimana hubungan makna antara paragraf 1 dan paragraf 2 dalam teks tersebut?", options: ["A. Paragraf 2 menjelaskan akibat dari fenomena sampah yang diuraikan di paragraf 1", "B. Paragraf 2 menyajikan solusi awal untuk permasalahan yang diperkenalkan di paragraf 1", "C. Paragraf 2 memberikan contoh spesifik dari jenis sampah yang disebutkan di paragraf 1", "D. Paragraf 2 mengkritisi data yang rancu tentang sampah yang disajikan di paragraf 1", "E. Paragraf 2 menguraikan penyebab dari permasalahan yang dijabarkan di paragraf 1"], correct: "E", explanation: "📌 **PEMBAHASAN:** Paragraf 2 menjelaskan penyebab dari permasalahan sampah yang disebutkan di paragraf 1." },
+    
+    { id: 45, kompetensi: "Data Pendukung", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Data apa saja yang mendukung opini penulis tersebut? Klik pilihan Benar atau Salah untuk setiap pernyataan sesuai isi teks!", options: ["Peningkatan aktivitas manusia yang menyebabkan lingkungan tercemar didukung oleh data lonjakan timbunan sampah medis sebesar 30-50%", "Tingginya jumlah dan jenis limbah didukung oleh data bahwa 96% paket dibungkus dengan plastik tebal dan bubble wrap", "Kebakaran hutan yang merusak ekosistem didukung data bahwa Indonesia merupakan negara ke-2 penyumbang sampah"], correct: "Benar, Benar, Salah", explanation: "📌 **PEMBAHASAN:** Data sampah medis dan plastik mendukung. Data Indonesia sebagai penyumbang sampah tidak mendukung kebakaran hutan." },
+    
+    { id: 46, kompetensi: "Makna Istilah", teks: "informasi", bacaan: "Berdasarkan hasil riset LIPI...", soal: "Mengapa penulis memilih istilah 'bahu-membahu' untuk menggambarkan peran semua pihak dalam upaya pelestarian lingkungan?", options: ["A. Memperkuat makna pentingnya kolaborasi berbagai pihak untuk mencapai tujuan", "B. Memberikan sedikit kesan informal yang mungkin kurang pas untuk teks opini", "C. Mengindikasikan bahwa idiom lebih cocok digunakan untuk konteks fisik", "D. Menyiratkan adanya paksaan atau tekanan dari satu pihak kepada pihak lain", "E. Menunjukkan bahwa konteks ini terlalu ambigu dan tidak ada definisi yang jelas"], correct: "A", explanation: "📌 **PEMBAHASAN:** 'Bahu-membahu' memperkuat makna kolaborasi dan kerja sama." },
+    
+    { id: 47, kompetensi: "Makna Kata", teks: "informasi", bacaan: "Belis adalah tradisi di wilayah Indonesia bagian timur seperti Nusa Tenggara Timur...", soal: "Apa makna kata sesepuh pada teks tersebut?", options: ["A. keluarga yang dihormati oleh seluruh warga desa", "B. orang yang dituakan atau dijadikan pemimpin", "C. masyarakat yang memiliki peran penting", "D. pengurus atau perangkat desa yang sudah tua", "E. laki-laki yang sudah menikah dan memiliki anak"], correct: "B", explanation: "📌 **PEMBAHASAN:** Sesepuh berarti orang yang dituakan atau dijadikan pemimpin." },
+    
+    { id: 48, kompetensi: "Kesimpulan", teks: "informasi", bacaan: "Belis adalah tradisi di wilayah Indonesia bagian timur...", soal: "Kalimat 'Dengan demikian, perlu untuk memikirkan ulang makna belis...' dapat menjadi kesimpulan yang sesuai teks argumentasi tersebut karena ...", options: ["A. menekankan pentingnya menjaga tradisi belis agar tidak hilang ditelan zaman", "B. mengusulkan agar tradisi belis dihapuskan sepenuhnya demi kesejahteraan keluarga", "C. menegaskan bahwa belis adalah pertukaran materi semata dan tidak memiliki makna lain", "D. merangkum masalah utama yang ditimbulkan oleh belis yang kaku, yaitu konflik dan tekanan", "E. menyimpulkan solusi konkret untuk masalah yang dibahas, yaitu beban finansial akibat belis"], correct: "E", explanation: "📌 **PEMBAHASAN:** Kesimpulan yang sesuai adalah solusi untuk masalah beban finansial akibat belis." },
+    
+    { id: 49, kompetensi: "Pemahaman Tekstual", teks: "informasi", bacaan: "Prospek Ekonomi Global di Tengah Ketidakpastian...", soal: "Manakah pernyataan yang dapat menjadi kelanjutan teks tersebut?", options: ["A. Peran aktif IMF dan Bank Dunia dalam menanggulangi krisis ekonomi dan pembentukan SDM di negara berkembang secara global", "B. Dampak langsung kebijakan suku bunga bank sentral terhadap tingkat pengangguran di setiap negara dan menjadi masalah global", "C. Analisis mendalam mengenai skenario dan kemungkinan-kemungkinan terkait evolusi inflasi, respons kebijakan, serta situasi geopolitik", "D. Analisis mengenai skenario dan kemungkinan-kemungkinan terkait evolusi inflasi, respons kebijakan, serta situasi geopolitik global", "E. Pentingnya investasi di sektor manufaktur untuk meningkatkan ekspor dan mengurangi gangguan rantai pasok secara global"], correct: "C", explanation: "📌 **PEMBAHASAN:** Kelanjutan yang logis adalah analisis mendalam tentang skenario dan kemungkinan yang terkait dengan inflasi, kebijakan, dan geopolitik." },
+    
+    { id: 50, kompetensi: "Analisis Cerita", teks: "fiksi", bacaan: "Roh Meratus...", soal: "Latar tempat yang tergambar dalam cerita tersebut adalah ...", options: ["A. sebuah perkampungan penduduk adat", "B. daerah perkotaan yang ramai", "C. pegunungan batu yang tandus", "D. hutan belantara yang lebat", "E. pantai dengan pasir putih"], correct: "D", explanation: "📌 **PEMBAHASAN:** Deskripsi pohon besar, sinar matahari hampir tidak menembus, lumut, dan sulur menunjukkan hutan belantara yang lebat." }
+];
+
+// State
+let userAnswers = {};
+let answerStatus = {};
+
+function loadStorage() {
+    let saved = localStorage.getItem('bindo_50_hard_test');
+    let savedStatus = localStorage.getItem('bindo_50_hard_status');
+    if(saved) userAnswers = JSON.parse(saved);
+    if(savedStatus) answerStatus = JSON.parse(savedStatus);
+    for(let i=1;i<=50;i++) {
+        if(!userAnswers[i]) userAnswers[i] = "";
+        if(answerStatus[i] === undefined) answerStatus[i] = false;
+    }
+}
+
+function saveStorage() {
+    localStorage.setItem('bindo_50_hard_test', JSON.stringify(userAnswers));
+    localStorage.setItem('bindo_50_hard_status', JSON.stringify(answerStatus));
+    let toast = document.getElementById('toast-save');
+    toast.style.opacity = '1';
+    setTimeout(() => toast.style.opacity = '0', 1000);
+}
+
+function updateScore() {
+    let correct = 0;
+    for(let i=1;i<=50;i++) if(answerStatus[i]) correct++;
+    document.getElementById('liveScoreDisplay').innerHTML = `🏆 SKOR: ${correct} / 50`;
+}
+
+window.evaluateQuestion = function(id) {
+    let q = soalData.find(x=>x.id===id);
+    let jawab = userAnswers[id];
+    if(!jawab) {
+        document.getElementById(`fb_${id}`).innerHTML = `<div class="result-warning">⚠️ Pilih jawaban terlebih dahulu!</div>`;
+        return;
+    }
+    let benar = (jawab === q.correct);
+    answerStatus[id] = benar;
+    saveStorage();
+    
+    let fbDiv = document.getElementById(`fb_${id}`);
+    let resultHtml = benar ? 
+        `<div class="result-correct">✅ <strong>BENAR!</strong> Jawaban Anda: ${jawab} (Kunci: ${q.correct})</div>` :
+        `<div class="result-wrong">❌ <strong>SALAH!</strong><br>Jawaban Anda: ${jawab}<br>Jawaban benar: <strong>${q.correct}</strong></div>`;
+    resultHtml += `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP + ANALISIS JEBAKAN:</strong><br>${q.explanation}</div>`;
+    fbDiv.innerHTML = resultHtml;
+    updateScore();
+};
+
+window.showExplanation = function(id) {
+    let q = soalData.find(x=>x.id===id);
+    document.getElementById(`fb_${id}`).innerHTML = `<div class="explanation-box"><strong>📘 PEMBAHASAN LENGKAP & STRATEGI MENJAWAB SOAL OLIMPIADE:</strong><br>${q.explanation}</div>`;
+};
+
+function checkAll() { for(let i=1;i<=50;i++) evaluateQuestion(i); }
+function resetAll() {
+    for(let i=1;i<=50;i++) {
+        userAnswers[i] = "";
+        answerStatus[i] = false;
+        let radios = document.getElementsByName(`q${i}`);
+        radios.forEach(r => r.checked = false);
+        document.getElementById(`fb_${i}`).innerHTML = "";
+    }
+    saveStorage();
+    updateScore();
+}
+
+function showAllAnswers() {
+    let modal = document.getElementById('answerModal');
+    let container = document.getElementById('answerListContainer');
+    container.innerHTML = soalData.map(q => `<div class="answer-item"><span>${q.id}. ${q.soal.substring(0,30)}...</span><span>${q.correct}</span></div>`).join('');
+    modal.style.display = 'flex';
+}
+
+function copyAnswers() {
+    let text = "KUNCI JAWABAN BAHASA INDONESIA (50 SOAL - SULIT & MENJEBAK)\n\n";
+    soalData.forEach(q => { text += `${q.id}. ${q.correct} - ${q.soal.substring(0,45)}\n`; });
+    navigator.clipboard.writeText(text);
+    alert("✅ Kunci jawaban disalin!");
+}
+
+function render() {
+    let grid = document.getElementById('quizGrid');
+    grid.innerHTML = '';
+    soalData.forEach((q, idx) => {
+        let card = document.createElement('div');
+        card.className = 'question-card';
+        card.style.animationDelay = `${idx * 0.015}s`;
+        let kompetensiColor = q.kompetensi.includes("Pemahaman Tekstual") ? "#3b82f6" : (q.kompetensi.includes("Pemahaman Inferensial") ? "#10b981" : (q.kompetensi.includes("Makna") ? "#8b5cf6" : "#f59e0b"));
+        card.innerHTML = `
+            <div class="card-header">
+                <div class="num-badge">${q.id}</div>
+                <div class="kompetensi-tag" style="background:${kompetensiColor}15; color:${kompetensiColor};">📌 ${q.kompetensi}</div>
+                <div class="teks-tag">📄 ${q.teks === 'informasi' ? 'Teks Informasi' : 'Teks Fiksi'}</div>
+            </div>
+            <div class="reading-text">📖 ${q.bacaan}</div>
+            <div class="question-text">❓ ${q.soal}</div>
+            <div class="options" id="opt_${q.id}"></div>
+            <div class="button-group-vertical">
+                <button class="check-btn" onclick="evaluateQuestion(${q.id})">✅ CEK JAWABAN & PEMBAHASAN</button>
+                <button class="pembahasan-btn" onclick="showExplanation(${q.id})">📖 LIHAT PEMBAHASAN</button>
+            </div>
+            <div class="feedback-area" id="fb_${q.id}"></div>
+        `;
+        grid.appendChild(card);
+        let optDiv = document.getElementById(`opt_${q.id}`);
+        q.options.forEach(opt => {
+            let letter = opt[0];
+            let div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<input type="radio" name="q${q.id}" value="${letter}" id="q${q.id}_${letter}" ${userAnswers[q.id]===letter ? 'checked' : ''}><label for="q${q.id}_${letter}">${opt}</label>`;
+            div.querySelector('input').addEventListener('change', (e) => {
+                userAnswers[q.id] = e.target.value;
+                answerStatus[q.id] = false;
+                saveStorage();
+                updateScore();
+                document.getElementById(`fb_${q.id}`).innerHTML = "";
+            });
+            optDiv.appendChild(div);
+        });
+        if(userAnswers[q.id] && answerStatus[q.id]) evaluateQuestion(q.id);
+    });
+}
+
+// Animasi loading persen
+function startLoaderAnimation() {
+    let startTime = null;
+    const duration = 2500;
+    const loaderElement = document.getElementById('loaderPercent');
+    if (!loaderElement) return;
+    function updatePercent(currentTime) {
+        if (!startTime) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const percent = Math.min(Math.floor((elapsed / duration) * 100), 100);
+        loaderElement.textContent = percent + '%';
+        if (elapsed < duration) {
+            requestAnimationFrame(updatePercent);
+        }
+    }
+    requestAnimationFrame(updatePercent);
+}
+
+// Splash screen
+window.addEventListener('load', () => {
+    startLoaderAnimation();
+    setTimeout(() => {
+        let splash = document.getElementById('splash-screen');
+        if(splash) {
+            splash.classList.add('fade-out');
+            setTimeout(() => splash.remove(), 800);
+        }
+    }, 2500);
+});
+
+// Scroll Top
+window.addEventListener('scroll', () => {
+    let btn = document.getElementById('scrollTopBtn');
+    if(window.scrollY > 300) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+});
+document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// Modal
+document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+    document.getElementById('answerModal').style.display = 'none';
+});
+document.getElementById('answerModal')?.addEventListener('click', (e) => {
+    if(e.target === e.currentTarget) document.getElementById('answerModal').style.display = 'none';
+});
+
+loadStorage();
+render();
+updateScore();
+
+document.getElementById('checkAllBtn')?.addEventListener('click', checkAll);
+document.getElementById('resetBtn')?.addEventListener('click', resetAll);
+document.getElementById('showAllAnswersBtn')?.addEventListener('click', showAllAnswers);
+document.getElementById('copyAnswersBtn')?.addEventListener('click', copyAnswers);
+</script>
+</body>
+</html>
