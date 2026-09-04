@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* ===== DARK MODE — "Constellation" ===== */
             --ink: #05070f;
             --ink-deep: #0a0f24;
             --nebula-blue: #14204a;
@@ -24,7 +23,6 @@
             --border-dark: rgba(150, 175, 255, 0.14);
             --shadow-dark: rgba(0, 0, 0, 0.5);
 
-            /* ===== LIGHT MODE — "Pink Fantasy" ===== */
             --light-bg: #fff6fa;
             --light-card: #fffafc;
             --light-text: #4a2f42;
@@ -64,7 +62,7 @@
             transition: background 0.6s var(--ease-smooth), color 0.4s ease;
         }
 
-        /* ===== CANVAS BACKGROUND (constellation / sparkle) ===== */
+        /* ===== CANVAS BACKGROUND ===== */
         #cosmos-canvas {
             position: fixed;
             top: 0;
@@ -874,7 +872,6 @@
         body.light-mode .settings-dropdown a:hover,
         body.light-mode .settings-dropdown div:hover { background: rgba(255, 143, 184, 0.18); color: var(--light-pink); }
 
-        /* focus visibility for accessibility */
         .subject-card:focus-visible,
         .mode-item:focus-visible,
         .nav-btn:focus-visible,
@@ -889,13 +886,13 @@
             outline-color: var(--light-pink);
         }
 
-        /* ===== AI FLOATING BUTTON ===== */
+        /* ===== AI FLOATING BUTTON - ROBOT SPEAKING ===== */
         .ai-fab {
             position: fixed;
             right: clamp(16px, 4vw, 28px);
             bottom: clamp(16px, 4vw, 28px);
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
             display: flex;
@@ -906,6 +903,7 @@
             box-shadow: 0 10px 28px rgba(127, 180, 255, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
             animation: fabFloat 3.2s ease-in-out infinite;
             transition: transform 0.35s var(--ease-pop), box-shadow 0.35s ease;
+            cursor: pointer;
         }
 
         .ai-fab::before {
@@ -929,39 +927,85 @@
         }
 
         .ai-fab:hover {
-            transform: scale(1.1) translateY(-3px);
+            transform: scale(1.08) translateY(-3px);
             box-shadow: 0 14px 34px rgba(127, 180, 255, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
         }
 
         .ai-fab:active { transform: scale(0.96); }
 
-        .ai-fab i {
-            font-size: 24px;
+        .ai-fab .robot-icon {
+            font-size: 32px;
             color: var(--ink);
             filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.25));
+            position: relative;
+            z-index: 2;
         }
 
-        .ai-fab-label {
+        /* ===== SPEECH BUBBLE ===== */
+        .speech-bubble {
             position: absolute;
-            right: 74px;
-            top: 50%;
-            transform: translateY(-50%) translateX(6px);
+            right: 82px;
+            bottom: 50%;
+            transform: translateY(50%) translateX(6px);
             background: rgba(8, 11, 26, 0.92);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-dark);
             color: var(--star-white);
-            padding: 7px 14px;
-            border-radius: 10px;
-            font-size: 0.78rem;
+            padding: 10px 18px;
+            border-radius: 14px 14px 4px 14px;
+            font-size: 0.75rem;
             font-weight: 500;
             white-space: nowrap;
+            max-width: 220px;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 3;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', sans-serif;
         }
 
-        .ai-fab:hover .ai-fab-label {
+        .speech-bubble.show {
             opacity: 1;
-            transform: translateY(-50%) translateX(0);
+            transform: translateY(50%) translateX(0);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            bottom: 8px;
+            border: 6px solid transparent;
+            border-left-color: rgba(8, 11, 26, 0.92);
+        }
+
+        .speech-bubble .typing-dots {
+            display: inline-block;
+            animation: dotBounce 1.2s ease-in-out infinite;
+        }
+
+        .speech-bubble .typing-dots span {
+            display: inline-block;
+            animation: dotBounce 1.2s ease-in-out infinite;
+        }
+
+        .speech-bubble .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .speech-bubble .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        body.light-mode .speech-bubble {
+            background: rgba(255, 250, 253, 0.96);
+            border: 1px solid var(--light-border);
+            color: var(--light-text);
+            box-shadow: 0 8px 24px rgba(255, 143, 184, 0.2);
+        }
+
+        body.light-mode .speech-bubble::after {
+            border-left-color: rgba(255, 250, 253, 0.96);
         }
 
         body.light-mode .ai-fab {
@@ -975,56 +1019,64 @@
             box-shadow: 0 14px 34px rgba(255, 143, 184, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
         }
 
-        body.light-mode .ai-fab i { color: #fff; }
+        body.light-mode .ai-fab .robot-icon { color: #fff; }
 
-        body.light-mode .ai-fab-label {
-            background: rgba(255, 250, 253, 0.96);
-            border: 1px solid var(--light-border);
-            color: var(--light-text);
+        /* ===== ROBOT FACE ANIMATION ===== */
+        .robot-face {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
         }
+
+        .robot-eyes {
+            display: flex;
+            gap: 6px;
+        }
+
+        .robot-eye {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ink);
+            animation: eyeBlink 3.6s ease-in-out infinite;
+        }
+
+        @keyframes eyeBlink {
+            0%, 45%, 55%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        .robot-mouth {
+            width: 14px;
+            height: 4px;
+            background: var(--ink);
+            border-radius: 0 0 6px 6px;
+            margin-top: 1px;
+            animation: mouthTalk 1.8s ease-in-out infinite;
+        }
+
+        @keyframes mouthTalk {
+            0%, 100% { height: 3px; width: 14px; border-radius: 0 0 6px 6px; }
+            30% { height: 6px; width: 16px; border-radius: 0 0 8px 8px; }
+            60% { height: 4px; width: 12px; border-radius: 0 0 4px 4px; }
+        }
+
+        body.light-mode .robot-eye,
+        body.light-mode .robot-mouth { background: #2d1a2a; }
 
         @media (max-width: 480px) {
-            .ai-fab { width: 52px; height: 52px; }
-            .ai-fab i { font-size: 20px; }
-            .ai-fab-label { display: none; }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (min-width: 640px) and (max-width: 1023px) {
-            .subjects-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        @media (max-width: 768px) {
-            .main-container { padding: 78px 16px 46px; }
-            .top-nav { padding: 10px 14px; }
-            .nav-brand { font-size: 16px; }
-            .nav-btn { width: 37px; height: 37px; font-size: 14px; }
-            .subjects-grid { gap: 12px; }
-            .subject-card { padding: 18px 12px; min-height: 156px; }
-            .subject-icon { font-size: 38px; margin-bottom: 8px; }
-            .subject-card h2 { font-size: 0.92rem; }
-            .subject-desc { font-size: 0.65rem; }
-            .mode-panel { padding: 22px; border-radius: 20px; }
-            .panel-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .modes-grid { grid-template-columns: 1fr; gap: 14px; }
-            .mode-item { padding: 18px; }
-            .mode-icon { font-size: 34px; }
-            .mode-item h4 { font-size: 1rem; }
-        }
-
-        @media (max-width: 480px) {
-            .main-container { padding: 70px 12px 38px; }
-            .header { margin-bottom: 36px; }
-            .header-subtitle { font-size: 0.72rem; letter-spacing: 0.05em; }
-            .subjects-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .subject-card { padding: 15px 8px; min-height: 132px; border-radius: 16px; }
-            .subject-icon { font-size: 30px; }
-            .logo-ring { width: 68px; height: 68px; margin: 0 auto 14px; }
-            .logo-core { width: 68px; height: 68px; font-size: 30px; border-radius: 20px; }
-        }
-
-        @media (min-width: 1200px) {
-            .subject-card { min-height: 210px; }
+            .ai-fab { width: 58px; height: 58px; }
+            .ai-fab .robot-icon { font-size: 26px; }
+            .speech-bubble {
+                right: 70px;
+                font-size: 0.7rem;
+                padding: 8px 14px;
+                max-width: 160px;
+                white-space: normal;
+            }
+            .speech-bubble.show { transform: translateY(0) translateX(0); bottom: calc(100% + 12px); }
         }
     </style>
 </head>
@@ -1108,13 +1160,27 @@
     </div>
 </div>
 
-<a href="alarich-ai.html" class="ai-fab" aria-label="Buka Alarich AI">
-    <i class="fa-solid fa-robot"></i>
-    <span class="ai-fab-label">Tanya Alarich AI</span>
-</a>
+<!-- ===== AI FAB WITH SPEECH ===== -->
+<div class="ai-fab" id="aiFab" aria-label="Buka Alarich AI">
+    <div class="robot-icon">
+        <div class="robot-face">
+            <div class="robot-eyes">
+                <span class="robot-eye"></span>
+                <span class="robot-eye"></span>
+            </div>
+            <div class="robot-mouth"></div>
+        </div>
+    </div>
+    <div class="speech-bubble" id="speechBubble">
+        <span id="speechText">Halo! Ada yang bisa kubantu? 😊</span>
+        <span class="typing-dots">
+            <span>.</span><span>.</span><span>.</span>
+        </span>
+    </div>
+</div>
 
 <script>
-// ========== COSMOS CANVAS: constellation (dark) / sparkle (light) ==========
+// ========== COSMOS CANVAS ==========
 (function() {
     const canvas = document.getElementById('cosmos-canvas');
     const ctx = canvas.getContext('2d', { alpha: true });
@@ -1130,10 +1196,10 @@
     }, { passive: true });
 
     const DARK_HUES = [
-        'rgba(215, 225, 255,',   // white-blue
-        'rgba(127, 227, 255,',   // cyan
-        'rgba(255, 217, 142,',   // gold
-        'rgba(180, 139, 255,'    // violet
+        'rgba(215, 225, 255,',
+        'rgba(127, 227, 255,',
+        'rgba(255, 217, 142,',
+        'rgba(180, 139, 255,'
     ];
     const FAIRY_HUES = ['255,143,184', '255,207,122', '201,162,255', '255,255,255', '150,220,255'];
 
@@ -1182,27 +1248,6 @@
                 life: 1
             });
         }
-    }
-
-    function maybeSpawnGlimmer() {
-        if (!isLight || reduceMotion) return null;
-        if (Math.random() < 0.02) {
-            const p = items[Math.floor(Math.random() * items.length)];
-            return p;
-        }
-        return null;
-    }
-
-    function drawSparkle(x, y, size, color, alpha) {
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.1;
-        ctx.beginPath();
-        ctx.moveTo(x - size, y); ctx.lineTo(x + size, y);
-        ctx.moveTo(x, y - size); ctx.lineTo(x, y + size);
-        ctx.stroke();
-        ctx.restore();
     }
 
     function drawDark() {
@@ -1295,11 +1340,6 @@
             ctx.arc(px, py, s.r * 0.9, 0, Math.PI * 2);
             ctx.fill();
         }
-
-        const g = maybeSpawnGlimmer();
-        if (g) {
-            drawSparkle(g.x + Math.sin(g.wobble) * g.drift, g.y, 7 + Math.random() * 4, `rgba(${g.fhue}, 1)`, 0.85);
-        }
     }
 
     function loop() {
@@ -1342,7 +1382,7 @@
     });
 })();
 
-// ========== SUMMER / FANTASY BUBBLES ==========
+// ========== BUBBLES & FLOWERS ==========
 function createBubbles() {
     const container = document.getElementById('bubbleContainer');
     container.innerHTML = '';
@@ -1561,6 +1601,98 @@ Object.entries(cards).forEach(([cardId, data]) => {
             openSubject(cardId, element);
         }
     });
+});
+
+// ========== AI ROBOT SPEECH LOOPING ==========
+const speechMessages = [
+    "Halo! Ada yang bisa kubantu? 😊",
+    "Siap belajar TKA hari ini? 📚",
+    "Klik aku untuk tanya jawab! 💡",
+    "Semangat! Kamu pasti bisa! 🚀"
+];
+// ========== AI FAB NAVIGATION ==========
+document.getElementById('aiFab').addEventListener('click', function(e) {
+    // Cegah speech bubble conflict
+    e.stopPropagation();
+    // Arahkan ke halaman Alarich AI
+    window.location.href = 'alarich-ai.html';
+});
+let messageIndex = 0;
+let isShowing = false;
+let timeoutId = null;
+const speechBubble = document.getElementById('speechBubble');
+const speechText = document.getElementById('speechText');
+const aiFab = document.getElementById('aiFab');
+
+function showNextMessage() {
+    // Update text
+    speechText.textContent = speechMessages[messageIndex];
+    
+    // Show bubble
+    speechBubble.classList.add('show');
+    isShowing = true;
+    
+    // Hide after 3.5 seconds
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+        speechBubble.classList.remove('show');
+        isShowing = false;
+        
+        // Move to next message after 1.5 second pause
+        timeoutId = setTimeout(() => {
+            messageIndex = (messageIndex + 1) % speechMessages.length;
+            showNextMessage();
+        }, 1500);
+    }, 3500);
+}
+
+// Start the looping after 2 seconds
+setTimeout(() => {
+    showNextMessage();
+}, 2000);
+
+// Also show message when user hovers/clicks the AI
+aiFab.addEventListener('mouseenter', () => {
+    if (!isShowing) {
+        clearTimeout(timeoutId);
+        speechText.textContent = speechMessages[messageIndex];
+        speechBubble.classList.add('show');
+        isShowing = true;
+        
+        timeoutId = setTimeout(() => {
+            speechBubble.classList.remove('show');
+            isShowing = false;
+            // Resume loop after pause
+            timeoutId = setTimeout(() => {
+                messageIndex = (messageIndex + 1) % speechMessages.length;
+                showNextMessage();
+            }, 1500);
+        }, 3000);
+    }
+});
+
+aiFab.addEventListener('click', () => {
+    clearTimeout(timeoutId);
+    // Show a random encouraging message on click
+    const clickMessages = [
+        "Wah, semangat belajarnya! 🔥",
+        "Tanya apa aja, aku siap! 🤖",
+        "Kamu hebat! Lanjutkan! 💪",
+        "Ayo kerjakan soal TKA! ✨"
+    ];
+    const randomMsg = clickMessages[Math.floor(Math.random() * clickMessages.length)];
+    speechText.textContent = randomMsg;
+    speechBubble.classList.add('show');
+    isShowing = true;
+    
+    timeoutId = setTimeout(() => {
+        speechBubble.classList.remove('show');
+        isShowing = false;
+        timeoutId = setTimeout(() => {
+            messageIndex = (messageIndex + 1) % speechMessages.length;
+            showNextMessage();
+        }, 1500);
+    }, 3000);
 });
 </script>
 </body>
