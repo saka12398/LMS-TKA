@@ -263,113 +263,110 @@ function startConfetti(){
     setTimeout(()=>{ if(animId){ cancelAnimationFrame(animId); animId=null; ctx.clearRect(0,0,canvas.width,canvas.height); }},5000);
 }
 
-// ==================== 50 SOAL MATEMATIKA ====================
+// ==================== 50 SOAL MATEMATIKA (DIPERBAHARUI) ====================
 const questions = [
-    // ===== BILANGAN (1-10) =====
-    { id: 1, diff: "Medium", cat: "Peluang", type: "mc", text: "Sebuah hotel memiliki 30 kamar. 18 kamar pemandangan laut, 10 kamar Twin Bed, 6 kamar keduanya. Peluang tamu mendapat kamar pemandangan laut atau Twin Bed adalah...", options: ["A. 1/5", "B. 8/15", "C. 11/15", "D. 12/15", "E. 14/15"], correct: "C", penyelesaian: "n(S) = 30<br>n(A) = 18, n(B) = 10, n(A∩B) = 6<br>n(A∪B) = 18 + 10 - 6 = 22<br>P = 22/30 = <strong>11/15</strong>" },
+    // ===== SOAL BARU 1-10 =====
+    { id: 1, diff: "Medium", cat: "Peluang", type: "mc", text: "Sebuah hotel memiliki 30 kamar yang tersedia di lantai 5. 18 kamar memiliki pemandangan laut, 10 kamar Twin Bed, 6 kamar keduanya. Peluang tamu mendapat kamar dengan pemandangan laut atau Twin Bed adalah...", options: ["A. 1/5", "B. 8/15", "C. 11/15", "D. 12/15", "E. 14/15"], correct: "C", penyelesaian: "n(S) = 30<br>n(A) = 18, n(B) = 10, n(A∩B) = 6<br>n(A∪B) = 18 + 10 - 6 = 22<br>P = 22/30 = <strong>11/15</strong>" },
     
-    { id: 2, diff: "Hard", cat: "Bilangan", type: "mc", text: "Bentuk rasional dari (2 + √2)/(√6 - √2) adalah ...", options: ["A. (√6 + √2 - √3 + 1)/2", "B. (√6 + √2 + √3 + 1)/2", "C. (√6 + √2 - 2√3 + 1)/2", "D. (√6 + √2 - √3 + 1)/4", "E. (√6 + √2 + √3 + 1)/4"], correct: "A", penyelesaian: "(2 + √2)/(√6 - √2) × (√6 + √2)/(√6 + √2)<br>= (2√6 + 2√2 + √12 + 2)/(6 - 2)<br>= (2√6 + 2√2 + 2√3 + 2)/4<br>= <strong>(√6 + √2 + √3 + 1)/2</strong>" },
+    { id: 2, diff: "Hard", cat: "Peluang", type: "mc-multiple", text: "Dari 10 gadget: 4 smartphone, 3 smartwatch, 2 tablet, 1 smart tag. Mana pernyataan yang benar?", options: ["1. Peluang smartphone = 40%", "2. Peluang bukan tablet = 0,2", "3. Peluang smart tag = 1/5", "4. Peluang bukan smartwatch = 70%"], correct: "1,3,4", penyelesaian: "1. 4/10=40% → BENAR<br>2. Bukan tablet = 8/10=0,8 → SALAH<br>3. Smart tag = 1/10=1/5 → BENAR<br>4. Bukan smartwatch = 7/10=70% → BENAR" },
     
-    { id: 3, diff: "Hot", cat: "Bilangan", type: "mc", text: "Tegangan = 2⁴×5² V, arus = 2⁻¹×5⁻¹ A, waktu = 2³×5 s. E = V×I×t. Jika rugi ½, energi bersih = ...", options: ["A. 2⁸×5⁵ J", "B. 2⁴×5³ J", "C. 80 J", "D. 32 J", "E. 5 J"], correct: "C", penyelesaian: "V = 2⁴×5², I = 2⁻¹×5⁻¹, t = 2³×5<br>E = 2⁴⁻¹⁺³ × 5²⁻¹⁺¹ = 2⁶ × 5² = 64 × 25 = 1.600 J<br>E bersih = ½ × 1.600 = <strong>800 J</strong>" },
+    { id: 3, diff: "Medium", cat: "Aritmatika Sosial", type: "mc", text: "Harga 3 buku dan 2 penggaris Rp18.000,00. Jika harga sebuah buku Rp1.000,00 lebih mahal dari penggaris, harga 2 buku dan 5 penggaris adalah...", options: ["A. Rp19.000,00", "B. Rp23.000,00", "C. Rp25.000,00", "D. Rp27.000,00", "E. Rp30.000,00"], correct: "B", penyelesaian: "b = p + 1.000<br>3b + 2p = 18.000 → 3(p+1.000)+2p=18.000 → 5p=15.000 → p=3.000, b=4.000<br>2b+5p = 8.000+15.000 = <strong>Rp23.000</strong>" },
     
-    { id: 4, diff: "Hard", cat: "Bilangan", type: "mc", text: "Bakteri membelah setiap ½ hari. Awal 2 bakteri. Setiap 2 hari, ¼ mati. Bakteri setelah 3 hari = ...", options: ["A. 48", "B. 64", "C. 96", "D. 128", "E. 192"], correct: "C", penyelesaian: "3 hari = 6 kali pembelahan<br>2 → 4 → 8 → 16 → 32 → 64 → 128<br>Setelah 2 hari (4 kali): 32 - ¼(32) = 24<br>1 hari (2 kali): 24 → 48 → <strong>96</strong>" },
+    { id: 4, diff: "Hard", cat: "Fungsi", type: "mc", text: "Diketahui f(x) = √(2x+3), dengan x ≥ -3/2. Jika f⁻¹(x) adalah invers dari f(x), nilai dari f⁻¹(3) = ...", options: ["A. 6", "B. 3", "C. 3/2", "D. -1/2", "E. -1"], correct: "B", penyelesaian: "f(x) = √(2x+3)<br>y = √(2x+3) → y² = 2x+3 → x = (y²-3)/2<br>f⁻¹(x) = (x²-3)/2<br>f⁻¹(3) = (9-3)/2 = <strong>3</strong>" },
     
-    { id: 5, diff: "Ekstrem", cat: "Bilangan", type: "tf", text: "Mebel: kayu max 20 m², waktu max 48 jam. Meja untung Rp500.000, kursi Rp300.000.", options: ["Mebel tidak dapat memproduksi 6 meja dan 5 kursi sekaligus", "Jika hanya kursi, maksimum 16 unit", "2 meja + 10 kursi > 8 meja", "Keuntungan maksimum Rp5.400.000"], correct: "S,B,S,S", penyelesaian: "(1) 6 meja+5 kursi: kayu=17≤20, waktu=39≤48 → BISA, jadi SALAH<br>(2) Hanya kursi: y≤16 → BENAR<br>(3) 2m+10k=1.000.000+3.000.000=4.000.000; 8m=4.000.000 → SAMA, SALAH<br>(4) Keuntungan max = Rp4.000.000 → SALAH" },
+    { id: 5, diff: "Hot", cat: "Fungsi", type: "mc", text: "Fungsi f: R→R dan g: R→R. Jika g(x) = x-1 dan (f∘g)(x) = x³-4x, nilai dari f(2) = ...", options: ["A. 9", "B. 13", "C. 15", "D. 17", "E. 25"], correct: "C", penyelesaian: "(f∘g)(x) = f(g(x)) = x³-4x<br>f(x-1) = x³-4x<br>Misal y = x-1 → x = y+1<br>f(y) = (y+1)³ - 4(y+1)<br>f(y) = y³+3y²-y-3<br>f(2) = 8+12-2-3 = <strong>15</strong>" },
     
-    { id: 6, diff: "Medium", cat: "Fungsi", type: "mc", text: "f(x) = √(2x+3), x ≥ -3/2. Nilai f⁻¹(3) = ...", options: ["A. 6", "B. 3", "C. 3/2", "D. -1/2", "E. -1"], correct: "B", penyelesaian: "f(x) = √(2x+3)<br>y = √(2x+3) → y² = 2x+3 → x = (y²-3)/2<br>f⁻¹(x) = (x²-3)/2<br>f⁻¹(3) = (9-3)/2 = <strong>3</strong>" },
+    { id: 6, diff: "Hot", cat: "Bilangan", type: "mc", text: "Tegangan = 2⁴×5² V, arus = 2⁻¹×5⁻¹ A, waktu = 2³×5 s. E = V×I×t. Jika rugi sistem ½, energi bersih = ...", options: ["A. 2⁸×5⁵ J", "B. 2⁴×5³ J", "C. 80 J", "D. 32 J", "E. 5 J"], correct: "C", penyelesaian: "V = 2⁴×5², I = 2⁻¹×5⁻¹, t = 2³×5<br>E = 2⁴⁻¹⁺³ × 5²⁻¹⁺¹ = 2⁶ × 5² = 64 × 25 = 1.600 J<br>E bersih = ½ × 1.600 = <strong>800 J</strong>" },
     
-    { id: 7, diff: "Hot", cat: "Fungsi", type: "mc", text: "g(x) = x-1, (f∘g)(x) = x³-4x. Nilai f(2) = ...", options: ["A. 9", "B. 13", "C. 15", "D. 17", "E. 25"], correct: "C", penyelesaian: "(f∘g)(x) = f(g(x)) = x³-4x<br>f(x-1) = x³-4x<br>Misal y = x-1 → x = y+1<br>f(y) = (y+1)³ - 4(y+1)<br>f(y) = y³+3y²-y-3<br>f(2) = 8+12-2-3 = <strong>15</strong>" },
+    { id: 7, diff: "Hard", cat: "Bilangan", type: "mc", text: "Bentuk rasional dari (2+√2)/(√6-√2) adalah...", options: ["A. (√6+√2-√3+1)/2", "B. (√6+√2+√3+1)/2", "C. (√6+√2-2√3+1)/2", "D. (√6+√2-√3+1)/4", "E. (√6+√2+√3+1)/4"], correct: "B", penyelesaian: "(2+√2)/(√6-√2) × (√6+√2)/(√6+√2)<br>= (2√6+2√2+√12+2)/(6-2)<br>= (2√6+2√2+2√3+2)/4<br>= <strong>(√6+√2+√3+1)/2</strong>" },
     
-    { id: 8, diff: "Hard", cat: "Geometri", type: "mc", text: "Karton persegi 30 cm, dipotong pojoknya untuk kotak tanpa tutup. Volume maksimum = ...", options: ["A. 2.000 cm³", "B. 3.000 cm³", "C. 4.000 cm³", "D. 5.000 cm³", "E. 6.000 cm³"], correct: "A", penyelesaian: "Misal potongan = x<br>V = (30-2x)²×x<br>V' = 0 → 12x²-240x+900=0 → x=5<br>V = (20)²×5 = <strong>2.000 cm³</strong>" },
+    { id: 8, diff: "Hard", cat: "Bilangan", type: "mc", text: "Bakteri membelah setiap ½ hari. Awal 2 bakteri. Setiap 2 hari, ¼ mati. Bakteri setelah 3 hari = ...", options: ["A. 48", "B. 64", "C. 96", "D. 128", "E. 192"], correct: "C", penyelesaian: "3 hari = 6 kali pembelahan<br>2 → 4 → 8 → 16 → 32 → 64 → 128<br>Setelah 2 hari (4 kali): 32 - ¼(32) = 24<br>1 hari (2 kali): 24 → 48 → <strong>96</strong>" },
     
-    { id: 9, diff: "Medium", cat: "Bilangan", type: "mc", text: "Harga 3 buku + 2 penggaris = Rp18.000. Buku Rp1.000 lebih mahal dari penggaris. Harga 2 buku + 5 penggaris = ...", options: ["A. Rp19.000", "B. Rp23.000", "C. Rp25.000", "D. Rp27.000", "E. Rp30.000"], correct: "C", penyelesaian: "b = p + 1.000<br>3b + 2p = 18.000 → 3(p+1.000)+2p=18.000 → 5p=15.000 → p=3.000, b=4.000<br>2b+5p = 8.000+15.000 = <strong>Rp23.000</strong>" },
+    { id: 9, diff: "Hot", cat: "Geometri", type: "mc", text: "Dari selembar karton persegi 30 cm, akan dibuat kotak tanpa tutup dengan menggunting empat persegi di pojok. Volume kotak terbesar yang dapat dibuat adalah...", options: ["A. 2.000 cm³", "B. 3.000 cm³", "C. 4.000 cm³", "D. 5.000 cm³", "E. 6.000 cm³"], correct: "A", penyelesaian: "Misal potongan = x<br>V = (30-2x)²×x<br>V' = 0 → 12x²-240x+900=0 → x=5<br>V = (20)²×5 = <strong>2.000 cm³</strong>" },
     
-    { id: 10, diff: "Hot", cat: "Bilangan", type: "mc", text: "Nilai (3² × 3⁴) ÷ 3⁵ = ...", options: ["A. 3", "B. 9", "C. 27", "D. 81", "E. 243"], correct: "A", penyelesaian: "3²×3⁴ = 3⁶<br>3⁶ ÷ 3⁵ = 3¹ = <strong>3</strong>" },
+    { id: 10, diff: "Medium", cat: "Aritmatika Sosial", type: "mc", text: "Pak Budi modal Rp50.000.000, butuh Rp200.000.000. Tabungan awal Rp5.000.000 + Rp1.500.000/bulan. Hambatan: bulan 5 & 9 keluar Rp5.000.000, bulan 7 kenaikan turun 20%. Manakah yang BENAR?", options: ["A. Dengan kendala, tetap bisa buka", "B. Tanpa persaingan bisa buka", "C. Kenaikan Rp1.700.000/bulan bisa buka", "D. A dan B benar", "E. B dan C benar"], correct: "E", penyelesaian: "Dengan kendala: total < 200.000 → SALAH<br>Tanpa persaingan: total > 200.000 → BENAR<br>Dengan Rp1.700.000: total > 200.000 → BENAR" },
 
-    // ===== ALJABAR (11-20) =====
-    { id: 11, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika (x+y)² = 49 dan xy = 10, maka x² + y² = ...", options: ["A. 19", "B. 29", "C. 39", "D. 49", "E. 59"], correct: "B", penyelesaian: "(x+y)² = x²+2xy+y²<br>49 = x²+y²+20<br>x²+y² = <strong>29</strong>" },
+    // ===== SOAL BARU 11-20 =====
+    { id: 11, diff: "Medium", cat: "Geometri", type: "mc", text: "Sebuah persegi panjang memiliki keliling 48 cm, panjang 4 cm lebih dari lebar. Luas persegi panjang tersebut adalah...", options: ["A. 120 cm²", "B. 128 cm²", "C. 140 cm²", "D. 150 cm²", "E. 160 cm²"], correct: "C", penyelesaian: "p+l=24, p=l+4 → l=10, p=14<br>L = 14×10 = <strong>140 cm²</strong>" },
     
-    { id: 12, diff: "Hot", cat: "Aljabar", type: "mc", text: "Jika a+b=5 dan a²+b²=17, maka ab = ...", options: ["A. 2", "B. 3", "C. 4", "D. 5", "E. 6"], correct: "C", penyelesaian: "(a+b)² = a²+2ab+b²<br>25 = 17+2ab → 2ab=8 → ab = <strong>4</strong>" },
+    { id: 12, diff: "Hard", cat: "Trigonometri", type: "mc", text: "Diketahui sin A = 1/a, A adalah sudut tumpul. Nilai cos A = ...", options: ["A. a/√(a²+1)", "B. 1/√(a²+1)", "C. √(a²-1)/a", "D. -√(a²-1)/a", "E. -√(a²+1)/a"], correct: "D", penyelesaian: "cos²A = 1 - 1/a² = (a²-1)/a²<br>cos A = ±√(a²-1)/a<br>A tumpul → cos negatif → <strong>-√(a²-1)/a</strong>" },
     
-    { id: 13, diff: "Ekstrem", cat: "Aljabar", type: "mc", text: "Jika x + 1/x = 5, maka x² + 1/x² = ...", options: ["A. 21", "B. 22", "C. 23", "D. 24", "E. 25"], correct: "C", penyelesaian: "(x+1/x)² = x²+2+1/x²<br>25 = x²+1/x²+2<br>x²+1/x² = <strong>23</strong>" },
+    { id: 13, diff: "Medium", cat: "Peluang", type: "mc", text: "Dua dadu dilempar. Peluang jumlah mata dadu > 9 adalah...", options: ["A. 1/6", "B. 1/4", "C. 1/3", "D. 5/18", "E. 1/2"], correct: "A", penyelesaian: "Jumlah >9: 10,11,12<br>Total cara = 6 dari 36 → 6/36 = <strong>1/6</strong>" },
     
-    { id: 14, diff: "Medium", cat: "Persamaan", type: "mc", text: "Himpunan penyelesaian dari 3x + 5 = 2x - 7 adalah ...", options: ["A. 12", "B. 2", "C. -2", "D. -12", "E. 0"], correct: "D", penyelesaian: "3x+5 = 2x-7 → 3x-2x = -7-5 → x = <strong>-12</strong>" },
+    { id: 14, diff: "Hard", cat: "Aritmatika Sosial", type: "mc", text: "Cihuy: 2b+p+3q=19k, Vero: b+2p+2q=17k, Vera: 3b+2p+q=20k. Saki beli 1 masing-masing = ...", options: ["A. Rp9.000", "B. Rp10.000", "C. Rp10.500", "D. Rp11.000", "E. Rp12.000"], correct: "D", penyelesaian: "Dengan eliminasi diperoleh b=4.000, p=3.000, q=4.000<br>Total = 4.000+3.000+4.000 = <strong>Rp11.000</strong>" },
     
-    { id: 15, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika a²+b²=25 dan a+b=7, maka ab = ...", options: ["A. 6", "B. 8", "C. 10", "D. 12", "E. 14"], correct: "D", penyelesaian: "(a+b)² = a²+2ab+b²<br>49 = 25+2ab → 2ab=24 → ab = <strong>12</strong>" },
+    { id: 15, diff: "Hard", cat: "Aritmatika Sosial", type: "mc", text: "Alas piring diameter 35 cm, dihias pita. Harga pita Rp5.000/m. 180 buah, biaya = ...", options: ["A. Rp6.930.000", "B. Rp1.980.000", "C. Rp1.000.000", "D. Rp990.000", "E. Rp900.000"], correct: "D", penyelesaian: "K = πd = (22/7)×35 = 110 cm = 1,1 m<br>Total pita = 1,1×180 = 198 m<br>Biaya = 198×5.000 = <strong>Rp990.000</strong>" },
     
-    { id: 16, diff: "Medium", cat: "Aljabar", type: "mc", text: "Pemfaktoran dari x² + 7x + 12 adalah ...", options: ["A. (x+2)(x+6)", "B. (x+3)(x+4)", "C. (x+1)(x+12)", "D. (x-3)(x-4)", "E. (x+3)(x+5)"], correct: "B", penyelesaian: "p+q=7, p×q=12 → p=3, q=4<br>x²+7x+12 = <strong>(x+3)(x+4)</strong>" },
+    { id: 16, diff: "Hard", cat: "Statistika", type: "mc", text: "Modus dari data: 58-60(2), 61-63(6), 64-66(9), 67-69(6), 70-72(4), 73-75(3) = ...", options: ["A. 64,0", "B. 64,5", "C. 65,0", "D. 65,5", "E. 66,0"], correct: "C", penyelesaian: "Kelas modus: 64-66 (f=9)<br>Tb=63,5, d₁=3, d₂=3, c=3<br>Mo=63,5 + 3/(3+3)×3 = 63,5 + 1,5 = <strong>65,0</strong>" },
     
-    { id: 17, diff: "Hot", cat: "Persamaan", type: "mc", text: "Nilai x yang memenuhi 2x - 5 ≤ 3x + 4 adalah ...", options: ["A. x≥9", "B. x≥-9", "C. x≤9", "D. x≤-9", "E. x>9"], correct: "B", penyelesaian: "2x-5 ≤ 3x+4 → 2x-3x ≤ 4+5 → -x ≤ 9 → x ≥ <strong>-9</strong>" },
+    { id: 17, diff: "Easy", cat: "Trigonometri", type: "mc", text: "sin 30° + cos 60° = ...", options: ["A. 0", "B. 1/2", "C. 1", "D. 3/2", "E. 2"], correct: "C", penyelesaian: "sin 30° = 1/2, cos 60° = 1/2<br>1/2 + 1/2 = <strong>1</strong>" },
     
-    { id: 18, diff: "Ekstrem", cat: "Persamaan", type: "mc", text: "Sistem: 2x+3y=12 dan 3x-2y=5. Nilai x×y = ...", options: ["A. 2", "B. 4", "C. 6", "D. 8", "E. 10"], correct: "C", penyelesaian: "Eliminasi → 13x=39 → x=3<br>2(3)+3y=12 → y=2<br>x×y = 3×2 = <strong>6</strong>" },
+    { id: 18, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika (x+y)² = 49 dan xy = 10, maka x² + y² = ...", options: ["A. 19", "B. 29", "C. 39", "D. 49", "E. 59"], correct: "B", penyelesaian: "(x+y)² = x²+2xy+y²<br>49 = x²+y²+20<br>x²+y² = <strong>29</strong>" },
     
-    { id: 19, diff: "Hard", cat: "Fungsi", type: "mc", text: "f(x)=2x-3, g(x)=x²+1. Nilai (f∘g)(2) = ...", options: ["A. 3", "B. 5", "C. 7", "D. 9", "E. 11"], correct: "C", penyelesaian: "g(2)=4+1=5<br>f(5)=10-3 = <strong>7</strong>" },
+    { id: 19, diff: "Medium", cat: "Peluang", type: "mc", text: "Dua koin dilempar. Peluang minimal satu gambar = ...", options: ["A. 1/4", "B. 1/2", "C. 3/4", "D. 1/3", "E. 2/3"], correct: "C", penyelesaian: "Ruang sampel: (A,A),(A,G),(G,A),(G,G)=4<br>Minimal satu G: 3 cara → 3/4" },
     
-    { id: 20, diff: "Hot", cat: "Fungsi", type: "mc", text: "f(x)=ax+b, f(2)=7, f(5)=16. Nilai a+b = ...", options: ["A. 2", "B. 3", "C. 4", "D. 5", "E. 6"], correct: "C", penyelesaian: "2a+b=7, 5a+b=16 → 3a=9 → a=3<br>6+b=7 → b=1<br>a+b = <strong>4</strong>" },
+    { id: 20, diff: "Hard", cat: "Geometri", type: "mc", text: "Kubus luas permukaan 150 cm². Volume = ...", options: ["A. 64 cm³", "B. 100 cm³", "C. 125 cm³", "D. 144 cm³", "E. 216 cm³"], correct: "C", penyelesaian: "6s²=150 → s²=25 → s=5<br>V=s³ = <strong>125 cm³</strong>" },
 
-    // ===== GEOMETRI (21-30) =====
+    // ===== SOAL ASLI 21-50 (DIPERTAHANKAN) =====
     { id: 21, diff: "Hard", cat: "Geometri", type: "mc", text: "Segitiga siku-siku sisi 7 cm dan 24 cm. Jari-jari lingkaran luar = ...", options: ["A. 10 cm", "B. 11 cm", "C. 12 cm", "D. 12,5 cm", "E. 13 cm"], correct: "D", penyelesaian: "c = √(7²+24²) = √625 = 25 cm<br>R = c/2 = <strong>12,5 cm</strong>" },
     
-    { id: 22, diff: "Hot", cat: "Geometri", type: "mc", text: "Persegi panjang K=48 cm, panjang 4 cm lebih dari lebar. Luas = ...", options: ["A. 120 cm²", "B. 128 cm²", "C. 140 cm²", "D. 150 cm²", "E. 160 cm²"], correct: "C", penyelesaian: "p+l=24, p=l+4 → l=10, p=14<br>L = 14×10 = <strong>140 cm²</strong>" },
+    { id: 22, diff: "Ekstrem", cat: "Geometri", type: "mc", text: "Luas lingkaran = 154 cm² (π=22/7). Keliling = ...", options: ["A. 22 cm", "B. 28 cm", "C. 44 cm", "D. 56 cm", "E. 88 cm"], correct: "C", penyelesaian: "πr²=154 → (22/7)r²=154 → r²=49 → r=7<br>K=2πr=2×(22/7)×7 = <strong>44 cm</strong>" },
     
-    { id: 23, diff: "Ekstrem", cat: "Geometri", type: "mc", text: "Luas lingkaran = 154 cm² (π=22/7). Keliling = ...", options: ["A. 22 cm", "B. 28 cm", "C. 44 cm", "D. 56 cm", "E. 88 cm"], correct: "C", penyelesaian: "πr²=154 → (22/7)r²=154 → r²=49 → r=7<br>K=2πr=2×(22/7)×7 = <strong>44 cm</strong>" },
+    { id: 23, diff: "Hard", cat: "Bangun Ruang", type: "mc", text: "Balok 12×9×8 cm. Diagonal ruang = ...", options: ["A. 15 cm", "B. 16 cm", "C. 17 cm", "D. 18 cm", "E. 19 cm"], correct: "C", penyelesaian: "d = √(12²+9²+8²) = √(144+81+64) = √289 = <strong>17 cm</strong>" },
     
-    { id: 24, diff: "Hard", cat: "Bangun Ruang", type: "mc", text: "Kubus luas permukaan 150 cm². Volume = ...", options: ["A. 64 cm³", "B. 100 cm³", "C. 125 cm³", "D. 144 cm³", "E. 216 cm³"], correct: "C", penyelesaian: "6s²=150 → s²=25 → s=5<br>V=s³ = <strong>125 cm³</strong>" },
+    { id: 24, diff: "Medium", cat: "Geometri", type: "mc", text: "Persegi L=64 cm². Keliling = ...", options: ["A. 16 cm", "B. 24 cm", "C. 28 cm", "D. 32 cm", "E. 40 cm"], correct: "D", penyelesaian: "s²=64 → s=8<br>K=4×8 = <strong>32 cm</strong>" },
     
-    { id: 25, diff: "Hot", cat: "Bangun Ruang", type: "mc", text: "Balok 12×9×8 cm. Diagonal ruang = ...", options: ["A. 15 cm", "B. 16 cm", "C. 17 cm", "D. 18 cm", "E. 19 cm"], correct: "C", penyelesaian: "d = √(12²+9²+8²) = √(144+81+64) = √289 = <strong>17 cm</strong>" },
+    { id: 25, diff: "Medium", cat: "Geometri", type: "mc", text: "Segitiga sisi 5, 12, 13 cm. Jenis segitiga = ...", options: ["A. Lancip", "B. Tumpul", "C. Siku-siku", "D. Sama sisi", "E. Sama kaki"], correct: "C", penyelesaian: "5²+12²=25+144=169=13² → <strong>Siku-siku</strong>" },
     
-    { id: 26, diff: "Medium", cat: "Geometri", type: "mc", text: "Persegi L=64 cm². Keliling = ...", options: ["A. 16 cm", "B. 24 cm", "C. 28 cm", "D. 32 cm", "E. 40 cm"], correct: "D", penyelesaian: "s²=64 → s=8<br>K=4×8 = <strong>32 cm</strong>" },
+    { id: 26, diff: "Hard", cat: "Geometri", type: "mc", text: "Diagonal persegi panjang 13 cm, lebar 5 cm. Panjang = ...", options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm", "E. 16 cm"], correct: "C", penyelesaian: "d²=p²+l² → 169=p²+25 → p²=144 → p = <strong>12 cm</strong>" },
     
-    { id: 27, diff: "Medium", cat: "Geometri", type: "mc", text: "Segitiga sisi 5, 12, 13 cm. Jenis segitiga = ...", options: ["A. Lancip", "B. Tumpul", "C. Siku-siku", "D. Sama sisi", "E. Sama kaki"], correct: "C", penyelesaian: "5²+12²=25+144=169=13² → <strong>Siku-siku</strong>" },
+    { id: 27, diff: "Hard", cat: "Bangun Ruang", type: "mc", text: "Kubus V=216 cm³. Luas permukaan = ...", options: ["A. 144 cm²", "B. 196 cm²", "C. 200 cm²", "D. 216 cm²", "E. 256 cm²"], correct: "D", penyelesaian: "s³=216 → s=6<br>LP=6×36 = <strong>216 cm²</strong>" },
     
-    { id: 28, diff: "Hard", cat: "Geometri", type: "mc", text: "Diagonal persegi panjang 13 cm, lebar 5 cm. Panjang = ...", options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm", "E. 16 cm"], correct: "C", penyelesaian: "d²=p²+l² → 169=p²+25 → p²=144 → p = <strong>12 cm</strong>" },
+    { id: 28, diff: "Medium", cat: "Bangun Ruang", type: "mc", text: "Balok 10×8×6 cm. Luas permukaan = ...", options: ["A. 320 cm²", "B. 340 cm²", "C. 360 cm²", "D. 376 cm²", "E. 400 cm²"], correct: "D", penyelesaian: "LP=2(10×8+10×6+8×6) = 2(80+60+48) = <strong>376 cm²</strong>" },
     
-    { id: 29, diff: "Hard", cat: "Bangun Ruang", type: "mc", text: "Kubus V=216 cm³. Luas permukaan = ...", options: ["A. 144 cm²", "B. 196 cm²", "C. 200 cm²", "D. 216 cm²", "E. 256 cm²"], correct: "D", penyelesaian: "s³=216 → s=6<br>LP=6×36 = <strong>216 cm²</strong>" },
+    { id: 29, diff: "Hard", cat: "Statistika", type: "mc", text: "Rata-rata 10 siswa = 75. Nilai Budi masuk, rata-rata 76. Nilai Budi = ...", options: ["A. 80", "B. 82", "C. 84", "D. 86", "E. 88"], correct: "D", penyelesaian: "Jumlah 10 = 750, jumlah 11 = 836<br>Nilai Budi = 836-750 = <strong>86</strong>" },
     
-    { id: 30, diff: "Medium", cat: "Bangun Ruang", type: "mc", text: "Balok 10×8×6 cm. Luas permukaan = ...", options: ["A. 320 cm²", "B. 340 cm²", "C. 360 cm²", "D. 376 cm²", "E. 400 cm²"], correct: "D", penyelesaian: "LP=2(10×8+10×6+8×6) = 2(80+60+48) = <strong>376 cm²</strong>" },
-
-    // ===== STATISTIKA & PELUANG (31-40) =====
-    { id: 31, diff: "Hard", cat: "Peluang", type: "mc", text: "Dua dadu dilempar. Peluang jumlah > 9 adalah ...", options: ["A. 1/6", "B. 1/4", "C. 1/3", "D. 5/18", "E. 1/2"], correct: "A", penyelesaian: "Jumlah >9: 10,11,12<br>Total cara = 6 dari 36 → 6/36 = <strong>1/6</strong>" },
+    { id: 30, diff: "Hot", cat: "Statistika", type: "mc", text: "Median data: 4,6,8,5,7,9,5,8,6,7 = ...", options: ["A. 5", "B. 5,5", "C. 6", "D. 6,5", "E. 7"], correct: "D", penyelesaian: "Urut: 4,5,5,6,6,7,7,8,8,9<br>Median = (6+7)/2 = <strong>6,5</strong>" },
     
-    { id: 32, diff: "Hard", cat: "Statistika", type: "mc", text: "Rata-rata 10 siswa = 75. Nilai Budi masuk, rata-rata 76. Nilai Budi = ...", options: ["A. 80", "B. 82", "C. 84", "D. 86", "E. 88"], correct: "D", penyelesaian: "Jumlah 10 = 750, jumlah 11 = 836<br>Nilai Budi = 836-750 = <strong>86</strong>" },
+    { id: 31, diff: "Medium", cat: "Peluang", type: "mc", text: "Dadu dilempar 120 kali. Frekuensi harapan muncul ganjil = ...", options: ["A. 40", "B. 50", "C. 60", "D. 70", "E. 80"], correct: "C", penyelesaian: "P(ganjil)=3/6=1/2<br>Fh = 120×1/2 = <strong>60</strong>" },
     
-    { id: 33, diff: "Hot", cat: "Statistika", type: "mc", text: "Median data: 4,6,8,5,7,9,5,8,6,7 = ...", options: ["A. 5", "B. 5,5", "C. 6", "D. 6,5", "E. 7"], correct: "D", penyelesaian: "Urut: 4,5,5,6,6,7,7,8,8,9<br>Median = (6+7)/2 = <strong>6,5</strong>" },
+    { id: 32, diff: "Medium", cat: "Statistika", type: "mc", text: "Modus data: 7,8,6,7,9,8,7,10,8,8 = ...", options: ["A. 6", "B. 7", "C. 8", "D. 9", "E. 10"], correct: "C", penyelesaian: "Frekuensi: 8 muncul 4 kali (terbanyak) → Modus = <strong>8</strong>" },
     
-    { id: 34, diff: "Medium", cat: "Peluang", type: "mc", text: "Dadu dilempar 120 kali. Frekuensi harapan muncul ganjil = ...", options: ["A. 40", "B. 50", "C. 60", "D. 70", "E. 80"], correct: "C", penyelesaian: "P(ganjil)=3/6=1/2<br>Fh = 120×1/2 = <strong>60</strong>" },
+    { id: 33, diff: "Medium", cat: "Statistika", type: "mc", text: "Median data: 3,5,2,6,4,7,5,8,9 = ...", options: ["A. 3", "B. 4", "C. 5", "D. 6", "E. 7"], correct: "C", penyelesaian: "Urut: 2,3,4,5,5,6,7,8,9<br>Median data ke-5 = <strong>5</strong>" },
     
-    { id: 35, diff: "Medium", cat: "Peluang", type: "mc", text: "Dua koin dilempar. Peluang minimal satu gambar = ...", options: ["A. 1/4", "B. 1/2", "C. 3/4", "D. 1/3", "E. 2/3"], correct: "C", penyelesaian: "Ruang sampel: (A,A),(A,G),(G,A),(G,G)=4<br>Minimal satu G: 3 cara → 3/4" },
+    { id: 34, diff: "Hard", cat: "Peluang", type: "mc", text: "6 grup putra, 4 putri. Diambil 2 satu per satu. Peluang putra lalu putri = ...", options: ["A. 4/15", "B. 2/5", "C. 3/10", "D. 1/3", "E. 5/12"], correct: "A", penyelesaian: "P(putra) = 6/10 = 3/5<br>P(putri setelah putra) = 4/9<br>P = 3/5 × 4/9 = 12/45 = <strong>4/15</strong>" },
     
-    { id: 36, diff: "Medium", cat: "Statistika", type: "mc", text: "Modus data: 7,8,6,7,9,8,7,10,8,8 = ...", options: ["A. 6", "B. 7", "C. 8", "D. 9", "E. 10"], correct: "C", penyelesaian: "Frekuensi: 8 muncul 4 kali (terbanyak) → Modus = <strong>8</strong>" },
+    { id: 35, diff: "Ekstrem", cat: "Peluang", type: "mc", text: "P(A)=0,7, P(B)=0,6, P(A∩B)=0,4. P(A∪B)=...", options: ["A. 0,7", "B. 0,8", "C. 0,9", "D. 1,0", "E. 1,1"], correct: "C", penyelesaian: "P(A∪B)=0,7+0,6-0,4 = <strong>0,9</strong>" },
     
-    { id: 37, diff: "Medium", cat: "Statistika", type: "mc", text: "Median data: 3,5,2,6,4,7,5,8,9 = ...", options: ["A. 3", "B. 4", "C. 5", "D. 6", "E. 7"], correct: "C", penyelesaian: "Urut: 2,3,4,5,5,6,7,8,9<br>Median data ke-5 = <strong>5</strong>" },
+    { id: 36, diff: "Easy", cat: "Trigonometri", type: "mc", text: "tan 45° - sin 30° = ...", options: ["A. 0", "B. 1/2", "C. 1", "D. 3/2", "E. 2"], correct: "B", penyelesaian: "tan 45° = 1, sin 30° = 1/2<br>1 - 1/2 = <strong>1/2</strong>" },
     
-    { id: 38, diff: "Hard", cat: "Peluang", type: "mc", text: "6 grup putra, 4 putri. Diambil 2 satu per satu. Peluang putra lalu putri = ...", options: ["A. 4/15", "B. 2/5", "C. 3/10", "D. 1/3", "E. 5/12"], correct: "A", penyelesaian: "P(putra) = 6/10 = 3/5<br>P(putri setelah putra) = 4/9<br>P = 3/5 × 4/9 = 12/45 = <strong>4/15</strong>" },
+    { id: 37, diff: "Medium", cat: "Trigonometri", type: "mc", text: "tan A = 3/4 (lancip). sin A = ...", options: ["A. 3/5", "B. 4/5", "C. 3/4", "D. 1/2", "E. 5/3"], correct: "A", penyelesaian: "depan=3, samping=4, miring=5<br>sin A = 3/5" },
     
-    { id: 39, diff: "Ekstrem", cat: "Peluang", type: "mc", text: "P(A)=0,7, P(B)=0,6, P(A∩B)=0,4. P(A∪B)=...", options: ["A. 0,7", "B. 0,8", "C. 0,9", "D. 1,0", "E. 1,1"], correct: "C", penyelesaian: "P(A∪B)=0,7+0,6-0,4 = <strong>0,9</strong>" },
+    { id: 38, diff: "Easy", cat: "Trigonometri", type: "mc", text: "cos 60° × sin 30° = ...", options: ["A. 0", "B. 1/4", "C. 1/2", "D. 3/4", "E. 1"], correct: "B", penyelesaian: "cos 60°=1/2, sin 30°=1/2<br>1/2 × 1/2 = <strong>1/4</strong>" },
     
-    { id: 40, diff: "Hot", cat: "Peluang", type: "mc", text: "Dari 10 gadget: 4 smartphone, 3 smartwatch, 2 tablet, 1 smart tag. Pernyataan benar? (jawab dengan nomor)", options: ["1. Peluang smartphone = 40%", "2. Peluang bukan tablet = 0,2", "3. Peluang smart tag = 1/5", "4. Peluang bukan smartwatch = 70%"], correct: "1,3,4", penyelesaian: "1. 4/10=40% → BENAR<br>2. Bukan tablet = 8/10=0,8 → SALAH<br>3. Smart tag = 1/10=1/5 → BENAR<br>4. Bukan smartwatch = 7/10=70% → BENAR" },
-
-    // ===== TRIGONOMETRI (41-45) =====
-    { id: 41, diff: "Hard", cat: "Trigonometri", type: "mc", text: "sin A = 1/a, A tumpul. cos A = ...", options: ["A. a/√(a²+1)", "B. 1/√(a²+1)", "C. √(a²-1)/a", "D. -√(a²-1)/a", "E. -√(a²+1)/a"], correct: "D", penyelesaian: "cos²A = 1 - 1/a² = (a²-1)/a²<br>cos A = ±√(a²-1)/a<br>A tumpul → cos negatif → <strong>-√(a²-1)/a</strong>" },
+    { id: 39, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika a+b=5 dan a²+b²=17, maka ab = ...", options: ["A. 2", "B. 3", "C. 4", "D. 5", "E. 6"], correct: "C", penyelesaian: "(a+b)² = a²+2ab+b²<br>25 = 17+2ab → 2ab=8 → ab = <strong>4</strong>" },
     
-    { id: 42, diff: "Easy", cat: "Trigonometri", type: "mc", text: "sin 30° + cos 60° = ...", options: ["A. 0", "B. 1/2", "C. 1", "D. 3/2", "E. 2"], correct: "C", penyelesaian: "sin 30° = 1/2, cos 60° = 1/2<br>1/2 + 1/2 = <strong>1</strong>" },
+    { id: 40, diff: "Ekstrem", cat: "Aljabar", type: "mc", text: "Jika x + 1/x = 5, maka x² + 1/x² = ...", options: ["A. 21", "B. 22", "C. 23", "D. 24", "E. 25"], correct: "C", penyelesaian: "(x+1/x)² = x²+2+1/x²<br>25 = x²+1/x²+2<br>x²+1/x² = <strong>23</strong>" },
     
-    { id: 43, diff: "Easy", cat: "Trigonometri", type: "mc", text: "tan 45° - sin 30° = ...", options: ["A. 0", "B. 1/2", "C. 1", "D. 3/2", "E. 2"], correct: "B", penyelesaian: "tan 45° = 1, sin 30° = 1/2<br>1 - 1/2 = <strong>1/2</strong>" },
+    { id: 41, diff: "Medium", cat: "Persamaan", type: "mc", text: "Himpunan penyelesaian dari 3x + 5 = 2x - 7 adalah ...", options: ["A. 12", "B. 2", "C. -2", "D. -12", "E. 0"], correct: "D", penyelesaian: "3x+5 = 2x-7 → 3x-2x = -7-5 → x = <strong>-12</strong>" },
     
-    { id: 44, diff: "Medium", cat: "Trigonometri", type: "mc", text: "tan A = 3/4 (lancip). sin A = ...", options: ["A. 3/5", "B. 4/5", "C. 3/4", "D. 1/2", "E. 5/3"], correct: "A", penyelesaian: "depan=3, samping=4, miring=5<br>sin A = 3/5" },
+    { id: 42, diff: "Hard", cat: "Aljabar", type: "mc", text: "Jika a²+b²=25 dan a+b=7, maka ab = ...", options: ["A. 6", "B. 8", "C. 10", "D. 12", "E. 14"], correct: "D", penyelesaian: "(a+b)² = a²+2ab+b²<br>49 = 25+2ab → 2ab=24 → ab = <strong>12</strong>" },
     
-    { id: 45, diff: "Easy", cat: "Trigonometri", type: "mc", text: "cos 60° × sin 30° = ...", options: ["A. 0", "B. 1/4", "C. 1/2", "D. 3/4", "E. 1"], correct: "B", penyelesaian: "cos 60°=1/2, sin 30°=1/2<br>1/2 × 1/2 = <strong>1/4</strong>" },
-
-    // ===== ARITMATIKA SOSIAL (46-50) =====
-    { id: 46, diff: "Hard", cat: "Aritmatika Sosial", type: "mc", text: "Cihuy: 2b+p+3q=19k, Vero: b+2p+2q=17k, Vera: 3b+2p+q=20k. Saki beli 1 masing-masing = ...", options: ["A. Rp9.000", "B. Rp10.000", "C. Rp10.500", "D. Rp11.000", "E. Rp12.000"], correct: "D", penyelesaian: "Dengan eliminasi diperoleh b=4.000, p=3.000, q=4.000<br>Total = 4.000+3.000+4.000 = <strong>Rp11.000</strong>" },
+    { id: 43, diff: "Medium", cat: "Aljabar", type: "mc", text: "Pemfaktoran dari x² + 7x + 12 adalah ...", options: ["A. (x+2)(x+6)", "B. (x+3)(x+4)", "C. (x+1)(x+12)", "D. (x-3)(x-4)", "E. (x+3)(x+5)"], correct: "B", penyelesaian: "p+q=7, p×q=12 → p=3, q=4<br>x²+7x+12 = <strong>(x+3)(x+4)</strong>" },
     
-    { id: 47, diff: "Hard", cat: "Aritmatika Sosial", type: "mc", text: "Alas piring diameter 35 cm, dihias pita. Harga pita Rp5.000/m. 180 buah, biaya = ...", options: ["A. Rp6.930.000", "B. Rp1.980.000", "C. Rp1.000.000", "D. Rp990.000", "E. Rp900.000"], correct: "D", penyelesaian: "K = πd = (22/7)×35 = 110 cm = 1,1 m<br>Total pita = 1,1×180 = 198 m<br>Biaya = 198×5.000 = <strong>Rp990.000</strong>" },
+    { id: 44, diff: "Hot", cat: "Persamaan", type: "mc", text: "Nilai x yang memenuhi 2x - 5 ≤ 3x + 4 adalah ...", options: ["A. x≥9", "B. x≥-9", "C. x≤9", "D. x≤-9", "E. x>9"], correct: "B", penyelesaian: "2x-5 ≤ 3x+4 → 2x-3x ≤ 4+5 → -x ≤ 9 → x ≥ <strong>-9</strong>" },
     
-    { id: 48, diff: "Hard", cat: "Statistika", type: "mc", text: "Modus dari data: 58-60(2), 61-63(6), 64-66(9), 67-69(6), 70-72(4), 73-75(3) = ...", options: ["A. 64,0", "B. 64,5", "C. 65,0", "D. 65,5", "E. 66,0"], correct: "C", penyelesaian: "Kelas modus: 64-66 (f=9)<br>Tb=63,5, d₁=3, d₂=3, c=3<br>Mo=63,5 + 3/(3+3)×3 = 63,5 + 1,5 = <strong>65,0</strong>" },
+    { id: 45, diff: "Ekstrem", cat: "Persamaan", type: "mc", text: "Sistem: 2x+3y=12 dan 3x-2y=5. Nilai x×y = ...", options: ["A. 2", "B. 4", "C. 6", "D. 8", "E. 10"], correct: "C", penyelesaian: "Eliminasi → 13x=39 → x=3<br>2(3)+3y=12 → y=2<br>x×y = 3×2 = <strong>6</strong>" },
     
-    { id: 49, diff: "Hot", cat: "Aritmatika Sosial", type: "mc", text: "Pak Budi modal Rp50.000.000, butuh Rp200.000.000. Tabungan awal Rp5.000.000 + Rp1.500.000/bulan. Hambatan: bulan 5 & 9 keluar Rp5.000.000, bulan 7 kenaikan turun 20%. Manakah yang BENAR?", options: ["A. Dengan kendala, tetap bisa buka", "B. Tanpa persaingan bisa buka", "C. Kenaikan Rp1.700.000/bulan bisa buka", "D. A dan B benar", "E. B dan C benar"], correct: "E", penyelesaian: "Dengan kendala: total < 200.000 → SALAH<br>Tanpa persaingan: total > 200.000 → BENAR<br>Dengan Rp1.700.000: total > 200.000 → BENAR" },
+    { id: 46, diff: "Hard", cat: "Fungsi", type: "mc", text: "f(x)=2x-3, g(x)=x²+1. Nilai (f∘g)(2) = ...", options: ["A. 3", "B. 5", "C. 7", "D. 9", "E. 11"], correct: "C", penyelesaian: "g(2)=4+1=5<br>f(5)=10-3 = <strong>7</strong>" },
     
-    { id: 50, diff: "Hard", cat: "Peluang", type: "mc", text: "Doorprize: 5 KL, 5 Bangkok, 10 bintang5, 10 bintang4, 10 kosong. Anto ke-6, sudah terambil 1 KL, 1 Bangkok, 2 bintang4, 1 kosong. Peluang KL = ...", options: ["A. 1/10", "B. 1/9", "C. 4/35", "D. 5/36", "E. 1/7"], correct: "C", penyelesaian: "Sisa KL=4, Bangkok=4, B5=10, B4=8, Kosong=9<br>Total sisa = 35<br>Peluang = <strong>4/35</strong>" }
+    { id: 47, diff: "Hot", cat: "Fungsi", type: "mc", text: "f(x)=ax+b, f(2)=7, f(5)=16. Nilai a+b = ...", options: ["A. 2", "B. 3", "C. 4", "D. 5", "E. 6"], correct: "C", penyelesaian: "2a+b=7, 5a+b=16 → 3a=9 → a=3<br>6+b=7 → b=1<br>a+b = <strong>4</strong>" },
+    
+    { id: 48, diff: "Hard", cat: "Peluang", type: "mc", text: "Doorprize: 5 KL, 5 Bangkok, 10 bintang5, 10 bintang4, 10 kosong. Anto ke-6, sudah terambil 1 KL, 1 Bangkok, 2 bintang4, 1 kosong. Peluang KL = ...", options: ["A. 1/10", "B. 1/9", "C. 4/35", "D. 5/36", "E. 1/7"], correct: "C", penyelesaian: "Sisa KL=4, Bangkok=4, B5=10, B4=8, Kosong=9<br>Total sisa = 35<br>Peluang = <strong>4/35</strong>" },
+    
+    { id: 49, diff: "Ekstrem", cat: "Geometri", type: "mc", text: "Karton persegi 30 cm dipotong pojoknya untuk kotak tanpa tutup. Volume maksimum = ...", options: ["A. 2.000 cm³", "B. 3.000 cm³", "C. 4.000 cm³", "D. 5.000 cm³", "E. 6.000 cm³"], correct: "A", penyelesaian: "Misal potongan = x<br>V = (30-2x)²×x<br>V' = 0 → 12x²-240x+900=0 → x=5<br>V = (20)²×5 = <strong>2.000 cm³</strong>" },
+    
+    { id: 50, diff: "Medium", cat: "Peluang", type: "mc", text: "Dua dadu dilempar. Peluang jumlah > 9 adalah ...", options: ["A. 1/6", "B. 1/4", "C. 1/3", "D. 5/18", "E. 1/2"], correct: "A", penyelesaian: "Jumlah >9: 10,11,12<br>Total cara = 6 dari 36 → 6/36 = <strong>1/6</strong>" }
 ];
 
 // ==================== AUTO SAVE ====================
@@ -530,14 +527,12 @@ function renderCards(){
         `;
         grid.appendChild(card);
         
-        // Restore status if already evaluated
         if(userAnswers[q.id] && answerStatus[q.id]) {
             evaluateQuestion(q.id);
         }
     });
 }
 
-// Untuk multiple choice dengan checkbox
 window.updateMultipleAnswer = function(qid) {
     let q = questions.find(qq => qq.id === qid);
     if(!q) return;
@@ -582,13 +577,11 @@ function resetAll(){
         let fb = document.getElementById(`fb_${i}`); 
         if(fb) fb.innerHTML = ''; 
     } 
-    // Reset radio/checkbox
     document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(inp => inp.checked = false);
     saveToStorage();
     updateScoreDisplay(); 
 }
 
-// ====== INIT ======
 window.evaluateQuestion = evaluateQuestion;
 window.showExplanationOnly = showExplanationOnly;
 window.updateAnswerAndSave = updateAnswerAndSave;
